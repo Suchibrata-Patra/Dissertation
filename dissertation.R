@@ -1,10 +1,5 @@
-#======= Required pAckages for the Codes
+#======= Required Packages for the Codes
 # install.packages("lattice")
-# 
-
-
-
-
 # rm(list=ls())
 # data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")
 # attach(data)
@@ -83,7 +78,7 @@ as.factor(data$TenYearCHD))
 
 
 #==== 
-#Correlation Heatmaprm(list=ls())
+#Correlation Hea(list=ls())
 rm(list=ls())
 data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")
 attach(data)
