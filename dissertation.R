@@ -77,31 +77,27 @@ confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),
 as.factor(data$TenYearCHD))
 
 
-#==== 
-#Correlation Hea(list=ls())
+#====
+# Code for Plotting teh Correlation Heatmaps
+#====== 
 rm(list=ls())
 data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")
-attach(data)
-names(data)
 library(ggplot2)
 library(reshape2)
 
 # Calculate correlation matrix
-correlation_matrix <- cor(data)
+correlation_matrix = cor(data)
 
-# Melt correlation matrix
-melted_correlation <- melt(correlation_matrix)
-
-# Plot heatmap
-ggplot(data = melted_correlation, aes(Var1, Var2, fill = value)) +
-  geom_tile(color = "white") +
-  scale_fill_gradient2(low = "Yellow", high = "Red", mid = "white", midpoint = 0,
-                       limit = c(-1,1), space = "Lab", name="Correlation") +
+# Melt the correlation matrix for plotting
+melted_correlation = melt(correlation_matrix)
+# Plot heatmap with correlation coefficients
+ggplot(melted_correlation, aes(Var1, Var2, fill = value)) +
+  geom_tile() + 
+  geom_text(aes(label = sprintf("%.2f", value)), size = 3) +
+  scale_fill_gradient2(low = "#58390b", high = "#0f423c", midpoint = 0, limit = c(-1,1), name="Correlation", mid = "#FFFFFF") +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, vjust = 1, size = 10, hjust = 1)) +
-  coord_fixed()
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +
+  coord_fixed() +
+  labs(x = "Variables", y = "Variables")
 
-
-
-#this is source Code
 
