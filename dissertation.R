@@ -133,7 +133,7 @@ ggplot(vif_df, aes(x = Variable, y = VIF, fill = VIF)) +
 
 
 # = = = = = = = = = = 
-#Splitting the Dataset into Training and Testing Data
+# Final Code
 # = = = = = = = = = =
 rm(list=ls())
 set.seed(123)
@@ -147,10 +147,10 @@ num_rows = nrow(data)
 
 # Randomly select row indices for the training set
 train_indices = sample(num_rows, size = round(train_proportion * num_rows), replace = FALSE)
-
 training_data = data[train_indices, ]
 testing_data = data[-train_indices, ]
 
+# Fitting of the Logistic Regression Model 
 names(data)
 data$male = as.factor(data$male)
 data$education = as.factor(data$education)
@@ -161,7 +161,9 @@ data$diabetes = as.factor(data$diabetes)
 data$TenYearCHD = as.factor(data$TenYearCHD)
 mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))
 summary(mymodel)
+
 fitted_prob=fitted(mymodel)
+plot(fitted_prob,type="h",main="Original vs Fitted")
 thresold = seq(0,1,0.001)
 TPR = numeric(length(thresold))
 FPR = numeric(length(thresold))
@@ -206,6 +208,183 @@ ggplot(Ten, aes(job, fill = y)) +
     geom_bar() +
     coord_flip()
 names(data)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#  = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+#   						       	Previous Code
+# = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
+
+#--- DATA CLEANING ---#
+#=====================#
+
+rm(list=ls())
+data=read.csv("literacy_data.csv",header=TRUE)
+is.data.frame(data)
+nrow(data)
+apply(is.na(data),2,which)
+
+# CLEANING
+data1=na.omit(data)
+apply(is.na(data1),2,which)
+dim(data1)
+
+#Recoding 2 as 0
+attach(data1)
+literacy1=replace(literacy,which(literacy==2),0)
+gender1=replace(gender,which(gender==2),0)
+data2=data.frame(literacy1,gender1,age)
+dim(data2)
+
+#part (i)
+tab1=table(literacy1,gender1);tab1
+#(a)
+o1=7860/2018;o1
+#(b)
+o2=4955/3883;o2
+#(c)
+or=3.894945/1.276075;or
+
+#part (ii)
+model_logit=glm(literacy1~age,data2,
+family=binomial(link="logit"));model_logit
+fitted(model_logit)
+
+#part (iii)
+model_probit=glm(literacy1~age,data2,
+family=binomial(link="probit"));model_probit
+pi_hat_probit=fitted(model_probit)
+
+#part (iv)
+pi_hat_logit=as.vector(fitted(model_logit));pi_hat_logit
+pi_hat_probit=as.vector(fitted(model_probit));pi_hat_probit
+
+chisq_logit=sum(((literacy1-pi_hat_logit)^2)/(pi_hat_logit*(1-pi_hat_logit)))
+chisq_probit=sum(((literacy1-pi_hat_probit)^2)/(pi_hat_probit*(1-pi_hat_probit)))
+chisq_logit
+chisq_probit
+ 
+#part (v)
+
+dt=data.frame(age,pi_hat_logit,pi_hat_probit)
+dtt=dt[order(age),]
+
+par(mfrow=c(2,1))
+plot(y=dtt[,2],x=dtt[,1],type='l')
+plot(y=dtt[,3],x=dtt[,1],type='l')
+
+# part (vi)
+
+library(caret)
+library(InformationValue)
+??caret
+confusionMatrix(as.factor(literacy1),pi_hat_logit,threshold=0.5)
+
+Y.hat=ifelse(pi_hat_logit>0.5,1,0)
+caret::confusionMatrix(as.factor(Y.hat),as.factor(literacy1))
+
+Y.hat=ifelse(pi_hat_logit>0.5,1,0)  
+t1=table(Y.hat,literacy1);t1
+TPR=t1[2,2]/(t1[2,2]+t1[1,2]);TPR
+FPR=4859/(4859+1042);FPR
+Sensitivity=TPR;Sensitivity
+Specificity=1-FPR;Specificity
+misc=1-TPR+FPR;misc
+
+TPR=array()
+FPR=array()
+Sensitivity=array()
+Specificity=array()
+misc=array()
+
+k=1
+p=seq(0.1,0.8,0.1)
+for(i in p)
+{
+print(paste("Threshold = ",i))
+Y.hat=ifelse(pi_hat_logit>i,1,0)
+t=table(Y.hat,literacy1)
+print(t)
+TPR[k]=t[2,2]/(t[2,2]+t[1,2])
+FPR[k]=t[2,1]/(t[2,1]+t[1,1])
+Sensitivity[k]=TPR[k]
+Specificity[k]=1-FPR[k]
+misc[k]=1-TPR[k]+FPR[k]
+k=k+1
+}
+
+data.frame(p,TPR,FPR,Specificity,Sensitivity,misc,TPR*(1-FPR))
+
+
+
+TPR=array()
+FPR=array()
+Sensitivity=array()
+Specificity=array()
+misclassification=array()
+
+k=1
+#p=seq(0.1,0.8,0.1)
+p=unique(pi_hat_logit)
+p=sort(p)
+p=p[-length(p)]
+p
+for(i in p)
+{
+print(paste("Threshold = ",i))
+Y.hat=ifelse(pi_hat_logit>i,1,0)
+t=table(Y.hat,literacy1)
+print(t)
+TPR[k]=t[2,2]/(t[2,2]+t[1,2])
+FPR[k]=t[2,1]/(t[2,1]+t[1,1])
+Sensitivity[k]=TPR[k]
+Specificity[k]=1-FPR[k]
+misclassification[k]=1-TPR[k]+FPR[k]
+k=k+1
+}
+
+p
+misc
+dtt=data.frame(p,TPR,FPR,Specificity,Sensitivity,misclassification,TPR*(1-FPR));dtt
+xx=TPR*(1-FPR)
+which(xx==max(xx))
+dtt[66,]
+xx
+par(mfrow=c(1,2))
+plot(y=TPR,x=1-FPR,type='l',xlim=c(0,1),main="ROC Curve")
+plot(x=TPR,y=1-FPR,type='l',xlim=c(0,1),main="ROC Curve")
+
+
+
+
+
+
+rm(list=ls())
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")
+data$male = as.factor(data$male)
+data$education = as.factor(data$education)
+data$currentSmoker = as.factor(data$currentSmoker)
+data$prevalentStroke = as.factor(data$prevalentStroke)
+data$prevalentHyp = as.factor(data$prevalentHyp)
+data$diabetes = as.factor(data$diabetes)
+data$TenYearCHD = as.factor(data$TenYearCHD)
+mymodel = glm(TenYearCHD ~ ., data = data, family = binomial(link = "logit"))
+summary(mymodel)
+
+
 
 
 
