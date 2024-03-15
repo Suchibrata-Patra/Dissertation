@@ -101,3 +101,36 @@ ggplot(melted_correlation, aes(Var1, Var2, fill = value)) +
   labs(x = "Variables", y = "Variables")
 
 
+# = = = = = = 
+# Plottting the VIF Values
+# = = = = = =
+# Remove existing objects and load the dataset
+
+rm(list = ls())
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")
+
+# Load necessary libraries
+library(car)
+library(ggplot2)
+
+# Fit the model
+mymodel = glm(TenYearCHD ~ ., data = data, family = binomial(link = "logit"))
+
+# Calculate VIF for each predictor in the model
+vif_values = vif(mymodel)
+
+# Transform VIF values into a data frame
+vif_df = data.frame(Variable = names(vif_values), VIF = unname(vif_values))
+
+# Create the bar chart using ggplot
+ggplot(vif_df, aes(x = Variable, y = VIF, fill = VIF)) +
+  geom_bar(stat = "identity", color = "steelblue") +
+  geom_hline(yintercept = 5, linetype = "dashed", color = "red", size = 1) +
+  theme_minimal() +
+  labs(title = "Plotting of the VIF Values", y = "VIF Value", x = "") +
+  coord_cartesian(ylim = c(0, max(vif_df$VIF) + 1)) + # Adjust y-axis limits
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) # Angle the x-axis text
+
+
+
+
