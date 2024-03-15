@@ -1033,3 +1033,1103 @@ ggplot(data = melted_correlation, aes(Var1, Var2, fill = value)) +#
   theme_minimal() +#
   theme(axis.text.x = element_text(angle = 45, vjust = 1, size = 10, hjust = 1)) +#
   coord_fixed()
+#======= Required Packages for the Codes#
+# install.packages("lattice")#
+# rm(list=ls())#
+# data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+# attach(data)#
+# names(data)#
+# data$male = as.factor(data$male)#
+# data$education = as.factor(data$education)#
+# data$currentSmoker = as.factor(data$currentSmoker)#
+# data$prevalentStroke = as.factor(data$prevalentStroke)#
+# data$prevalentHyp = as.factor(data$prevalentHyp)#
+# data$diabetes = as.factor(data$diabetes)#
+# data$TenYearCHD = as.factor(data$TenYearCHD)#
+#
+# mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
+# summary(mymodel)#
+# # install.packages("caret")#
+# fitted_prob=fitted(mymodel)#
+# thresold = seq(0,1,0.001)#
+# accuracy = numeric(length(thresold))#
+# for(i in 1:length(thresold)) {#
+    # Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
+    # x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
+    # y = as.data.frame(x$overall)#
+    # accuracy[i] = y[1,1]#
+# }#
+# accuracy#
+# plot(thresold, accuracy, type="l")#
+# abline(v = thresold[which.max(accuracy)], col = "red", lty = 2)#
+#
+# #thresold = thresold[which.max(accuracy)]#
+# Y_hat = ifelse(fitted_prob <= thresold, 0, 1)#
+# x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
+# detach(data)#
+rm(list=ls())#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+attach(data)#
+names(data)#
+data$male = as.factor(data$male)#
+data$education = as.factor(data$education)#
+data$currentSmoker = as.factor(data$currentSmoker)#
+data$prevalentStroke = as.factor(data$prevalentStroke)#
+data$prevalentHyp = as.factor(data$prevalentHyp)#
+data$diabetes = as.factor(data$diabetes)#
+data$TenYearCHD = as.factor(data$TenYearCHD)#
+#
+mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
+summary(mymodel)#
+fitted_prob=fitted(mymodel)#
+#=============================================##
+# Finding thresold by Optimising TPR*(1-FPR)  ##
+#=============================================##
+thresold = seq(0,1,0.001)#
+TPR = numeric(length(thresold))#
+FPR = numeric(length(thresold))#
+Index = numeric(length(thresold))#
+for (i in 1:length(thresold)) {#
+    Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
+    conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
+    confusion_matrix = conf_matrix$table #
+     TN = confusion_matrix[1, 1]  # True Negatives#
+     FP = confusion_matrix[1, 2]  # False Positives#
+     FN = confusion_matrix[2, 1]  # False Negatives#
+     TP = confusion_matrix[2, 2]  # True Positives#
+    TPR[i] = TP / (TP + FN)#
+    FPR[i] = FP / (TN+FP+FN+TP)#
+    Index[i] = TPR[i] *(1-FPR[i]) #
+}#
+optimal_threshold = thresold[which.max(Index)]#
+plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
+abline(v = optimal_threshold, col = "red", lty = 2)#
+Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
+confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
+as.factor(data$TenYearCHD))#
+#==== #
+#Correlation Hea(list=ls())#
+rm(list=ls())#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+attach(data)#
+names(data)#
+library(ggplot2)#
+library(reshape2)#
+#
+# Calculate correlation matrix#
+correlation_matrix <- cor(data)#
+#
+# Melt correlation matrix#
+melted_correlation <- melt(correlation_matrix)#
+#
+# Plot heatmap#
+ggplot(data = melted_correlation, aes(Var1, Var2, fill = value)) +#
+  geom_tile(color = "white") +#
+  scale_fill_gradient2(low = "Yellow", high = "Red", mid = "white", midpoint = 0,#
+                       limit = c(-1,1), space = "Lab", name="Correlation") +#
+  theme_minimal() +#
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, size = 10, hjust = 1)) +#
+  coord_fixed()#
+#this is source Code
+#======= Required Packages for the Codes#
+# install.packages("lattice")#
+# rm(list=ls())#
+# data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+# attach(data)#
+# names(data)#
+# data$male = as.factor(data$male)#
+# data$education = as.factor(data$education)#
+# data$currentSmoker = as.factor(data$currentSmoker)#
+# data$prevalentStroke = as.factor(data$prevalentStroke)#
+# data$prevalentHyp = as.factor(data$prevalentHyp)#
+# data$diabetes = as.factor(data$diabetes)#
+# data$TenYearCHD = as.factor(data$TenYearCHD)#
+#
+# mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
+# summary(mymodel)#
+# # install.packages("caret")#
+# fitted_prob=fitted(mymodel)#
+# thresold = seq(0,1,0.001)#
+# accuracy = numeric(length(thresold))#
+# for(i in 1:length(thresold)) {#
+    # Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
+    # x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
+    # y = as.data.frame(x$overall)#
+    # accuracy[i] = y[1,1]#
+# }#
+# accuracy#
+# plot(thresold, accuracy, type="l")#
+# abline(v = thresold[which.max(accuracy)], col = "red", lty = 2)#
+#
+# #thresold = thresold[which.max(accuracy)]#
+# Y_hat = ifelse(fitted_prob <= thresold, 0, 1)#
+# x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
+# detach(data)#
+rm(list=ls())#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+attach(data)#
+names(data)#
+data$male = as.factor(data$male)#
+data$education = as.factor(data$education)#
+data$currentSmoker = as.factor(data$currentSmoker)#
+data$prevalentStroke = as.factor(data$prevalentStroke)#
+data$prevalentHyp = as.factor(data$prevalentHyp)#
+data$diabetes = as.factor(data$diabetes)#
+data$TenYearCHD = as.factor(data$TenYearCHD)#
+#
+mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
+summary(mymodel)#
+fitted_prob=fitted(mymodel)#
+#=============================================##
+# Finding thresold by Optimising TPR*(1-FPR)  ##
+#=============================================##
+thresold = seq(0,1,0.001)#
+TPR = numeric(length(thresold))#
+FPR = numeric(length(thresold))#
+Index = numeric(length(thresold))#
+for (i in 1:length(thresold)) {#
+    Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
+    conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
+    confusion_matrix = conf_matrix$table #
+     TN = confusion_matrix[1, 1]  # True Negatives#
+     FP = confusion_matrix[1, 2]  # False Positives#
+     FN = confusion_matrix[2, 1]  # False Negatives#
+     TP = confusion_matrix[2, 2]  # True Positives#
+    TPR[i] = TP / (TP + FN)#
+    FPR[i] = FP / (TN+FP+FN+TP)#
+    Index[i] = TPR[i] *(1-FPR[i]) #
+}#
+optimal_threshold = thresold[which.max(Index)]#
+plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
+abline(v = optimal_threshold, col = "red", lty = 2)#
+Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
+confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
+as.factor(data$TenYearCHD))#
+#==== #
+#Correlation Hea(list=ls())#
+rm(list=ls())#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+attach(data)#
+names(data)#
+library(ggplot2)#
+library(reshape2)#
+#
+# Calculate correlation matrix#
+correlation_matrix <- cor(data)#
+#
+# Melt correlation matrix#
+melted_correlation <- melt(correlation_matrix)#
+#
+# Plot heatmap#
+ggplot(data = melted_correlation, aes(Var1, Var2, fill = value)) +#
+  geom_tile(color = "white") +#
+  scale_fill_gradient2(low = "Yellow", high = "Red", mid = "white", midpoint = 0,#
+                       limit = c(-1,1), space = "Lab", name="Correlation") +#
+  theme_minimal() +#
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, size = 10, hjust = 1)) +#
+  coord_fixed()#
+#this is source Code
+# Load necessary libraries#
+library(pROC)#
+#
+# Generate sample data#
+set.seed(123)#
+actual <- sample(c(0, 1), 100, replace = TRUE)#
+predicted <- runif(100)#
+#
+# Calculate ROC curve#
+roc_curve <- roc(actual, predicted)#
+#
+# Plot ROC curve#
+plot(roc_curve, main = "Receiver Operating Characteristic (ROC) Curve",#
+     col = "blue", lwd = 2, print.auc = TRUE)#
+#
+# Add diagonal line (random classifier)#
+abline(a = 0, b = 1, lty = 2, col = "red")#
+#
+# Add legend#
+legend("bottomright", legend = c("ROC Curve", "Random Classifier"),#
+       col = c("blue", "red"), lty = c(1, 2), lwd = c(2, 1), bg = "white")
+# Load necessary libraries#
+library(pROC)#
+#
+# Generate sample data#
+set.seed(123)#
+actual <- sample(c(0, 1), 100, replace = TRUE)#
+predicted <- runif(100)#
+#
+# Calculate ROC curve#
+roc_curve <- roc(actual, predicted)#
+#
+# Plot smooth ROC curve#
+plot(roc_curve, main = "Receiver Operating Characteristic (ROC) Curve",#
+     col = "blue", lwd = 2, print.auc = TRUE, legacy.axes = TRUE)#
+#
+# Add diagonal line (random classifier)#
+abline(a = 0, b = 1, lty = 2, col = "red")#
+#
+# Add legend#
+legend("bottomright", legend = c("ROC Curve", "Random Classifier"),#
+       col = c("blue", "red"), lty = c(1, 2), lwd = c(2, 1), bg = "white")
+# Load necessary libraries#
+library(pROC)#
+#
+# Generate sample data#
+set.seed(123)#
+actual <- sample(c(0, 1), 100, replace = TRUE)#
+predicted <- runif(100)#
+#
+# Calculate ROC curve#
+roc_curve <- roc(actual, predicted)#
+#
+# Plot smooth ROC curve#
+plot(roc_curve, main = "Receiver Operating Characteristic (ROC) Curve",#
+     col = "blue", lwd = 2, print.auc = TRUE, legacy.axes = TRUE)#
+#
+# Add diagonal line (random classifier)#
+abline(a = 0, b = 1, lty = 2, col = "red")#
+#
+# Add legend#
+legend("bottomright", legend = c("ROC Curve", "Random Classifier"),#
+       col = c("blue", "red"), lty = c(1, 2), lwd = c(2, 1), bg = "white")
+# Load necessary libraries#
+library(pROC)#
+#
+# Generate sample data#
+set.seed(123)#
+actual <- sample(c(0, 1), 100, replace = TRUE)#
+predicted <- runif(100)#
+#
+# Calculate ROC curve#
+roc_curve <- roc(actual, predicted)#
+#
+# Create a semi-circular ROC curve#
+plot(roc_curve, type = "n", main = "Receiver Operating Characteristic (ROC) Curve",#
+     col = "blue", lwd = 2, print.auc = TRUE)#
+#
+# Draw a semi-circle#
+theta <- seq(pi, 2*pi, length.out = 100)#
+x <- cos(theta)#
+y <- sin(theta)#
+lines(x, y, type = "l", col = "red", lwd = 2)#
+#
+# Add legend#
+legend("bottomright", legend = c("ROC Curve", "Random Classifier"),#
+       col = c("blue", "red"), lty = c(1, 1), lwd = c(2, 2), bg = "white")
+# Load necessary libraries#
+library(pROC)#
+#
+# Generate sample data#
+set.seed(123)#
+actual <- sample(c(0, 1), 100, replace = TRUE)#
+predicted <- runif(100)#
+#
+# Calculate ROC curve#
+roc_curve <- roc(actual, predicted)#
+#
+# Plot ROC curve with a smooth, rounded shape#
+plot(roc_curve, main = "Receiver Operating Characteristic (ROC) Curve",#
+     col = "blue", lwd = 2, print.auc = TRUE, legacy.axes = TRUE, smooth = TRUE)#
+#
+# Add diagonal line (random classifier)#
+abline(a = 0, b = 1, lty = 2, col = "red")#
+#
+# Add legend#
+legend("bottomright", legend = c("ROC Curve", "Random Classifier"),#
+       col = c("blue", "red"), lty = c(1, 2), lwd = c(2, 1), bg = "white")
+# Load necessary libraries#
+library(pROC)#
+#
+# Generate sample data#
+set.seed(123)#
+actual <- sample(c(0, 1), 100, replace = TRUE)#
+predicted <- runif(100)#
+#
+# Calculate ROC curve#
+roc_curve <- roc(actual, predicted)#
+#
+# Interpolate ROC curve using splines#
+interp_roc <- smooth(roc_curve, method = "spline")#
+#
+# Plot smooth hand-drawn ROC curve#
+plot(interp_roc, main = "Hand-Drawn Receiver Operating Characteristic (ROC) Curve",#
+     col = "blue", lwd = 2, print.auc = TRUE)#
+#
+# Add diagonal line (random classifier)#
+abline(a = 0, b = 1, lty = 2, col = "red")#
+#
+# Add legend#
+legend("bottomright", legend = c("ROC Curve", "Random Classifier"),#
+       col = c("blue", "red"), lty = c(1, 2), lwd = c(2, 1), bg = "white")
+# Load necessary libraries#
+library(pROC)#
+#
+# Generate sample data#
+set.seed(123)#
+actual <- sample(c(0, 1), 100, replace = TRUE)#
+predicted <- runif(100)#
+#
+# Calculate ROC curve#
+roc_curve <- roc(actual, predicted)#
+#
+# Interpolate ROC curve using splines#
+interp_roc <- smooth(roc_curve, method = "spline")#
+#
+# Plot smooth hand-drawn ROC curve#
+plot(interp_roc, main = "Hand-Drawn Receiver Operating Characteristic (ROC) Curve",#
+     col = "blue", lwd = 2, print.auc = TRUE)#
+#
+# Add diagonal line (random classifier)#
+abline(a = 0, b = 1, lty = 2, col = "red")#
+#
+# Add legend#
+legend("bottomright", legend = c("ROC Curve", "Random Classifier"),#
+       col = c("blue", "red"), lty = c(1, 2), lwd = c(2, 1), bg = "white")
+rm(list=ls())#
+#
+# Setting the working directory#
+setwd("D:/Edwisor_Project - Loan_Defaulter/")#
+getwd()#
+#
+# Load the dataset#
+gfgDataset = read.csv("bank-loan.csv", header=TRUE)#
+#
+### Data SAMPLING #####
+library(caret)#
+set.seed(101)#
+split = createDataPartition(data$default, p=0.81, list=FALSE)#
+train_data = data[split, ]#
+test_data = data[-split, ]#
+#
+# error metrics -- Confusion Matrix#
+err_metric = function(GFGCM)#
+{#
+	GFGTN = GFGCM[1, 1]#
+	GFGRATE = GFGCM[2, 2]#
+	FP = GFGCM[1, 2]#
+	FN = GFGCM[2, 1]#
+	gfgPrecise = (GFGRATE)/(GFGRATE+FP)#
+	recall_score = (FP)/(FP+GFGTN)#
+	f1_score = 2*((gfgPrecise*recall_score)/(gfgPrecise+recall_score))#
+	accuracy_model = (GFGRATE+GFGTN)/(GFGRATE+GFGTN+FP+FN)#
+	False_positive_rate = (FP)/(FP+GFGTN)#
+	False_negative_rate = (FN)/(FN+GFGRATE)#
+	print(paste("GfgPrecise value of the model: ", round(gfgPrecise, 2)))#
+	print(paste("Accuracy of the model: ", round(accuracy_model, 2)))#
+	print(paste("Recall value of the model: ", round(recall_score, 2)))#
+	print(paste("False Positive rate of the model: ", round(False_positive_rate, 2)))#
+	print(paste("False Negative rate of the model: ", round(False_negative_rate, 2)))#
+	print(paste("f1 score of the model: ", round(f1_score, 2)))#
+}#
+#
+# 1. Logistic regression#
+logit_m = glm(formula=default~., data=train_data, family='binomial')#
+summary(logit_m)#
+logit_P = predict(logit_m, newdata=test_data[-13], type='response')#
+logit_P < - ifalse(logit_P > 0.5, 1, 0) # Probability check#
+GFGCM = table(test_data[, 13], logit_P)#
+print(GFGCM)#
+err_metric(GFGCM)#
+#
+# ROC-curve using pROC library#
+library(pROC)#
+roc_score = roc(test_data[, 13], logit_P) # AUC score#
+plot(roc_score, main="ROC curve -- Logistic Regression ")
+data
+rm(list=ls())
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")
+data
+rm(list=ls())#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+attach(data)#
+names(data)#
+library(ggplot2)#
+library(reshape2)#
+#
+# Calculate correlation matrix#
+correlation_matrix <- cor(data)#
+#
+# Melt correlation matrix#
+melted_correlation <- melt(correlation_matrix)#
+#
+# Plot heatmap#
+ggplot(data = melted_correlation, aes(Var1, Var2, fill = value)) +#
+  geom_tile(color = "white") +#
+  scale_fill_gradient2(low = "Yellow", high = "Red", mid = "white", midpoint = 0,#
+                       limit = c(-1,1), space = "Lab", name="Correlation") +#
+  theme_minimal() +#
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, size = 10, hjust = 1)) +#
+  coord_fixed()
+# Load necessary libraries#
+library(ggplot2)#
+library(reshape2)#
+#
+# Load data#
+data <- read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+#
+# Calculate correlation matrix#
+correlation_matrix <- cor(data)#
+#
+# Melt the correlation matrix for plotting#
+melted_correlation <- melt(correlation_matrix)#
+#
+# Plot heatmap with correlation coefficients#
+ggplot(melted_correlation, aes(Var1, Var2, fill = value)) +#
+  geom_tile() + #
+  geom_text(aes(label = sprintf("%.2f", value)), size = 3) +#
+  scale_fill_gradient2(low = "yellow", high = "red", midpoint = 0, limit = c(-1,1), name="Correlation") +#
+  theme_minimal() +#
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +#
+  coord_fixed()
+# Load necessary libraries#
+library(ggplot2)#
+library(reshape2)#
+#
+# Load data#
+data <- read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+#
+# Calculate correlation matrix#
+correlation_matrix <- cor(data)#
+#
+# Melt the correlation matrix for plotting#
+melted_correlation <- melt(correlation_matrix)#
+#
+# Plot heatmap with correlation coefficients#
+ggplot(melted_correlation, aes(Var1, Var2, fill = value)) +#
+  geom_tile() + #
+  geom_text(aes(label = sprintf("%.2f", value)), size = 3) +#
+  scale_fill_gradient2(low = "#FFFF00", high = "#FF0000", midpoint = 0, limit = c(-1,1), name="Correlation", mid = "#FFFFFF") +#
+  theme_minimal() +#
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +#
+  coord_fixed()
+# Load necessary libraries#
+library(ggplot2)#
+library(reshape2)#
+#
+# Load data#
+data <- read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+#
+# Calculate correlation matrix#
+correlation_matrix <- cor(data)#
+#
+# Melt the correlation matrix for plotting#
+melted_correlation <- melt(correlation_matrix)#
+#
+# Plot heatmap with correlation coefficients#
+ggplot(melted_correlation, aes(Var1, Var2, fill = value)) +#
+  geom_tile() + #
+  geom_text(aes(label = sprintf("%.2f", value)), size = 3) +#
+  scale_fill_gradient2(low = "#3jhsFF00", high = "#FF0000", midpoint = 0, limit = c(-1,1), name="Correlation", mid = "#FFFFFF") +#
+  theme_minimal() +#
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +#
+  coord_fixed()
+# Load necessary libraries#
+library(ggplot2)#
+library(reshape2)#
+#
+# Load data#
+data <- read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+#
+# Calculate correlation matrix#
+correlation_matrix <- cor(data)#
+#
+# Melt the correlation matrix for plotting#
+melted_correlation <- melt(correlation_matrix)#
+#
+# Plot heatmap with correlation coefficients#
+ggplot(melted_correlation, aes(Var1, Var2, fill = value)) +#
+  geom_tile() + #
+  geom_text(aes(label = sprintf("%.2f", value)), size = 3) +#
+  scale_fill_gradient2(low = "#58390b", high = "#0f423c", midpoint = 0, limit = c(-1,1), name="Correlation", mid = "#FFFFFF") +#
+  theme_minimal() +#
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +#
+  coord_fixed()
+# Load necessary libraries#
+library(ggplot2)#
+library(reshape2)#
+#
+# Load data#
+data <- read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+#
+# Calculate correlation matrix#
+correlation_matrix <- cor(data)#
+#
+# Melt the correlation matrix for plotting#
+melted_correlation <- melt(correlation_matrix)#
+#
+# Plot heatmap with correlation coefficients#
+ggplot(melted_correlation, aes(Var1, Var2, fill = value)) +#
+  geom_tile() + #
+  geom_text(aes(label = sprintf("%.2f", value)), size = 3) +#
+  scale_fill_gradient2(low = "#58390b", high = "#0f423c", midpoint = 0, limit = c(-1,1), name="Correlation", mid = "#FFFFFF") +#
+  theme_minimal() +#
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +#
+  coord_fixed()
+#======= Required Packages for the Codes#
+# install.packages("lattice")#
+# rm(list=ls())#
+# data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+# attach(data)#
+# names(data)#
+# data$male = as.factor(data$male)#
+# data$education = as.factor(data$education)#
+# data$currentSmoker = as.factor(data$currentSmoker)#
+# data$prevalentStroke = as.factor(data$prevalentStroke)#
+# data$prevalentHyp = as.factor(data$prevalentHyp)#
+# data$diabetes = as.factor(data$diabetes)#
+# data$TenYearCHD = as.factor(data$TenYearCHD)#
+#
+# mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
+# summary(mymodel)#
+# # install.packages("caret")#
+# fitted_prob=fitted(mymodel)#
+# thresold = seq(0,1,0.001)#
+# accuracy = numeric(length(thresold))#
+# for(i in 1:length(thresold)) {#
+    # Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
+    # x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
+    # y = as.data.frame(x$overall)#
+    # accuracy[i] = y[1,1]#
+# }#
+# accuracy#
+# plot(thresold, accuracy, type="l")#
+# abline(v = thresold[which.max(accuracy)], col = "red", lty = 2)#
+#
+# #thresold = thresold[which.max(accuracy)]#
+# Y_hat = ifelse(fitted_prob <= thresold, 0, 1)#
+# x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
+# detach(data)#
+rm(list=ls())#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+attach(data)#
+names(data)#
+data$male = as.factor(data$male)#
+data$education = as.factor(data$education)#
+data$currentSmoker = as.factor(data$currentSmoker)#
+data$prevalentStroke = as.factor(data$prevalentStroke)#
+data$prevalentHyp = as.factor(data$prevalentHyp)#
+data$diabetes = as.factor(data$diabetes)#
+data$TenYearCHD = as.factor(data$TenYearCHD)#
+#
+mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
+summary(mymodel)#
+fitted_prob=fitted(mymodel)#
+#=============================================##
+# Finding thresold by Optimising TPR*(1-FPR)  ##
+#=============================================##
+thresold = seq(0,1,0.001)#
+TPR = numeric(length(thresold))#
+FPR = numeric(length(thresold))#
+Index = numeric(length(thresold))#
+for (i in 1:length(thresold)) {#
+    Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
+    conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
+    confusion_matrix = conf_matrix$table #
+     TN = confusion_matrix[1, 1]  # True Negatives#
+     FP = confusion_matrix[1, 2]  # False Positives#
+     FN = confusion_matrix[2, 1]  # False Negatives#
+     TP = confusion_matrix[2, 2]  # True Positives#
+    TPR[i] = TP / (TP + FN)#
+    FPR[i] = FP / (TN+FP+FN+TP)#
+    Index[i] = TPR[i] *(1-FPR[i]) #
+}#
+optimal_threshold = thresold[which.max(Index)]#
+plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
+abline(v = optimal_threshold, col = "red", lty = 2)#
+Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
+confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
+as.factor(data$TenYearCHD))#
+#==== #
+rm(list=ls())#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+library(ggplot2)#
+library(reshape2)#
+#
+# Calculate correlation matrix#
+correlation_matrix = cor(data)#
+#
+# Melt the correlation matrix for plotting#
+melted_correlation = melt(correlation_matrix)#
+#
+# Plot heatmap with correlation coefficients#
+ggplot(melted_correlation, aes(Var1, Var2, fill = value)) +#
+  geom_tile() + #
+  geom_text(aes(label = sprintf("%.2f", value)), size = 3) +#
+  scale_fill_gradient2(low = "#58390b", high = "#0f423c", midpoint = 0, limit = c(-1,1), name="Correlation", mid = "#FFFFFF") +#
+  theme_minimal() +#
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +#
+  coord_fixed()#
+#
+#this is source Code
+#======= Required Packages for the Codes#
+# install.packages("lattice")#
+# rm(list=ls())#
+# data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+# attach(data)#
+# names(data)#
+# data$male = as.factor(data$male)#
+# data$education = as.factor(data$education)#
+# data$currentSmoker = as.factor(data$currentSmoker)#
+# data$prevalentStroke = as.factor(data$prevalentStroke)#
+# data$prevalentHyp = as.factor(data$prevalentHyp)#
+# data$diabetes = as.factor(data$diabetes)#
+# data$TenYearCHD = as.factor(data$TenYearCHD)#
+#
+# mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
+# summary(mymodel)#
+# # install.packages("caret")#
+# fitted_prob=fitted(mymodel)#
+# thresold = seq(0,1,0.001)#
+# accuracy = numeric(length(thresold))#
+# for(i in 1:length(thresold)) {#
+    # Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
+    # x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
+    # y = as.data.frame(x$overall)#
+    # accuracy[i] = y[1,1]#
+# }#
+# accuracy#
+# plot(thresold, accuracy, type="l")#
+# abline(v = thresold[which.max(accuracy)], col = "red", lty = 2)#
+#
+# #thresold = thresold[which.max(accuracy)]#
+# Y_hat = ifelse(fitted_prob <= thresold, 0, 1)#
+# x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
+# detach(data)#
+rm(list=ls())#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+attach(data)#
+names(data)#
+data$male = as.factor(data$male)#
+data$education = as.factor(data$education)#
+data$currentSmoker = as.factor(data$currentSmoker)#
+data$prevalentStroke = as.factor(data$prevalentStroke)#
+data$prevalentHyp = as.factor(data$prevalentHyp)#
+data$diabetes = as.factor(data$diabetes)#
+data$TenYearCHD = as.factor(data$TenYearCHD)#
+#
+mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
+summary(mymodel)#
+fitted_prob=fitted(mymodel)#
+#=============================================##
+# Finding thresold by Optimising TPR*(1-FPR)  ##
+#=============================================##
+thresold = seq(0,1,0.001)#
+TPR = numeric(length(thresold))#
+FPR = numeric(length(thresold))#
+Index = numeric(length(thresold))#
+for (i in 1:length(thresold)) {#
+    Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
+    conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
+    confusion_matrix = conf_matrix$table #
+     TN = confusion_matrix[1, 1]  # True Negatives#
+     FP = confusion_matrix[1, 2]  # False Positives#
+     FN = confusion_matrix[2, 1]  # False Negatives#
+     TP = confusion_matrix[2, 2]  # True Positives#
+    TPR[i] = TP / (TP + FN)#
+    FPR[i] = FP / (TN+FP+FN+TP)#
+    Index[i] = TPR[i] *(1-FPR[i]) #
+}#
+optimal_threshold = thresold[which.max(Index)]#
+plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
+abline(v = optimal_threshold, col = "red", lty = 2)#
+Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
+confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
+as.factor(data$TenYearCHD))#
+#==== #
+rm(list=ls())#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+library(ggplot2)#
+library(reshape2)#
+#
+# Calculate correlation matrix#
+correlation_matrix = cor(data)#
+#
+# Melt the correlation matrix for plotting#
+melted_correlation = melt(correlation_matrix)#
+#
+# Plot heatmap with correlation coefficients#
+ggplot(melted_correlation, aes(Predictor Variables, Predictor Variables, fill = value)) +#
+  geom_tile() + #
+  geom_text(aes(label = sprintf("%.2f", value)), size = 3) +#
+  scale_fill_gradient2(low = "#58390b", high = "#0f423c", midpoint = 0, limit = c(-1,1), name="Correlation", mid = "#FFFFFF") +#
+  theme_minimal() +#
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +#
+  coord_fixed()#
+#
+#this is source Code
+#======= Required Packages for the Codes#
+# install.packages("lattice")#
+# rm(list=ls())#
+# data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+# attach(data)#
+# names(data)#
+# data$male = as.factor(data$male)#
+# data$education = as.factor(data$education)#
+# data$currentSmoker = as.factor(data$currentSmoker)#
+# data$prevalentStroke = as.factor(data$prevalentStroke)#
+# data$prevalentHyp = as.factor(data$prevalentHyp)#
+# data$diabetes = as.factor(data$diabetes)#
+# data$TenYearCHD = as.factor(data$TenYearCHD)#
+#
+# mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
+# summary(mymodel)#
+# # install.packages("caret")#
+# fitted_prob=fitted(mymodel)#
+# thresold = seq(0,1,0.001)#
+# accuracy = numeric(length(thresold))#
+# for(i in 1:length(thresold)) {#
+    # Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
+    # x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
+    # y = as.data.frame(x$overall)#
+    # accuracy[i] = y[1,1]#
+# }#
+# accuracy#
+# plot(thresold, accuracy, type="l")#
+# abline(v = thresold[which.max(accuracy)], col = "red", lty = 2)#
+#
+# #thresold = thresold[which.max(accuracy)]#
+# Y_hat = ifelse(fitted_prob <= thresold, 0, 1)#
+# x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
+# detach(data)#
+rm(list=ls())#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+attach(data)#
+names(data)#
+data$male = as.factor(data$male)#
+data$education = as.factor(data$education)#
+data$currentSmoker = as.factor(data$currentSmoker)#
+data$prevalentStroke = as.factor(data$prevalentStroke)#
+data$prevalentHyp = as.factor(data$prevalentHyp)#
+data$diabetes = as.factor(data$diabetes)#
+data$TenYearCHD = as.factor(data$TenYearCHD)#
+#
+mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
+summary(mymodel)#
+fitted_prob=fitted(mymodel)#
+#=============================================##
+# Finding thresold by Optimising TPR*(1-FPR)  ##
+#=============================================##
+thresold = seq(0,1,0.001)#
+TPR = numeric(length(thresold))#
+FPR = numeric(length(thresold))#
+Index = numeric(length(thresold))#
+for (i in 1:length(thresold)) {#
+    Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
+    conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
+    confusion_matrix = conf_matrix$table #
+     TN = confusion_matrix[1, 1]  # True Negatives#
+     FP = confusion_matrix[1, 2]  # False Positives#
+     FN = confusion_matrix[2, 1]  # False Negatives#
+     TP = confusion_matrix[2, 2]  # True Positives#
+    TPR[i] = TP / (TP + FN)#
+    FPR[i] = FP / (TN+FP+FN+TP)#
+    Index[i] = TPR[i] *(1-FPR[i]) #
+}#
+optimal_threshold = thresold[which.max(Index)]#
+plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
+abline(v = optimal_threshold, col = "red", lty = 2)#
+Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
+confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
+as.factor(data$TenYearCHD))#
+#==== #
+rm(list=ls())#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+library(ggplot2)#
+library(reshape2)#
+#
+# Calculate correlation matrix#
+correlation_matrix = cor(data)#
+#
+# Melt the correlation matrix for plotting#
+melted_correlation = melt(correlation_matrix)#
+#
+# Plot heatmap with correlation coefficients#
+ggplot(melted_correlation, aes(Var1, Var2, fill = value)) +#
+  geom_tile() + #
+  geom_text(aes(label = sprintf("%.2f", value)), size = 3) +#
+  scale_fill_gradient2(low = "#58390b", high = "#0f423c", midpoint = 0, limit = c(-1,1), name="Correlation", mid = "#FFFFFF") +#
+  theme_minimal() +#
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +#
+  coord_fixed()#
+#
+#this is source Code
+rm(list=ls())
+rm(list=ls())#
+data <- read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+library(ggplot2)#
+library(reshape2)#
+#
+# Calculate correlation matrix#
+correlation_matrix <- cor(data)#
+#
+# Melt the correlation matrix for plotting#
+melted_correlation <- melt(correlation_matrix)#
+#
+# Plot heatmap with correlation coefficients#
+ggplot(melted_correlation, aes(Var1, Var2, fill = value)) +#
+  geom_tile() + #
+  geom_text(aes(label = sprintf("%.2f", value)), size = 3) +#
+  scale_fill_gradient2(low = "#58390b", high = "#0f423c", midpoint = 0, limit = c(-1,1), name="Correlation", mid = "#FFFFFF") +#
+  theme_minimal() +#
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +#
+  coord_fixed() +#
+  labs(x = "Variables", y = "Variables")
+#======= Required Packages for the Codes#
+# install.packages("lattice")#
+# rm(list=ls())#
+# data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+# attach(data)#
+# names(data)#
+# data$male = as.factor(data$male)#
+# data$education = as.factor(data$education)#
+# data$currentSmoker = as.factor(data$currentSmoker)#
+# data$prevalentStroke = as.factor(data$prevalentStroke)#
+# data$prevalentHyp = as.factor(data$prevalentHyp)#
+# data$diabetes = as.factor(data$diabetes)#
+# data$TenYearCHD = as.factor(data$TenYearCHD)#
+#
+# mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
+# summary(mymodel)#
+# # install.packages("caret")#
+# fitted_prob=fitted(mymodel)#
+# thresold = seq(0,1,0.001)#
+# accuracy = numeric(length(thresold))#
+# for(i in 1:length(thresold)) {#
+    # Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
+    # x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
+    # y = as.data.frame(x$overall)#
+    # accuracy[i] = y[1,1]#
+# }#
+# accuracy#
+# plot(thresold, accuracy, type="l")#
+# abline(v = thresold[which.max(accuracy)], col = "red", lty = 2)#
+#
+# #thresold = thresold[which.max(accuracy)]#
+# Y_hat = ifelse(fitted_prob <= thresold, 0, 1)#
+# x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
+# detach(data)#
+rm(list=ls())#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+attach(data)#
+names(data)#
+data$male = as.factor(data$male)#
+data$education = as.factor(data$education)#
+data$currentSmoker = as.factor(data$currentSmoker)#
+data$prevalentStroke = as.factor(data$prevalentStroke)#
+data$prevalentHyp = as.factor(data$prevalentHyp)#
+data$diabetes = as.factor(data$diabetes)#
+data$TenYearCHD = as.factor(data$TenYearCHD)#
+#
+mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
+summary(mymodel)#
+fitted_prob=fitted(mymodel)#
+#=============================================##
+# Finding thresold by Optimising TPR*(1-FPR)  ##
+#=============================================##
+thresold = seq(0,1,0.001)#
+TPR = numeric(length(thresold))#
+FPR = numeric(length(thresold))#
+Index = numeric(length(thresold))#
+for (i in 1:length(thresold)) {#
+    Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
+    conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
+    confusion_matrix = conf_matrix$table #
+     TN = confusion_matrix[1, 1]  # True Negatives#
+     FP = confusion_matrix[1, 2]  # False Positives#
+     FN = confusion_matrix[2, 1]  # False Negatives#
+     TP = confusion_matrix[2, 2]  # True Positives#
+    TPR[i] = TP / (TP + FN)#
+    FPR[i] = FP / (TN+FP+FN+TP)#
+    Index[i] = TPR[i] *(1-FPR[i]) #
+}#
+optimal_threshold = thresold[which.max(Index)]#
+plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
+abline(v = optimal_threshold, col = "red", lty = 2)#
+Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
+confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
+as.factor(data$TenYearCHD))#
+#====#
+# Code for Plotting teh Correlation Heatmaps#
+#====== #
+rm(list=ls())#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+library(ggplot2)#
+library(reshape2)#
+#
+# Calculate correlation matrix#
+correlation_matrix = cor(data)#
+#
+# Melt the correlation matrix for plotting#
+melted_correlation = melt(correlation_matrix)#
+#
+# Plot heatmap with correlation coefficients#
+ggplot(melted_correlation, aes(Var1, Var2, fill = value)) +#
+  geom_tile() + #
+  geom_text(aes(label = sprintf("%.2f", value)), size = 3) +#
+  scale_fill_gradient2(low = "#58390b", high = "#0f423c", midpoint = 0, limit = c(-1,1), name="Correlation", mid = "#FFFFFF") +#
+  theme_minimal() +#
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +#
+  coord_fixed() +#
+  labs(x = "Variables", y = "Variables")
+#======= Required Packages for the Codes#
+# install.packages("lattice")#
+# rm(list=ls())#
+# data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+# attach(data)#
+# names(data)#
+# data$male = as.factor(data$male)#
+# data$education = as.factor(data$education)#
+# data$currentSmoker = as.factor(data$currentSmoker)#
+# data$prevalentStroke = as.factor(data$prevalentStroke)#
+# data$prevalentHyp = as.factor(data$prevalentHyp)#
+# data$diabetes = as.factor(data$diabetes)#
+# data$TenYearCHD = as.factor(data$TenYearCHD)#
+#
+# mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
+# summary(mymodel)#
+# # install.packages("caret")#
+# fitted_prob=fitted(mymodel)#
+# thresold = seq(0,1,0.001)#
+# accuracy = numeric(length(thresold))#
+# for(i in 1:length(thresold)) {#
+    # Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
+    # x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
+    # y = as.data.frame(x$overall)#
+    # accuracy[i] = y[1,1]#
+# }#
+# accuracy#
+# plot(thresold, accuracy, type="l")#
+# abline(v = thresold[which.max(accuracy)], col = "red", lty = 2)#
+#
+# #thresold = thresold[which.max(accuracy)]#
+# Y_hat = ifelse(fitted_prob <= thresold, 0, 1)#
+# x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
+# detach(data)#
+rm(list=ls())#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+attach(data)#
+names(data)#
+data$male = as.factor(data$male)#
+data$education = as.factor(data$education)#
+data$currentSmoker = as.factor(data$currentSmoker)#
+data$prevalentStroke = as.factor(data$prevalentStroke)#
+data$prevalentHyp = as.factor(data$prevalentHyp)#
+data$diabetes = as.factor(data$diabetes)#
+data$TenYearCHD = as.factor(data$TenYearCHD)#
+#
+mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
+summary(mymodel)#
+fitted_prob=fitted(mymodel)#
+#=============================================##
+# Finding thresold by Optimising TPR*(1-FPR)  ##
+#=============================================##
+thresold = seq(0,1,0.001)#
+TPR = numeric(length(thresold))#
+FPR = numeric(length(thresold))#
+Index = numeric(length(thresold))#
+for (i in 1:length(thresold)) {#
+    Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
+    conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
+    confusion_matrix = conf_matrix$table #
+     TN = confusion_matrix[1, 1]  # True Negatives#
+     FP = confusion_matrix[1, 2]  # False Positives#
+     FN = confusion_matrix[2, 1]  # False Negatives#
+     TP = confusion_matrix[2, 2]  # True Positives#
+    TPR[i] = TP / (TP + FN)#
+    FPR[i] = FP / (TN+FP+FN+TP)#
+    Index[i] = TPR[i] *(1-FPR[i]) #
+}#
+optimal_threshold = thresold[which.max(Index)]#
+plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
+abline(v = optimal_threshold, col = "red", lty = 2)#
+Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
+confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
+as.factor(data$TenYearCHD))#
+#====#
+# Code for Plotting teh Correlation Heatmaps#
+#====== #
+rm(list=ls())#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+library(ggplot2)#
+library(reshape2)#
+#
+# Calculate correlation matrix#
+correlation_matrix = cor(data)#
+#
+# Melt the correlation matrix for plotting#
+melted_correlation = melt(correlation_matrix)#
+png()#
+# Plot heatmap with correlation coefficients#
+ggplot(melted_correlation, aes(Var1, Var2, fill = value)) +#
+  geom_tile() + #
+  geom_text(aes(label = sprintf("%.2f", value)), size = 3) +#
+  scale_fill_gradient2(low = "#58390b", high = "#0f423c", midpoint = 0, limit = c(-1,1), name="Correlation", mid = "#FFFFFF") +#
+  theme_minimal() +#
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +#
+  coord_fixed() +#
+  labs(x = "Variables", y = "Variables")
+rm(list=ls())#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+library(ggplot2)#
+library(reshape2)#
+#
+# Calculate correlation matrix#
+correlation_matrix = cor(data)#
+#
+# Melt the correlation matrix for plotting#
+melted_correlation = melt(correlation_matrix)#
+png()#
+# Plot heatmap with correlation coefficients#
+ggplot(melted_correlation, aes(Var1, Var2, fill = value)) +#
+  geom_tile() + #
+  geom_text(aes(label = sprintf("%.2f", value)), size = 3) +#
+  scale_fill_gradient2(low = "#58390b", high = "#0f423c", midpoint = 0, limit = c(-1,1), name="Correlation", mid = "#FFFFFF") +#
+  theme_minimal() +#
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +#
+  coord_fixed() +#
+  labs(x = "Variables", y = "Variables")
+getwd()
+# Required Packages#
+install.packages("car")#
+library(car)#
+#
+# Assuming 'data' has already been read and preprocessed as per your previous steps#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+#
+# Convert necessary columns to factors#
+data$male = as.factor(data$male)#
+data$education = as.factor(data$education)#
+data$currentSmoker = as.factor(data$currentSmoker)#
+data$prevalentStroke = as.factor(data$prevalentStroke)#
+data$prevalentHyp = as.factor(data$prevalentHyp)#
+data$diabetes = as.factor(data$diabetes)#
+data$TenYearCHD = as.factor(data$TenYearCHD)#
+#
+# Build the model#
+mymodel = glm(TenYearCHD ~ ., data = data, family = binomial(link = "logit"))#
+#
+# Calculate VIF#
+vif_values = vif(mymodel)#
+print(vif_values)#
+#
+# Calculate Tolerance#
+tol_values = 1 / vif_values#
+print(tol_values)
+help(vif)
+mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))
+summary(mymodel)
+mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))
+summary(mymodel)
+library(car)#
+#
+# Assuming 'data' is your dataframe and 'model' is your glm model.#
+# If you want to calculate VIFs for a subset of predictors or under a linear assumption:#
+# Example using a linear model for the sake of VIF calculation#
+linear_model <- lm(TenYearCHD ~ ., data = data)#
+#
+# Calculate VIF#
+vif_values <- vif(linear_model)#
+print(vif_values)
+model=aov(TenYearChd~.)
+mymodel = aov(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))
+summary(mymodel)
