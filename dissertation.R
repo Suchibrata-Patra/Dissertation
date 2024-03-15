@@ -162,13 +162,6 @@ data$TenYearCHD = as.factor(data$TenYearCHD)
 mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))
 summary(mymodel)
 fitted_prob=fitted(mymodel)
-
-
-
-#Fitting the Complete Model
-
-
-
 thresold = seq(0,1,0.001)
 TPR = numeric(length(thresold))
 FPR = numeric(length(thresold))
