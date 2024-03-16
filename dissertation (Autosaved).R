@@ -368,6 +368,10 @@ data$diabetes = as.factor(data$diabetes)
 data$TenYearCHD = as.factor(data$TenYearCHD)
 mymodel = glm(TenYearCHD ~ ., data = data, family = binomial(link = "logit"))
 summary(mymodel)
+
+
+
+#Code for testing the significance of the predictor variables
 x=summary(mymodel)
 x$deviance
 y=x$coefficients
@@ -378,7 +382,7 @@ walds_t = estimates/sqrt(se)
 significance = numeric(16)
 for(i in 1:16){
 	if(walds_t[i]>=1.96){
-		significance[i]= "*" ;
+		significance[i]= "***" ;
 	}else{
 		significance[i]="*"
 	}
