@@ -1,1038 +1,1693 @@
-rm(list=ls())
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")
-attach(data)
-plot(data)
+detach(data)
+detach(data)
+detach(data)
+detach(data)
+# = = = = = = = = = = #
+#Splitting the Dataset into Training and Testing Data#
+# = = = = = = = = = =#
+rm(list=ls())#
+set.seed(123)#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+attach(data)#
+# Define the proportion of data for training (e.g., 80%)#
+train_proportion = 0.8#
+#
+# Number of rows in the data frame#
+num_rows = nrow(data)#
+#
+# Randomly select row indices for the training set#
+train_indices = sample(num_rows, size = round(train_proportion * num_rows), replace = FALSE)#
+#
+# Create the training set#
+training_data = data[train_indices, ]#
+#
+# Create the testing set (excluding rows in the training set)#
+testing_data = data[-train_indices, ]#
+detach(data)
+testing_data
+nrows(testing)_data
+nrows(testing_data)
+nrow(testing_data)
+nrow(training_data)
+library(readr)#
+library(tidymodels)#
+#
+# Read the dataset and convert the target variable to a factor#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+bank_df$y = as.factor(data)#
+#
+# Plot job occupation against the target variable#
+ggplot(bank_df, aes(job, fill = y)) +#
+    geom_bar() +#
+    coord_flip()
+install.packages("tidymodels")
+#install.packages("tidymodels")#
+library(readr)#
+library(tidymodels)#
+#
+# Read the dataset and convert the target variable to a factor#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+bank_df$y = as.factor(data)#
+#
+# Plot job occupation against the target variable#
+ggplot(bank_df, aes(job, fill = y)) +#
+    geom_bar() +#
+    coord_flip()
 names(data)
-plot(age,TenYearCHD)
-plot(male,TenYearCHD)
-plot(education,TenYearCHD)
-plot(diabetes,TenYearCHD)
+ggplot(TenYearCHD, aes(job, fill = y)) +
+ggplot(TenYearCHD, aes(job, fill = y)) +
+ggplot(TenYearCHD, aes(job, fill = y)) +
+ggplot(TenYearCHD, aes(job, fill = y)) +
+ggplot(TenYearCHD, aes(job, fill = y)) +
+#======= Required Packages for the Codes#
+# install.packages("lattice")#
+# rm(list=ls())#
+# data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+# attach(data)#
+# names(data)#
+# data$male = as.factor(data$male)#
+# data$education = as.factor(data$education)#
+# data$currentSmoker = as.factor(data$currentSmoker)#
+# data$prevalentStroke = as.factor(data$prevalentStroke)#
+# data$prevalentHyp = as.factor(data$prevalentHyp)#
+# data$diabetes = as.factor(data$diabetes)#
+# data$TenYearCHD = as.factor(data$TenYearCHD)#
+#
+# mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
+# summary(mymodel)#
+# # install.packages("caret")#
+# fitted_prob=fitted(mymodel)#
+# thresold = seq(0,1,0.001)#
+# accuracy = numeric(length(thresold))#
+# for(i in 1:length(thresold)) {#
+    # Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
+    # x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
+    # y = as.data.frame(x$overall)#
+    # accuracy[i] = y[1,1]#
+# }#
+# accuracy#
+# plot(thresold, accuracy, type="l")#
+# abline(v = thresold[which.max(accuracy)], col = "red", lty = 2)#
+#
+# #thresold = thresold[which.max(accuracy)]#
+# Y_hat = ifelse(fitted_prob <= thresold, 0, 1)#
+# x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
+# detach(data)#
+# # rm(list=ls())#
+# data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+# attach(data)#
+# names(data)#
+# data$male = as.factor(data$male)#
+# data$education = as.factor(data$education)#
+# data$currentSmoker = as.factor(data$currentSmoker)#
+# data$prevalentStroke = as.factor(data$prevalentStroke)#
+# data$prevalentHyp = as.factor(data$prevalentHyp)#
+# data$diabetes = as.factor(data$diabetes)#
+# data$TenYearCHD = as.factor(data$TenYearCHD)#
+#
+# mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
+# summary(mymodel)#
+# fitted_prob=fitted(mymodel)#
+# #=============================================##
+# # Finding thresold by Optimising TPR*(1-FPR)  ##
+# #=============================================##
+# thresold = seq(0,1,0.001)#
+# TPR = numeric(length(thresold))#
+# FPR = numeric(length(thresold))#
+# Index = numeric(length(thresold))#
+# for (i in 1:length(thresold)) {#
+    # Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
+    # conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
+    # confusion_matrix = conf_matrix$table #
+     # TN = confusion_matrix[1, 1]  # True Negatives#
+     # FP = confusion_matrix[1, 2]  # False Positives#
+     # FN = confusion_matrix[2, 1]  # False Negatives#
+     # TP = confusion_matrix[2, 2]  # True Positives#
+    # TPR[i] = TP / (TP + FN)#
+    # FPR[i] = FP / (TN+FP+FN+TP)#
+    # Index[i] = TPR[i] *(1-FPR[i]) #
+# }#
+# optimal_threshold = thresold[which.max(Index)]#
+# plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
+# abline(v = optimal_threshold, col = "red", lty = 2)#
+# Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
+# confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
+# as.factor(data$TenYearCHD))#
+#====#
+# Code for Plotting teh Correlation Heatmaps#
+#====== #
+rm(list=ls())#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+library(ggplot2)#
+library(reshape2)#
+#
+# Calculate correlation matrix#
+correlation_matrix = cor(data)#
+#
+# Melt the correlation matrix for plotting#
+melted_correlation = melt(correlation_matrix)#
+# Plot heatmap with correlation coefficients#
+ggplot(melted_correlation, aes(Var1, Var2, fill = value)) +#
+  geom_tile() + #
+  geom_text(aes(label = sprintf("%.2f", value)), size = 3) +#
+  scale_fill_gradient2(low = "#58390b", high = "#0f423c", midpoint = 0, limit = c(-1,1), name="Correlation", mid = "#FFFFFF") +#
+  theme_minimal() +#
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +#
+  coord_fixed() +#
+  labs(x = "Variables", y = "Variables")#
+# = = = = = = #
+# Plottting the VIF Values#
+# = = = = = =#
+# Remove existing objects and load the dataset#
+#
+rm(list = ls())#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+#
+# Load necessary libraries#
+library(car)#
+library(ggplot2)#
+#
+# Fit the model#
+mymodel = glm(TenYearCHD ~ ., data = data, family = binomial(link = "logit"))#
+#
+# Calculate VIF for each predictor in the model#
+vif_values = vif(mymodel)#
+#
+# Transform VIF values into a data frame#
+vif_df = data.frame(Variable = names(vif_values), VIF = unname(vif_values))#
+#
+# Create the bar chart using ggplot#
+ggplot(vif_df, aes(x = Variable, y = VIF, fill = VIF)) +#
+  geom_bar(stat = "identity", color = "steelblue") +#
+  geom_hline(yintercept = 5, linetype = "dashed", color = "red", size = 1) +#
+  theme_minimal() +#
+  labs(title = "Plotting of the VIF Values", y = "VIF Value", x = "") +#
+  coord_cartesian(ylim = c(0, max(vif_df$VIF) + 1)) + # Adjust y-axis limits#
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) # Angle the x-axis text#
+# = = = = = = = = = = #
+#Splitting the Dataset into Training and Testing Data#
+# = = = = = = = = = =#
+rm(list=ls())#
+set.seed(123)#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+attach(data)#
+# Define the proportion of data for training (e.g., 80%)#
+train_proportion = 0.8#
+#
+# Number of rows in the data frame#
+num_rows = nrow(data)#
+#
+# Randomly select row indices for the training set#
+train_indices = sample(num_rows, size = round(train_proportion * num_rows), replace = FALSE)#
+#
+training_data = data[train_indices, ]#
+testing_data = data[-train_indices, ]#
+#
+names(data)#
+data$male = as.factor(data$male)#
+data$education = as.factor(data$education)#
+data$currentSmoker = as.factor(data$currentSmoker)#
+data$prevalentStroke = as.factor(data$prevalentStroke)#
+data$prevalentHyp = as.factor(data$prevalentHyp)#
+data$diabetes = as.factor(data$diabetes)#
+data$TenYearCHD = as.factor(data$TenYearCHD)#
+mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
+summary(mymodel)#
+fitted_prob=fitted(mymodel)#
+#
+thresold = seq(0,1,0.001)#
+TPR = numeric(length(thresold))#
+FPR = numeric(length(thresold))#
+Index = numeric(length(thresold))#
+for (i in 1:length(thresold)) {#
+    Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
+    conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
+    confusion_matrix = conf_matrix$table #
+     TN = confusion_matrix[1, 1]  # True Negatives#
+     FP = confusion_matrix[1, 2]  # False Positives#
+     FN = confusion_matrix[2, 1]  # False Negatives#
+     TP = confusion_matrix[2, 2]  # True Positives#
+    TPR[i] = TP / (TP + FN)#
+    FPR[i] = FP / (TN+FP+FN+TP)#
+    Index[i] = TPR[i] *(1-FPR[i]) #
+}#
+optimal_threshold = thresold[which.max(Index)]#
+plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
+abline(v = optimal_threshold, col = "red", lty = 2)#
+Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
+confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
+as.factor(data$TenYearCHD))#
+detach(data)#
+#install.packages("tidymodels")#
+library(readr)#
+library(tidymodels)#
+#
+# Read the dataset and convert the target variable to a factor#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+#
+# Plot job occupation against the target variable#
+ggplot(TenYearCHD, aes(job, fill = y)) +#
+    geom_bar() +#
+    coord_flip()#
+#
+names(data)
+#install.packages("tidymodels")#
+library(readr)#
+library(tidymodels)#
+#
+# Read the dataset and convert the target variable to a factor#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+#
+# Plot job occupation against the target variable#
+ggplot(TenYearCHD, aes(job, fill = y)) +#
+    geom_bar() +#
+    coord_flip()#
+#
+names(data)
+#======= Required Packages for the Codes#
+# install.packages("lattice")#
+# rm(list=ls())#
+# data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+# attach(data)#
+# names(data)#
+# data$male = as.factor(data$male)#
+# data$education = as.factor(data$education)#
+# data$currentSmoker = as.factor(data$currentSmoker)#
+# data$prevalentStroke = as.factor(data$prevalentStroke)#
+# data$prevalentHyp = as.factor(data$prevalentHyp)#
+# data$diabetes = as.factor(data$diabetes)#
+# data$TenYearCHD = as.factor(data$TenYearCHD)#
+#
+# mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
+# summary(mymodel)#
+# # install.packages("caret")#
+# fitted_prob=fitted(mymodel)#
+# thresold = seq(0,1,0.001)#
+# accuracy = numeric(length(thresold))#
+# for(i in 1:length(thresold)) {#
+    # Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
+    # x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
+    # y = as.data.frame(x$overall)#
+    # accuracy[i] = y[1,1]#
+# }#
+# accuracy#
+# plot(thresold, accuracy, type="l")#
+# abline(v = thresold[which.max(accuracy)], col = "red", lty = 2)#
+#
+# #thresold = thresold[which.max(accuracy)]#
+# Y_hat = ifelse(fitted_prob <= thresold, 0, 1)#
+# x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
+# detach(data)#
+# # rm(list=ls())#
+# data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+# attach(data)#
+# names(data)#
+# data$male = as.factor(data$male)#
+# data$education = as.factor(data$education)#
+# data$currentSmoker = as.factor(data$currentSmoker)#
+# data$prevalentStroke = as.factor(data$prevalentStroke)#
+# data$prevalentHyp = as.factor(data$prevalentHyp)#
+# data$diabetes = as.factor(data$diabetes)#
+# data$TenYearCHD = as.factor(data$TenYearCHD)#
+#
+# mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
+# summary(mymodel)#
+# fitted_prob=fitted(mymodel)#
+# #=============================================##
+# # Finding thresold by Optimising TPR*(1-FPR)  ##
+# #=============================================##
+# thresold = seq(0,1,0.001)#
+# TPR = numeric(length(thresold))#
+# FPR = numeric(length(thresold))#
+# Index = numeric(length(thresold))#
+# for (i in 1:length(thresold)) {#
+    # Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
+    # conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
+    # confusion_matrix = conf_matrix$table #
+     # TN = confusion_matrix[1, 1]  # True Negatives#
+     # FP = confusion_matrix[1, 2]  # False Positives#
+     # FN = confusion_matrix[2, 1]  # False Negatives#
+     # TP = confusion_matrix[2, 2]  # True Positives#
+    # TPR[i] = TP / (TP + FN)#
+    # FPR[i] = FP / (TN+FP+FN+TP)#
+    # Index[i] = TPR[i] *(1-FPR[i]) #
+# }#
+# optimal_threshold = thresold[which.max(Index)]#
+# plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
+# abline(v = optimal_threshold, col = "red", lty = 2)#
+# Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
+# confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
+# as.factor(data$TenYearCHD))#
+#====#
+# Code for Plotting teh Correlation Heatmaps#
+#====== #
+rm(list=ls())#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+library(ggplot2)#
+library(reshape2)#
+#
+# Calculate correlation matrix#
+correlation_matrix = cor(data)#
+#
+# Melt the correlation matrix for plotting#
+melted_correlation = melt(correlation_matrix)#
+# Plot heatmap with correlation coefficients#
+ggplot(melted_correlation, aes(Var1, Var2, fill = value)) +#
+  geom_tile() + #
+  geom_text(aes(label = sprintf("%.2f", value)), size = 3) +#
+  scale_fill_gradient2(low = "#58390b", high = "#0f423c", midpoint = 0, limit = c(-1,1), name="Correlation", mid = "#FFFFFF") +#
+  theme_minimal() +#
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +#
+  coord_fixed() +#
+  labs(x = "Variables", y = "Variables")#
+# = = = = = = #
+# Plottting the VIF Values#
+# = = = = = =#
+# Remove existing objects and load the dataset#
+#
+rm(list = ls())#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+#
+# Load necessary libraries#
+library(car)#
+library(ggplot2)#
+#
+# Fit the model#
+mymodel = glm(TenYearCHD ~ ., data = data, family = binomial(link = "logit"))#
+#
+# Calculate VIF for each predictor in the model#
+vif_values = vif(mymodel)#
+#
+# Transform VIF values into a data frame#
+vif_df = data.frame(Variable = names(vif_values), VIF = unname(vif_values))#
+#
+# Create the bar chart using ggplot#
+ggplot(vif_df, aes(x = Variable, y = VIF, fill = VIF)) +#
+  geom_bar(stat = "identity", color = "steelblue") +#
+  geom_hline(yintercept = 5, linetype = "dashed", color = "red", size = 1) +#
+  theme_minimal() +#
+  labs(title = "Plotting of the VIF Values", y = "VIF Value", x = "") +#
+  coord_cartesian(ylim = c(0, max(vif_df$VIF) + 1)) + # Adjust y-axis limits#
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) # Angle the x-axis text#
+# = = = = = = = = = = #
+#Splitting the Dataset into Training and Testing Data#
+# = = = = = = = = = =#
+rm(list=ls())#
+set.seed(123)#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+attach(data)#
+# Define the proportion of data for training (e.g., 80%)#
+train_proportion = 0.8#
+#
+# Number of rows in the data frame#
+num_rows = nrow(data)#
+#
+# Randomly select row indices for the training set#
+train_indices = sample(num_rows, size = round(train_proportion * num_rows), replace = FALSE)#
+#
+training_data = data[train_indices, ]#
+testing_data = data[-train_indices, ]#
+#
+names(data)#
+data$male = as.factor(data$male)#
+data$education = as.factor(data$education)#
+data$currentSmoker = as.factor(data$currentSmoker)#
+data$prevalentStroke = as.factor(data$prevalentStroke)#
+data$prevalentHyp = as.factor(data$prevalentHyp)#
+data$diabetes = as.factor(data$diabetes)#
+data$TenYearCHD = as.factor(data$TenYearCHD)#
+mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
+summary(mymodel)#
+fitted_prob=fitted(mymodel)#
+#
+thresold = seq(0,1,0.001)#
+TPR = numeric(length(thresold))#
+FPR = numeric(length(thresold))#
+Index = numeric(length(thresold))#
+for (i in 1:length(thresold)) {#
+    Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
+    conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
+    confusion_matrix = conf_matrix$table #
+     TN = confusion_matrix[1, 1]  # True Negatives#
+     FP = confusion_matrix[1, 2]  # False Positives#
+     FN = confusion_matrix[2, 1]  # False Negatives#
+     TP = confusion_matrix[2, 2]  # True Positives#
+    TPR[i] = TP / (TP + FN)#
+    FPR[i] = FP / (TN+FP+FN+TP)#
+    Index[i] = TPR[i] *(1-FPR[i]) #
+}#
+optimal_threshold = thresold[which.max(Index)]#
+plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
+abline(v = optimal_threshold, col = "red", lty = 2)#
+Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
+confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
+as.factor(data$TenYearCHD))#
+detach(data)#
+#install.packages("tidymodels")#
+library(readr)#
+library(tidymodels)#
+#
+# Read the dataset and convert the target variable to a factor#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+#
+# Plot job occupation against the target variable#
+ggplot(Ten, aes(job, fill = y)) +#
+    geom_bar() +#
+    coord_flip()#
+#
+names(data)
+table(data$TenYearCHD)
+y = table(data$TenYearCHD)
+hist(y)
+barplot(y)
+barplot(y,col=c("Green","Red"))
+barplot(y,col=c("#DHEUED","Red"))
+barplot(y,col=c("Green","Red"),main="CardioVascular Disease Datast")
+barplot(y,col=c("Green","Red"),main="CardioVascular Disease Dataset")
+barplot(y,col=c("Green","Red"),main="CardioVascular Disease Dataset",ylab="Outcome")
+barplot(y,col=c("Green","Red"),main="CardioVascular Disease Dataset",xlab="Outcome")
+barplot(y,col=c("Green","Red"),main="CardioVascular Disease Dataset",xlab="Outcome",ylab="Count")
+barplot(y,col=c("Green","Red"),main="CardioVascular Disease Dataset",xlab="Outcome",ylab="Count",lty=2)
+barplot(y,col=c("Green","Red"),main="CardioVascular Disease Dataset",xlab="Outcome",ylab="Count")
+barplot(y,col=c("Green","Red"),main="CardioVascular Disease Dataset",xlab="Outcome",ylab="Count")
+grid()
+??candlestick
+??candlestick
+barplot(y,col=c("Green","Red"),main="CardioVascular Disease Dataset",xlab="Outcome",ylab="Count")
+grid()
+barplot(y,col=c("Green","Red"),main="CardioVascular Disease Dataset",xlab="Outcome",ylab="Count")
+barplot(y,col=c("Green","Red"),main="CardioVascular Disease Dataset",xlab="Outcome",ylab="Count",horiz=TRUE)
+barplot(y,col=c("Green","Red"),main="CardioVascular Disease Dataset",xlab="Outcome",ylab="Count")
+abline(h=1500)
+abline(h=100)
+abline(h=2000)
+abline(h=2500)
+abline(v=0.5)
+abline(v=0.7)
+abline(v=1)
+abline(v=5)
+abline(v=3)
+abline(v=2)
+#======= Required Packages for the Codes#
+# install.packages("lattice")#
+# rm(list=ls())#
+# data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+# attach(data)#
+# names(data)#
+# data$male = as.factor(data$male)#
+# data$education = as.factor(data$education)#
+# data$currentSmoker = as.factor(data$currentSmoker)#
+# data$prevalentStroke = as.factor(data$prevalentStroke)#
+# data$prevalentHyp = as.factor(data$prevalentHyp)#
+# data$diabetes = as.factor(data$diabetes)#
+# data$TenYearCHD = as.factor(data$TenYearCHD)#
+#
+# mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
+# summary(mymodel)#
+# # install.packages("caret")#
+# fitted_prob=fitted(mymodel)#
+# thresold = seq(0,1,0.001)#
+# accuracy = numeric(length(thresold))#
+# for(i in 1:length(thresold)) {#
+    # Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
+    # x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
+    # y = as.data.frame(x$overall)#
+    # accuracy[i] = y[1,1]#
+# }#
+# accuracy#
+# plot(thresold, accuracy, type="l")#
+# abline(v = thresold[which.max(accuracy)], col = "red", lty = 2)#
+#
+# #thresold = thresold[which.max(accuracy)]#
+# Y_hat = ifelse(fitted_prob <= thresold, 0, 1)#
+# x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
+# detach(data)#
+# # rm(list=ls())#
+# data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+# attach(data)#
+# names(data)#
+# data$male = as.factor(data$male)#
+# data$education = as.factor(data$education)#
+# data$currentSmoker = as.factor(data$currentSmoker)#
+# data$prevalentStroke = as.factor(data$prevalentStroke)#
+# data$prevalentHyp = as.factor(data$prevalentHyp)#
+# data$diabetes = as.factor(data$diabetes)#
+# data$TenYearCHD = as.factor(data$TenYearCHD)#
+#
+# mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
+# summary(mymodel)#
+# fitted_prob=fitted(mymodel)#
+# #=============================================##
+# # Finding thresold by Optimising TPR*(1-FPR)  ##
+# #=============================================##
+# thresold = seq(0,1,0.001)#
+# TPR = numeric(length(thresold))#
+# FPR = numeric(length(thresold))#
+# Index = numeric(length(thresold))#
+# for (i in 1:length(thresold)) {#
+    # Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
+    # conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
+    # confusion_matrix = conf_matrix$table #
+     # TN = confusion_matrix[1, 1]  # True Negatives#
+     # FP = confusion_matrix[1, 2]  # False Positives#
+     # FN = confusion_matrix[2, 1]  # False Negatives#
+     # TP = confusion_matrix[2, 2]  # True Positives#
+    # TPR[i] = TP / (TP + FN)#
+    # FPR[i] = FP / (TN+FP+FN+TP)#
+    # Index[i] = TPR[i] *(1-FPR[i]) #
+# }#
+# optimal_threshold = thresold[which.max(Index)]#
+# plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
+# abline(v = optimal_threshold, col = "red", lty = 2)#
+# Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
+# confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
+# as.factor(data$TenYearCHD))#
+#====#
+# Code for Plotting teh Correlation Heatmaps#
+#====== #
+rm(list=ls())#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+library(ggplot2)#
+library(reshape2)#
+#
+# Calculate correlation matrix#
+correlation_matrix = cor(data)#
+#
+# Melt the correlation matrix for plotting#
+melted_correlation = melt(correlation_matrix)#
+# Plot heatmap with correlation coefficients#
+ggplot(melted_correlation, aes(Var1, Var2, fill = value)) +#
+  geom_tile() + #
+  geom_text(aes(label = sprintf("%.2f", value)), size = 3) +#
+  scale_fill_gradient2(low = "#58390b", high = "#0f423c", midpoint = 0, limit = c(-1,1), name="Correlation", mid = "#FFFFFF") +#
+  theme_minimal() +#
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +#
+  coord_fixed() +#
+  labs(x = "Variables", y = "Variables")#
+# = = = = = = #
+# Plottting the VIF Values#
+# = = = = = =#
+# Remove existing objects and load the dataset#
+#
+rm(list = ls())#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+#
+# Load necessary libraries#
+library(car)#
+library(ggplot2)#
+#
+# Fit the model#
+mymodel = glm(TenYearCHD ~ ., data = data, family = binomial(link = "logit"))#
+#
+# Calculate VIF for each predictor in the model#
+vif_values = vif(mymodel)#
+#
+# Transform VIF values into a data frame#
+vif_df = data.frame(Variable = names(vif_values), VIF = unname(vif_values))#
+#
+# Create the bar chart using ggplot#
+ggplot(vif_df, aes(x = Variable, y = VIF, fill = VIF)) +#
+  geom_bar(stat = "identity", color = "steelblue") +#
+  geom_hline(yintercept = 5, linetype = "dashed", color = "red", size = 1) +#
+  theme_minimal() +#
+  labs(title = "Plotting of the VIF Values", y = "VIF Value", x = "") +#
+  coord_cartesian(ylim = c(0, max(vif_df$VIF) + 1)) + # Adjust y-axis limits#
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) # Angle the x-axis text#
+# = = = = = = = = = = #
+#Splitting the Dataset into Training and Testing Data#
+# = = = = = = = = = =#
+rm(list=ls())#
+set.seed(123)#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+attach(data)#
+# Define the proportion of data for training (e.g., 80%)#
+train_proportion = 0.8#
+#
+# Number of rows in the data frame#
+num_rows = nrow(data)#
+#
+# Randomly select row indices for the training set#
+train_indices = sample(num_rows, size = round(train_proportion * num_rows), replace = FALSE)#
+#
+training_data = data[train_indices, ]#
+testing_data = data[-train_indices, ]#
+#
+names(data)#
+data$male = as.factor(data$male)#
+data$education = as.factor(data$education)#
+data$currentSmoker = as.factor(data$currentSmoker)#
+data$prevalentStroke = as.factor(data$prevalentStroke)#
+data$prevalentHyp = as.factor(data$prevalentHyp)#
+data$diabetes = as.factor(data$diabetes)#
+data$TenYearCHD = as.factor(data$TenYearCHD)#
+mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
+summary(mymodel)#
+fitted_prob=fitted(mymodel)#
+thresold = seq(0,1,0.001)#
+TPR = numeric(length(thresold))#
+FPR = numeric(length(thresold))#
+Index = numeric(length(thresold))#
+for (i in 1:length(thresold)) {#
+    Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
+    conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
+    confusion_matrix = conf_matrix$table #
+     TN = confusion_matrix[1, 1]  # True Negatives#
+     FP = confusion_matrix[1, 2]  # False Positives#
+     FN = confusion_matrix[2, 1]  # False Negatives#
+     TP = confusion_matrix[2, 2]  # True Positives#
+    TPR[i] = TP / (TP + FN)#
+    FPR[i] = FP / (TN+FP+FN+TP)#
+    Index[i] = TPR[i] *(1-FPR[i]) #
+}#
+optimal_threshold = thresold[which.max(Index)]#
+plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
+abline(v = optimal_threshold, col = "red", lty = 2)#
+Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
+confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
+as.factor(data$TenYearCHD))#
+detach(data)#
+#install.packages("tidymodels")#
+library(readr)#
+library(tidymodels)#
+#
+# Read the dataset and convert the target variable to a factor#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+#
+# Plot job occupation against the target variable#
+ggplot(Ten, aes(job, fill = y)) +#
+    geom_bar() +#
+    coord_flip()#
+names(data)
+#======= Required Packages for the Codes#
+# install.packages("lattice")#
+# rm(list=ls())#
+# data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+# attach(data)#
+# names(data)#
+# data$male = as.factor(data$male)#
+# data$education = as.factor(data$education)#
+# data$currentSmoker = as.factor(data$currentSmoker)#
+# data$prevalentStroke = as.factor(data$prevalentStroke)#
+# data$prevalentHyp = as.factor(data$prevalentHyp)#
+# data$diabetes = as.factor(data$diabetes)#
+# data$TenYearCHD = as.factor(data$TenYearCHD)#
+#
+# mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
+# summary(mymodel)#
+# # install.packages("caret")#
+# fitted_prob=fitted(mymodel)#
+# thresold = seq(0,1,0.001)#
+# accuracy = numeric(length(thresold))#
+# for(i in 1:length(thresold)) {#
+    # Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
+    # x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
+    # y = as.data.frame(x$overall)#
+    # accuracy[i] = y[1,1]#
+# }#
+# accuracy#
+# plot(thresold, accuracy, type="l")#
+# abline(v = thresold[which.max(accuracy)], col = "red", lty = 2)#
+#
+# #thresold = thresold[which.max(accuracy)]#
+# Y_hat = ifelse(fitted_prob <= thresold, 0, 1)#
+# x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
+# detach(data)#
+# # rm(list=ls())#
+# data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+# attach(data)#
+# names(data)#
+# data$male = as.factor(data$male)#
+# data$education = as.factor(data$education)#
+# data$currentSmoker = as.factor(data$currentSmoker)#
+# data$prevalentStroke = as.factor(data$prevalentStroke)#
+# data$prevalentHyp = as.factor(data$prevalentHyp)#
+# data$diabetes = as.factor(data$diabetes)#
+# data$TenYearCHD = as.factor(data$TenYearCHD)#
+#
+# mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
+# summary(mymodel)#
+# fitted_prob=fitted(mymodel)#
+# #=============================================##
+# # Finding thresold by Optimising TPR*(1-FPR)  ##
+# #=============================================##
+# thresold = seq(0,1,0.001)#
+# TPR = numeric(length(thresold))#
+# FPR = numeric(length(thresold))#
+# Index = numeric(length(thresold))#
+# for (i in 1:length(thresold)) {#
+    # Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
+    # conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
+    # confusion_matrix = conf_matrix$table #
+     # TN = confusion_matrix[1, 1]  # True Negatives#
+     # FP = confusion_matrix[1, 2]  # False Positives#
+     # FN = confusion_matrix[2, 1]  # False Negatives#
+     # TP = confusion_matrix[2, 2]  # True Positives#
+    # TPR[i] = TP / (TP + FN)#
+    # FPR[i] = FP / (TN+FP+FN+TP)#
+    # Index[i] = TPR[i] *(1-FPR[i]) #
+# }#
+# optimal_threshold = thresold[which.max(Index)]#
+# plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
+# abline(v = optimal_threshold, col = "red", lty = 2)#
+# Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
+# confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
+# as.factor(data$TenYearCHD))#
+#====#
+# Code for Plotting teh Correlation Heatmaps#
+#====== #
+rm(list=ls())#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+library(ggplot2)#
+library(reshape2)#
+#
+# Calculate correlation matrix#
+correlation_matrix = cor(data)#
+#
+# Melt the correlation matrix for plotting#
+melted_correlation = melt(correlation_matrix)#
+# Plot heatmap with correlation coefficients#
+ggplot(melted_correlation, aes(Var1, Var2, fill = value)) +#
+  geom_tile() + #
+  geom_text(aes(label = sprintf("%.2f", value)), size = 3) +#
+  scale_fill_gradient2(low = "#58390b", high = "#0f423c", midpoint = 0, limit = c(-1,1), name="Correlation", mid = "#FFFFFF") +#
+  theme_minimal() +#
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +#
+  coord_fixed() +#
+  labs(x = "Variables", y = "Variables")#
+# = = = = = = #
+# Plottting the VIF Values#
+# = = = = = =#
+# Remove existing objects and load the dataset#
+#
+rm(list = ls())#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+#
+# Load necessary libraries#
+library(car)#
+library(ggplot2)#
+#
+# Fit the model#
+mymodel = glm(TenYearCHD ~ ., data = data, family = binomial(link = "logit"))#
+#
+# Calculate VIF for each predictor in the model#
+vif_values = vif(mymodel)#
+#
+# Transform VIF values into a data frame#
+vif_df = data.frame(Variable = names(vif_values), VIF = unname(vif_values))#
+#
+# Create the bar chart using ggplot#
+ggplot(vif_df, aes(x = Variable, y = VIF, fill = VIF)) +#
+  geom_bar(stat = "identity", color = "steelblue") +#
+  geom_hline(yintercept = 5, linetype = "dashed", color = "red", size = 1) +#
+  theme_minimal() +#
+  labs(title = "Plotting of the VIF Values", y = "VIF Value", x = "") +#
+  coord_cartesian(ylim = c(0, max(vif_df$VIF) + 1)) + # Adjust y-axis limits#
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) # Angle the x-axis text#
+# = = = = = = = = = = #
+#Splitting the Dataset into Training and Testing Data#
+# = = = = = = = = = =#
+rm(list=ls())#
+set.seed(123)#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+attach(data)#
+# Define the proportion of data for training (e.g., 80%)#
+train_proportion = 0.8#
+#
+# Number of rows in the data frame#
+num_rows = nrow(data)#
+#
+# Randomly select row indices for the training set#
+train_indices = sample(num_rows, size = round(train_proportion * num_rows), replace = FALSE)#
+#
+training_data = data[train_indices, ]#
+testing_data = data[-train_indices, ]#
+#
+names(data)#
+data$male = as.factor(data$male)#
+data$education = as.factor(data$education)#
+data$currentSmoker = as.factor(data$currentSmoker)#
+data$prevalentStroke = as.factor(data$prevalentStroke)#
+data$prevalentHyp = as.factor(data$prevalentHyp)#
+data$diabetes = as.factor(data$diabetes)#
+data$TenYearCHD = as.factor(data$TenYearCHD)#
+mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
+summary(mymodel)#
+fitted_prob=fitted(mymodel)#
+thresold = seq(0,1,0.001)#
+TPR = numeric(length(thresold))#
+FPR = numeric(length(thresold))#
+Index = numeric(length(thresold))#
+for (i in 1:length(thresold)) {#
+    Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
+    conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
+    confusion_matrix = conf_matrix$table #
+     TN = confusion_matrix[1, 1]  # True Negatives#
+     FP = confusion_matrix[1, 2]  # False Positives#
+     FN = confusion_matrix[2, 1]  # False Negatives#
+     TP = confusion_matrix[2, 2]  # True Positives#
+    TPR[i] = TP / (TP + FN)#
+    FPR[i] = FP / (TN+FP+FN+TP)#
+    Index[i] = TPR[i] *(1-FPR[i]) #
+}#
+optimal_threshold = thresold[which.max(Index)]#
+plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
+abline(v = optimal_threshold, col = "red", lty = 2)#
+Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
+confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
+as.factor(data$TenYearCHD))#
+detach(data)#
+#install.packages("tidymodels")#
+library(readr)#
+library(tidymodels)#
+#
+# Read the dataset and convert the target variable to a factor#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+#
+# Plot job occupation against the target variable#
+ggplot(Ten, aes(job, fill = y)) +#
+    geom_bar() +#
+    coord_flip()#
+names(data)
+#======= Required Packages for the Codes#
+# install.packages("lattice")#
+# rm(list=ls())#
+# data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+# attach(data)#
+# names(data)#
+# data$male = as.factor(data$male)#
+# data$education = as.factor(data$education)#
+# data$currentSmoker = as.factor(data$currentSmoker)#
+# data$prevalentStroke = as.factor(data$prevalentStroke)#
+# data$prevalentHyp = as.factor(data$prevalentHyp)#
+# data$diabetes = as.factor(data$diabetes)#
+# data$TenYearCHD = as.factor(data$TenYearCHD)#
+#
+# mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
+# summary(mymodel)#
+# # install.packages("caret")#
+# fitted_prob=fitted(mymodel)#
+# thresold = seq(0,1,0.001)#
+# accuracy = numeric(length(thresold))#
+# for(i in 1:length(thresold)) {#
+    # Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
+    # x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
+    # y = as.data.frame(x$overall)#
+    # accuracy[i] = y[1,1]#
+# }#
+# accuracy#
+# plot(thresold, accuracy, type="l")#
+# abline(v = thresold[which.max(accuracy)], col = "red", lty = 2)#
+#
+# #thresold = thresold[which.max(accuracy)]#
+# Y_hat = ifelse(fitted_prob <= thresold, 0, 1)#
+# x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
+# detach(data)#
+# # rm(list=ls())#
+# data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+# attach(data)#
+# names(data)#
+# data$male = as.factor(data$male)#
+# data$education = as.factor(data$education)#
+# data$currentSmoker = as.factor(data$currentSmoker)#
+# data$prevalentStroke = as.factor(data$prevalentStroke)#
+# data$prevalentHyp = as.factor(data$prevalentHyp)#
+# data$diabetes = as.factor(data$diabetes)#
+# data$TenYearCHD = as.factor(data$TenYearCHD)#
+#
+# mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
+# summary(mymodel)#
+# fitted_prob=fitted(mymodel)#
+# #=============================================##
+# # Finding thresold by Optimising TPR*(1-FPR)  ##
+# #=============================================##
+# thresold = seq(0,1,0.001)#
+# TPR = numeric(length(thresold))#
+# FPR = numeric(length(thresold))#
+# Index = numeric(length(thresold))#
+# for (i in 1:length(thresold)) {#
+    # Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
+    # conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
+    # confusion_matrix = conf_matrix$table #
+     # TN = confusion_matrix[1, 1]  # True Negatives#
+     # FP = confusion_matrix[1, 2]  # False Positives#
+     # FN = confusion_matrix[2, 1]  # False Negatives#
+     # TP = confusion_matrix[2, 2]  # True Positives#
+    # TPR[i] = TP / (TP + FN)#
+    # FPR[i] = FP / (TN+FP+FN+TP)#
+    # Index[i] = TPR[i] *(1-FPR[i]) #
+# }#
+# optimal_threshold = thresold[which.max(Index)]#
+# plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
+# abline(v = optimal_threshold, col = "red", lty = 2)#
+# Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
+# confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
+# as.factor(data$TenYearCHD))#
+#====#
+# Code for Plotting teh Correlation Heatmaps#
+#====== #
+rm(list=ls())#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+library(ggplot2)#
+library(reshape2)#
+#
+# Calculate correlation matrix#
+correlation_matrix = cor(data)#
+#
+# Melt the correlation matrix for plotting#
+melted_correlation = melt(correlation_matrix)#
+# Plot heatmap with correlation coefficients#
+ggplot(melted_correlation, aes(Var1, Var2, fill = value)) +#
+  geom_tile() + #
+  geom_text(aes(label = sprintf("%.2f", value)), size = 3) +#
+  scale_fill_gradient2(low = "#58390b", high = "#0f423c", midpoint = 0, limit = c(-1,1), name="Correlation", mid = "#FFFFFF") +#
+  theme_minimal() +#
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +#
+  coord_fixed() +#
+  labs(x = "Variables", y = "Variables")#
+# = = = = = = #
+# Plottting the VIF Values#
+# = = = = = =#
+# Remove existing objects and load the dataset#
+#
+rm(list = ls())#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+#
+# Load necessary libraries#
+library(car)#
+library(ggplot2)#
+#
+# Fit the model#
+mymodel = glm(TenYearCHD ~ ., data = data, family = binomial(link = "logit"))#
+#
+# Calculate VIF for each predictor in the model#
+vif_values = vif(mymodel)#
+#
+# Transform VIF values into a data frame#
+vif_df = data.frame(Variable = names(vif_values), VIF = unname(vif_values))#
+#
+# Create the bar chart using ggplot#
+ggplot(vif_df, aes(x = Variable, y = VIF, fill = VIF)) +#
+  geom_bar(stat = "identity", color = "steelblue") +#
+  geom_hline(yintercept = 5, linetype = "dashed", color = "red", size = 1) +#
+  theme_minimal() +#
+  labs(title = "Plotting of the VIF Values", y = "VIF Value", x = "") +#
+  coord_cartesian(ylim = c(0, max(vif_df$VIF) + 1)) + # Adjust y-axis limits#
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) # Angle the x-axis text#
+# = = = = = = = = = = #
+#Splitting the Dataset into Training and Testing Data#
+# = = = = = = = = = =#
+rm(list=ls())#
+set.seed(123)#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+attach(data)#
+# Define the proportion of data for training (e.g., 80%)#
+train_proportion = 0.8#
+#
+# Number of rows in the data frame#
+num_rows = nrow(data)#
+#
+# Randomly select row indices for the training set#
+train_indices = sample(num_rows, size = round(train_proportion * num_rows), replace = FALSE)#
+#
+training_data = data[train_indices, ]#
+testing_data = data[-train_indices, ]#
+#
+names(data)#
+data$male = as.factor(data$male)#
+data$education = as.factor(data$education)#
+data$currentSmoker = as.factor(data$currentSmoker)#
+data$prevalentStroke = as.factor(data$prevalentStroke)#
+data$prevalentHyp = as.factor(data$prevalentHyp)#
+data$diabetes = as.factor(data$diabetes)#
+data$TenYearCHD = as.factor(data$TenYearCHD)#
+mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
+summary(mymodel)#
+fitted_prob=fitted(mymodel)#
+thresold = seq(0,1,0.001)#
+TPR = numeric(length(thresold))#
+FPR = numeric(length(thresold))#
+Index = numeric(length(thresold))#
+for (i in 1:length(thresold)) {#
+    Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
+    conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
+    confusion_matrix = conf_matrix$table #
+     TN = confusion_matrix[1, 1]  # True Negatives#
+     FP = confusion_matrix[1, 2]  # False Positives#
+     FN = confusion_matrix[2, 1]  # False Negatives#
+     TP = confusion_matrix[2, 2]  # True Positives#
+    TPR[i] = TP / (TP + FN)#
+    FPR[i] = FP / (TN+FP+FN+TP)#
+    Index[i] = TPR[i] *(1-FPR[i]) #
+}#
+optimal_threshold = thresold[which.max(Index)]#
+plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
+abline(v = optimal_threshold, col = "red", lty = 2)#
+Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
+confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
+as.factor(data$TenYearCHD))#
+detach(data)#
+#install.packages("tidymodels")#
+library(readr)#
+library(tidymodels)#
+#
+# Read the dataset and convert the target variable to a factor#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+#
+# Plot job occupation against the target variable#
+ggplot(Ten, aes(job, fill = y)) +#
+    geom_bar() +#
+    coord_flip()#
+names(data)
+#======= Required Packages for the Codes#
+# install.packages("lattice")#
+# rm(list=ls())#
+# data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+# attach(data)#
+# names(data)#
+# data$male = as.factor(data$male)#
+# data$education = as.factor(data$education)#
+# data$currentSmoker = as.factor(data$currentSmoker)#
+# data$prevalentStroke = as.factor(data$prevalentStroke)#
+# data$prevalentHyp = as.factor(data$prevalentHyp)#
+# data$diabetes = as.factor(data$diabetes)#
+# data$TenYearCHD = as.factor(data$TenYearCHD)#
+#
+# mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
+# summary(mymodel)#
+# # install.packages("caret")#
+# fitted_prob=fitted(mymodel)#
+# thresold = seq(0,1,0.001)#
+# accuracy = numeric(length(thresold))#
+# for(i in 1:length(thresold)) {#
+    # Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
+    # x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
+    # y = as.data.frame(x$overall)#
+    # accuracy[i] = y[1,1]#
+# }#
+# accuracy#
+# plot(thresold, accuracy, type="l")#
+# abline(v = thresold[which.max(accuracy)], col = "red", lty = 2)#
+#
+# #thresold = thresold[which.max(accuracy)]#
+# Y_hat = ifelse(fitted_prob <= thresold, 0, 1)#
+# x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
+# detach(data)#
+# # rm(list=ls())#
+# data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+# attach(data)#
+# names(data)#
+# data$male = as.factor(data$male)#
+# data$education = as.factor(data$education)#
+# data$currentSmoker = as.factor(data$currentSmoker)#
+# data$prevalentStroke = as.factor(data$prevalentStroke)#
+# data$prevalentHyp = as.factor(data$prevalentHyp)#
+# data$diabetes = as.factor(data$diabetes)#
+# data$TenYearCHD = as.factor(data$TenYearCHD)#
+#
+# mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
+# summary(mymodel)#
+# fitted_prob=fitted(mymodel)#
+# #=============================================##
+# # Finding thresold by Optimising TPR*(1-FPR)  ##
+# #=============================================##
+# thresold = seq(0,1,0.001)#
+# TPR = numeric(length(thresold))#
+# FPR = numeric(length(thresold))#
+# Index = numeric(length(thresold))#
+# for (i in 1:length(thresold)) {#
+    # Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
+    # conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
+    # confusion_matrix = conf_matrix$table #
+     # TN = confusion_matrix[1, 1]  # True Negatives#
+     # FP = confusion_matrix[1, 2]  # False Positives#
+     # FN = confusion_matrix[2, 1]  # False Negatives#
+     # TP = confusion_matrix[2, 2]  # True Positives#
+    # TPR[i] = TP / (TP + FN)#
+    # FPR[i] = FP / (TN+FP+FN+TP)#
+    # Index[i] = TPR[i] *(1-FPR[i]) #
+# }#
+# optimal_threshold = thresold[which.max(Index)]#
+# plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
+# abline(v = optimal_threshold, col = "red", lty = 2)#
+# Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
+# confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
+# as.factor(data$TenYearCHD))#
+#====#
+# Code for Plotting teh Correlation Heatmaps#
+#====== #
+rm(list=ls())#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+library(ggplot2)#
+library(reshape2)#
+#
+# Calculate correlation matrix#
+correlation_matrix = cor(data)#
+#
+# Melt the correlation matrix for plotting#
+melted_correlation = melt(correlation_matrix)#
+# Plot heatmap with correlation coefficients#
+ggplot(melted_correlation, aes(Var1, Var2, fill = value)) +#
+  geom_tile() + #
+  geom_text(aes(label = sprintf("%.2f", value)), size = 3) +#
+  scale_fill_gradient2(low = "#58390b", high = "#0f423c", midpoint = 0, limit = c(-1,1), name="Correlation", mid = "#FFFFFF") +#
+  theme_minimal() +#
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +#
+  coord_fixed() +#
+  labs(x = "Variables", y = "Variables")#
+# = = = = = = #
+# Plottting the VIF Values#
+# = = = = = =#
+# Remove existing objects and load the dataset#
+#
+rm(list = ls())#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+#
+# Load necessary libraries#
+library(car)#
+library(ggplot2)#
+#
+# Fit the model#
+mymodel = glm(TenYearCHD ~ ., data = data, family = binomial(link = "logit"))#
+#
+# Calculate VIF for each predictor in the model#
+vif_values = vif(mymodel)#
+#
+# Transform VIF values into a data frame#
+vif_df = data.frame(Variable = names(vif_values), VIF = unname(vif_values))#
+#
+# Create the bar chart using ggplot#
+ggplot(vif_df, aes(x = Variable, y = VIF, fill = VIF)) +#
+  geom_bar(stat = "identity", color = "steelblue") +#
+  geom_hline(yintercept = 5, linetype = "dashed", color = "red", size = 1) +#
+  theme_minimal() +#
+  labs(title = "Plotting of the VIF Values", y = "VIF Value", x = "") +#
+  coord_cartesian(ylim = c(0, max(vif_df$VIF) + 1)) + # Adjust y-axis limits#
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) # Angle the x-axis text#
+# = = = = = = = = = = #
+#Splitting the Dataset into Training and Testing Data#
+# = = = = = = = = = =#
+rm(list=ls())#
+set.seed(123)#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+attach(data)#
+# Define the proportion of data for training (e.g., 80%)#
+train_proportion = 0.8#
+#
+# Number of rows in the data frame#
+num_rows = nrow(data)#
+#
+# Randomly select row indices for the training set#
+train_indices = sample(num_rows, size = round(train_proportion * num_rows), replace = FALSE)#
+#
+training_data = data[train_indices, ]#
+testing_data = data[-train_indices, ]#
+#
+names(data)#
+data$male = as.factor(data$male)#
+data$education = as.factor(data$education)#
+data$currentSmoker = as.factor(data$currentSmoker)#
+data$prevalentStroke = as.factor(data$prevalentStroke)#
+data$prevalentHyp = as.factor(data$prevalentHyp)#
+data$diabetes = as.factor(data$diabetes)#
+data$TenYearCHD = as.factor(data$TenYearCHD)#
+mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
+summary(mymodel)#
+fitted_prob=fitted(mymodel)#
+thresold = seq(0,1,0.001)#
+TPR = numeric(length(thresold))#
+FPR = numeric(length(thresold))#
+Index = numeric(length(thresold))#
+for (i in 1:length(thresold)) {#
+    Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
+    conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
+    confusion_matrix = conf_matrix$table #
+     TN = confusion_matrix[1, 1]  # True Negatives#
+     FP = confusion_matrix[1, 2]  # False Positives#
+     FN = confusion_matrix[2, 1]  # False Negatives#
+     TP = confusion_matrix[2, 2]  # True Positives#
+    TPR[i] = TP / (TP + FN)#
+    FPR[i] = FP / (TN+FP+FN+TP)#
+    Index[i] = TPR[i] *(1-FPR[i]) #
+}#
+optimal_threshold = thresold[which.max(Index)]#
+plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
+abline(v = optimal_threshold, col = "red", lty = 2)#
+Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
+confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
+as.factor(data$TenYearCHD))#
+detach(data)#
+#install.packages("tidymodels")#
+library(readr)#
+library(tidymodels)#
+#
+# Read the dataset and convert the target variable to a factor#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+#
+# Plot job occupation against the target variable#
+ggplot(Ten, aes(job, fill = y)) +#
+    geom_bar() +#
+    coord_flip()#
+names(data)
+#======= Required Packages for the Codes#
+# install.packages("lattice")#
+# rm(list=ls())#
+# data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+# attach(data)#
+# names(data)#
+# data$male = as.factor(data$male)#
+# data$education = as.factor(data$education)#
+# data$currentSmoker = as.factor(data$currentSmoker)#
+# data$prevalentStroke = as.factor(data$prevalentStroke)#
+# data$prevalentHyp = as.factor(data$prevalentHyp)#
+# data$diabetes = as.factor(data$diabetes)#
+# data$TenYearCHD = as.factor(data$TenYearCHD)#
+#
+# mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
+# summary(mymodel)#
+# # install.packages("caret")#
+# fitted_prob=fitted(mymodel)#
+# thresold = seq(0,1,0.001)#
+# accuracy = numeric(length(thresold))#
+# for(i in 1:length(thresold)) {#
+    # Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
+    # x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
+    # y = as.data.frame(x$overall)#
+    # accuracy[i] = y[1,1]#
+# }#
+# accuracy#
+# plot(thresold, accuracy, type="l")#
+# abline(v = thresold[which.max(accuracy)], col = "red", lty = 2)#
+#
+# #thresold = thresold[which.max(accuracy)]#
+# Y_hat = ifelse(fitted_prob <= thresold, 0, 1)#
+# x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
+# detach(data)#
+# # rm(list=ls())#
+# data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+# attach(data)#
+# names(data)#
+# data$male = as.factor(data$male)#
+# data$education = as.factor(data$education)#
+# data$currentSmoker = as.factor(data$currentSmoker)#
+# data$prevalentStroke = as.factor(data$prevalentStroke)#
+# data$prevalentHyp = as.factor(data$prevalentHyp)#
+# data$diabetes = as.factor(data$diabetes)#
+# data$TenYearCHD = as.factor(data$TenYearCHD)#
+#
+# mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
+# summary(mymodel)#
+# fitted_prob=fitted(mymodel)#
+# #=============================================##
+# # Finding thresold by Optimising TPR*(1-FPR)  ##
+# #=============================================##
+# thresold = seq(0,1,0.001)#
+# TPR = numeric(length(thresold))#
+# FPR = numeric(length(thresold))#
+# Index = numeric(length(thresold))#
+# for (i in 1:length(thresold)) {#
+    # Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
+    # conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
+    # confusion_matrix = conf_matrix$table #
+     # TN = confusion_matrix[1, 1]  # True Negatives#
+     # FP = confusion_matrix[1, 2]  # False Positives#
+     # FN = confusion_matrix[2, 1]  # False Negatives#
+     # TP = confusion_matrix[2, 2]  # True Positives#
+    # TPR[i] = TP / (TP + FN)#
+    # FPR[i] = FP / (TN+FP+FN+TP)#
+    # Index[i] = TPR[i] *(1-FPR[i]) #
+# }#
+# optimal_threshold = thresold[which.max(Index)]#
+# plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
+# abline(v = optimal_threshold, col = "red", lty = 2)#
+# Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
+# confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
+# as.factor(data$TenYearCHD))#
+#====#
+# Code for Plotting teh Correlation Heatmaps#
+#====== #
+rm(list=ls())#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+library(ggplot2)#
+library(reshape2)#
+#
+# Calculate correlation matrix#
+correlation_matrix = cor(data)#
+#
+# Melt the correlation matrix for plotting#
+melted_correlation = melt(correlation_matrix)#
+# Plot heatmap with correlation coefficients#
+ggplot(melted_correlation, aes(Var1, Var2, fill = value)) +#
+  geom_tile() + #
+  geom_text(aes(label = sprintf("%.2f", value)), size = 3) +#
+  scale_fill_gradient2(low = "#58390b", high = "#0f423c", midpoint = 0, limit = c(-1,1), name="Correlation", mid = "#FFFFFF") +#
+  theme_minimal() +#
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +#
+  coord_fixed() +#
+  labs(x = "Variables", y = "Variables")#
+# = = = = = = #
+# Plottting the VIF Values#
+# = = = = = =#
+# Remove existing objects and load the dataset#
+#
+rm(list = ls())#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+#
+# Load necessary libraries#
+library(car)#
+library(ggplot2)#
+#
+# Fit the model#
+mymodel = glm(TenYearCHD ~ ., data = data, family = binomial(link = "logit"))#
+#
+# Calculate VIF for each predictor in the model#
+vif_values = vif(mymodel)#
+#
+# Transform VIF values into a data frame#
+vif_df = data.frame(Variable = names(vif_values), VIF = unname(vif_values))#
+#
+# Create the bar chart using ggplot#
+ggplot(vif_df, aes(x = Variable, y = VIF, fill = VIF)) +#
+  geom_bar(stat = "identity", color = "steelblue") +#
+  geom_hline(yintercept = 5, linetype = "dashed", color = "red", size = 1) +#
+  theme_minimal() +#
+  labs(title = "Plotting of the VIF Values", y = "VIF Value", x = "") +#
+  coord_cartesian(ylim = c(0, max(vif_df$VIF) + 1)) + # Adjust y-axis limits#
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) # Angle the x-axis text#
+# = = = = = = = = = = #
+#Splitting the Dataset into Training and Testing Data#
+# = = = = = = = = = =#
+rm(list=ls())#
+set.seed(123)#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+attach(data)#
+# Define the proportion of data for training (e.g., 80%)#
+train_proportion = 0.8#
+#
+# Number of rows in the data frame#
+num_rows = nrow(data)#
+#
+# Randomly select row indices for the training set#
+train_indices = sample(num_rows, size = round(train_proportion * num_rows), replace = FALSE)#
+#
+training_data = data[train_indices, ]#
+testing_data = data[-train_indices, ]#
+#
+names(data)#
+data$male = as.factor(data$male)#
+data$education = as.factor(data$education)#
+data$currentSmoker = as.factor(data$currentSmoker)#
+data$prevalentStroke = as.factor(data$prevalentStroke)#
+data$prevalentHyp = as.factor(data$prevalentHyp)#
+data$diabetes = as.factor(data$diabetes)#
+data$TenYearCHD = as.factor(data$TenYearCHD)#
+mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
+summary(mymodel)#
+fitted_prob=fitted(mymodel)#
+thresold = seq(0,1,0.001)#
+TPR = numeric(length(thresold))#
+FPR = numeric(length(thresold))#
+Index = numeric(length(thresold))#
+for (i in 1:length(thresold)) {#
+    Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
+    conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
+    confusion_matrix = conf_matrix$table #
+     TN = confusion_matrix[1, 1]  # True Negatives#
+     FP = confusion_matrix[1, 2]  # False Positives#
+     FN = confusion_matrix[2, 1]  # False Negatives#
+     TP = confusion_matrix[2, 2]  # True Positives#
+    TPR[i] = TP / (TP + FN)#
+    FPR[i] = FP / (TN+FP+FN+TP)#
+    Index[i] = TPR[i] *(1-FPR[i]) #
+}#
+optimal_threshold = thresold[which.max(Index)]#
+plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
+abline(v = optimal_threshold, col = "red", lty = 2)#
+Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
+confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
+as.factor(data$TenYearCHD))#
+detach(data)#
+#install.packages("tidymodels")#
+library(readr)#
+library(tidymodels)#
+#
+# Read the dataset and convert the target variable to a factor#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+#
+# Plot job occupation against the target variable#
+ggplot(Ten, aes(job, fill = y)) +#
+    geom_bar() +#
+    coord_flip()#
+names(data)
+#======= Required Packages for the Codes#
+# install.packages("lattice")#
+# rm(list=ls())#
+# data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+# attach(data)#
+# names(data)#
+# data$male = as.factor(data$male)#
+# data$education = as.factor(data$education)#
+# data$currentSmoker = as.factor(data$currentSmoker)#
+# data$prevalentStroke = as.factor(data$prevalentStroke)#
+# data$prevalentHyp = as.factor(data$prevalentHyp)#
+# data$diabetes = as.factor(data$diabetes)#
+# data$TenYearCHD = as.factor(data$TenYearCHD)#
+#
+# mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
+# summary(mymodel)#
+# # install.packages("caret")#
+# fitted_prob=fitted(mymodel)#
+# thresold = seq(0,1,0.001)#
+# accuracy = numeric(length(thresold))#
+# for(i in 1:length(thresold)) {#
+    # Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
+    # x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
+    # y = as.data.frame(x$overall)#
+    # accuracy[i] = y[1,1]#
+# }#
+# accuracy#
+# plot(thresold, accuracy, type="l")#
+# abline(v = thresold[which.max(accuracy)], col = "red", lty = 2)#
+#
+# #thresold = thresold[which.max(accuracy)]#
+# Y_hat = ifelse(fitted_prob <= thresold, 0, 1)#
+# x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
+# detach(data)#
+# # rm(list=ls())#
+# data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+# attach(data)#
+# names(data)#
+# data$male = as.factor(data$male)#
+# data$education = as.factor(data$education)#
+# data$currentSmoker = as.factor(data$currentSmoker)#
+# data$prevalentStroke = as.factor(data$prevalentStroke)#
+# data$prevalentHyp = as.factor(data$prevalentHyp)#
+# data$diabetes = as.factor(data$diabetes)#
+# data$TenYearCHD = as.factor(data$TenYearCHD)#
+#
+# mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
+# summary(mymodel)#
+# fitted_prob=fitted(mymodel)#
+# #=============================================##
+# # Finding thresold by Optimising TPR*(1-FPR)  ##
+# #=============================================##
+# thresold = seq(0,1,0.001)#
+# TPR = numeric(length(thresold))#
+# FPR = numeric(length(thresold))#
+# Index = numeric(length(thresold))#
+# for (i in 1:length(thresold)) {#
+    # Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
+    # conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
+    # confusion_matrix = conf_matrix$table #
+     # TN = confusion_matrix[1, 1]  # True Negatives#
+     # FP = confusion_matrix[1, 2]  # False Positives#
+     # FN = confusion_matrix[2, 1]  # False Negatives#
+     # TP = confusion_matrix[2, 2]  # True Positives#
+    # TPR[i] = TP / (TP + FN)#
+    # FPR[i] = FP / (TN+FP+FN+TP)#
+    # Index[i] = TPR[i] *(1-FPR[i]) #
+# }#
+# optimal_threshold = thresold[which.max(Index)]#
+# plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
+# abline(v = optimal_threshold, col = "red", lty = 2)#
+# Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
+# confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
+# as.factor(data$TenYearCHD))#
+#====#
+# Code for Plotting teh Correlation Heatmaps#
+#====== #
+rm(list=ls())#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+library(ggplot2)#
+library(reshape2)#
+#
+# Calculate correlation matrix#
+correlation_matrix = cor(data)#
+#
+# Melt the correlation matrix for plotting#
+melted_correlation = melt(correlation_matrix)#
+# Plot heatmap with correlation coefficients#
+ggplot(melted_correlation, aes(Var1, Var2, fill = value)) +#
+  geom_tile() + #
+  geom_text(aes(label = sprintf("%.2f", value)), size = 3) +#
+  scale_fill_gradient2(low = "#58390b", high = "#0f423c", midpoint = 0, limit = c(-1,1), name="Correlation", mid = "#FFFFFF") +#
+  theme_minimal() +#
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +#
+  coord_fixed() +#
+  labs(x = "Variables", y = "Variables")#
+# = = = = = = #
+# Plottting the VIF Values#
+# = = = = = =#
+# Remove existing objects and load the dataset#
+#
+rm(list = ls())#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+#
+# Load necessary libraries#
+library(car)#
+library(ggplot2)#
+#
+# Fit the model#
+mymodel = glm(TenYearCHD ~ ., data = data, family = binomial(link = "logit"))#
+#
+# Calculate VIF for each predictor in the model#
+vif_values = vif(mymodel)#
+#
+# Transform VIF values into a data frame#
+vif_df = data.frame(Variable = names(vif_values), VIF = unname(vif_values))#
+#
+# Create the bar chart using ggplot#
+ggplot(vif_df, aes(x = Variable, y = VIF, fill = VIF)) +#
+  geom_bar(stat = "identity", color = "steelblue") +#
+  geom_hline(yintercept = 5, linetype = "dashed", color = "red", size = 1) +#
+  theme_minimal() +#
+  labs(title = "Plotting of the VIF Values", y = "VIF Value", x = "") +#
+  coord_cartesian(ylim = c(0, max(vif_df$VIF) + 1)) + # Adjust y-axis limits#
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) # Angle the x-axis text#
+# = = = = = = = = = = #
+#Splitting the Dataset into Training and Testing Data#
+# = = = = = = = = = =#
+rm(list=ls())#
+set.seed(123)#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+attach(data)#
+# Define the proportion of data for training (e.g., 80%)#
+train_proportion = 0.8#
+#
+# Number of rows in the data frame#
+num_rows = nrow(data)#
+#
+# Randomly select row indices for the training set#
+train_indices = sample(num_rows, size = round(train_proportion * num_rows), replace = FALSE)#
+#
+training_data = data[train_indices, ]#
+testing_data = data[-train_indices, ]#
+#
+names(data)#
+data$male = as.factor(data$male)#
+data$education = as.factor(data$education)#
+data$currentSmoker = as.factor(data$currentSmoker)#
+data$prevalentStroke = as.factor(data$prevalentStroke)#
+data$prevalentHyp = as.factor(data$prevalentHyp)#
+data$diabetes = as.factor(data$diabetes)#
+data$TenYearCHD = as.factor(data$TenYearCHD)#
+mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
+summary(mymodel)#
+fitted_prob=fitted(mymodel)#
+thresold = seq(0,1,0.001)#
+TPR = numeric(length(thresold))#
+FPR = numeric(length(thresold))#
+Index = numeric(length(thresold))#
+for (i in 1:length(thresold)) {#
+    Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
+    conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
+    confusion_matrix = conf_matrix$table #
+     TN = confusion_matrix[1, 1]  # True Negatives#
+     FP = confusion_matrix[1, 2]  # False Positives#
+     FN = confusion_matrix[2, 1]  # False Negatives#
+     TP = confusion_matrix[2, 2]  # True Positives#
+    TPR[i] = TP / (TP + FN)#
+    FPR[i] = FP / (TN+FP+FN+TP)#
+    Index[i] = TPR[i] *(1-FPR[i]) #
+}#
+optimal_threshold = thresold[which.max(Index)]#
+plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
+abline(v = optimal_threshold, col = "red", lty = 2)#
+Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
+confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
+as.factor(data$TenYearCHD))#
+detach(data)#
+#install.packages("tidymodels")#
+library(readr)#
+library(tidymodels)#
+#
+# Read the dataset and convert the target variable to a factor#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+#
+# Plot job occupation against the target variable#
+ggplot(Ten, aes(job, fill = y)) +#
+    geom_bar() +#
+    coord_flip()#
+names(data)
 rm(list=ls())
-# rm(list=ls())
-# data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")
+kjhvjkvhfkdsfjsghfjkdsfdskfjhdgkds
+opcjbgpo;fgohigfoij
+zsxcl;kj
+[iou[]
+#Writting Down the Complete Code
+# Writting Down the Complete Code
 rm(list=ls())
+rm(list=ls())
+set.seed(123)
 data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")
 attach(data)
+# Define the proportion of data for training (e.g., 80%)
+train_proportion = 0.8
+# Number of rows in the data frame
+num_rows = nrow(data)
+# Number of rows in the data frame#
+num_rows = nrow(data)#
+#
+# Randomly select row indices for the training set#
+train_indices = sample(num_rows, size = round(train_proportion * num_rows), replace = FALSE)#
+#
+training_data = data[train_indices, ]#
+testing_data = data[-train_indices, ]
+training_data
+testing_data
+testing_data
+names(data)
 names(data)
 data$male = as.factor(data$male)
 data$education = as.factor(data$education)
+data$male = as.factor(data$male)
+data$male = as.factor(data$male)
+data$male = as.factor(data$male)
+data$male = as.factor(data$male)
 data$currentSmoker = as.factor(data$currentSmoker)
-data$prevalentStroke = as.factor(data$prevalentStroke)
 data$prevalentHyp = as.factor(data$prevalentHyp)
 data$diabetes = as.factor(data$diabetes)
 data$TenYearCHD = as.factor(data$TenYearCHD)
+data$TenYearCHD = as.factor(data$TenYearCHD)
 mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))
-mymodel
-summary(model)
+mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))
 summary(mymodel)
-plot(mymodel)
-names(mymodel)
-mymodel$contrasts
-mymodel$method
-mymodel$mxlevels
-mymodel$df.residual
-install.packages("lattice")
-library(lattice)
-corr_mat <- round(cor(data),2)
-data
-??heatmap
-library(ggplot2)#
-library(reshape2)#
-#
-# Calculate correlation matrix#
-correlation_matrix <- cor(data[, -c(1:3)])#
-#
-# Melt correlation matrix#
-melted_correlation <- melt(correlation_matrix)#
-#
-# Plot heatmap#
-ggplot(data = melted_correlation, aes(Var1, Var2, fill = value)) +#
-  geom_tile(color = "white") +#
-  scale_fill_gradient2(low = "blue", high = "red", mid = "white", midpoint = 0,#
-                       limit = c(-1,1), space = "Lab", name="Correlation") +#
-  theme_minimal() +#
-  theme(axis.text.x = element_text(angle = 45, vjust = 1, size = 10, hjust = 1)) +#
-  coord_fixed()
-corr()
-data = as.data.frame(data)
-corr(data)
-correlation(data)
-library(ggplot2)#
-library(reshape2)#
-#
-# Exclude non-numeric variables#
-numeric_data <- data[, sapply(data, is.numeric)]#
-#
-# Calculate correlation matrix#
-correlation_matrix <- cor(numeric_data)#
-#
-# Melt correlation matrix#
-melted_correlation <- melt(correlation_matrix)#
-#
-# Plot heatmap#
-ggplot(data = melted_correlation, aes(Var1, Var2, fill = value)) +#
-  geom_tile(color = "white") +#
-  scale_fill_gradient2(low = "blue", high = "red", mid = "white", midpoint = 0,#
-                       limit = c(-1,1), space = "Lab", name="Correlation") +#
-  theme_minimal() +#
-  theme(axis.text.x = element_text(angle = 45, vjust = 1, size = 10, hjust = 1)) +#
-  coord_fixed()
-correlation_matrix <- cor(data)
-#======= Required pAckages for the Codes#
-# install.packages("lattice")#
-# #
-# rm(list=ls())#
-# data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-# attach(data)#
-# names(data)#
-# data$male = as.factor(data$male)#
-# data$education = as.factor(data$education)#
-# data$currentSmoker = as.factor(data$currentSmoker)#
-# data$prevalentStroke = as.factor(data$prevalentStroke)#
-# data$prevalentHyp = as.factor(data$prevalentHyp)#
-# data$diabetes = as.factor(data$diabetes)#
-# data$TenYearCHD = as.factor(data$TenYearCHD)#
-#
-# mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
-# summary(mymodel)#
-# # install.packages("caret")#
-# fitted_prob=fitted(mymodel)#
-# thresold = seq(0,1,0.001)#
-# accuracy = numeric(length(thresold))#
-# for(i in 1:length(thresold)) {#
-    # Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
-    # x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
-    # y = as.data.frame(x$overall)#
-    # accuracy[i] = y[1,1]#
-# }#
-# accuracy#
-# plot(thresold, accuracy, type="l")#
-# abline(v = thresold[which.max(accuracy)], col = "red", lty = 2)#
-#
-# #thresold = thresold[which.max(accuracy)]#
-# Y_hat = ifelse(fitted_prob <= thresold, 0, 1)#
-# x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
-# detach(data)#
-rm(list=ls())#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-attach(data)#
-names(data)#
-data$male = as.factor(data$male)#
-data$education = as.factor(data$education)#
-data$currentSmoker = as.factor(data$currentSmoker)#
-data$prevalentStroke = as.factor(data$prevalentStroke)#
-data$prevalentHyp = as.factor(data$prevalentHyp)#
-data$diabetes = as.factor(data$diabetes)#
-data$TenYearCHD = as.factor(data$TenYearCHD)#
-#
-mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
-summary(mymodel)#
-fitted_prob=fitted(mymodel)#
-#=============================================##
-# Finding thresold by Optimising TPR*(1-FPR)  ##
-#=============================================##
-thresold = seq(0,1,0.001)#
-TPR = numeric(length(thresold))#
-FPR = numeric(length(thresold))#
-Index = numeric(length(thresold))#
-for (i in 1:length(thresold)) {#
-    Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
-    conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
-    confusion_matrix = conf_matrix$table #
-     TN = confusion_matrix[1, 1]  # True Negatives#
-     FP = confusion_matrix[1, 2]  # False Positives#
-     FN = confusion_matrix[2, 1]  # False Negatives#
-     TP = confusion_matrix[2, 2]  # True Positives#
-    TPR[i] = TP / (TP + FN)#
-    FPR[i] = FP / (TN+FP+FN+TP)#
-    Index[i] = TPR[i] *(1-FPR[i]) #
-}#
-optimal_threshold = thresold[which.max(Index)]#
-plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
-abline(v = optimal_threshold, col = "red", lty = 2)#
-Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
-confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
-as.factor(data$TenYearCHD))#
-#Correlation Heatmap#
-library(ggplot2)#
-library(reshape2)#
-#
-# Exclude non-numeric variables#
-numeric_data <- data[, sapply(data, is.numeric)]#
-#
-# Calculate correlation matrix#
-correlation_matrix <- cor(numeric_data)#
-#
-# Melt correlation matrix#
-melted_correlation <- melt(correlation_matrix)#
-#
-# Plot heatmap#
-ggplot(data = melted_correlation, aes(Var1, Var2, fill = value)) +#
-  geom_tile(color = "white") +#
-  scale_fill_gradient2(low = "blue", high = "red", mid = "white", midpoint = 0,#
-                       limit = c(-1,1), space = "Lab", name="Correlation") +#
-  theme_minimal() +#
-  theme(axis.text.x = element_text(angle = 45, vjust = 1, size = 10, hjust = 1)) +#
-  coord_fixed()#
-detach(data)
-#======= Required pAckages for the Codes#
-# install.packages("lattice")#
-# #
-# rm(list=ls())#
-# data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-# attach(data)#
-# names(data)#
-# data$male = as.factor(data$male)#
-# data$education = as.factor(data$education)#
-# data$currentSmoker = as.factor(data$currentSmoker)#
-# data$prevalentStroke = as.factor(data$prevalentStroke)#
-# data$prevalentHyp = as.factor(data$prevalentHyp)#
-# data$diabetes = as.factor(data$diabetes)#
-# data$TenYearCHD = as.factor(data$TenYearCHD)#
-#
-# mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
-# summary(mymodel)#
-# # install.packages("caret")#
-# fitted_prob=fitted(mymodel)#
-# thresold = seq(0,1,0.001)#
-# accuracy = numeric(length(thresold))#
-# for(i in 1:length(thresold)) {#
-    # Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
-    # x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
-    # y = as.data.frame(x$overall)#
-    # accuracy[i] = y[1,1]#
-# }#
-# accuracy#
-# plot(thresold, accuracy, type="l")#
-# abline(v = thresold[which.max(accuracy)], col = "red", lty = 2)#
-#
-# #thresold = thresold[which.max(accuracy)]#
-# Y_hat = ifelse(fitted_prob <= thresold, 0, 1)#
-# x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
-# detach(data)#
-rm(list=ls())#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-attach(data)#
-names(data)#
-data$male = as.factor(data$male)#
-data$education = as.factor(data$education)#
-data$currentSmoker = as.factor(data$currentSmoker)#
-data$prevalentStroke = as.factor(data$prevalentStroke)#
-data$prevalentHyp = as.factor(data$prevalentHyp)#
-data$diabetes = as.factor(data$diabetes)#
-data$TenYearCHD = as.factor(data$TenYearCHD)#
-#
-mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
-summary(mymodel)#
-fitted_prob=fitted(mymodel)#
-#=============================================##
-# Finding thresold by Optimising TPR*(1-FPR)  ##
-#=============================================##
-thresold = seq(0,1,0.001)#
-TPR = numeric(length(thresold))#
-FPR = numeric(length(thresold))#
-Index = numeric(length(thresold))#
-for (i in 1:length(thresold)) {#
-    Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
-    conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
-    confusion_matrix = conf_matrix$table #
-     TN = confusion_matrix[1, 1]  # True Negatives#
-     FP = confusion_matrix[1, 2]  # False Positives#
-     FN = confusion_matrix[2, 1]  # False Negatives#
-     TP = confusion_matrix[2, 2]  # True Positives#
-    TPR[i] = TP / (TP + FN)#
-    FPR[i] = FP / (TN+FP+FN+TP)#
-    Index[i] = TPR[i] *(1-FPR[i]) #
-}#
-optimal_threshold = thresold[which.max(Index)]#
-plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
-abline(v = optimal_threshold, col = "red", lty = 2)#
-Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
-confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
-as.factor(data$TenYearCHD))#
-#Correlation Heatmap#
-library(ggplot2)#
-library(reshape2)#
-#
-# Exclude non-numeric variables#
-numeric_data <- data[, sapply(data, is.numeric)]#
-#
-# Calculate correlation matrix#
-correlation_matrix <- cor(numeric_data)#
-#
-# Melt correlation matrix#
-melted_correlation <- melt(correlation_matrix)#
-#
-# Plot heatmap#
-ggplot(data = melted_correlation, aes(Var1, Var2, fill = value)) +#
-  geom_tile(color = "white") +#
-  scale_fill_gradient2(low = "GREEN", high = "red", mid = "white", midpoint = 0,#
-                       limit = c(-1,1), space = "Lab", name="Correlation") +#
-  theme_minimal() +#
-  theme(axis.text.x = element_text(angle = 45, vjust = 1, size = 10, hjust = 1)) +#
-  coord_fixed()#
-detach(data)
-#======= Required pAckages for the Codes#
-# install.packages("lattice")#
-# #
-# rm(list=ls())#
-# data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-# attach(data)#
-# names(data)#
-# data$male = as.factor(data$male)#
-# data$education = as.factor(data$education)#
-# data$currentSmoker = as.factor(data$currentSmoker)#
-# data$prevalentStroke = as.factor(data$prevalentStroke)#
-# data$prevalentHyp = as.factor(data$prevalentHyp)#
-# data$diabetes = as.factor(data$diabetes)#
-# data$TenYearCHD = as.factor(data$TenYearCHD)#
-#
-# mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
-# summary(mymodel)#
-# # install.packages("caret")#
-# fitted_prob=fitted(mymodel)#
-# thresold = seq(0,1,0.001)#
-# accuracy = numeric(length(thresold))#
-# for(i in 1:length(thresold)) {#
-    # Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
-    # x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
-    # y = as.data.frame(x$overall)#
-    # accuracy[i] = y[1,1]#
-# }#
-# accuracy#
-# plot(thresold, accuracy, type="l")#
-# abline(v = thresold[which.max(accuracy)], col = "red", lty = 2)#
-#
-# #thresold = thresold[which.max(accuracy)]#
-# Y_hat = ifelse(fitted_prob <= thresold, 0, 1)#
-# x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
-# detach(data)#
-rm(list=ls())#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-attach(data)#
-names(data)#
-data$male = as.factor(data$male)#
-data$education = as.factor(data$education)#
-data$currentSmoker = as.factor(data$currentSmoker)#
-data$prevalentStroke = as.factor(data$prevalentStroke)#
-data$prevalentHyp = as.factor(data$prevalentHyp)#
-data$diabetes = as.factor(data$diabetes)#
-data$TenYearCHD = as.factor(data$TenYearCHD)#
-#
-mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
-summary(mymodel)#
-fitted_prob=fitted(mymodel)#
-#=============================================##
-# Finding thresold by Optimising TPR*(1-FPR)  ##
-#=============================================##
-thresold = seq(0,1,0.001)#
-TPR = numeric(length(thresold))#
-FPR = numeric(length(thresold))#
-Index = numeric(length(thresold))#
-for (i in 1:length(thresold)) {#
-    Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
-    conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
-    confusion_matrix = conf_matrix$table #
-     TN = confusion_matrix[1, 1]  # True Negatives#
-     FP = confusion_matrix[1, 2]  # False Positives#
-     FN = confusion_matrix[2, 1]  # False Negatives#
-     TP = confusion_matrix[2, 2]  # True Positives#
-    TPR[i] = TP / (TP + FN)#
-    FPR[i] = FP / (TN+FP+FN+TP)#
-    Index[i] = TPR[i] *(1-FPR[i]) #
-}#
-optimal_threshold = thresold[which.max(Index)]#
-plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
-abline(v = optimal_threshold, col = "red", lty = 2)#
-Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
-confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
-as.factor(data$TenYearCHD))#
-#Correlation Heatmap#
-library(ggplot2)#
-library(reshape2)#
-#
-# Exclude non-numeric variables#
-numeric_data <- data[, sapply(data, is.numeric)]#
-#
-# Calculate correlation matrix#
-correlation_matrix <- cor(numeric_data)#
-#
-# Melt correlation matrix#
-melted_correlation <- melt(correlation_matrix)#
-#
-# Plot heatmap#
-ggplot(data = melted_correlation, aes(Var1, Var2, fill = value)) +#
-  geom_tile(color = "white") +#
-  scale_fill_gradient2(low = "Red", high = "Violet", mid = "white", midpoint = 0,#
-                       limit = c(-1,1), space = "Lab", name="Correlation") +#
-  theme_minimal() +#
-  theme(axis.text.x = element_text(angle = 45, vjust = 1, size = 10, hjust = 1)) +#
-  coord_fixed()#
-detach(data)
-#======= Required pAckages for the Codes#
-# install.packages("lattice")#
-# #
-# rm(list=ls())#
-# data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-# attach(data)#
-# names(data)#
-# data$male = as.factor(data$male)#
-# data$education = as.factor(data$education)#
-# data$currentSmoker = as.factor(data$currentSmoker)#
-# data$prevalentStroke = as.factor(data$prevalentStroke)#
-# data$prevalentHyp = as.factor(data$prevalentHyp)#
-# data$diabetes = as.factor(data$diabetes)#
-# data$TenYearCHD = as.factor(data$TenYearCHD)#
-#
-# mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
-# summary(mymodel)#
-# # install.packages("caret")#
-# fitted_prob=fitted(mymodel)#
-# thresold = seq(0,1,0.001)#
-# accuracy = numeric(length(thresold))#
-# for(i in 1:length(thresold)) {#
-    # Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
-    # x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
-    # y = as.data.frame(x$overall)#
-    # accuracy[i] = y[1,1]#
-# }#
-# accuracy#
-# plot(thresold, accuracy, type="l")#
-# abline(v = thresold[which.max(accuracy)], col = "red", lty = 2)#
-#
-# #thresold = thresold[which.max(accuracy)]#
-# Y_hat = ifelse(fitted_prob <= thresold, 0, 1)#
-# x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
-# detach(data)#
-rm(list=ls())#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-attach(data)#
-names(data)#
-data$male = as.factor(data$male)#
-data$education = as.factor(data$education)#
-data$currentSmoker = as.factor(data$currentSmoker)#
-data$prevalentStroke = as.factor(data$prevalentStroke)#
-data$prevalentHyp = as.factor(data$prevalentHyp)#
-data$diabetes = as.factor(data$diabetes)#
-data$TenYearCHD = as.factor(data$TenYearCHD)#
-#
-mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
-summary(mymodel)#
-fitted_prob=fitted(mymodel)#
-#=============================================##
-# Finding thresold by Optimising TPR*(1-FPR)  ##
-#=============================================##
-thresold = seq(0,1,0.001)#
-TPR = numeric(length(thresold))#
-FPR = numeric(length(thresold))#
-Index = numeric(length(thresold))#
-for (i in 1:length(thresold)) {#
-    Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
-    conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
-    confusion_matrix = conf_matrix$table #
-     TN = confusion_matrix[1, 1]  # True Negatives#
-     FP = confusion_matrix[1, 2]  # False Positives#
-     FN = confusion_matrix[2, 1]  # False Negatives#
-     TP = confusion_matrix[2, 2]  # True Positives#
-    TPR[i] = TP / (TP + FN)#
-    FPR[i] = FP / (TN+FP+FN+TP)#
-    Index[i] = TPR[i] *(1-FPR[i]) #
-}#
-optimal_threshold = thresold[which.max(Index)]#
-plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
-abline(v = optimal_threshold, col = "red", lty = 2)#
-Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
-confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
-as.factor(data$TenYearCHD))#
-#Correlation Heatmap#
-library(ggplot2)#
-library(reshape2)#
-#
-# Exclude non-numeric variables#
-numeric_data <- data[, sapply(data, is.numeric)]#
-#
-# Calculate correlation matrix#
-correlation_matrix <- cor(numeric_data)#
-#
-# Melt correlation matrix#
-melted_correlation <- melt(correlation_matrix)#
-#
-# Plot heatmap#
-ggplot(data = melted_correlation, aes(Var1, Var2, fill = value)) +#
-  geom_tile(color = "white") +#
-  scale_fill_gradient2(low = "Green", high = "Red", mid = "white", midpoint = 0,#
-                       limit = c(-1,1), space = "Lab", name="Correlation") +#
-  theme_minimal() +#
-  theme(axis.text.x = element_text(angle = 45, vjust = 1, size = 10, hjust = 1)) +#
-  coord_fixed()#
-detach(data)
-corr(data)
-cor(data)
-rcor(data)
-rcorr(data)
-str(data)
-rm(list=ls())
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")
-attach(data)
-corr(data)
-cor(data)
-correlation_matrix <- cor(data)
-# Melt correlation matrix#
-melted_correlation <- melt(correlation_matrix)#
-#
-# Plot heatmap#
-ggplot(data = melted_correlation, aes(Var1, Var2, fill = value)) +#
-  geom_tile(color = "white") +#
-  scale_fill_gradient2(low = "Green", high = "Red", mid = "white", midpoint = 0,#
-                       limit = c(-1,1), space = "Lab", name="Correlation") +#
-  theme_minimal() +#
-  theme(axis.text.x = element_text(angle = 45, vjust = 1, size = 10, hjust = 1)) +#
-  coord_fixed()#
-detach(data)
-#======= Required pAckages for the Codes#
-# install.packages("lattice")#
-# #
-# rm(list=ls())#
-# data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-# attach(data)#
-# names(data)#
-# data$male = as.factor(data$male)#
-# data$education = as.factor(data$education)#
-# data$currentSmoker = as.factor(data$currentSmoker)#
-# data$prevalentStroke = as.factor(data$prevalentStroke)#
-# data$prevalentHyp = as.factor(data$prevalentHyp)#
-# data$diabetes = as.factor(data$diabetes)#
-# data$TenYearCHD = as.factor(data$TenYearCHD)#
-#
-# mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
-# summary(mymodel)#
-# # install.packages("caret")#
-# fitted_prob=fitted(mymodel)#
-# thresold = seq(0,1,0.001)#
-# accuracy = numeric(length(thresold))#
-# for(i in 1:length(thresold)) {#
-    # Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
-    # x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
-    # y = as.data.frame(x$overall)#
-    # accuracy[i] = y[1,1]#
-# }#
-# accuracy#
-# plot(thresold, accuracy, type="l")#
-# abline(v = thresold[which.max(accuracy)], col = "red", lty = 2)#
-#
-# #thresold = thresold[which.max(accuracy)]#
-# Y_hat = ifelse(fitted_prob <= thresold, 0, 1)#
-# x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
-# detach(data)#
-rm(list=ls())#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-attach(data)#
-names(data)#
-data$male = as.factor(data$male)#
-data$education = as.factor(data$education)#
-data$currentSmoker = as.factor(data$currentSmoker)#
-data$prevalentStroke = as.factor(data$prevalentStroke)#
-data$prevalentHyp = as.factor(data$prevalentHyp)#
-data$diabetes = as.factor(data$diabetes)#
-data$TenYearCHD = as.factor(data$TenYearCHD)#
-#
-mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
-summary(mymodel)#
-fitted_prob=fitted(mymodel)#
-#=============================================##
-# Finding thresold by Optimising TPR*(1-FPR)  ##
-#=============================================##
-thresold = seq(0,1,0.001)#
-TPR = numeric(length(thresold))#
-FPR = numeric(length(thresold))#
-Index = numeric(length(thresold))#
-for (i in 1:length(thresold)) {#
-    Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
-    conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
-    confusion_matrix = conf_matrix$table #
-     TN = confusion_matrix[1, 1]  # True Negatives#
-     FP = confusion_matrix[1, 2]  # False Positives#
-     FN = confusion_matrix[2, 1]  # False Negatives#
-     TP = confusion_matrix[2, 2]  # True Positives#
-    TPR[i] = TP / (TP + FN)#
-    FPR[i] = FP / (TN+FP+FN+TP)#
-    Index[i] = TPR[i] *(1-FPR[i]) #
-}#
-optimal_threshold = thresold[which.max(Index)]#
-plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
-abline(v = optimal_threshold, col = "red", lty = 2)#
-Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
-confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
-as.factor(data$TenYearCHD))#
-#==== #
-#Correlation Heatmap#
-library(ggplot2)#
-library(reshape2)#
-#
-# Exclude non-numeric variables#
-numeric_data <- data[, sapply(data, is.numeric)]#
-#
-# Calculate correlation matrix#
-correlation_matrix <- cor(data)#
-#
-# Melt correlation matrix#
-melted_correlation <- melt(correlation_matrix)#
-#
-# Plot heatmap#
-ggplot(data = melted_correlation, aes(Var1, Var2, fill = value)) +#
-  geom_tile(color = "white") +#
-  scale_fill_gradient2(low = "Green", high = "Yellow", mid = "white", midpoint = 0,#
-                       limit = c(-1,1), space = "Lab", name="Correlation") +#
-  theme_minimal() +#
-  theme(axis.text.x = element_text(angle = 45, vjust = 1, size = 10, hjust = 1)) +#
-  coord_fixed()#
-detach(data)
-#======= Required pAckages for the Codes#
-# install.packages("lattice")#
-# #
-# rm(list=ls())#
-# data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-# attach(data)#
-# names(data)#
-# data$male = as.factor(data$male)#
-# data$education = as.factor(data$education)#
-# data$currentSmoker = as.factor(data$currentSmoker)#
-# data$prevalentStroke = as.factor(data$prevalentStroke)#
-# data$prevalentHyp = as.factor(data$prevalentHyp)#
-# data$diabetes = as.factor(data$diabetes)#
-# data$TenYearCHD = as.factor(data$TenYearCHD)#
-#
-# mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
-# summary(mymodel)#
-# # install.packages("caret")#
-# fitted_prob=fitted(mymodel)#
-# thresold = seq(0,1,0.001)#
-# accuracy = numeric(length(thresold))#
-# for(i in 1:length(thresold)) {#
-    # Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
-    # x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
-    # y = as.data.frame(x$overall)#
-    # accuracy[i] = y[1,1]#
-# }#
-# accuracy#
-# plot(thresold, accuracy, type="l")#
-# abline(v = thresold[which.max(accuracy)], col = "red", lty = 2)#
-#
-# #thresold = thresold[which.max(accuracy)]#
-# Y_hat = ifelse(fitted_prob <= thresold, 0, 1)#
-# x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
-# detach(data)#
-rm(list=ls())#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-attach(data)#
-names(data)#
-data$male = as.factor(data$male)#
-data$education = as.factor(data$education)#
-data$currentSmoker = as.factor(data$currentSmoker)#
-data$prevalentStroke = as.factor(data$prevalentStroke)#
-data$prevalentHyp = as.factor(data$prevalentHyp)#
-data$diabetes = as.factor(data$diabetes)#
-data$TenYearCHD = as.factor(data$TenYearCHD)#
-#
-mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
-summary(mymodel)#
-fitted_prob=fitted(mymodel)#
-#=============================================##
-# Finding thresold by Optimising TPR*(1-FPR)  ##
-#=============================================##
-thresold = seq(0,1,0.001)#
-TPR = numeric(length(thresold))#
-FPR = numeric(length(thresold))#
-Index = numeric(length(thresold))#
-for (i in 1:length(thresold)) {#
-    Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
-    conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
-    confusion_matrix = conf_matrix$table #
-     TN = confusion_matrix[1, 1]  # True Negatives#
-     FP = confusion_matrix[1, 2]  # False Positives#
-     FN = confusion_matrix[2, 1]  # False Negatives#
-     TP = confusion_matrix[2, 2]  # True Positives#
-    TPR[i] = TP / (TP + FN)#
-    FPR[i] = FP / (TN+FP+FN+TP)#
-    Index[i] = TPR[i] *(1-FPR[i]) #
-}#
-optimal_threshold = thresold[which.max(Index)]#
-plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
-abline(v = optimal_threshold, col = "red", lty = 2)#
-Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
-confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
-as.factor(data$TenYearCHD))#
-#==== #
-#Correlation Heatmap#
-library(ggplot2)#
-library(reshape2)#
-#
-# Exclude non-numeric variables#
-numeric_data <- data[, sapply(data, is.numeric)]#
-#
-# Calculate correlation matrix#
-correlation_matrix <- cor(data)#
-#
-# Melt correlation matrix#
-melted_correlation <- melt(correlation_matrix)#
-#
-# Plot heatmap#
-ggplot(data = melted_correlation, aes(Var1, Var2, fill = value)) +#
-  geom_tile(color = "white") +#
-  scale_fill_gradient2(low = "Green", high = "Yellow", mid = "white", midpoint = 0,#
-                       limit = c(-1,1), space = "Lab", name="Correlation") +#
-  theme_minimal() #
-  theme(axis.text.x = element_text(angle = 45, vjust = 1, size = 10, hjust = 1)) +#
-  coord_fixed()#
-detach(data)
-#======= Required pAckages for the Codes#
-# install.packages("lattice")#
-# #
-# rm(list=ls())#
-# data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-# attach(data)#
-# names(data)#
-# data$male = as.factor(data$male)#
-# data$education = as.factor(data$education)#
-# data$currentSmoker = as.factor(data$currentSmoker)#
-# data$prevalentStroke = as.factor(data$prevalentStroke)#
-# data$prevalentHyp = as.factor(data$prevalentHyp)#
-# data$diabetes = as.factor(data$diabetes)#
-# data$TenYearCHD = as.factor(data$TenYearCHD)#
-#
-# mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
-# summary(mymodel)#
-# # install.packages("caret")#
-# fitted_prob=fitted(mymodel)#
-# thresold = seq(0,1,0.001)#
-# accuracy = numeric(length(thresold))#
-# for(i in 1:length(thresold)) {#
-    # Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
-    # x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
-    # y = as.data.frame(x$overall)#
-    # accuracy[i] = y[1,1]#
-# }#
-# accuracy#
-# plot(thresold, accuracy, type="l")#
-# abline(v = thresold[which.max(accuracy)], col = "red", lty = 2)#
-#
-# #thresold = thresold[which.max(accuracy)]#
-# Y_hat = ifelse(fitted_prob <= thresold, 0, 1)#
-# x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
-# detach(data)#
-rm(list=ls())#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-attach(data)#
-names(data)#
-data$male = as.factor(data$male)#
-data$education = as.factor(data$education)#
-data$currentSmoker = as.factor(data$currentSmoker)#
-data$prevalentStroke = as.factor(data$prevalentStroke)#
-data$prevalentHyp = as.factor(data$prevalentHyp)#
-data$diabetes = as.factor(data$diabetes)#
-data$TenYearCHD = as.factor(data$TenYearCHD)#
-#
-mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
-summary(mymodel)#
-fitted_prob=fitted(mymodel)#
-#=============================================##
-# Finding thresold by Optimising TPR*(1-FPR)  ##
-#=============================================##
-thresold = seq(0,1,0.001)#
-TPR = numeric(length(thresold))#
-FPR = numeric(length(thresold))#
-Index = numeric(length(thresold))#
-for (i in 1:length(thresold)) {#
-    Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
-    conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
-    confusion_matrix = conf_matrix$table #
-     TN = confusion_matrix[1, 1]  # True Negatives#
-     FP = confusion_matrix[1, 2]  # False Positives#
-     FN = confusion_matrix[2, 1]  # False Negatives#
-     TP = confusion_matrix[2, 2]  # True Positives#
-    TPR[i] = TP / (TP + FN)#
-    FPR[i] = FP / (TN+FP+FN+TP)#
-    Index[i] = TPR[i] *(1-FPR[i]) #
-}#
-optimal_threshold = thresold[which.max(Index)]#
-plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
-abline(v = optimal_threshold, col = "red", lty = 2)#
-Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
-confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
-as.factor(data$TenYearCHD))#
-#==== Determining if there is Multicollinerality #
-#Correlation Heatmap#
-rm(list=ls())#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-attach(data)#
-names(data)#
-library(ggplot2)#
-library(reshape2)#
-#
-# Exclude non-numeric variables#
-numeric_data <- data[, sapply(data, is.numeric)]#
-#
-# Calculate correlation matrix#
-correlation_matrix <- cor(data)#
-#
-# Melt correlation matrix#
-melted_correlation <- melt(correlation_matrix)#
-#
-# Plot heatmap#
-ggplot(data = melted_correlation, aes(Var1, Var2, fill = value)) +#
-  geom_tile(color = "white") +#
-  scale_fill_gradient2(low = "Green", high = "Yellow", mid = "white", midpoint = 0,#
-                       limit = c(-1,1), space = "Lab", name="Correlation") +#
-  theme_minimal() #
-  theme(axis.text.x = element_text(angle = 45, vjust = 1, size = 10, hjust = 1)) +#
-  coord_fixed()#
-detach(data)
-library(ggplot2)#
-library(reshape2)#
-#
-# Exclude non-numeric variables#
-numeric_data <- data[, sapply(data, is.numeric)]#
-#
-# Calculate correlation matrix#
-correlation_matrix <- cor(data)#
-#
-# Melt correlation matrix#
-melted_correlation <- melt(correlation_matrix)#
-#
-# Plot heatmap#
-ggplot(data = melted_correlation, aes(Var1, Var2, fill = value)) +#
-  geom_tile(color = "white") +#
-  scale_fill_gradient2(low = "Green", high = "Yellow", mid = "white", midpoint = 0,#
-                       limit = c(-1,1), space = "Lab", name="Correlation") +#
-  theme_minimal() #
-  theme(axis.text.x = element_text(angle = 45, vjust = 1, size = 10, hjust = 1)) +#
-  coord_fixed()#
-detach(data)
-library(ggplot2)
-library(reshape2)
-correlation_matrix <- cor(data)
-melted_correlation <- melt(correlation_matrix)
-ggplot(data = melted_correlation, aes(Var1, Var2, fill = value)) +
-geom_tile(color = "white") +
-scale_fill_gradient2(low = "Green", high = "Yellow", mid = "white", midpoint = 0,
-limit = c(-1,1), space = "Lab", name="Correlation") +
-theme_minimal()
-theme(axis.text.x = element_text(angle = 45, vjust = 1, size = 10, hjust = 1)) +
-rm(list=ls())
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")
-attach(data)
-library(ggplot2)
-library(reshape2)
-# Calculate correlation matrix#
-correlation_matrix <- cor(data)#
-#
-# Melt correlation matrix#
-melted_correlation <- melt(correlation_matrix)#
-#
-# Plot heatmap#
-ggplot(data = melted_correlation, aes(Var1, Var2, fill = value)) +#
-  geom_tile(color = "white") +#
-  scale_fill_gradient2(low = "Green", high = "Red", mid = "white", midpoint = 0,#
-                       limit = c(-1,1), space = "Lab", name="Correlation") +#
-  theme_minimal() +#
-  theme(axis.text.x = element_text(angle = 45, vjust = 1, size = 10, hjust = 1)) +#
-  coord_fixed()
-#======= Required pAckages for the Codes#
-# install.packages("lattice")#
-# #
-# rm(list=ls())#
-# data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-# attach(data)#
-# names(data)#
-# data$male = as.factor(data$male)#
-# data$education = as.factor(data$education)#
-# data$currentSmoker = as.factor(data$currentSmoker)#
-# data$prevalentStroke = as.factor(data$prevalentStroke)#
-# data$prevalentHyp = as.factor(data$prevalentHyp)#
-# data$diabetes = as.factor(data$diabetes)#
-# data$TenYearCHD = as.factor(data$TenYearCHD)#
-#
-# mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
-# summary(mymodel)#
-# # install.packages("caret")#
-# fitted_prob=fitted(mymodel)#
-# thresold = seq(0,1,0.001)#
-# accuracy = numeric(length(thresold))#
-# for(i in 1:length(thresold)) {#
-    # Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
-    # x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
-    # y = as.data.frame(x$overall)#
-    # accuracy[i] = y[1,1]#
-# }#
-# accuracy#
-# plot(thresold, accuracy, type="l")#
-# abline(v = thresold[which.max(accuracy)], col = "red", lty = 2)#
-#
-# #thresold = thresold[which.max(accuracy)]#
-# Y_hat = ifelse(fitted_prob <= thresold, 0, 1)#
-# x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
-# detach(data)#
-rm(list=ls())#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-attach(data)#
-names(data)#
-data$male = as.factor(data$male)#
-data$education = as.factor(data$education)#
-data$currentSmoker = as.factor(data$currentSmoker)#
-data$prevalentStroke = as.factor(data$prevalentStroke)#
-data$prevalentHyp = as.factor(data$prevalentHyp)#
-data$diabetes = as.factor(data$diabetes)#
-data$TenYearCHD = as.factor(data$TenYearCHD)#
-#
-mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
-summary(mymodel)#
-fitted_prob=fitted(mymodel)#
-#=============================================##
-# Finding thresold by Optimising TPR*(1-FPR)  ##
-#=============================================##
-thresold = seq(0,1,0.001)#
-TPR = numeric(length(thresold))#
-FPR = numeric(length(thresold))#
-Index = numeric(length(thresold))#
-for (i in 1:length(thresold)) {#
-    Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
-    conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
-    confusion_matrix = conf_matrix$table #
-     TN = confusion_matrix[1, 1]  # True Negatives#
-     FP = confusion_matrix[1, 2]  # False Positives#
-     FN = confusion_matrix[2, 1]  # False Negatives#
-     TP = confusion_matrix[2, 2]  # True Positives#
-    TPR[i] = TP / (TP + FN)#
-    FPR[i] = FP / (TN+FP+FN+TP)#
-    Index[i] = TPR[i] *(1-FPR[i]) #
-}#
-optimal_threshold = thresold[which.max(Index)]#
-plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
-abline(v = optimal_threshold, col = "red", lty = 2)#
-Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
-confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
-as.factor(data$TenYearCHD))#
-#==== #
-#Correlation Heatmap#
-library(ggplot2)#
-library(reshape2)#
-#
-# Exclude non-numeric variables#
-numeric_data <- data[, sapply(data, is.numeric)]#
-#
-# Calculate correlation matrix#
-correlation_matrix <- cor(data)#
-#
-# Melt correlation matrix#
-melted_correlation <- melt(correlation_matrix)#
-#
-# Plot heatmap#
-ggplot(data = melted_correlation, aes(Var1, Var2, fill = value)) +#
-  geom_tile(color = "white") +#
-  scale_fill_gradient2(low = "Yellow", high = "Red", mid = "white", midpoint = 0,#
-                       limit = c(-1,1), space = "Lab", name="Correlation") +#
-  theme_minimal() +#
-  theme(axis.text.x = element_text(angle = 45, vjust = 1, size = 10, hjust = 1)) +#
-  coord_fixed()
-help(melt)
-#======= Required pAckages for the Codes#
-# install.packages("lattice")#
-# #
-# rm(list=ls())#
-# data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-# attach(data)#
-# names(data)#
-# data$male = as.factor(data$male)#
-# data$education = as.factor(data$education)#
-# data$currentSmoker = as.factor(data$currentSmoker)#
-# data$prevalentStroke = as.factor(data$prevalentStroke)#
-# data$prevalentHyp = as.factor(data$prevalentHyp)#
-# data$diabetes = as.factor(data$diabetes)#
-# data$TenYearCHD = as.factor(data$TenYearCHD)#
-#
-# mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
-# summary(mymodel)#
-# # install.packages("caret")#
-# fitted_prob=fitted(mymodel)#
-# thresold = seq(0,1,0.001)#
-# accuracy = numeric(length(thresold))#
-# for(i in 1:length(thresold)) {#
-    # Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
-    # x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
-    # y = as.data.frame(x$overall)#
-    # accuracy[i] = y[1,1]#
-# }#
-# accuracy#
-# plot(thresold, accuracy, type="l")#
-# abline(v = thresold[which.max(accuracy)], col = "red", lty = 2)#
-#
-# #thresold = thresold[which.max(accuracy)]#
-# Y_hat = ifelse(fitted_prob <= thresold, 0, 1)#
-# x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
-# detach(data)#
-rm(list=ls())#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-attach(data)#
-names(data)#
-data$male = as.factor(data$male)#
-data$education = as.factor(data$education)#
-data$currentSmoker = as.factor(data$currentSmoker)#
-data$prevalentStroke = as.factor(data$prevalentStroke)#
-data$prevalentHyp = as.factor(data$prevalentHyp)#
-data$diabetes = as.factor(data$diabetes)#
-data$TenYearCHD = as.factor(data$TenYearCHD)#
-#
-mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
-summary(mymodel)#
-fitted_prob=fitted(mymodel)#
-#=============================================##
-# Finding thresold by Optimising TPR*(1-FPR)  ##
-#=============================================##
-thresold = seq(0,1,0.001)#
-TPR = numeric(length(thresold))#
-FPR = numeric(length(thresold))#
-Index = numeric(length(thresold))#
-for (i in 1:length(thresold)) {#
-    Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
-    conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
-    confusion_matrix = conf_matrix$table #
-     TN = confusion_matrix[1, 1]  # True Negatives#
-     FP = confusion_matrix[1, 2]  # False Positives#
-     FN = confusion_matrix[2, 1]  # False Negatives#
-     TP = confusion_matrix[2, 2]  # True Positives#
-    TPR[i] = TP / (TP + FN)#
-    FPR[i] = FP / (TN+FP+FN+TP)#
-    Index[i] = TPR[i] *(1-FPR[i]) #
-}#
-optimal_threshold = thresold[which.max(Index)]#
-plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
-abline(v = optimal_threshold, col = "red", lty = 2)#
-Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
-confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
-as.factor(data$TenYearCHD))#
-#==== #
-#Correlation Heatmaprm(list=ls())#
-rm(list=ls())#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-attach(data)#
-names(data)#
-library(ggplot2)#
-library(reshape2)#
-#
-# Calculate correlation matrix#
-correlation_matrix <- cor(data)#
-#
-# Melt correlation matrix#
-melted_correlation <- melt(correlation_matrix)#
-#
-# Plot heatmap#
-ggplot(data = melted_correlation, aes(Var1, Var2, fill = value)) +#
-  geom_tile(color = "white") +#
-  scale_fill_gradient2(low = "Yellow", high = "Red", mid = "white", midpoint = 0,#
-                       limit = c(-1,1), space = "Lab", name="Correlation") +#
-  theme_minimal() +#
-  theme(axis.text.x = element_text(angle = 45, vjust = 1, size = 10, hjust = 1)) +#
-  coord_fixed()
+summary(mymodel)
+mymodel
+# Fitting of the Logistic Regression Model
+data$TenYearCHD = as.factor(data$TenYearCHD)
+mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))
+summary(mymodel)
+fitted_prob=fitted(mymodel)
+plot(fitted_prob)
+plot(fitted_prob,type="h")
+plot(fitted_prob,type="h",main="Original vs Fitted")
+thresold = seq(0,1,0.001)
+TPR = numeric(length(thresold))
+FPR = numeric(length(thresold))
+Index = numeric(length(thresold))
+plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")
+optimal_threshold = thresold[which.max(Index)]
+optimal_threshold = thresold[which.max(Index)]
 #======= Required Packages for the Codes#
 # install.packages("lattice")#
 # rm(list=ls())#
@@ -1067,73 +1722,7 @@ ggplot(data = melted_correlation, aes(Var1, Var2, fill = value)) +#
 # Y_hat = ifelse(fitted_prob <= thresold, 0, 1)#
 # x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
 # detach(data)#
-rm(list=ls())#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-attach(data)#
-names(data)#
-data$male = as.factor(data$male)#
-data$education = as.factor(data$education)#
-data$currentSmoker = as.factor(data$currentSmoker)#
-data$prevalentStroke = as.factor(data$prevalentStroke)#
-data$prevalentHyp = as.factor(data$prevalentHyp)#
-data$diabetes = as.factor(data$diabetes)#
-data$TenYearCHD = as.factor(data$TenYearCHD)#
-#
-mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
-summary(mymodel)#
-fitted_prob=fitted(mymodel)#
-#=============================================##
-# Finding thresold by Optimising TPR*(1-FPR)  ##
-#=============================================##
-thresold = seq(0,1,0.001)#
-TPR = numeric(length(thresold))#
-FPR = numeric(length(thresold))#
-Index = numeric(length(thresold))#
-for (i in 1:length(thresold)) {#
-    Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
-    conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
-    confusion_matrix = conf_matrix$table #
-     TN = confusion_matrix[1, 1]  # True Negatives#
-     FP = confusion_matrix[1, 2]  # False Positives#
-     FN = confusion_matrix[2, 1]  # False Negatives#
-     TP = confusion_matrix[2, 2]  # True Positives#
-    TPR[i] = TP / (TP + FN)#
-    FPR[i] = FP / (TN+FP+FN+TP)#
-    Index[i] = TPR[i] *(1-FPR[i]) #
-}#
-optimal_threshold = thresold[which.max(Index)]#
-plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
-abline(v = optimal_threshold, col = "red", lty = 2)#
-Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
-confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
-as.factor(data$TenYearCHD))#
-#==== #
-#Correlation Hea(list=ls())#
-rm(list=ls())#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-attach(data)#
-names(data)#
-library(ggplot2)#
-library(reshape2)#
-#
-# Calculate correlation matrix#
-correlation_matrix <- cor(data)#
-#
-# Melt correlation matrix#
-melted_correlation <- melt(correlation_matrix)#
-#
-# Plot heatmap#
-ggplot(data = melted_correlation, aes(Var1, Var2, fill = value)) +#
-  geom_tile(color = "white") +#
-  scale_fill_gradient2(low = "Yellow", high = "Red", mid = "white", midpoint = 0,#
-                       limit = c(-1,1), space = "Lab", name="Correlation") +#
-  theme_minimal() +#
-  theme(axis.text.x = element_text(angle = 45, vjust = 1, size = 10, hjust = 1)) +#
-  coord_fixed()#
-#this is source Code
-#======= Required Packages for the Codes#
-# install.packages("lattice")#
-# rm(list=ls())#
+# # rm(list=ls())#
 # data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
 # attach(data)#
 # names(data)#
@@ -1147,807 +1736,32 @@ ggplot(data = melted_correlation, aes(Var1, Var2, fill = value)) +#
 #
 # mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
 # summary(mymodel)#
-# # install.packages("caret")#
 # fitted_prob=fitted(mymodel)#
+# #=============================================##
+# # Finding thresold by Optimising TPR*(1-FPR)  ##
+# #=============================================##
 # thresold = seq(0,1,0.001)#
-# accuracy = numeric(length(thresold))#
-# for(i in 1:length(thresold)) {#
+# TPR = numeric(length(thresold))#
+# FPR = numeric(length(thresold))#
+# Index = numeric(length(thresold))#
+# for (i in 1:length(thresold)) {#
     # Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
-    # x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
-    # y = as.data.frame(x$overall)#
-    # accuracy[i] = y[1,1]#
+    # conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
+    # confusion_matrix = conf_matrix$table #
+     # TN = confusion_matrix[1, 1]  # True Negatives#
+     # FP = confusion_matrix[1, 2]  # False Positives#
+     # FN = confusion_matrix[2, 1]  # False Negatives#
+     # TP = confusion_matrix[2, 2]  # True Positives#
+    # TPR[i] = TP / (TP + FN)#
+    # FPR[i] = FP / (TN+FP+FN+TP)#
+    # Index[i] = TPR[i] *(1-FPR[i]) #
 # }#
-# accuracy#
-# plot(thresold, accuracy, type="l")#
-# abline(v = thresold[which.max(accuracy)], col = "red", lty = 2)#
-#
-# #thresold = thresold[which.max(accuracy)]#
-# Y_hat = ifelse(fitted_prob <= thresold, 0, 1)#
-# x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
-# detach(data)#
-rm(list=ls())#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-attach(data)#
-names(data)#
-data$male = as.factor(data$male)#
-data$education = as.factor(data$education)#
-data$currentSmoker = as.factor(data$currentSmoker)#
-data$prevalentStroke = as.factor(data$prevalentStroke)#
-data$prevalentHyp = as.factor(data$prevalentHyp)#
-data$diabetes = as.factor(data$diabetes)#
-data$TenYearCHD = as.factor(data$TenYearCHD)#
-#
-mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
-summary(mymodel)#
-fitted_prob=fitted(mymodel)#
-#=============================================##
-# Finding thresold by Optimising TPR*(1-FPR)  ##
-#=============================================##
-thresold = seq(0,1,0.001)#
-TPR = numeric(length(thresold))#
-FPR = numeric(length(thresold))#
-Index = numeric(length(thresold))#
-for (i in 1:length(thresold)) {#
-    Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
-    conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
-    confusion_matrix = conf_matrix$table #
-     TN = confusion_matrix[1, 1]  # True Negatives#
-     FP = confusion_matrix[1, 2]  # False Positives#
-     FN = confusion_matrix[2, 1]  # False Negatives#
-     TP = confusion_matrix[2, 2]  # True Positives#
-    TPR[i] = TP / (TP + FN)#
-    FPR[i] = FP / (TN+FP+FN+TP)#
-    Index[i] = TPR[i] *(1-FPR[i]) #
-}#
-optimal_threshold = thresold[which.max(Index)]#
-plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
-abline(v = optimal_threshold, col = "red", lty = 2)#
-Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
-confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
-as.factor(data$TenYearCHD))#
-#==== #
-#Correlation Hea(list=ls())#
-rm(list=ls())#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-attach(data)#
-names(data)#
-library(ggplot2)#
-library(reshape2)#
-#
-# Calculate correlation matrix#
-correlation_matrix <- cor(data)#
-#
-# Melt correlation matrix#
-melted_correlation <- melt(correlation_matrix)#
-#
-# Plot heatmap#
-ggplot(data = melted_correlation, aes(Var1, Var2, fill = value)) +#
-  geom_tile(color = "white") +#
-  scale_fill_gradient2(low = "Yellow", high = "Red", mid = "white", midpoint = 0,#
-                       limit = c(-1,1), space = "Lab", name="Correlation") +#
-  theme_minimal() +#
-  theme(axis.text.x = element_text(angle = 45, vjust = 1, size = 10, hjust = 1)) +#
-  coord_fixed()#
-#this is source Code
-# Load necessary libraries#
-library(pROC)#
-#
-# Generate sample data#
-set.seed(123)#
-actual <- sample(c(0, 1), 100, replace = TRUE)#
-predicted <- runif(100)#
-#
-# Calculate ROC curve#
-roc_curve <- roc(actual, predicted)#
-#
-# Plot ROC curve#
-plot(roc_curve, main = "Receiver Operating Characteristic (ROC) Curve",#
-     col = "blue", lwd = 2, print.auc = TRUE)#
-#
-# Add diagonal line (random classifier)#
-abline(a = 0, b = 1, lty = 2, col = "red")#
-#
-# Add legend#
-legend("bottomright", legend = c("ROC Curve", "Random Classifier"),#
-       col = c("blue", "red"), lty = c(1, 2), lwd = c(2, 1), bg = "white")
-# Load necessary libraries#
-library(pROC)#
-#
-# Generate sample data#
-set.seed(123)#
-actual <- sample(c(0, 1), 100, replace = TRUE)#
-predicted <- runif(100)#
-#
-# Calculate ROC curve#
-roc_curve <- roc(actual, predicted)#
-#
-# Plot smooth ROC curve#
-plot(roc_curve, main = "Receiver Operating Characteristic (ROC) Curve",#
-     col = "blue", lwd = 2, print.auc = TRUE, legacy.axes = TRUE)#
-#
-# Add diagonal line (random classifier)#
-abline(a = 0, b = 1, lty = 2, col = "red")#
-#
-# Add legend#
-legend("bottomright", legend = c("ROC Curve", "Random Classifier"),#
-       col = c("blue", "red"), lty = c(1, 2), lwd = c(2, 1), bg = "white")
-# Load necessary libraries#
-library(pROC)#
-#
-# Generate sample data#
-set.seed(123)#
-actual <- sample(c(0, 1), 100, replace = TRUE)#
-predicted <- runif(100)#
-#
-# Calculate ROC curve#
-roc_curve <- roc(actual, predicted)#
-#
-# Plot smooth ROC curve#
-plot(roc_curve, main = "Receiver Operating Characteristic (ROC) Curve",#
-     col = "blue", lwd = 2, print.auc = TRUE, legacy.axes = TRUE)#
-#
-# Add diagonal line (random classifier)#
-abline(a = 0, b = 1, lty = 2, col = "red")#
-#
-# Add legend#
-legend("bottomright", legend = c("ROC Curve", "Random Classifier"),#
-       col = c("blue", "red"), lty = c(1, 2), lwd = c(2, 1), bg = "white")
-# Load necessary libraries#
-library(pROC)#
-#
-# Generate sample data#
-set.seed(123)#
-actual <- sample(c(0, 1), 100, replace = TRUE)#
-predicted <- runif(100)#
-#
-# Calculate ROC curve#
-roc_curve <- roc(actual, predicted)#
-#
-# Create a semi-circular ROC curve#
-plot(roc_curve, type = "n", main = "Receiver Operating Characteristic (ROC) Curve",#
-     col = "blue", lwd = 2, print.auc = TRUE)#
-#
-# Draw a semi-circle#
-theta <- seq(pi, 2*pi, length.out = 100)#
-x <- cos(theta)#
-y <- sin(theta)#
-lines(x, y, type = "l", col = "red", lwd = 2)#
-#
-# Add legend#
-legend("bottomright", legend = c("ROC Curve", "Random Classifier"),#
-       col = c("blue", "red"), lty = c(1, 1), lwd = c(2, 2), bg = "white")
-# Load necessary libraries#
-library(pROC)#
-#
-# Generate sample data#
-set.seed(123)#
-actual <- sample(c(0, 1), 100, replace = TRUE)#
-predicted <- runif(100)#
-#
-# Calculate ROC curve#
-roc_curve <- roc(actual, predicted)#
-#
-# Plot ROC curve with a smooth, rounded shape#
-plot(roc_curve, main = "Receiver Operating Characteristic (ROC) Curve",#
-     col = "blue", lwd = 2, print.auc = TRUE, legacy.axes = TRUE, smooth = TRUE)#
-#
-# Add diagonal line (random classifier)#
-abline(a = 0, b = 1, lty = 2, col = "red")#
-#
-# Add legend#
-legend("bottomright", legend = c("ROC Curve", "Random Classifier"),#
-       col = c("blue", "red"), lty = c(1, 2), lwd = c(2, 1), bg = "white")
-# Load necessary libraries#
-library(pROC)#
-#
-# Generate sample data#
-set.seed(123)#
-actual <- sample(c(0, 1), 100, replace = TRUE)#
-predicted <- runif(100)#
-#
-# Calculate ROC curve#
-roc_curve <- roc(actual, predicted)#
-#
-# Interpolate ROC curve using splines#
-interp_roc <- smooth(roc_curve, method = "spline")#
-#
-# Plot smooth hand-drawn ROC curve#
-plot(interp_roc, main = "Hand-Drawn Receiver Operating Characteristic (ROC) Curve",#
-     col = "blue", lwd = 2, print.auc = TRUE)#
-#
-# Add diagonal line (random classifier)#
-abline(a = 0, b = 1, lty = 2, col = "red")#
-#
-# Add legend#
-legend("bottomright", legend = c("ROC Curve", "Random Classifier"),#
-       col = c("blue", "red"), lty = c(1, 2), lwd = c(2, 1), bg = "white")
-# Load necessary libraries#
-library(pROC)#
-#
-# Generate sample data#
-set.seed(123)#
-actual <- sample(c(0, 1), 100, replace = TRUE)#
-predicted <- runif(100)#
-#
-# Calculate ROC curve#
-roc_curve <- roc(actual, predicted)#
-#
-# Interpolate ROC curve using splines#
-interp_roc <- smooth(roc_curve, method = "spline")#
-#
-# Plot smooth hand-drawn ROC curve#
-plot(interp_roc, main = "Hand-Drawn Receiver Operating Characteristic (ROC) Curve",#
-     col = "blue", lwd = 2, print.auc = TRUE)#
-#
-# Add diagonal line (random classifier)#
-abline(a = 0, b = 1, lty = 2, col = "red")#
-#
-# Add legend#
-legend("bottomright", legend = c("ROC Curve", "Random Classifier"),#
-       col = c("blue", "red"), lty = c(1, 2), lwd = c(2, 1), bg = "white")
-rm(list=ls())#
-#
-# Setting the working directory#
-setwd("D:/Edwisor_Project - Loan_Defaulter/")#
-getwd()#
-#
-# Load the dataset#
-gfgDataset = read.csv("bank-loan.csv", header=TRUE)#
-#
-### Data SAMPLING #####
-library(caret)#
-set.seed(101)#
-split = createDataPartition(data$default, p=0.81, list=FALSE)#
-train_data = data[split, ]#
-test_data = data[-split, ]#
-#
-# error metrics -- Confusion Matrix#
-err_metric = function(GFGCM)#
-{#
-	GFGTN = GFGCM[1, 1]#
-	GFGRATE = GFGCM[2, 2]#
-	FP = GFGCM[1, 2]#
-	FN = GFGCM[2, 1]#
-	gfgPrecise = (GFGRATE)/(GFGRATE+FP)#
-	recall_score = (FP)/(FP+GFGTN)#
-	f1_score = 2*((gfgPrecise*recall_score)/(gfgPrecise+recall_score))#
-	accuracy_model = (GFGRATE+GFGTN)/(GFGRATE+GFGTN+FP+FN)#
-	False_positive_rate = (FP)/(FP+GFGTN)#
-	False_negative_rate = (FN)/(FN+GFGRATE)#
-	print(paste("GfgPrecise value of the model: ", round(gfgPrecise, 2)))#
-	print(paste("Accuracy of the model: ", round(accuracy_model, 2)))#
-	print(paste("Recall value of the model: ", round(recall_score, 2)))#
-	print(paste("False Positive rate of the model: ", round(False_positive_rate, 2)))#
-	print(paste("False Negative rate of the model: ", round(False_negative_rate, 2)))#
-	print(paste("f1 score of the model: ", round(f1_score, 2)))#
-}#
-#
-# 1. Logistic regression#
-logit_m = glm(formula=default~., data=train_data, family='binomial')#
-summary(logit_m)#
-logit_P = predict(logit_m, newdata=test_data[-13], type='response')#
-logit_P < - ifalse(logit_P > 0.5, 1, 0) # Probability check#
-GFGCM = table(test_data[, 13], logit_P)#
-print(GFGCM)#
-err_metric(GFGCM)#
-#
-# ROC-curve using pROC library#
-library(pROC)#
-roc_score = roc(test_data[, 13], logit_P) # AUC score#
-plot(roc_score, main="ROC curve -- Logistic Regression ")
-data
-rm(list=ls())
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")
-data
-rm(list=ls())#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-attach(data)#
-names(data)#
-library(ggplot2)#
-library(reshape2)#
-#
-# Calculate correlation matrix#
-correlation_matrix <- cor(data)#
-#
-# Melt correlation matrix#
-melted_correlation <- melt(correlation_matrix)#
-#
-# Plot heatmap#
-ggplot(data = melted_correlation, aes(Var1, Var2, fill = value)) +#
-  geom_tile(color = "white") +#
-  scale_fill_gradient2(low = "Yellow", high = "Red", mid = "white", midpoint = 0,#
-                       limit = c(-1,1), space = "Lab", name="Correlation") +#
-  theme_minimal() +#
-  theme(axis.text.x = element_text(angle = 45, vjust = 1, size = 10, hjust = 1)) +#
-  coord_fixed()
-# Load necessary libraries#
-library(ggplot2)#
-library(reshape2)#
-#
-# Load data#
-data <- read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-#
-# Calculate correlation matrix#
-correlation_matrix <- cor(data)#
-#
-# Melt the correlation matrix for plotting#
-melted_correlation <- melt(correlation_matrix)#
-#
-# Plot heatmap with correlation coefficients#
-ggplot(melted_correlation, aes(Var1, Var2, fill = value)) +#
-  geom_tile() + #
-  geom_text(aes(label = sprintf("%.2f", value)), size = 3) +#
-  scale_fill_gradient2(low = "yellow", high = "red", midpoint = 0, limit = c(-1,1), name="Correlation") +#
-  theme_minimal() +#
-  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +#
-  coord_fixed()
-# Load necessary libraries#
-library(ggplot2)#
-library(reshape2)#
-#
-# Load data#
-data <- read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-#
-# Calculate correlation matrix#
-correlation_matrix <- cor(data)#
-#
-# Melt the correlation matrix for plotting#
-melted_correlation <- melt(correlation_matrix)#
-#
-# Plot heatmap with correlation coefficients#
-ggplot(melted_correlation, aes(Var1, Var2, fill = value)) +#
-  geom_tile() + #
-  geom_text(aes(label = sprintf("%.2f", value)), size = 3) +#
-  scale_fill_gradient2(low = "#FFFF00", high = "#FF0000", midpoint = 0, limit = c(-1,1), name="Correlation", mid = "#FFFFFF") +#
-  theme_minimal() +#
-  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +#
-  coord_fixed()
-# Load necessary libraries#
-library(ggplot2)#
-library(reshape2)#
-#
-# Load data#
-data <- read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-#
-# Calculate correlation matrix#
-correlation_matrix <- cor(data)#
-#
-# Melt the correlation matrix for plotting#
-melted_correlation <- melt(correlation_matrix)#
-#
-# Plot heatmap with correlation coefficients#
-ggplot(melted_correlation, aes(Var1, Var2, fill = value)) +#
-  geom_tile() + #
-  geom_text(aes(label = sprintf("%.2f", value)), size = 3) +#
-  scale_fill_gradient2(low = "#3jhsFF00", high = "#FF0000", midpoint = 0, limit = c(-1,1), name="Correlation", mid = "#FFFFFF") +#
-  theme_minimal() +#
-  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +#
-  coord_fixed()
-# Load necessary libraries#
-library(ggplot2)#
-library(reshape2)#
-#
-# Load data#
-data <- read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-#
-# Calculate correlation matrix#
-correlation_matrix <- cor(data)#
-#
-# Melt the correlation matrix for plotting#
-melted_correlation <- melt(correlation_matrix)#
-#
-# Plot heatmap with correlation coefficients#
-ggplot(melted_correlation, aes(Var1, Var2, fill = value)) +#
-  geom_tile() + #
-  geom_text(aes(label = sprintf("%.2f", value)), size = 3) +#
-  scale_fill_gradient2(low = "#58390b", high = "#0f423c", midpoint = 0, limit = c(-1,1), name="Correlation", mid = "#FFFFFF") +#
-  theme_minimal() +#
-  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +#
-  coord_fixed()
-# Load necessary libraries#
-library(ggplot2)#
-library(reshape2)#
-#
-# Load data#
-data <- read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-#
-# Calculate correlation matrix#
-correlation_matrix <- cor(data)#
-#
-# Melt the correlation matrix for plotting#
-melted_correlation <- melt(correlation_matrix)#
-#
-# Plot heatmap with correlation coefficients#
-ggplot(melted_correlation, aes(Var1, Var2, fill = value)) +#
-  geom_tile() + #
-  geom_text(aes(label = sprintf("%.2f", value)), size = 3) +#
-  scale_fill_gradient2(low = "#58390b", high = "#0f423c", midpoint = 0, limit = c(-1,1), name="Correlation", mid = "#FFFFFF") +#
-  theme_minimal() +#
-  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +#
-  coord_fixed()
-#======= Required Packages for the Codes#
-# install.packages("lattice")#
-# rm(list=ls())#
-# data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-# attach(data)#
-# names(data)#
-# data$male = as.factor(data$male)#
-# data$education = as.factor(data$education)#
-# data$currentSmoker = as.factor(data$currentSmoker)#
-# data$prevalentStroke = as.factor(data$prevalentStroke)#
-# data$prevalentHyp = as.factor(data$prevalentHyp)#
-# data$diabetes = as.factor(data$diabetes)#
-# data$TenYearCHD = as.factor(data$TenYearCHD)#
-#
-# mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
-# summary(mymodel)#
-# # install.packages("caret")#
-# fitted_prob=fitted(mymodel)#
-# thresold = seq(0,1,0.001)#
-# accuracy = numeric(length(thresold))#
-# for(i in 1:length(thresold)) {#
-    # Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
-    # x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
-    # y = as.data.frame(x$overall)#
-    # accuracy[i] = y[1,1]#
-# }#
-# accuracy#
-# plot(thresold, accuracy, type="l")#
-# abline(v = thresold[which.max(accuracy)], col = "red", lty = 2)#
-#
-# #thresold = thresold[which.max(accuracy)]#
-# Y_hat = ifelse(fitted_prob <= thresold, 0, 1)#
-# x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
-# detach(data)#
-rm(list=ls())#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-attach(data)#
-names(data)#
-data$male = as.factor(data$male)#
-data$education = as.factor(data$education)#
-data$currentSmoker = as.factor(data$currentSmoker)#
-data$prevalentStroke = as.factor(data$prevalentStroke)#
-data$prevalentHyp = as.factor(data$prevalentHyp)#
-data$diabetes = as.factor(data$diabetes)#
-data$TenYearCHD = as.factor(data$TenYearCHD)#
-#
-mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
-summary(mymodel)#
-fitted_prob=fitted(mymodel)#
-#=============================================##
-# Finding thresold by Optimising TPR*(1-FPR)  ##
-#=============================================##
-thresold = seq(0,1,0.001)#
-TPR = numeric(length(thresold))#
-FPR = numeric(length(thresold))#
-Index = numeric(length(thresold))#
-for (i in 1:length(thresold)) {#
-    Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
-    conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
-    confusion_matrix = conf_matrix$table #
-     TN = confusion_matrix[1, 1]  # True Negatives#
-     FP = confusion_matrix[1, 2]  # False Positives#
-     FN = confusion_matrix[2, 1]  # False Negatives#
-     TP = confusion_matrix[2, 2]  # True Positives#
-    TPR[i] = TP / (TP + FN)#
-    FPR[i] = FP / (TN+FP+FN+TP)#
-    Index[i] = TPR[i] *(1-FPR[i]) #
-}#
-optimal_threshold = thresold[which.max(Index)]#
-plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
-abline(v = optimal_threshold, col = "red", lty = 2)#
-Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
-confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
-as.factor(data$TenYearCHD))#
-#==== #
-rm(list=ls())#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-library(ggplot2)#
-library(reshape2)#
-#
-# Calculate correlation matrix#
-correlation_matrix = cor(data)#
-#
-# Melt the correlation matrix for plotting#
-melted_correlation = melt(correlation_matrix)#
-#
-# Plot heatmap with correlation coefficients#
-ggplot(melted_correlation, aes(Var1, Var2, fill = value)) +#
-  geom_tile() + #
-  geom_text(aes(label = sprintf("%.2f", value)), size = 3) +#
-  scale_fill_gradient2(low = "#58390b", high = "#0f423c", midpoint = 0, limit = c(-1,1), name="Correlation", mid = "#FFFFFF") +#
-  theme_minimal() +#
-  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +#
-  coord_fixed()#
-#
-#this is source Code
-#======= Required Packages for the Codes#
-# install.packages("lattice")#
-# rm(list=ls())#
-# data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-# attach(data)#
-# names(data)#
-# data$male = as.factor(data$male)#
-# data$education = as.factor(data$education)#
-# data$currentSmoker = as.factor(data$currentSmoker)#
-# data$prevalentStroke = as.factor(data$prevalentStroke)#
-# data$prevalentHyp = as.factor(data$prevalentHyp)#
-# data$diabetes = as.factor(data$diabetes)#
-# data$TenYearCHD = as.factor(data$TenYearCHD)#
-#
-# mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
-# summary(mymodel)#
-# # install.packages("caret")#
-# fitted_prob=fitted(mymodel)#
-# thresold = seq(0,1,0.001)#
-# accuracy = numeric(length(thresold))#
-# for(i in 1:length(thresold)) {#
-    # Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
-    # x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
-    # y = as.data.frame(x$overall)#
-    # accuracy[i] = y[1,1]#
-# }#
-# accuracy#
-# plot(thresold, accuracy, type="l")#
-# abline(v = thresold[which.max(accuracy)], col = "red", lty = 2)#
-#
-# #thresold = thresold[which.max(accuracy)]#
-# Y_hat = ifelse(fitted_prob <= thresold, 0, 1)#
-# x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
-# detach(data)#
-rm(list=ls())#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-attach(data)#
-names(data)#
-data$male = as.factor(data$male)#
-data$education = as.factor(data$education)#
-data$currentSmoker = as.factor(data$currentSmoker)#
-data$prevalentStroke = as.factor(data$prevalentStroke)#
-data$prevalentHyp = as.factor(data$prevalentHyp)#
-data$diabetes = as.factor(data$diabetes)#
-data$TenYearCHD = as.factor(data$TenYearCHD)#
-#
-mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
-summary(mymodel)#
-fitted_prob=fitted(mymodel)#
-#=============================================##
-# Finding thresold by Optimising TPR*(1-FPR)  ##
-#=============================================##
-thresold = seq(0,1,0.001)#
-TPR = numeric(length(thresold))#
-FPR = numeric(length(thresold))#
-Index = numeric(length(thresold))#
-for (i in 1:length(thresold)) {#
-    Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
-    conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
-    confusion_matrix = conf_matrix$table #
-     TN = confusion_matrix[1, 1]  # True Negatives#
-     FP = confusion_matrix[1, 2]  # False Positives#
-     FN = confusion_matrix[2, 1]  # False Negatives#
-     TP = confusion_matrix[2, 2]  # True Positives#
-    TPR[i] = TP / (TP + FN)#
-    FPR[i] = FP / (TN+FP+FN+TP)#
-    Index[i] = TPR[i] *(1-FPR[i]) #
-}#
-optimal_threshold = thresold[which.max(Index)]#
-plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
-abline(v = optimal_threshold, col = "red", lty = 2)#
-Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
-confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
-as.factor(data$TenYearCHD))#
-#==== #
-rm(list=ls())#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-library(ggplot2)#
-library(reshape2)#
-#
-# Calculate correlation matrix#
-correlation_matrix = cor(data)#
-#
-# Melt the correlation matrix for plotting#
-melted_correlation = melt(correlation_matrix)#
-#
-# Plot heatmap with correlation coefficients#
-ggplot(melted_correlation, aes(Predictor Variables, Predictor Variables, fill = value)) +#
-  geom_tile() + #
-  geom_text(aes(label = sprintf("%.2f", value)), size = 3) +#
-  scale_fill_gradient2(low = "#58390b", high = "#0f423c", midpoint = 0, limit = c(-1,1), name="Correlation", mid = "#FFFFFF") +#
-  theme_minimal() +#
-  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +#
-  coord_fixed()#
-#
-#this is source Code
-#======= Required Packages for the Codes#
-# install.packages("lattice")#
-# rm(list=ls())#
-# data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-# attach(data)#
-# names(data)#
-# data$male = as.factor(data$male)#
-# data$education = as.factor(data$education)#
-# data$currentSmoker = as.factor(data$currentSmoker)#
-# data$prevalentStroke = as.factor(data$prevalentStroke)#
-# data$prevalentHyp = as.factor(data$prevalentHyp)#
-# data$diabetes = as.factor(data$diabetes)#
-# data$TenYearCHD = as.factor(data$TenYearCHD)#
-#
-# mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
-# summary(mymodel)#
-# # install.packages("caret")#
-# fitted_prob=fitted(mymodel)#
-# thresold = seq(0,1,0.001)#
-# accuracy = numeric(length(thresold))#
-# for(i in 1:length(thresold)) {#
-    # Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
-    # x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
-    # y = as.data.frame(x$overall)#
-    # accuracy[i] = y[1,1]#
-# }#
-# accuracy#
-# plot(thresold, accuracy, type="l")#
-# abline(v = thresold[which.max(accuracy)], col = "red", lty = 2)#
-#
-# #thresold = thresold[which.max(accuracy)]#
-# Y_hat = ifelse(fitted_prob <= thresold, 0, 1)#
-# x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
-# detach(data)#
-rm(list=ls())#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-attach(data)#
-names(data)#
-data$male = as.factor(data$male)#
-data$education = as.factor(data$education)#
-data$currentSmoker = as.factor(data$currentSmoker)#
-data$prevalentStroke = as.factor(data$prevalentStroke)#
-data$prevalentHyp = as.factor(data$prevalentHyp)#
-data$diabetes = as.factor(data$diabetes)#
-data$TenYearCHD = as.factor(data$TenYearCHD)#
-#
-mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
-summary(mymodel)#
-fitted_prob=fitted(mymodel)#
-#=============================================##
-# Finding thresold by Optimising TPR*(1-FPR)  ##
-#=============================================##
-thresold = seq(0,1,0.001)#
-TPR = numeric(length(thresold))#
-FPR = numeric(length(thresold))#
-Index = numeric(length(thresold))#
-for (i in 1:length(thresold)) {#
-    Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
-    conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
-    confusion_matrix = conf_matrix$table #
-     TN = confusion_matrix[1, 1]  # True Negatives#
-     FP = confusion_matrix[1, 2]  # False Positives#
-     FN = confusion_matrix[2, 1]  # False Negatives#
-     TP = confusion_matrix[2, 2]  # True Positives#
-    TPR[i] = TP / (TP + FN)#
-    FPR[i] = FP / (TN+FP+FN+TP)#
-    Index[i] = TPR[i] *(1-FPR[i]) #
-}#
-optimal_threshold = thresold[which.max(Index)]#
-plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
-abline(v = optimal_threshold, col = "red", lty = 2)#
-Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
-confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
-as.factor(data$TenYearCHD))#
-#==== #
-rm(list=ls())#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-library(ggplot2)#
-library(reshape2)#
-#
-# Calculate correlation matrix#
-correlation_matrix = cor(data)#
-#
-# Melt the correlation matrix for plotting#
-melted_correlation = melt(correlation_matrix)#
-#
-# Plot heatmap with correlation coefficients#
-ggplot(melted_correlation, aes(Var1, Var2, fill = value)) +#
-  geom_tile() + #
-  geom_text(aes(label = sprintf("%.2f", value)), size = 3) +#
-  scale_fill_gradient2(low = "#58390b", high = "#0f423c", midpoint = 0, limit = c(-1,1), name="Correlation", mid = "#FFFFFF") +#
-  theme_minimal() +#
-  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +#
-  coord_fixed()#
-#
-#this is source Code
-rm(list=ls())
-rm(list=ls())#
-data <- read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-library(ggplot2)#
-library(reshape2)#
-#
-# Calculate correlation matrix#
-correlation_matrix <- cor(data)#
-#
-# Melt the correlation matrix for plotting#
-melted_correlation <- melt(correlation_matrix)#
-#
-# Plot heatmap with correlation coefficients#
-ggplot(melted_correlation, aes(Var1, Var2, fill = value)) +#
-  geom_tile() + #
-  geom_text(aes(label = sprintf("%.2f", value)), size = 3) +#
-  scale_fill_gradient2(low = "#58390b", high = "#0f423c", midpoint = 0, limit = c(-1,1), name="Correlation", mid = "#FFFFFF") +#
-  theme_minimal() +#
-  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +#
-  coord_fixed() +#
-  labs(x = "Variables", y = "Variables")
-#======= Required Packages for the Codes#
-# install.packages("lattice")#
-# rm(list=ls())#
-# data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-# attach(data)#
-# names(data)#
-# data$male = as.factor(data$male)#
-# data$education = as.factor(data$education)#
-# data$currentSmoker = as.factor(data$currentSmoker)#
-# data$prevalentStroke = as.factor(data$prevalentStroke)#
-# data$prevalentHyp = as.factor(data$prevalentHyp)#
-# data$diabetes = as.factor(data$diabetes)#
-# data$TenYearCHD = as.factor(data$TenYearCHD)#
-#
-# mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
-# summary(mymodel)#
-# # install.packages("caret")#
-# fitted_prob=fitted(mymodel)#
-# thresold = seq(0,1,0.001)#
-# accuracy = numeric(length(thresold))#
-# for(i in 1:length(thresold)) {#
-    # Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
-    # x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
-    # y = as.data.frame(x$overall)#
-    # accuracy[i] = y[1,1]#
-# }#
-# accuracy#
-# plot(thresold, accuracy, type="l")#
-# abline(v = thresold[which.max(accuracy)], col = "red", lty = 2)#
-#
-# #thresold = thresold[which.max(accuracy)]#
-# Y_hat = ifelse(fitted_prob <= thresold, 0, 1)#
-# x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
-# detach(data)#
-rm(list=ls())#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-attach(data)#
-names(data)#
-data$male = as.factor(data$male)#
-data$education = as.factor(data$education)#
-data$currentSmoker = as.factor(data$currentSmoker)#
-data$prevalentStroke = as.factor(data$prevalentStroke)#
-data$prevalentHyp = as.factor(data$prevalentHyp)#
-data$diabetes = as.factor(data$diabetes)#
-data$TenYearCHD = as.factor(data$TenYearCHD)#
-#
-mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
-summary(mymodel)#
-fitted_prob=fitted(mymodel)#
-#=============================================##
-# Finding thresold by Optimising TPR*(1-FPR)  ##
-#=============================================##
-thresold = seq(0,1,0.001)#
-TPR = numeric(length(thresold))#
-FPR = numeric(length(thresold))#
-Index = numeric(length(thresold))#
-for (i in 1:length(thresold)) {#
-    Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
-    conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
-    confusion_matrix = conf_matrix$table #
-     TN = confusion_matrix[1, 1]  # True Negatives#
-     FP = confusion_matrix[1, 2]  # False Positives#
-     FN = confusion_matrix[2, 1]  # False Negatives#
-     TP = confusion_matrix[2, 2]  # True Positives#
-    TPR[i] = TP / (TP + FN)#
-    FPR[i] = FP / (TN+FP+FN+TP)#
-    Index[i] = TPR[i] *(1-FPR[i]) #
-}#
-optimal_threshold = thresold[which.max(Index)]#
-plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
-abline(v = optimal_threshold, col = "red", lty = 2)#
-Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
-confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
-as.factor(data$TenYearCHD))#
+# optimal_threshold = thresold[which.max(Index)]#
+# plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
+# abline(v = optimal_threshold, col = "red", lty = 2)#
+# Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
+# confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
+# as.factor(data$TenYearCHD))#
 #====#
 # Code for Plotting teh Correlation Heatmaps#
 #====== #
@@ -1961,7 +1775,6 @@ correlation_matrix = cor(data)#
 #
 # Melt the correlation matrix for plotting#
 melted_correlation = melt(correlation_matrix)#
-#
 # Plot heatmap with correlation coefficients#
 ggplot(melted_correlation, aes(Var1, Var2, fill = value)) +#
   geom_tile() + #
@@ -1970,166 +1783,1194 @@ ggplot(melted_correlation, aes(Var1, Var2, fill = value)) +#
   theme_minimal() +#
   theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +#
   coord_fixed() +#
-  labs(x = "Variables", y = "Variables")
-#======= Required Packages for the Codes#
-# install.packages("lattice")#
-# rm(list=ls())#
-# data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-# attach(data)#
-# names(data)#
-# data$male = as.factor(data$male)#
-# data$education = as.factor(data$education)#
-# data$currentSmoker = as.factor(data$currentSmoker)#
-# data$prevalentStroke = as.factor(data$prevalentStroke)#
-# data$prevalentHyp = as.factor(data$prevalentHyp)#
-# data$diabetes = as.factor(data$diabetes)#
-# data$TenYearCHD = as.factor(data$TenYearCHD)#
+  labs(x = "Variables", y = "Variables")#
+# = = = = = = #
+# Plottting the VIF Values#
+# = = = = = =#
+# Remove existing objects and load the dataset#
 #
-# mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
-# summary(mymodel)#
-# # install.packages("caret")#
-# fitted_prob=fitted(mymodel)#
-# thresold = seq(0,1,0.001)#
-# accuracy = numeric(length(thresold))#
-# for(i in 1:length(thresold)) {#
-    # Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
-    # x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
-    # y = as.data.frame(x$overall)#
-    # accuracy[i] = y[1,1]#
-# }#
-# accuracy#
-# plot(thresold, accuracy, type="l")#
-# abline(v = thresold[which.max(accuracy)], col = "red", lty = 2)#
-#
-# #thresold = thresold[which.max(accuracy)]#
-# Y_hat = ifelse(fitted_prob <= thresold, 0, 1)#
-# x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
-# detach(data)#
-rm(list=ls())#
+rm(list = ls())#
 data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-attach(data)#
-names(data)#
-data$male = as.factor(data$male)#
-data$education = as.factor(data$education)#
-data$currentSmoker = as.factor(data$currentSmoker)#
-data$prevalentStroke = as.factor(data$prevalentStroke)#
-data$prevalentHyp = as.factor(data$prevalentHyp)#
-data$diabetes = as.factor(data$diabetes)#
-data$TenYearCHD = as.factor(data$TenYearCHD)#
 #
-mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
-summary(mymodel)#
-fitted_prob=fitted(mymodel)#
-#=============================================##
-# Finding thresold by Optimising TPR*(1-FPR)  ##
-#=============================================##
-thresold = seq(0,1,0.001)#
-TPR = numeric(length(thresold))#
-FPR = numeric(length(thresold))#
-Index = numeric(length(thresold))#
-for (i in 1:length(thresold)) {#
-    Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
-    conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
-    confusion_matrix = conf_matrix$table #
-     TN = confusion_matrix[1, 1]  # True Negatives#
-     FP = confusion_matrix[1, 2]  # False Positives#
-     FN = confusion_matrix[2, 1]  # False Negatives#
-     TP = confusion_matrix[2, 2]  # True Positives#
-    TPR[i] = TP / (TP + FN)#
-    FPR[i] = FP / (TN+FP+FN+TP)#
-    Index[i] = TPR[i] *(1-FPR[i]) #
-}#
-optimal_threshold = thresold[which.max(Index)]#
-plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
-abline(v = optimal_threshold, col = "red", lty = 2)#
-Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
-confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
-as.factor(data$TenYearCHD))#
-#====#
-# Code for Plotting teh Correlation Heatmaps#
-#====== #
-rm(list=ls())#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-library(ggplot2)#
-library(reshape2)#
-#
-# Calculate correlation matrix#
-correlation_matrix = cor(data)#
-#
-# Melt the correlation matrix for plotting#
-melted_correlation = melt(correlation_matrix)#
-png()#
-# Plot heatmap with correlation coefficients#
-ggplot(melted_correlation, aes(Var1, Var2, fill = value)) +#
-  geom_tile() + #
-  geom_text(aes(label = sprintf("%.2f", value)), size = 3) +#
-  scale_fill_gradient2(low = "#58390b", high = "#0f423c", midpoint = 0, limit = c(-1,1), name="Correlation", mid = "#FFFFFF") +#
-  theme_minimal() +#
-  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +#
-  coord_fixed() +#
-  labs(x = "Variables", y = "Variables")
-rm(list=ls())#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-library(ggplot2)#
-library(reshape2)#
-#
-# Calculate correlation matrix#
-correlation_matrix = cor(data)#
-#
-# Melt the correlation matrix for plotting#
-melted_correlation = melt(correlation_matrix)#
-png()#
-# Plot heatmap with correlation coefficients#
-ggplot(melted_correlation, aes(Var1, Var2, fill = value)) +#
-  geom_tile() + #
-  geom_text(aes(label = sprintf("%.2f", value)), size = 3) +#
-  scale_fill_gradient2(low = "#58390b", high = "#0f423c", midpoint = 0, limit = c(-1,1), name="Correlation", mid = "#FFFFFF") +#
-  theme_minimal() +#
-  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +#
-  coord_fixed() +#
-  labs(x = "Variables", y = "Variables")
-getwd()
-# Required Packages#
-install.packages("car")#
+# Load necessary libraries#
 library(car)#
+library(ggplot2)#
 #
-# Assuming 'data' has already been read and preprocessed as per your previous steps#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-#
-# Convert necessary columns to factors#
-data$male = as.factor(data$male)#
-data$education = as.factor(data$education)#
-data$currentSmoker = as.factor(data$currentSmoker)#
-data$prevalentStroke = as.factor(data$prevalentStroke)#
-data$prevalentHyp = as.factor(data$prevalentHyp)#
-data$diabetes = as.factor(data$diabetes)#
-data$TenYearCHD = as.factor(data$TenYearCHD)#
-#
-# Build the model#
+# Fit the model#
 mymodel = glm(TenYearCHD ~ ., data = data, family = binomial(link = "logit"))#
 #
-# Calculate VIF#
+# Calculate VIF for each predictor in the model#
 vif_values = vif(mymodel)#
-print(vif_values)#
 #
-# Calculate Tolerance#
-tol_values = 1 / vif_values#
-print(tol_values)
-help(vif)
-mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))
+# Transform VIF values into a data frame#
+vif_df = data.frame(Variable = names(vif_values), VIF = unname(vif_values))#
+#
+# Create the bar chart using ggplot#
+ggplot(vif_df, aes(x = Variable, y = VIF, fill = VIF)) +#
+  geom_bar(stat = "identity", color = "steelblue") +#
+  geom_hline(yintercept = 5, linetype = "dashed", color = "red", size = 1) +#
+  theme_minimal() +#
+  labs(title = "Plotting of the VIF Values", y = "VIF Value", x = "") +#
+  coord_cartesian(ylim = c(0, max(vif_df$VIF) + 1)) + # Adjust y-axis limits#
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) # Angle the x-axis text#
+# = = = = = = = = = = #
+# Final Code#
+# = = = = = = = = = =#
+rm(list=ls())#
+set.seed(123)#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+attach(data)#
+# Define the proportion of data for training (e.g., 80%)#
+train_proportion = 0.8#
+#
+# Number of rows in the data frame#
+num_rows = nrow(data)#
+#
+# Randomly select row indices for the training set#
+train_indices = sample(num_rows, size = round(train_proportion * num_rows), replace = FALSE)#
+training_data = data[train_indices, ]#
+testing_data = data[-train_indices, ]#
+#
+# Fitting of the Logistic Regression Model #
+names(data)#
+data$male = as.factor(data$male)#
+data$education = as.factor(data$education)#
+data$currentSmoker = as.factor(data$currentSmoker)#
+data$prevalentStroke = as.factor(data$prevalentStroke)#
+data$prevalentHyp = as.factor(data$prevalentHyp)#
+data$diabetes = as.factor(data$diabetes)#
+data$TenYearCHD = as.factor(data$TenYearCHD)#
+mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
+summary(mymodel)#
+#
+fitted_prob=fitted(mymodel)#
+plot(fitted_prob,type="h",main="Original vs Fitted")#
+thresold = seq(0,1,0.001)#
+TPR = numeric(length(thresold))#
+FPR = numeric(length(thresold))#
+Index = numeric(length(thresold))#
+for (i in 1:length(thresold)) {#
+    Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
+    conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
+    confusion_matrix = conf_matrix$table #
+     TN = confusion_matrix[1, 1]  # True Negatives#
+     FP = confusion_matrix[1, 2]  # False Positives#
+     FN = confusion_matrix[2, 1]  # False Negatives#
+     TP = confusion_matrix[2, 2]  # True Positives#
+    TPR[i] = TP / (TP + FN)#
+    FPR[i] = FP / (TN+FP+FN+TP)#
+    Index[i] = TPR[i] *(1-FPR[i]) #
+}#
+optimal_threshold = thresold[which.max(Index)]#
+plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
+abline(v = optimal_threshold, col = "red", lty = 2)#
+Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
+confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
+as.factor(data$TenYearCHD))#
+detach(data)#
+#install.packages("tidymodels")#
+library(readr)#
+library(tidymodels)#
+#
+# Read the dataset and convert the target variable to a factor#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+#
+# Plot job occupation against the target variable#
+ggplot(Ten, aes(job, fill = y)) +#
+    geom_bar() +#
+    coord_flip()#
+names(data)
+wt
+detach(data)
+detach(data)
+detach(data)
+detach(data)
+rm(list=ls())#
+set.seed(123)#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+attach(data)#
+# Define the proportion of data for training (e.g., 80%)#
+train_proportion = 0.8#
+#
+# Number of rows in the data frame#
+num_rows = nrow(data)#
+#
+# Randomly select row indices for the training set#
+train_indices = sample(num_rows, size = round(train_proportion * num_rows), replace = FALSE)#
+training_data = data[train_indices, ]#
+testing_data = data[-train_indices, ]#
+#
+# Fitting of the Logistic Regression Model #
+names(data)#
+data$male = as.factor(data$male)#
+data$education = as.factor(data$education)#
+data$currentSmoker = as.factor(data$currentSmoker)#
+data$prevalentStroke = as.factor(data$prevalentStroke)#
+data$prevalentHyp = as.factor(data$prevalentHyp)#
+data$diabetes = as.factor(data$diabetes)#
+data$TenYearCHD = as.factor(data$TenYearCHD)#
+mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
+summary(mymodel)#
+#
+fitted_prob=fitted(mymodel)
+plot(fitted_prob,type="h",main="Original vs Fitted")
+mymodel
+summay(mymodel)
 summary(mymodel)
-mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))
+summary(model)
 summary(mymodel)
+summary(mymodel)
+data
+summary(mymodel)
+data
+names(data)
+data = data[-3]
+names(data)
+mymodel = glm(TenYearCHD ~ ., data = data, family = binomial(link = "logit"))
+summary(model)
+summary(mymodel)
+data_modified_1 = data[-3]
+mymodel = glm(TenYearCHD ~ ., data = data_modified_1, family = binomial(link = "logit"))
+rm(list=ls())
+rm(list=ls())#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+mymodel = glm(TenYearCHD ~ ., data = data, family = binomial(link = "logit"))#
+summary(mymodel)#
+#
+data_modified_1 = data[-3]#
+mymodel_1 = glm(TenYearCHD ~ ., data = data_modified_1, family = binomial(link = "logit"))#
+summary(mymodel_1)
+summary(mymodel_1)
+2785.1
+summary(mymodel)
+summary(mymodel_1)
+summary(mymodel)
+mymodel = glm(TenYearCHD ~ ., data = data, family = binomial(link = "logit"))
+summary(mymodel)
+rm(list=ls())#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+data$male = as.factor(data$male)#
+data$education = as.factor(data$education)#
+data$currentSmoker = as.factor(data$currentSmoker)#
+data$prevalentStroke = as.factor(data$prevalentStroke)#
+data$prevalentHyp = as.factor(data$prevalentHyp)#
+data$diabetes = as.factor(data$diabetes)#
+data$TenYearCHD = as.factor(data$TenYearCHD)#
+mymodel = glm(TenYearCHD ~ ., data = data, family = binomial(link = "logit"))#
+summary(mymodel)#
+#
+data_modified_1 = data[-3]#
+mymodel_1 = glm(TenYearCHD ~ ., data = data_modified_1, family = binomial(link = "logit"))#
+summary(mymodel_1)
+summary(mymodel)
+data_modified_1 = data[-3]#
+mymodel_1 = glm(TenYearCHD ~ ., data = data_modified_1, family = binomial(link = "logit"))#
+summary(mymodel_1)
+rm(list=ls())#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+data$male = as.factor(data$male)#
+data$education = as.factor(data$education)#
+data$currentSmoker = as.factor(data$currentSmoker)#
+data$prevalentStroke = as.factor(data$prevalentStroke)#
+data$prevalentHyp = as.factor(data$prevalentHyp)#
+data$diabetes = as.factor(data$diabetes)#
+data$TenYearCHD = as.factor(data$TenYearCHD)#
+mymodel = glm(TenYearCHD ~ ., data = data, family = binomial(link = "logit"))#
+summary(mymodel)#
+#
+data_modified_1 = data[-3]#
+mymodel_1 = glm(TenYearCHD ~ ., data = data_modified_1, family = binomial(link = "logit"))#
+summary(mymodel_1)
+summary(mymodel)
+rm(list=ls())#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+data$male = as.factor(data$male)#
+data$education = as.factor(data$education)#
+data$currentSmoker = as.factor(data$currentSmoker)#
+data$prevalentStroke = as.factor(data$prevalentStroke)#
+data$prevalentHyp = as.factor(data$prevalentHyp)#
+data$diabetes = as.factor(data$diabetes)#
+data$TenYearCHD = as.factor(data$TenYearCHD)#
+mymodel = glm(TenYearCHD ~ ., data = data, family = binomial(link = "logit"))#
+summary(mymodel)
+chisq_logit=sum(((literacy1-pi_hat_logit)^2)/(pi_hat_logit*(1-pi_hat_logit)))
+mean(male)
+names(summary(model))
+names(summary(mymodel))
+summary(mymodel)
+names(summary(mymodel))
+x=summary(model)
+x$deviance
+x=summary(model)
+x=summary(mymodel)
+x$deviance
+names(summary(mymodel))
+summary(mymodel)
+x$estimate
+x$Coefficients
+x=summary(mymodel)
+names(summary(mymodel))
+x$terms
+names(summary(mymodel))
+x$coefficients
+x$coefficients$Estimate
+y=x$coefficients;y$$Estimate
+y=x$coefficients;y$Estimate
+y=x$coefficients
+y$Estimate
+y$estimate
+names(y)
+y
+y[2]
+y = as.data.frame(y)
+y
+y$Estimates
+y&[1,1]
+y[1,1]
+y[,1]
+estimates = y[,1]
+se = y[,2]
+se
+name(data)
+namea(data)
+names(data)
+data.frame(names(data),estimates,se)
+se = y[,2]
+data.frame(names(data)[-length(data)],estimates,se)
+data.frame(names(data)[-17,-16],estimates,se)
+length(names(data))
+lebgth(se)
+length(se)
+x$deviance
+y=x$coefficients
+y = as.data.frame(y)
+estimates = y[,1]
+summary(mymodel)
+estimates = y[,1][-1,-18]
+estimates = y[,1][-1,-16]
+estimates = y[,1][-1]
+estimates
+estimates = y[,1][-1,-17]
+length(se)
+estimates = y[,1][-1,-18]
+estimates = y[,1][-1,-18]
+estimates = y[,1][-c(1,18)]
+se = y[,2][-c(1,18)]
+data.frame(names(data)[-17,-16],estimates,se)
+data.frame(names(data)[-c(16,17)],estimates,se)
+#======= Required Packages for the Codes#
+# install.packages("lattice")#
+# rm(list=ls())#
+# data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+# attach(data)#
+# names(data)#
+# data$male = as.factor(data$male)#
+# data$education = as.factor(data$education)#
+# data$currentSmoker = as.factor(data$currentSmoker)#
+# data$prevalentStroke = as.factor(data$prevalentStroke)#
+# data$prevalentHyp = as.factor(data$prevalentHyp)#
+# data$diabetes = as.factor(data$diabetes)#
+# data$TenYearCHD = as.factor(data$TenYearCHD)#
+#
+# mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
+# summary(mymodel)#
+# # install.packages("caret")#
+# fitted_prob=fitted(mymodel)#
+# thresold = seq(0,1,0.001)#
+# accuracy = numeric(length(thresold))#
+# for(i in 1:length(thresold)) {#
+    # Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
+    # x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
+    # y = as.data.frame(x$overall)#
+    # accuracy[i] = y[1,1]#
+# }#
+# accuracy#
+# plot(thresold, accuracy, type="l")#
+# abline(v = thresold[which.max(accuracy)], col = "red", lty = 2)#
+#
+# #thresold = thresold[which.max(accuracy)]#
+# Y_hat = ifelse(fitted_prob <= thresold, 0, 1)#
+# x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
+# detach(data)#
+# # rm(list=ls())#
+# data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+# attach(data)#
+# names(data)#
+# data$male = as.factor(data$male)#
+# data$education = as.factor(data$education)#
+# data$currentSmoker = as.factor(data$currentSmoker)#
+# data$prevalentStroke = as.factor(data$prevalentStroke)#
+# data$prevalentHyp = as.factor(data$prevalentHyp)#
+# data$diabetes = as.factor(data$diabetes)#
+# data$TenYearCHD = as.factor(data$TenYearCHD)#
+#
+# mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
+# summary(mymodel)#
+# fitted_prob=fitted(mymodel)#
+# #=============================================##
+# # Finding thresold by Optimising TPR*(1-FPR)  ##
+# #=============================================##
+# thresold = seq(0,1,0.001)#
+# TPR = numeric(length(thresold))#
+# FPR = numeric(length(thresold))#
+# Index = numeric(length(thresold))#
+# for (i in 1:length(thresold)) {#
+    # Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
+    # conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
+    # confusion_matrix = conf_matrix$table #
+     # TN = confusion_matrix[1, 1]  # True Negatives#
+     # FP = confusion_matrix[1, 2]  # False Positives#
+     # FN = confusion_matrix[2, 1]  # False Negatives#
+     # TP = confusion_matrix[2, 2]  # True Positives#
+    # TPR[i] = TP / (TP + FN)#
+    # FPR[i] = FP / (TN+FP+FN+TP)#
+    # Index[i] = TPR[i] *(1-FPR[i]) #
+# }#
+# optimal_threshold = thresold[which.max(Index)]#
+# plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
+# abline(v = optimal_threshold, col = "red", lty = 2)#
+# Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
+# confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
+# as.factor(data$TenYearCHD))#
+#====#
+# Code for Plotting teh Correlation Heatmaps#
+#====== #
+rm(list=ls())#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+library(ggplot2)#
+library(reshape2)#
+#
+# Calculate correlation matrix#
+correlation_matrix = cor(data)#
+#
+# Melt the correlation matrix for plotting#
+melted_correlation = melt(correlation_matrix)#
+# Plot heatmap with correlation coefficients#
+ggplot(melted_correlation, aes(Var1, Var2, fill = value)) +#
+  geom_tile() + #
+  geom_text(aes(label = sprintf("%.2f", value)), size = 3) +#
+  scale_fill_gradient2(low = "#58390b", high = "#0f423c", midpoint = 0, limit = c(-1,1), name="Correlation", mid = "#FFFFFF") +#
+  theme_minimal() +#
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +#
+  coord_fixed() +#
+  labs(x = "Variables", y = "Variables")#
+# = = = = = = #
+# Plottting the VIF Values#
+# = = = = = =#
+# Remove existing objects and load the dataset#
+#
+rm(list = ls())#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+#
+# Load necessary libraries#
 library(car)#
+library(ggplot2)#
 #
-# Assuming 'data' is your dataframe and 'model' is your glm model.#
-# If you want to calculate VIFs for a subset of predictors or under a linear assumption:#
-# Example using a linear model for the sake of VIF calculation#
-linear_model <- lm(TenYearCHD ~ ., data = data)#
+# Fit the model#
+mymodel = glm(TenYearCHD ~ ., data = data, family = binomial(link = "logit"))#
 #
-# Calculate VIF#
-vif_values <- vif(linear_model)#
-print(vif_values)
-model=aov(TenYearChd~.)
-mymodel = aov(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))
+# Calculate VIF for each predictor in the model#
+vif_values = vif(mymodel)#
+#
+# Transform VIF values into a data frame#
+vif_df = data.frame(Variable = names(vif_values), VIF = unname(vif_values))#
+#
+# Create the bar chart using ggplot#
+ggplot(vif_df, aes(x = Variable, y = VIF, fill = VIF)) +#
+  geom_bar(stat = "identity", color = "steelblue") +#
+  geom_hline(yintercept = 5, linetype = "dashed", color = "red", size = 1) +#
+  theme_minimal() +#
+  labs(title = "Plotting of the VIF Values", y = "VIF Value", x = "") +#
+  coord_cartesian(ylim = c(0, max(vif_df$VIF) + 1)) + # Adjust y-axis limits#
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) # Angle the x-axis text#
+# = = = = = = = = = = #
+# Final Code#
+# = = = = = = = = = =#
+rm(list=ls())#
+set.seed(123)#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+attach(data)#
+# Define the proportion of data for training (e.g., 80%)#
+train_proportion = 0.8#
+#
+# Number of rows in the data frame#
+num_rows = nrow(data)#
+#
+# Randomly select row indices for the training set#
+train_indices = sample(num_rows, size = round(train_proportion * num_rows), replace = FALSE)#
+training_data = data[train_indices, ]#
+testing_data = data[-train_indices, ]#
+#
+# Fitting of the Logistic Regression Model #
+names(data)#
+data$male = as.factor(data$male)#
+data$education = as.factor(data$education)#
+data$currentSmoker = as.factor(data$currentSmoker)#
+data$prevalentStroke = as.factor(data$prevalentStroke)#
+data$prevalentHyp = as.factor(data$prevalentHyp)#
+data$diabetes = as.factor(data$diabetes)#
+data$TenYearCHD = as.factor(data$TenYearCHD)#
+mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
+summary(mymodel)#
+#
+fitted_prob=fitted(mymodel)#
+plot(fitted_prob,type="h",main="Original vs Fitted")#
+thresold = seq(0,1,0.001)#
+TPR = numeric(length(thresold))#
+FPR = numeric(length(thresold))#
+Index = numeric(length(thresold))#
+for (i in 1:length(thresold)) {#
+    Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
+    conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
+    confusion_matrix = conf_matrix$table #
+     TN = confusion_matrix[1, 1]  # True Negatives#
+     FP = confusion_matrix[1, 2]  # False Positives#
+     FN = confusion_matrix[2, 1]  # False Negatives#
+     TP = confusion_matrix[2, 2]  # True Positives#
+    TPR[i] = TP / (TP + FN)#
+    FPR[i] = FP / (TN+FP+FN+TP)#
+    Index[i] = TPR[i] *(1-FPR[i]) #
+}#
+optimal_threshold = thresold[which.max(Index)]#
+plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
+abline(v = optimal_threshold, col = "red", lty = 2)#
+Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
+confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
+as.factor(data$TenYearCHD))#
+detach(data)#
+#install.packages("tidymodels")#
+library(readr)#
+library(tidymodels)#
+#
+# Read the dataset and convert the target variable to a factor#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+#
+# Plot job occupation against the target variable#
+ggplot(Ten, aes(job, fill = y)) +#
+    geom_bar() +#
+    coord_flip()#
+names(data)#
+#  = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =#
+#   						       	Previous Code#
+# = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = #
+#
+#--- DATA CLEANING ---##
+#=====================##
+#
+rm(list=ls())#
+data=read.csv("literacy_data.csv",header=TRUE)#
+is.data.frame(data)#
+nrow(data)#
+apply(is.na(data),2,which)#
+#
+# CLEANING#
+data1=na.omit(data)#
+apply(is.na(data1),2,which)#
+dim(data1)#
+#
+#Recoding 2 as 0#
+attach(data1)#
+literacy1=replace(literacy,which(literacy==2),0)#
+gender1=replace(gender,which(gender==2),0)#
+data2=data.frame(literacy1,gender1,age)#
+dim(data2)#
+#
+#part (i)#
+tab1=table(literacy1,gender1);tab1#
+#(a)#
+o1=7860/2018;o1#
+#(b)#
+o2=4955/3883;o2#
+#(c)#
+or=3.894945/1.276075;or#
+#
+#part (ii)#
+model_logit=glm(literacy1~age,data2,#
+family=binomial(link="logit"));model_logit#
+fitted(model_logit)#
+#
+#part (iii)#
+model_probit=glm(literacy1~age,data2,#
+family=binomial(link="probit"));model_probit#
+pi_hat_probit=fitted(model_probit)#
+#
+#part (iv)#
+pi_hat_logit=as.vector(fitted(model_logit));pi_hat_logit#
+pi_hat_probit=as.vector(fitted(model_probit));pi_hat_probit#
+#
+chisq_logit=sum(((literacy1-pi_hat_logit)^2)/(pi_hat_logit*(1-pi_hat_logit)))#
+chisq_probit=sum(((literacy1-pi_hat_probit)^2)/(pi_hat_probit*(1-pi_hat_probit)))#
+chisq_logit#
+chisq_probit#
+#part (v)#
+#
+dt=data.frame(age,pi_hat_logit,pi_hat_probit)#
+dtt=dt[order(age),]#
+#
+par(mfrow=c(2,1))#
+plot(y=dtt[,2],x=dtt[,1],type='l')#
+plot(y=dtt[,3],x=dtt[,1],type='l')#
+#
+# part (vi)#
+#
+library(caret)#
+library(InformationValue)#
+??caret#
+confusionMatrix(as.factor(literacy1),pi_hat_logit,threshold=0.5)#
+#
+Y.hat=ifelse(pi_hat_logit>0.5,1,0)#
+caret::confusionMatrix(as.factor(Y.hat),as.factor(literacy1))#
+#
+Y.hat=ifelse(pi_hat_logit>0.5,1,0)  #
+t1=table(Y.hat,literacy1);t1#
+TPR=t1[2,2]/(t1[2,2]+t1[1,2]);TPR#
+FPR=4859/(4859+1042);FPR#
+Sensitivity=TPR;Sensitivity#
+Specificity=1-FPR;Specificity#
+misc=1-TPR+FPR;misc#
+#
+TPR=array()#
+FPR=array()#
+Sensitivity=array()#
+Specificity=array()#
+misc=array()#
+#
+k=1#
+p=seq(0.1,0.8,0.1)#
+for(i in p)#
+{#
+print(paste("Threshold = ",i))#
+Y.hat=ifelse(pi_hat_logit>i,1,0)#
+t=table(Y.hat,literacy1)#
+print(t)#
+TPR[k]=t[2,2]/(t[2,2]+t[1,2])#
+FPR[k]=t[2,1]/(t[2,1]+t[1,1])#
+Sensitivity[k]=TPR[k]#
+Specificity[k]=1-FPR[k]#
+misc[k]=1-TPR[k]+FPR[k]#
+k=k+1#
+}#
+#
+data.frame(p,TPR,FPR,Specificity,Sensitivity,misc,TPR*(1-FPR))#
+TPR=array()#
+FPR=array()#
+Sensitivity=array()#
+Specificity=array()#
+misclassification=array()#
+#
+k=1#
+#p=seq(0.1,0.8,0.1)#
+p=unique(pi_hat_logit)#
+p=sort(p)#
+p=p[-length(p)]#
+p#
+for(i in p)#
+{#
+print(paste("Threshold = ",i))#
+Y.hat=ifelse(pi_hat_logit>i,1,0)#
+t=table(Y.hat,literacy1)#
+print(t)#
+TPR[k]=t[2,2]/(t[2,2]+t[1,2])#
+FPR[k]=t[2,1]/(t[2,1]+t[1,1])#
+Sensitivity[k]=TPR[k]#
+Specificity[k]=1-FPR[k]#
+misclassification[k]=1-TPR[k]+FPR[k]#
+k=k+1#
+}#
+#
+p#
+misc#
+dtt=data.frame(p,TPR,FPR,Specificity,Sensitivity,misclassification,TPR*(1-FPR));dtt#
+xx=TPR*(1-FPR)#
+which(xx==max(xx))#
+dtt[66,]#
+xx#
+par(mfrow=c(1,2))#
+plot(y=TPR,x=1-FPR,type='l',xlim=c(0,1),main="ROC Curve")#
+plot(x=TPR,y=1-FPR,type='l',xlim=c(0,1),main="ROC Curve")#
+rm(list=ls())#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+data$male = as.factor(data$male)#
+data$education = as.factor(data$education)#
+data$currentSmoker = as.factor(data$currentSmoker)#
+data$prevalentStroke = as.factor(data$prevalentStroke)#
+data$prevalentHyp = as.factor(data$prevalentHyp)#
+data$diabetes = as.factor(data$diabetes)#
+data$TenYearCHD = as.factor(data$TenYearCHD)#
+mymodel = glm(TenYearCHD ~ ., data = data, family = binomial(link = "logit"))#
+summary(mymodel)#
+names(summary(mymodel))#
+x=summary(mymodel)#
+x$deviance#
+y=x$coefficients#
+y = as.data.frame(y)#
+estimates = y[,1][-c(1,18)]#
+se = y[,2][-c(1,18)]#
+length(names(data))#
+length(se)#
+data.frame(names(data)[-c(16,17)],estimates,se)
+data.frame(names(data),estimates,se)
+walds_t = estimates/sqrt(se)
+data.frame(names(data),estimates,se,walds)
+data.frame(names(data),estimates,se,walds_t)
+x=summary(mymodel)
+names(summary(mymodel))
 summary(mymodel)
+significance = numeric(lengthwalds_t)
+significance = numeric(lengthwalds_t)
+significance = numeric(length(walds_t))
+if(walds_t>1.96,significance=1,significance=0)
+rm(list=ls())#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+data$male = as.factor(data$male)#
+data$education = as.factor(data$education)#
+data$currentSmoker = as.factor(data$currentSmoker)#
+data$prevalentStroke = as.factor(data$prevalentStroke)#
+data$prevalentHyp = as.factor(data$prevalentHyp)#
+data$diabetes = as.factor(data$diabetes)#
+data$TenYearCHD = as.factor(data$TenYearCHD)#
+mymodel = glm(TenYearCHD ~ ., data = data, family = binomial(link = "logit"))#
+summary(mymodel)#
+x=summary(mymodel)#
+x$deviance#
+y=x$coefficients#
+y = as.data.frame(y)#
+estimates = y[,1][-c(1,18)]#
+se = y[,2][-c(1,18)]#
+walds_t = estimates/sqrt(se)#
+significance = numeric(16)#
+for(i in 1:16){#
+	if(walds_t[i]>1.96){#
+		significance[i]="*"#
+	}#
+}
+rm(list=ls())#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+data$male = as.factor(data$male)#
+data$education = as.factor(data$education)#
+data$currentSmoker = as.factor(data$currentSmoker)#
+data$prevalentStroke = as.factor(data$prevalentStroke)#
+data$prevalentHyp = as.factor(data$prevalentHyp)#
+data$diabetes = as.factor(data$diabetes)#
+data$TenYearCHD = as.factor(data$TenYearCHD)#
+mymodel = glm(TenYearCHD ~ ., data = data, family = binomial(link = "logit"))#
+summary(mymodel)#
+x=summary(mymodel)#
+x$deviance#
+y=x$coefficients#
+y = as.data.frame(y)#
+estimates = y[,1][-c(1,18)]#
+se = y[,2][-c(1,18)]#
+walds_t = estimates/sqrt(se)#
+significance = numeric(16)#
+for(i in 1:16){#
+	if(walds_t[i]>1.96){#
+		significance[i]="*"#
+	}#
+}#
+data.frame(names(data),estimates,se,walds_t)
+data.frame(names(data),estimates,se,walds_t,significance)
+data.frame(names(data),estimates,se,walds_t,significance)
+rm(list=ls())#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+data$male = as.factor(data$male)#
+data$education = as.factor(data$education)#
+data$currentSmoker = as.factor(data$currentSmoker)#
+data$prevalentStroke = as.factor(data$prevalentStroke)#
+data$prevalentHyp = as.factor(data$prevalentHyp)#
+data$diabetes = as.factor(data$diabetes)#
+data$TenYearCHD = as.factor(data$TenYearCHD)#
+mymodel = glm(TenYearCHD ~ ., data = data, family = binomial(link = "logit"))#
+summary(mymodel)#
+x=summary(mymodel)#
+x$deviance#
+y=x$coefficients#
+y = as.data.frame(y)#
+estimates = y[,1][-c(1,18)]#
+se = y[,2][-c(1,18)]#
+walds_t = estimates/sqrt(se)#
+significance = numeric(16)#
+for(i in 1:16){#
+	if(walds_t[i]>1.96){#
+		significance[i]="*"#
+	}#
+	i=i+1#
+}#
+data.frame(names(data),estimates,se,walds_t,significance)
+rm(list=ls())#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+data$male = as.factor(data$male)#
+data$education = as.factor(data$education)#
+data$currentSmoker = as.factor(data$currentSmoker)#
+data$prevalentStroke = as.factor(data$prevalentStroke)#
+data$prevalentHyp = as.factor(data$prevalentHyp)#
+data$diabetes = as.factor(data$diabetes)#
+data$TenYearCHD = as.factor(data$TenYearCHD)#
+mymodel = glm(TenYearCHD ~ ., data = data, family = binomial(link = "logit"))#
+summary(mymodel)#
+x=summary(mymodel)#
+x$deviance#
+y=x$coefficients#
+y = as.data.frame(y)#
+estimates = y[,1][-c(1,18)]#
+se = y[,2][-c(1,18)]#
+walds_t = estimates/sqrt(se)#
+significance = numeric(16)#
+for(i in 1:16){#
+	if(walds_t[i]>1.96){#
+		significance[i]= "He"#
+	}#
+	i=i+1#
+}#
+data.frame(names(data),estimates,se,walds_t,significance)
+significance[i]= "He" ;
+for(i in 1:16){
+if(walds_t[i]>1.96){
+significance[i]= "He" ;
+}
+i=i+1
+}
+data.frame(names(data),estimates,se,walds_t,significance)
+i=i+1 ;
+for(i in 1:16){#
+	if(walds_t[i]>1.96){#
+		significance[i]= "He" ;#
+	}#
+	i=i+1 ;#
+}
+data.frame(names(data),estimates,se,walds_t,significance)
+plot(x=TPR,y=1-FPR,type='l',xlim=c(0,1),main="ROC Curve")
+#======= Required Packages for the Codes#
+# install.packages("lattice")#
+# rm(list=ls())#
+# data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+# attach(data)#
+# names(data)#
+# data$male = as.factor(data$male)#
+# data$education = as.factor(data$education)#
+# data$currentSmoker = as.factor(data$currentSmoker)#
+# data$prevalentStroke = as.factor(data$prevalentStroke)#
+# data$prevalentHyp = as.factor(data$prevalentHyp)#
+# data$diabetes = as.factor(data$diabetes)#
+# data$TenYearCHD = as.factor(data$TenYearCHD)#
+#
+# mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
+# summary(mymodel)#
+# # install.packages("caret")#
+# fitted_prob=fitted(mymodel)#
+# thresold = seq(0,1,0.001)#
+# accuracy = numeric(length(thresold))#
+# for(i in 1:length(thresold)) {#
+    # Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
+    # x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
+    # y = as.data.frame(x$overall)#
+    # accuracy[i] = y[1,1]#
+# }#
+# accuracy#
+# plot(thresold, accuracy, type="l")#
+# abline(v = thresold[which.max(accuracy)], col = "red", lty = 2)#
+#
+# #thresold = thresold[which.max(accuracy)]#
+# Y_hat = ifelse(fitted_prob <= thresold, 0, 1)#
+# x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
+# detach(data)#
+# # rm(list=ls())#
+# data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+# attach(data)#
+# names(data)#
+# data$male = as.factor(data$male)#
+# data$education = as.factor(data$education)#
+# data$currentSmoker = as.factor(data$currentSmoker)#
+# data$prevalentStroke = as.factor(data$prevalentStroke)#
+# data$prevalentHyp = as.factor(data$prevalentHyp)#
+# data$diabetes = as.factor(data$diabetes)#
+# data$TenYearCHD = as.factor(data$TenYearCHD)#
+#
+# mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
+# summary(mymodel)#
+# fitted_prob=fitted(mymodel)#
+# #=============================================##
+# # Finding thresold by Optimising TPR*(1-FPR)  ##
+# #=============================================##
+# thresold = seq(0,1,0.001)#
+# TPR = numeric(length(thresold))#
+# FPR = numeric(length(thresold))#
+# Index = numeric(length(thresold))#
+# for (i in 1:length(thresold)) {#
+    # Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
+    # conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
+    # confusion_matrix = conf_matrix$table #
+     # TN = confusion_matrix[1, 1]  # True Negatives#
+     # FP = confusion_matrix[1, 2]  # False Positives#
+     # FN = confusion_matrix[2, 1]  # False Negatives#
+     # TP = confusion_matrix[2, 2]  # True Positives#
+    # TPR[i] = TP / (TP + FN)#
+    # FPR[i] = FP / (TN+FP+FN+TP)#
+    # Index[i] = TPR[i] *(1-FPR[i]) #
+# }#
+# optimal_threshold = thresold[which.max(Index)]#
+# plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
+# abline(v = optimal_threshold, col = "red", lty = 2)#
+# Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
+# confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
+# as.factor(data$TenYearCHD))#
+#====#
+# Code for Plotting teh Correlation Heatmaps#
+#====== #
+rm(list=ls())#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+library(ggplot2)#
+library(reshape2)#
+#
+# Calculate correlation matrix#
+correlation_matrix = cor(data)#
+#
+# Melt the correlation matrix for plotting#
+melted_correlation = melt(correlation_matrix)#
+# Plot heatmap with correlation coefficients#
+ggplot(melted_correlation, aes(Var1, Var2, fill = value)) +#
+  geom_tile() + #
+  geom_text(aes(label = sprintf("%.2f", value)), size = 3) +#
+  scale_fill_gradient2(low = "#58390b", high = "#0f423c", midpoint = 0, limit = c(-1,1), name="Correlation", mid = "#FFFFFF") +#
+  theme_minimal() +#
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +#
+  coord_fixed() +#
+  labs(x = "Variables", y = "Variables")#
+# = = = = = = #
+# Plottting the VIF Values#
+# = = = = = =#
+# Remove existing objects and load the dataset#
+#
+rm(list = ls())#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+#
+# Load necessary libraries#
+library(car)#
+library(ggplot2)#
+#
+# Fit the model#
+mymodel = glm(TenYearCHD ~ ., data = data, family = binomial(link = "logit"))#
+#
+# Calculate VIF for each predictor in the model#
+vif_values = vif(mymodel)#
+#
+# Transform VIF values into a data frame#
+vif_df = data.frame(Variable = names(vif_values), VIF = unname(vif_values))#
+#
+# Create the bar chart using ggplot#
+ggplot(vif_df, aes(x = Variable, y = VIF, fill = VIF)) +#
+  geom_bar(stat = "identity", color = "steelblue") +#
+  geom_hline(yintercept = 5, linetype = "dashed", color = "red", size = 1) +#
+  theme_minimal() +#
+  labs(title = "Plotting of the VIF Values", y = "VIF Value", x = "") +#
+  coord_cartesian(ylim = c(0, max(vif_df$VIF) + 1)) + # Adjust y-axis limits#
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) # Angle the x-axis text#
+# = = = = = = = = = = #
+# Final Code#
+# = = = = = = = = = =#
+rm(list=ls())#
+set.seed(123)#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+attach(data)#
+# Define the proportion of data for training (e.g., 80%)#
+train_proportion = 0.8#
+#
+# Number of rows in the data frame#
+num_rows = nrow(data)#
+#
+# Randomly select row indices for the training set#
+train_indices = sample(num_rows, size = round(train_proportion * num_rows), replace = FALSE)#
+training_data = data[train_indices, ]#
+testing_data = data[-train_indices, ]#
+#
+# Fitting of the Logistic Regression Model #
+names(data)#
+data$male = as.factor(data$male)#
+data$education = as.factor(data$education)#
+data$currentSmoker = as.factor(data$currentSmoker)#
+data$prevalentStroke = as.factor(data$prevalentStroke)#
+data$prevalentHyp = as.factor(data$prevalentHyp)#
+data$diabetes = as.factor(data$diabetes)#
+data$TenYearCHD = as.factor(data$TenYearCHD)#
+mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
+summary(mymodel)#
+#
+fitted_prob=fitted(mymodel)#
+plot(fitted_prob,type="h",main="Original vs Fitted")#
+thresold = seq(0,1,0.001)#
+TPR = numeric(length(thresold))#
+FPR = numeric(length(thresold))#
+Index = numeric(length(thresold))#
+for (i in 1:length(thresold)) {#
+    Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
+    conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
+    confusion_matrix = conf_matrix$table #
+     TN = confusion_matrix[1, 1]  # True Negatives#
+     FP = confusion_matrix[1, 2]  # False Positives#
+     FN = confusion_matrix[2, 1]  # False Negatives#
+     TP = confusion_matrix[2, 2]  # True Positives#
+    TPR[i] = TP / (TP + FN)#
+    FPR[i] = FP / (TN+FP+FN+TP)#
+    Index[i] = TPR[i] *(1-FPR[i]) #
+}#
+optimal_threshold = thresold[which.max(Index)]#
+plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
+abline(v = optimal_threshold, col = "red", lty = 2)#
+Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
+confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
+as.factor(data$TenYearCHD))#
+detach(data)#
+#install.packages("tidymodels")#
+library(readr)#
+library(tidymodels)#
+#
+# Read the dataset and convert the target variable to a factor#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+#
+# Plot job occupation against the target variable#
+ggplot(Ten, aes(job, fill = y)) +#
+    geom_bar() +#
+    coord_flip()#
+names(data)#
+#  = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =#
+#   						       	Previous Code#
+# = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = #
+#
+#--- DATA CLEANING ---##
+#=====================##
+#
+rm(list=ls())#
+data=read.csv("literacy_data.csv",header=TRUE)#
+is.data.frame(data)#
+nrow(data)#
+apply(is.na(data),2,which)#
+#
+# CLEANING#
+data1=na.omit(data)#
+apply(is.na(data1),2,which)#
+dim(data1)#
+#
+#Recoding 2 as 0#
+attach(data1)#
+literacy1=replace(literacy,which(literacy==2),0)#
+gender1=replace(gender,which(gender==2),0)#
+data2=data.frame(literacy1,gender1,age)#
+dim(data2)#
+#
+#part (i)#
+tab1=table(literacy1,gender1);tab1#
+#(a)#
+o1=7860/2018;o1#
+#(b)#
+o2=4955/3883;o2#
+#(c)#
+or=3.894945/1.276075;or#
+#
+#part (ii)#
+model_logit=glm(literacy1~age,data2,#
+family=binomial(link="logit"));model_logit#
+fitted(model_logit)#
+#
+#part (iii)#
+model_probit=glm(literacy1~age,data2,#
+family=binomial(link="probit"));model_probit#
+pi_hat_probit=fitted(model_probit)#
+#
+#part (iv)#
+pi_hat_logit=as.vector(fitted(model_logit));pi_hat_logit#
+pi_hat_probit=as.vector(fitted(model_probit));pi_hat_probit#
+#
+chisq_logit=sum(((literacy1-pi_hat_logit)^2)/(pi_hat_logit*(1-pi_hat_logit)))#
+chisq_probit=sum(((literacy1-pi_hat_probit)^2)/(pi_hat_probit*(1-pi_hat_probit)))#
+chisq_logit#
+chisq_probit#
+#part (v)#
+#
+dt=data.frame(age,pi_hat_logit,pi_hat_probit)#
+dtt=dt[order(age),]#
+#
+par(mfrow=c(2,1))#
+plot(y=dtt[,2],x=dtt[,1],type='l')#
+plot(y=dtt[,3],x=dtt[,1],type='l')#
+#
+# part (vi)#
+#
+library(caret)#
+library(InformationValue)#
+??caret#
+confusionMatrix(as.factor(literacy1),pi_hat_logit,threshold=0.5)#
+#
+Y.hat=ifelse(pi_hat_logit>0.5,1,0)#
+caret::confusionMatrix(as.factor(Y.hat),as.factor(literacy1))#
+#
+Y.hat=ifelse(pi_hat_logit>0.5,1,0)  #
+t1=table(Y.hat,literacy1);t1#
+TPR=t1[2,2]/(t1[2,2]+t1[1,2]);TPR#
+FPR=4859/(4859+1042);FPR#
+Sensitivity=TPR;Sensitivity#
+Specificity=1-FPR;Specificity#
+misc=1-TPR+FPR;misc#
+#
+TPR=array()#
+FPR=array()#
+Sensitivity=array()#
+Specificity=array()#
+misc=array()#
+#
+k=1#
+p=seq(0.1,0.8,0.1)#
+for(i in p)#
+{#
+print(paste("Threshold = ",i))#
+Y.hat=ifelse(pi_hat_logit>i,1,0)#
+t=table(Y.hat,literacy1)#
+print(t)#
+TPR[k]=t[2,2]/(t[2,2]+t[1,2])#
+FPR[k]=t[2,1]/(t[2,1]+t[1,1])#
+Sensitivity[k]=TPR[k]#
+Specificity[k]=1-FPR[k]#
+misc[k]=1-TPR[k]+FPR[k]#
+k=k+1#
+}#
+#
+data.frame(p,TPR,FPR,Specificity,Sensitivity,misc,TPR*(1-FPR))#
+TPR=array()#
+FPR=array()#
+Sensitivity=array()#
+Specificity=array()#
+misclassification=array()#
+#
+k=1#
+#p=seq(0.1,0.8,0.1)#
+p=unique(pi_hat_logit)#
+p=sort(p)#
+p=p[-length(p)]#
+p#
+for(i in p)#
+{#
+print(paste("Threshold = ",i))#
+Y.hat=ifelse(pi_hat_logit>i,1,0)#
+t=table(Y.hat,literacy1)#
+print(t)#
+TPR[k]=t[2,2]/(t[2,2]+t[1,2])#
+FPR[k]=t[2,1]/(t[2,1]+t[1,1])#
+Sensitivity[k]=TPR[k]#
+Specificity[k]=1-FPR[k]#
+misclassification[k]=1-TPR[k]+FPR[k]#
+k=k+1#
+}#
+#
+p#
+misc#
+dtt=data.frame(p,TPR,FPR,Specificity,Sensitivity,misclassification,TPR*(1-FPR));dtt#
+xx=TPR*(1-FPR)#
+which(xx==max(xx))#
+dtt[66,]#
+xx#
+par(mfrow=c(1,2))#
+plot(y=TPR,x=1-FPR,type='l',xlim=c(0,1),main="ROC Curve")#
+plot(x=TPR,y=1-FPR,type='l',xlim=c(0,1),main="ROC Curve")#
+rm(list=ls())#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+data$male = as.factor(data$male)#
+data$education = as.factor(data$education)#
+data$currentSmoker = as.factor(data$currentSmoker)#
+data$prevalentStroke = as.factor(data$prevalentStroke)#
+data$prevalentHyp = as.factor(data$prevalentHyp)#
+data$diabetes = as.factor(data$diabetes)#
+data$TenYearCHD = as.factor(data$TenYearCHD)#
+mymodel = glm(TenYearCHD ~ ., data = data, family = binomial(link = "logit"))#
+summary(mymodel)#
+x=summary(mymodel)#
+x$deviance#
+y=x$coefficients#
+y = as.data.frame(y)#
+estimates = y[,1][-c(1,18)]#
+se = y[,2][-c(1,18)]#
+walds_t = estimates/sqrt(se)#
+significance = numeric(16)#
+for(i in 1:16){#
+	if(walds_t[i]>1.96){#
+		significance[i]= "He" ;#
+	}#
+	i=i+1 ;#
+}#
+data.frame(names(data),estimates,se,walds_t,significance)
+# Transform VIF values into a data frame#
+vif_df = data.frame(Variable = names(vif_values), VIF = unname(vif_values))#
+#
+# Create the bar chart using ggplot#
+ggplot(vif_df, aes(x = Variable, y = VIF, fill = VIF)) +#
+  geom_bar(stat = "identity", color = "steelblue") +#
+  geom_hline(yintercept = 5, linetype = "dashed", color = "red", size = 1) +#
+  theme_minimal() +#
+  labs(title = "Plotting of the VIF Values", y = "VIF Value", x = "") +#
+  coord_cartesian(ylim = c(0, max(vif_df$VIF) + 1)) + # Adjust y-axis limits#
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) # Angle the x-axis text#
+# = = = = = = = = = = #
+# Final Code#
+# = = = = = = = = = =#
+rm(list=ls())#
+set.seed(123)#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+attach(data)#
+# Define the proportion of data for training (e.g., 80%)#
+train_proportion = 0.8#
+#
+# Number of rows in the data frame#
+num_rows = nrow(data)#
+#
+# Randomly select row indices for the training set#
+train_indices = sample(num_rows, size = round(train_proportion * num_rows), replace = FALSE)#
+training_data = data[train_indices, ]#
+testing_data = data[-train_indices, ]#
+#
+# Fitting of the Logistic Regression Model #
+names(data)#
+data$male = as.factor(data$male)#
+data$education = as.factor(data$education)#
+data$currentSmoker = as.factor(data$currentSmoker)#
+data$prevalentStroke = as.factor(data$prevalentStroke)#
+data$prevalentHyp = as.factor(data$prevalentHyp)#
+data$diabetes = as.factor(data$diabetes)#
+data$TenYearCHD = as.factor(data$TenYearCHD)#
+mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
+summary(mymodel)#
+#
+fitted_prob=fitted(mymodel)#
+plot(fitted_prob,type="h",main="Original vs Fitted")#
+thresold = seq(0,1,0.001)#
+TPR = numeric(length(thresold))#
+FPR = numeric(length(thresold))#
+Index = numeric(length(thresold))#
+for (i in 1:length(thresold)) {#
+    Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
+    conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
+    confusion_matrix = conf_matrix$table #
+     TN = confusion_matrix[1, 1]  # True Negatives#
+     FP = confusion_matrix[1, 2]  # False Positives#
+     FN = confusion_matrix[2, 1]  # False Negatives#
+     TP = confusion_matrix[2, 2]  # True Positives#
+    TPR[i] = TP / (TP + FN)#
+    FPR[i] = FP / (TN+FP+FN+TP)#
+    Index[i] = TPR[i] *(1-FPR[i]) #
+}#
+optimal_threshold = thresold[which.max(Index)]#
+plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
+abline(v = optimal_threshold, col = "red", lty = 2)#
+Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
+confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
+as.factor(data$TenYearCHD))#
+detach(data)#
+#install.packages("tidymodels")#
+library(readr)#
+library(tidymodels)#
+#
+# Read the dataset and convert the target variable to a factor#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+#
+# Plot job occupation against the target variable#
+ggplot(Ten, aes(job, fill = y)) +#
+    geom_bar() +#
+    coord_flip()#
+names(data)

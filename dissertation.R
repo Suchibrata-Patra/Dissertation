@@ -383,7 +383,21 @@ data$diabetes = as.factor(data$diabetes)
 data$TenYearCHD = as.factor(data$TenYearCHD)
 mymodel = glm(TenYearCHD ~ ., data = data, family = binomial(link = "logit"))
 summary(mymodel)
-
+x=summary(mymodel)
+x$deviance
+y=x$coefficients
+y = as.data.frame(y)
+estimates = y[,1][-c(1,18)]
+se = y[,2][-c(1,18)]
+walds_t = estimates/sqrt(se)
+significance = numeric(16)
+for(i in 1:16){
+	if(walds_t[i]>1.96){
+		significance[i]= "He" ;
+	}
+	i=i+1 ;
+}
+data.frame(names(data),estimates,se,walds_t,significance)
 
 
 
