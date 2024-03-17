@@ -6,6 +6,7 @@ rm(list=ls())
 # install.packages("caret")
 #install.packages("pROC")
 #install.packages("randomForest")
+#install.packages("olsrr")
 library(car)
 library(caTools)
 library(ggplot2)
@@ -13,6 +14,7 @@ library(pROC)
 library(reshape2)
 library(randomForest)
 library(InformationValue)
+library(olsrr)
 set.seed(123)
 
 
@@ -103,7 +105,7 @@ data.frame(names(training_data),exp(Odds_Ratio),p_values)
 # = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
 
 # Full Model
-AIC_full_model = 2787.9
+AIC_full_model = 2095.7
 x = summary(fullmodel)
 y = x$coefficients
 z = as.data.frame(y[,4])
@@ -112,7 +114,7 @@ q = which.max(p) ; q
 reduced_data_1 = data[,-q] 
 reduced_model_1 =  glm(TenYearCHD ~ ., data = reduced_data_1, family = binomial(link = "logit"))
 summary(reduced_model_1)
-AIC_1 = 2786.3
+AIC_1 = 2784.8
 
 
 # Reduced Model - 01
@@ -124,7 +126,7 @@ q = which.max(p) ; q
 reduced_data_2 = reduced_data_1[,-q]
 reduced_model_2 = glm(TenYearCHD ~ ., data = reduced_data_2, family = binomial(link = "logit"))
 summary(reduced_model_2)
-AIC_2 = 2784.4
+AIC_2 = 2786.8
 
 
 
