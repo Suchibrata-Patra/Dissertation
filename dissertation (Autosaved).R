@@ -15,10 +15,11 @@ library(reshape2)
 library(randomForest)
 library(InformationValue)
 library(olsrr)
-set.seed(1234)
+set.seed(123)
+
 
 data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")
-attach(data)
+
 split = sample.split(data, SplitRatio = 0.8)
 training_data = data[split, ]
 testing_data = data[!split, ]
@@ -162,7 +163,7 @@ TPR=array()
 FPR=array()
 Index = array()
 k=1
-p=seq(0.1,1,0.0001)
+p=seq(0.1,1,0.00001)
 for(i in p)
 {
 print(paste("Threshold = ",i))
