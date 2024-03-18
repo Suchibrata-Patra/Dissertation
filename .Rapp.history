@@ -1,2003 +1,11 @@
-detach(data)
-# = = = = = = = = = = #
-#Splitting the Dataset into Training and Testing Data#
-# = = = = = = = = = =#
-rm(list=ls())#
-set.seed(123)#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-attach(data)#
-# Define the proportion of data for training (e.g., 80%)#
-train_proportion = 0.8#
-#
-# Number of rows in the data frame#
-num_rows = nrow(data)#
-#
-# Randomly select row indices for the training set#
-train_indices = sample(num_rows, size = round(train_proportion * num_rows), replace = FALSE)#
-#
-# Create the training set#
-training_data = data[train_indices, ]#
-#
-# Create the testing set (excluding rows in the training set)#
-testing_data = data[-train_indices, ]#
-detach(data)
-testing_data
-nrows(testing)_data
-nrows(testing_data)
-nrow(testing_data)
-nrow(training_data)
-library(readr)#
-library(tidymodels)#
-#
-# Read the dataset and convert the target variable to a factor#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-bank_df$y = as.factor(data)#
-#
-# Plot job occupation against the target variable#
-ggplot(bank_df, aes(job, fill = y)) +#
-    geom_bar() +#
-    coord_flip()
-install.packages("tidymodels")
-#install.packages("tidymodels")#
-library(readr)#
-library(tidymodels)#
-#
-# Read the dataset and convert the target variable to a factor#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-bank_df$y = as.factor(data)#
-#
-# Plot job occupation against the target variable#
-ggplot(bank_df, aes(job, fill = y)) +#
-    geom_bar() +#
-    coord_flip()
-names(data)
-ggplot(TenYearCHD, aes(job, fill = y)) +
-#======= Required Packages for the Codes#
-# install.packages("lattice")#
-# rm(list=ls())#
-# data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-# attach(data)#
-# names(data)#
-# data$male = as.factor(data$male)#
-# data$education = as.factor(data$education)#
-# data$currentSmoker = as.factor(data$currentSmoker)#
-# data$prevalentStroke = as.factor(data$prevalentStroke)#
-# data$prevalentHyp = as.factor(data$prevalentHyp)#
-# data$diabetes = as.factor(data$diabetes)#
-# data$TenYearCHD = as.factor(data$TenYearCHD)#
-#
-# mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
-# summary(mymodel)#
-# # install.packages("caret")#
-# fitted_prob=fitted(mymodel)#
-# thresold = seq(0,1,0.001)#
-# accuracy = numeric(length(thresold))#
-# for(i in 1:length(thresold)) {#
-    # Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
-    # x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
-    # y = as.data.frame(x$overall)#
-    # accuracy[i] = y[1,1]#
-# }#
-# accuracy#
-# plot(thresold, accuracy, type="l")#
-# abline(v = thresold[which.max(accuracy)], col = "red", lty = 2)#
-#
-# #thresold = thresold[which.max(accuracy)]#
-# Y_hat = ifelse(fitted_prob <= thresold, 0, 1)#
-# x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
-# detach(data)#
-# # rm(list=ls())#
-# data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-# attach(data)#
-# names(data)#
-# data$male = as.factor(data$male)#
-# data$education = as.factor(data$education)#
-# data$currentSmoker = as.factor(data$currentSmoker)#
-# data$prevalentStroke = as.factor(data$prevalentStroke)#
-# data$prevalentHyp = as.factor(data$prevalentHyp)#
-# data$diabetes = as.factor(data$diabetes)#
-# data$TenYearCHD = as.factor(data$TenYearCHD)#
-#
-# mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
-# summary(mymodel)#
-# fitted_prob=fitted(mymodel)#
-# #=============================================##
-# # Finding thresold by Optimising TPR*(1-FPR)  ##
-# #=============================================##
-# thresold = seq(0,1,0.001)#
-# TPR = numeric(length(thresold))#
-# FPR = numeric(length(thresold))#
-# Index = numeric(length(thresold))#
-# for (i in 1:length(thresold)) {#
-    # Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
-    # conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
-    # confusion_matrix = conf_matrix$table #
-     # TN = confusion_matrix[1, 1]  # True Negatives#
-     # FP = confusion_matrix[1, 2]  # False Positives#
-     # FN = confusion_matrix[2, 1]  # False Negatives#
-     # TP = confusion_matrix[2, 2]  # True Positives#
-    # TPR[i] = TP / (TP + FN)#
-    # FPR[i] = FP / (TN+FP+FN+TP)#
-    # Index[i] = TPR[i] *(1-FPR[i]) #
-# }#
-# optimal_threshold = thresold[which.max(Index)]#
-# plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
-# abline(v = optimal_threshold, col = "red", lty = 2)#
-# Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
-# confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
-# as.factor(data$TenYearCHD))#
-#====#
-# Code for Plotting teh Correlation Heatmaps#
-#====== #
-rm(list=ls())#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-library(ggplot2)#
-library(reshape2)#
-#
-# Calculate correlation matrix#
-correlation_matrix = cor(data)#
-#
-# Melt the correlation matrix for plotting#
-melted_correlation = melt(correlation_matrix)#
-# Plot heatmap with correlation coefficients#
-ggplot(melted_correlation, aes(Var1, Var2, fill = value)) +#
-  geom_tile() + #
-  geom_text(aes(label = sprintf("%.2f", value)), size = 3) +#
-  scale_fill_gradient2(low = "#58390b", high = "#0f423c", midpoint = 0, limit = c(-1,1), name="Correlation", mid = "#FFFFFF") +#
-  theme_minimal() +#
-  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +#
-  coord_fixed() +#
-  labs(x = "Variables", y = "Variables")#
-# = = = = = = #
-# Plottting the VIF Values#
-# = = = = = =#
-# Remove existing objects and load the dataset#
-#
-rm(list = ls())#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-#
-# Load necessary libraries#
-library(car)#
-library(ggplot2)#
-#
-# Fit the model#
-mymodel = glm(TenYearCHD ~ ., data = data, family = binomial(link = "logit"))#
-#
-# Calculate VIF for each predictor in the model#
-vif_values = vif(mymodel)#
-#
-# Transform VIF values into a data frame#
-vif_df = data.frame(Variable = names(vif_values), VIF = unname(vif_values))#
-#
-# Create the bar chart using ggplot#
-ggplot(vif_df, aes(x = Variable, y = VIF, fill = VIF)) +#
-  geom_bar(stat = "identity", color = "steelblue") +#
-  geom_hline(yintercept = 5, linetype = "dashed", color = "red", size = 1) +#
-  theme_minimal() +#
-  labs(title = "Plotting of the VIF Values", y = "VIF Value", x = "") +#
-  coord_cartesian(ylim = c(0, max(vif_df$VIF) + 1)) + # Adjust y-axis limits#
-  theme(axis.text.x = element_text(angle = 45, hjust = 1)) # Angle the x-axis text#
-# = = = = = = = = = = #
-#Splitting the Dataset into Training and Testing Data#
-# = = = = = = = = = =#
-rm(list=ls())#
-set.seed(123)#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-attach(data)#
-# Define the proportion of data for training (e.g., 80%)#
-train_proportion = 0.8#
-#
-# Number of rows in the data frame#
-num_rows = nrow(data)#
-#
-# Randomly select row indices for the training set#
-train_indices = sample(num_rows, size = round(train_proportion * num_rows), replace = FALSE)#
-#
-training_data = data[train_indices, ]#
-testing_data = data[-train_indices, ]#
-#
-names(data)#
-data$male = as.factor(data$male)#
-data$education = as.factor(data$education)#
-data$currentSmoker = as.factor(data$currentSmoker)#
-data$prevalentStroke = as.factor(data$prevalentStroke)#
-data$prevalentHyp = as.factor(data$prevalentHyp)#
-data$diabetes = as.factor(data$diabetes)#
-data$TenYearCHD = as.factor(data$TenYearCHD)#
-mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
-summary(mymodel)#
-fitted_prob=fitted(mymodel)#
-#
-thresold = seq(0,1,0.001)#
-TPR = numeric(length(thresold))#
-FPR = numeric(length(thresold))#
-Index = numeric(length(thresold))#
-for (i in 1:length(thresold)) {#
-    Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
-    conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
-    confusion_matrix = conf_matrix$table #
-     TN = confusion_matrix[1, 1]  # True Negatives#
-     FP = confusion_matrix[1, 2]  # False Positives#
-     FN = confusion_matrix[2, 1]  # False Negatives#
-     TP = confusion_matrix[2, 2]  # True Positives#
-    TPR[i] = TP / (TP + FN)#
-    FPR[i] = FP / (TN+FP+FN+TP)#
-    Index[i] = TPR[i] *(1-FPR[i]) #
-}#
-optimal_threshold = thresold[which.max(Index)]#
-plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
-abline(v = optimal_threshold, col = "red", lty = 2)#
-Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
-confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
-as.factor(data$TenYearCHD))#
-detach(data)#
-#install.packages("tidymodels")#
-library(readr)#
-library(tidymodels)#
-#
-# Read the dataset and convert the target variable to a factor#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-#
-# Plot job occupation against the target variable#
-ggplot(TenYearCHD, aes(job, fill = y)) +#
-    geom_bar() +#
-    coord_flip()#
-#
-names(data)
-#install.packages("tidymodels")#
-library(readr)#
-library(tidymodels)#
-#
-# Read the dataset and convert the target variable to a factor#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-#
-# Plot job occupation against the target variable#
-ggplot(TenYearCHD, aes(job, fill = y)) +#
-    geom_bar() +#
-    coord_flip()#
-#
-names(data)
-#======= Required Packages for the Codes#
-# install.packages("lattice")#
-# rm(list=ls())#
-# data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-# attach(data)#
-# names(data)#
-# data$male = as.factor(data$male)#
-# data$education = as.factor(data$education)#
-# data$currentSmoker = as.factor(data$currentSmoker)#
-# data$prevalentStroke = as.factor(data$prevalentStroke)#
-# data$prevalentHyp = as.factor(data$prevalentHyp)#
-# data$diabetes = as.factor(data$diabetes)#
-# data$TenYearCHD = as.factor(data$TenYearCHD)#
-#
-# mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
-# summary(mymodel)#
-# # install.packages("caret")#
-# fitted_prob=fitted(mymodel)#
-# thresold = seq(0,1,0.001)#
-# accuracy = numeric(length(thresold))#
-# for(i in 1:length(thresold)) {#
-    # Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
-    # x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
-    # y = as.data.frame(x$overall)#
-    # accuracy[i] = y[1,1]#
-# }#
-# accuracy#
-# plot(thresold, accuracy, type="l")#
-# abline(v = thresold[which.max(accuracy)], col = "red", lty = 2)#
-#
-# #thresold = thresold[which.max(accuracy)]#
-# Y_hat = ifelse(fitted_prob <= thresold, 0, 1)#
-# x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
-# detach(data)#
-# # rm(list=ls())#
-# data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-# attach(data)#
-# names(data)#
-# data$male = as.factor(data$male)#
-# data$education = as.factor(data$education)#
-# data$currentSmoker = as.factor(data$currentSmoker)#
-# data$prevalentStroke = as.factor(data$prevalentStroke)#
-# data$prevalentHyp = as.factor(data$prevalentHyp)#
-# data$diabetes = as.factor(data$diabetes)#
-# data$TenYearCHD = as.factor(data$TenYearCHD)#
-#
-# mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
-# summary(mymodel)#
-# fitted_prob=fitted(mymodel)#
-# #=============================================##
-# # Finding thresold by Optimising TPR*(1-FPR)  ##
-# #=============================================##
-# thresold = seq(0,1,0.001)#
-# TPR = numeric(length(thresold))#
-# FPR = numeric(length(thresold))#
-# Index = numeric(length(thresold))#
-# for (i in 1:length(thresold)) {#
-    # Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
-    # conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
-    # confusion_matrix = conf_matrix$table #
-     # TN = confusion_matrix[1, 1]  # True Negatives#
-     # FP = confusion_matrix[1, 2]  # False Positives#
-     # FN = confusion_matrix[2, 1]  # False Negatives#
-     # TP = confusion_matrix[2, 2]  # True Positives#
-    # TPR[i] = TP / (TP + FN)#
-    # FPR[i] = FP / (TN+FP+FN+TP)#
-    # Index[i] = TPR[i] *(1-FPR[i]) #
-# }#
-# optimal_threshold = thresold[which.max(Index)]#
-# plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
-# abline(v = optimal_threshold, col = "red", lty = 2)#
-# Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
-# confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
-# as.factor(data$TenYearCHD))#
-#====#
-# Code for Plotting teh Correlation Heatmaps#
-#====== #
-rm(list=ls())#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-library(ggplot2)#
-library(reshape2)#
-#
-# Calculate correlation matrix#
-correlation_matrix = cor(data)#
-#
-# Melt the correlation matrix for plotting#
-melted_correlation = melt(correlation_matrix)#
-# Plot heatmap with correlation coefficients#
-ggplot(melted_correlation, aes(Var1, Var2, fill = value)) +#
-  geom_tile() + #
-  geom_text(aes(label = sprintf("%.2f", value)), size = 3) +#
-  scale_fill_gradient2(low = "#58390b", high = "#0f423c", midpoint = 0, limit = c(-1,1), name="Correlation", mid = "#FFFFFF") +#
-  theme_minimal() +#
-  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +#
-  coord_fixed() +#
-  labs(x = "Variables", y = "Variables")#
-# = = = = = = #
-# Plottting the VIF Values#
-# = = = = = =#
-# Remove existing objects and load the dataset#
-#
-rm(list = ls())#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-#
-# Load necessary libraries#
-library(car)#
-library(ggplot2)#
-#
-# Fit the model#
-mymodel = glm(TenYearCHD ~ ., data = data, family = binomial(link = "logit"))#
-#
-# Calculate VIF for each predictor in the model#
-vif_values = vif(mymodel)#
-#
-# Transform VIF values into a data frame#
-vif_df = data.frame(Variable = names(vif_values), VIF = unname(vif_values))#
-#
-# Create the bar chart using ggplot#
-ggplot(vif_df, aes(x = Variable, y = VIF, fill = VIF)) +#
-  geom_bar(stat = "identity", color = "steelblue") +#
-  geom_hline(yintercept = 5, linetype = "dashed", color = "red", size = 1) +#
-  theme_minimal() +#
-  labs(title = "Plotting of the VIF Values", y = "VIF Value", x = "") +#
-  coord_cartesian(ylim = c(0, max(vif_df$VIF) + 1)) + # Adjust y-axis limits#
-  theme(axis.text.x = element_text(angle = 45, hjust = 1)) # Angle the x-axis text#
-# = = = = = = = = = = #
-#Splitting the Dataset into Training and Testing Data#
-# = = = = = = = = = =#
-rm(list=ls())#
-set.seed(123)#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-attach(data)#
-# Define the proportion of data for training (e.g., 80%)#
-train_proportion = 0.8#
-#
-# Number of rows in the data frame#
-num_rows = nrow(data)#
-#
-# Randomly select row indices for the training set#
-train_indices = sample(num_rows, size = round(train_proportion * num_rows), replace = FALSE)#
-#
-training_data = data[train_indices, ]#
-testing_data = data[-train_indices, ]#
-#
-names(data)#
-data$male = as.factor(data$male)#
-data$education = as.factor(data$education)#
-data$currentSmoker = as.factor(data$currentSmoker)#
-data$prevalentStroke = as.factor(data$prevalentStroke)#
-data$prevalentHyp = as.factor(data$prevalentHyp)#
-data$diabetes = as.factor(data$diabetes)#
-data$TenYearCHD = as.factor(data$TenYearCHD)#
-mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
-summary(mymodel)#
-fitted_prob=fitted(mymodel)#
-#
-thresold = seq(0,1,0.001)#
-TPR = numeric(length(thresold))#
-FPR = numeric(length(thresold))#
-Index = numeric(length(thresold))#
-for (i in 1:length(thresold)) {#
-    Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
-    conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
-    confusion_matrix = conf_matrix$table #
-     TN = confusion_matrix[1, 1]  # True Negatives#
-     FP = confusion_matrix[1, 2]  # False Positives#
-     FN = confusion_matrix[2, 1]  # False Negatives#
-     TP = confusion_matrix[2, 2]  # True Positives#
-    TPR[i] = TP / (TP + FN)#
-    FPR[i] = FP / (TN+FP+FN+TP)#
-    Index[i] = TPR[i] *(1-FPR[i]) #
-}#
-optimal_threshold = thresold[which.max(Index)]#
-plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
-abline(v = optimal_threshold, col = "red", lty = 2)#
-Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
-confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
-as.factor(data$TenYearCHD))#
-detach(data)#
-#install.packages("tidymodels")#
-library(readr)#
-library(tidymodels)#
-#
-# Read the dataset and convert the target variable to a factor#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-#
-# Plot job occupation against the target variable#
-ggplot(Ten, aes(job, fill = y)) +#
-    geom_bar() +#
-    coord_flip()#
-#
-names(data)
-table(data$TenYearCHD)
-y = table(data$TenYearCHD)
-hist(y)
-barplot(y)
-barplot(y,col=c("Green","Red"))
-barplot(y,col=c("#DHEUED","Red"))
-barplot(y,col=c("Green","Red"),main="CardioVascular Disease Datast")
-barplot(y,col=c("Green","Red"),main="CardioVascular Disease Dataset")
-barplot(y,col=c("Green","Red"),main="CardioVascular Disease Dataset",ylab="Outcome")
-barplot(y,col=c("Green","Red"),main="CardioVascular Disease Dataset",xlab="Outcome")
-barplot(y,col=c("Green","Red"),main="CardioVascular Disease Dataset",xlab="Outcome",ylab="Count")
-barplot(y,col=c("Green","Red"),main="CardioVascular Disease Dataset",xlab="Outcome",ylab="Count",lty=2)
-barplot(y,col=c("Green","Red"),main="CardioVascular Disease Dataset",xlab="Outcome",ylab="Count")
-grid()
-??candlestick
-barplot(y,col=c("Green","Red"),main="CardioVascular Disease Dataset",xlab="Outcome",ylab="Count")
-grid()
-barplot(y,col=c("Green","Red"),main="CardioVascular Disease Dataset",xlab="Outcome",ylab="Count")
-barplot(y,col=c("Green","Red"),main="CardioVascular Disease Dataset",xlab="Outcome",ylab="Count",horiz=TRUE)
-barplot(y,col=c("Green","Red"),main="CardioVascular Disease Dataset",xlab="Outcome",ylab="Count")
-abline(h=1500)
-abline(h=100)
-abline(h=2000)
-abline(h=2500)
-abline(v=0.5)
-abline(v=0.7)
-abline(v=1)
-abline(v=5)
-abline(v=3)
-abline(v=2)
-#======= Required Packages for the Codes#
-# install.packages("lattice")#
-# rm(list=ls())#
-# data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-# attach(data)#
-# names(data)#
-# data$male = as.factor(data$male)#
-# data$education = as.factor(data$education)#
-# data$currentSmoker = as.factor(data$currentSmoker)#
-# data$prevalentStroke = as.factor(data$prevalentStroke)#
-# data$prevalentHyp = as.factor(data$prevalentHyp)#
-# data$diabetes = as.factor(data$diabetes)#
-# data$TenYearCHD = as.factor(data$TenYearCHD)#
-#
-# mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
-# summary(mymodel)#
-# # install.packages("caret")#
-# fitted_prob=fitted(mymodel)#
-# thresold = seq(0,1,0.001)#
-# accuracy = numeric(length(thresold))#
-# for(i in 1:length(thresold)) {#
-    # Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
-    # x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
-    # y = as.data.frame(x$overall)#
-    # accuracy[i] = y[1,1]#
-# }#
-# accuracy#
-# plot(thresold, accuracy, type="l")#
-# abline(v = thresold[which.max(accuracy)], col = "red", lty = 2)#
-#
-# #thresold = thresold[which.max(accuracy)]#
-# Y_hat = ifelse(fitted_prob <= thresold, 0, 1)#
-# x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
-# detach(data)#
-# # rm(list=ls())#
-# data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-# attach(data)#
-# names(data)#
-# data$male = as.factor(data$male)#
-# data$education = as.factor(data$education)#
-# data$currentSmoker = as.factor(data$currentSmoker)#
-# data$prevalentStroke = as.factor(data$prevalentStroke)#
-# data$prevalentHyp = as.factor(data$prevalentHyp)#
-# data$diabetes = as.factor(data$diabetes)#
-# data$TenYearCHD = as.factor(data$TenYearCHD)#
-#
-# mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
-# summary(mymodel)#
-# fitted_prob=fitted(mymodel)#
-# #=============================================##
-# # Finding thresold by Optimising TPR*(1-FPR)  ##
-# #=============================================##
-# thresold = seq(0,1,0.001)#
-# TPR = numeric(length(thresold))#
-# FPR = numeric(length(thresold))#
-# Index = numeric(length(thresold))#
-# for (i in 1:length(thresold)) {#
-    # Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
-    # conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
-    # confusion_matrix = conf_matrix$table #
-     # TN = confusion_matrix[1, 1]  # True Negatives#
-     # FP = confusion_matrix[1, 2]  # False Positives#
-     # FN = confusion_matrix[2, 1]  # False Negatives#
-     # TP = confusion_matrix[2, 2]  # True Positives#
-    # TPR[i] = TP / (TP + FN)#
-    # FPR[i] = FP / (TN+FP+FN+TP)#
-    # Index[i] = TPR[i] *(1-FPR[i]) #
-# }#
-# optimal_threshold = thresold[which.max(Index)]#
-# plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
-# abline(v = optimal_threshold, col = "red", lty = 2)#
-# Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
-# confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
-# as.factor(data$TenYearCHD))#
-#====#
-# Code for Plotting teh Correlation Heatmaps#
-#====== #
-rm(list=ls())#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-library(ggplot2)#
-library(reshape2)#
-#
-# Calculate correlation matrix#
-correlation_matrix = cor(data)#
-#
-# Melt the correlation matrix for plotting#
-melted_correlation = melt(correlation_matrix)#
-# Plot heatmap with correlation coefficients#
-ggplot(melted_correlation, aes(Var1, Var2, fill = value)) +#
-  geom_tile() + #
-  geom_text(aes(label = sprintf("%.2f", value)), size = 3) +#
-  scale_fill_gradient2(low = "#58390b", high = "#0f423c", midpoint = 0, limit = c(-1,1), name="Correlation", mid = "#FFFFFF") +#
-  theme_minimal() +#
-  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +#
-  coord_fixed() +#
-  labs(x = "Variables", y = "Variables")#
-# = = = = = = #
-# Plottting the VIF Values#
-# = = = = = =#
-# Remove existing objects and load the dataset#
-#
-rm(list = ls())#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-#
-# Load necessary libraries#
-library(car)#
-library(ggplot2)#
-#
-# Fit the model#
-mymodel = glm(TenYearCHD ~ ., data = data, family = binomial(link = "logit"))#
-#
-# Calculate VIF for each predictor in the model#
-vif_values = vif(mymodel)#
-#
-# Transform VIF values into a data frame#
-vif_df = data.frame(Variable = names(vif_values), VIF = unname(vif_values))#
-#
-# Create the bar chart using ggplot#
-ggplot(vif_df, aes(x = Variable, y = VIF, fill = VIF)) +#
-  geom_bar(stat = "identity", color = "steelblue") +#
-  geom_hline(yintercept = 5, linetype = "dashed", color = "red", size = 1) +#
-  theme_minimal() +#
-  labs(title = "Plotting of the VIF Values", y = "VIF Value", x = "") +#
-  coord_cartesian(ylim = c(0, max(vif_df$VIF) + 1)) + # Adjust y-axis limits#
-  theme(axis.text.x = element_text(angle = 45, hjust = 1)) # Angle the x-axis text#
-# = = = = = = = = = = #
-#Splitting the Dataset into Training and Testing Data#
-# = = = = = = = = = =#
-rm(list=ls())#
-set.seed(123)#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-attach(data)#
-# Define the proportion of data for training (e.g., 80%)#
-train_proportion = 0.8#
-#
-# Number of rows in the data frame#
-num_rows = nrow(data)#
-#
-# Randomly select row indices for the training set#
-train_indices = sample(num_rows, size = round(train_proportion * num_rows), replace = FALSE)#
-#
-training_data = data[train_indices, ]#
-testing_data = data[-train_indices, ]#
-#
-names(data)#
-data$male = as.factor(data$male)#
-data$education = as.factor(data$education)#
-data$currentSmoker = as.factor(data$currentSmoker)#
-data$prevalentStroke = as.factor(data$prevalentStroke)#
-data$prevalentHyp = as.factor(data$prevalentHyp)#
-data$diabetes = as.factor(data$diabetes)#
-data$TenYearCHD = as.factor(data$TenYearCHD)#
-mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
-summary(mymodel)#
-fitted_prob=fitted(mymodel)#
-thresold = seq(0,1,0.001)#
-TPR = numeric(length(thresold))#
-FPR = numeric(length(thresold))#
-Index = numeric(length(thresold))#
-for (i in 1:length(thresold)) {#
-    Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
-    conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
-    confusion_matrix = conf_matrix$table #
-     TN = confusion_matrix[1, 1]  # True Negatives#
-     FP = confusion_matrix[1, 2]  # False Positives#
-     FN = confusion_matrix[2, 1]  # False Negatives#
-     TP = confusion_matrix[2, 2]  # True Positives#
-    TPR[i] = TP / (TP + FN)#
-    FPR[i] = FP / (TN+FP+FN+TP)#
-    Index[i] = TPR[i] *(1-FPR[i]) #
-}#
-optimal_threshold = thresold[which.max(Index)]#
-plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
-abline(v = optimal_threshold, col = "red", lty = 2)#
-Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
-confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
-as.factor(data$TenYearCHD))#
-detach(data)#
-#install.packages("tidymodels")#
-library(readr)#
-library(tidymodels)#
-#
-# Read the dataset and convert the target variable to a factor#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-#
-# Plot job occupation against the target variable#
-ggplot(Ten, aes(job, fill = y)) +#
-    geom_bar() +#
-    coord_flip()#
-names(data)
-rm(list=ls())
-kjhvjkvhfkdsfjsghfjkdsfdskfjhdgkds
-opcjbgpo;fgohigfoij
-zsxcl;kj
-[iou[]
-#Writting Down the Complete Code
-# Writting Down the Complete Code
-rm(list=ls())
-set.seed(123)
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")
-attach(data)
-# Define the proportion of data for training (e.g., 80%)
-train_proportion = 0.8
-# Number of rows in the data frame
-num_rows = nrow(data)
-# Number of rows in the data frame#
-num_rows = nrow(data)#
-#
-# Randomly select row indices for the training set#
-train_indices = sample(num_rows, size = round(train_proportion * num_rows), replace = FALSE)#
-#
-training_data = data[train_indices, ]#
-testing_data = data[-train_indices, ]
-training_data
-testing_data
-names(data)
-data$male = as.factor(data$male)
-data$education = as.factor(data$education)
-data$male = as.factor(data$male)
-data$currentSmoker = as.factor(data$currentSmoker)
-data$prevalentHyp = as.factor(data$prevalentHyp)
-data$diabetes = as.factor(data$diabetes)
-data$TenYearCHD = as.factor(data$TenYearCHD)
-mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))
-summary(mymodel)
-mymodel
-# Fitting of the Logistic Regression Model
-data$TenYearCHD = as.factor(data$TenYearCHD)
-mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))
-summary(mymodel)
-fitted_prob=fitted(mymodel)
-plot(fitted_prob)
-plot(fitted_prob,type="h")
-plot(fitted_prob,type="h",main="Original vs Fitted")
-thresold = seq(0,1,0.001)
-TPR = numeric(length(thresold))
-FPR = numeric(length(thresold))
-Index = numeric(length(thresold))
-plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")
-optimal_threshold = thresold[which.max(Index)]
-#======= Required Packages for the Codes#
-# install.packages("lattice")#
-# rm(list=ls())#
-# data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-# attach(data)#
-# names(data)#
-# data$male = as.factor(data$male)#
-# data$education = as.factor(data$education)#
-# data$currentSmoker = as.factor(data$currentSmoker)#
-# data$prevalentStroke = as.factor(data$prevalentStroke)#
-# data$prevalentHyp = as.factor(data$prevalentHyp)#
-# data$diabetes = as.factor(data$diabetes)#
-# data$TenYearCHD = as.factor(data$TenYearCHD)#
-#
-# mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
-# summary(mymodel)#
-# # install.packages("caret")#
-# fitted_prob=fitted(mymodel)#
-# thresold = seq(0,1,0.001)#
-# accuracy = numeric(length(thresold))#
-# for(i in 1:length(thresold)) {#
-    # Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
-    # x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
-    # y = as.data.frame(x$overall)#
-    # accuracy[i] = y[1,1]#
-# }#
-# accuracy#
-# plot(thresold, accuracy, type="l")#
-# abline(v = thresold[which.max(accuracy)], col = "red", lty = 2)#
-#
-# #thresold = thresold[which.max(accuracy)]#
-# Y_hat = ifelse(fitted_prob <= thresold, 0, 1)#
-# x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
-# detach(data)#
-# # rm(list=ls())#
-# data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-# attach(data)#
-# names(data)#
-# data$male = as.factor(data$male)#
-# data$education = as.factor(data$education)#
-# data$currentSmoker = as.factor(data$currentSmoker)#
-# data$prevalentStroke = as.factor(data$prevalentStroke)#
-# data$prevalentHyp = as.factor(data$prevalentHyp)#
-# data$diabetes = as.factor(data$diabetes)#
-# data$TenYearCHD = as.factor(data$TenYearCHD)#
-#
-# mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
-# summary(mymodel)#
-# fitted_prob=fitted(mymodel)#
-# #=============================================##
-# # Finding thresold by Optimising TPR*(1-FPR)  ##
-# #=============================================##
-# thresold = seq(0,1,0.001)#
-# TPR = numeric(length(thresold))#
-# FPR = numeric(length(thresold))#
-# Index = numeric(length(thresold))#
-# for (i in 1:length(thresold)) {#
-    # Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
-    # conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
-    # confusion_matrix = conf_matrix$table #
-     # TN = confusion_matrix[1, 1]  # True Negatives#
-     # FP = confusion_matrix[1, 2]  # False Positives#
-     # FN = confusion_matrix[2, 1]  # False Negatives#
-     # TP = confusion_matrix[2, 2]  # True Positives#
-    # TPR[i] = TP / (TP + FN)#
-    # FPR[i] = FP / (TN+FP+FN+TP)#
-    # Index[i] = TPR[i] *(1-FPR[i]) #
-# }#
-# optimal_threshold = thresold[which.max(Index)]#
-# plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
-# abline(v = optimal_threshold, col = "red", lty = 2)#
-# Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
-# confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
-# as.factor(data$TenYearCHD))#
-#====#
-# Code for Plotting teh Correlation Heatmaps#
-#====== #
-rm(list=ls())#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-library(ggplot2)#
-library(reshape2)#
-#
-# Calculate correlation matrix#
-correlation_matrix = cor(data)#
-#
-# Melt the correlation matrix for plotting#
-melted_correlation = melt(correlation_matrix)#
-# Plot heatmap with correlation coefficients#
-ggplot(melted_correlation, aes(Var1, Var2, fill = value)) +#
-  geom_tile() + #
-  geom_text(aes(label = sprintf("%.2f", value)), size = 3) +#
-  scale_fill_gradient2(low = "#58390b", high = "#0f423c", midpoint = 0, limit = c(-1,1), name="Correlation", mid = "#FFFFFF") +#
-  theme_minimal() +#
-  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +#
-  coord_fixed() +#
-  labs(x = "Variables", y = "Variables")#
-# = = = = = = #
-# Plottting the VIF Values#
-# = = = = = =#
-# Remove existing objects and load the dataset#
-#
-rm(list = ls())#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-#
-# Load necessary libraries#
-library(car)#
-library(ggplot2)#
-#
-# Fit the model#
-mymodel = glm(TenYearCHD ~ ., data = data, family = binomial(link = "logit"))#
-#
-# Calculate VIF for each predictor in the model#
-vif_values = vif(mymodel)#
-#
-# Transform VIF values into a data frame#
-vif_df = data.frame(Variable = names(vif_values), VIF = unname(vif_values))#
-#
-# Create the bar chart using ggplot#
-ggplot(vif_df, aes(x = Variable, y = VIF, fill = VIF)) +#
-  geom_bar(stat = "identity", color = "steelblue") +#
-  geom_hline(yintercept = 5, linetype = "dashed", color = "red", size = 1) +#
-  theme_minimal() +#
-  labs(title = "Plotting of the VIF Values", y = "VIF Value", x = "") +#
-  coord_cartesian(ylim = c(0, max(vif_df$VIF) + 1)) + # Adjust y-axis limits#
-  theme(axis.text.x = element_text(angle = 45, hjust = 1)) # Angle the x-axis text#
-# = = = = = = = = = = #
-# Final Code#
-# = = = = = = = = = =#
-rm(list=ls())#
-set.seed(123)#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-attach(data)#
-# Define the proportion of data for training (e.g., 80%)#
-train_proportion = 0.8#
-#
-# Number of rows in the data frame#
-num_rows = nrow(data)#
-#
-# Randomly select row indices for the training set#
-train_indices = sample(num_rows, size = round(train_proportion * num_rows), replace = FALSE)#
-training_data = data[train_indices, ]#
-testing_data = data[-train_indices, ]#
-#
-# Fitting of the Logistic Regression Model #
-names(data)#
-data$male = as.factor(data$male)#
-data$education = as.factor(data$education)#
-data$currentSmoker = as.factor(data$currentSmoker)#
-data$prevalentStroke = as.factor(data$prevalentStroke)#
-data$prevalentHyp = as.factor(data$prevalentHyp)#
-data$diabetes = as.factor(data$diabetes)#
-data$TenYearCHD = as.factor(data$TenYearCHD)#
-mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
-summary(mymodel)#
-#
-fitted_prob=fitted(mymodel)#
-plot(fitted_prob,type="h",main="Original vs Fitted")#
-thresold = seq(0,1,0.001)#
-TPR = numeric(length(thresold))#
-FPR = numeric(length(thresold))#
-Index = numeric(length(thresold))#
-for (i in 1:length(thresold)) {#
-    Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
-    conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
-    confusion_matrix = conf_matrix$table #
-     TN = confusion_matrix[1, 1]  # True Negatives#
-     FP = confusion_matrix[1, 2]  # False Positives#
-     FN = confusion_matrix[2, 1]  # False Negatives#
-     TP = confusion_matrix[2, 2]  # True Positives#
-    TPR[i] = TP / (TP + FN)#
-    FPR[i] = FP / (TN+FP+FN+TP)#
-    Index[i] = TPR[i] *(1-FPR[i]) #
-}#
-optimal_threshold = thresold[which.max(Index)]#
-plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
-abline(v = optimal_threshold, col = "red", lty = 2)#
-Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
-confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
-as.factor(data$TenYearCHD))#
-detach(data)#
-#install.packages("tidymodels")#
-library(readr)#
-library(tidymodels)#
-#
-# Read the dataset and convert the target variable to a factor#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-#
-# Plot job occupation against the target variable#
-ggplot(Ten, aes(job, fill = y)) +#
-    geom_bar() +#
-    coord_flip()#
-names(data)
-wt
-detach(data)
-rm(list=ls())#
-set.seed(123)#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-attach(data)#
-# Define the proportion of data for training (e.g., 80%)#
-train_proportion = 0.8#
-#
-# Number of rows in the data frame#
-num_rows = nrow(data)#
-#
-# Randomly select row indices for the training set#
-train_indices = sample(num_rows, size = round(train_proportion * num_rows), replace = FALSE)#
-training_data = data[train_indices, ]#
-testing_data = data[-train_indices, ]#
-#
-# Fitting of the Logistic Regression Model #
-names(data)#
-data$male = as.factor(data$male)#
-data$education = as.factor(data$education)#
-data$currentSmoker = as.factor(data$currentSmoker)#
-data$prevalentStroke = as.factor(data$prevalentStroke)#
-data$prevalentHyp = as.factor(data$prevalentHyp)#
-data$diabetes = as.factor(data$diabetes)#
-data$TenYearCHD = as.factor(data$TenYearCHD)#
-mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
-summary(mymodel)#
-#
-fitted_prob=fitted(mymodel)
-plot(fitted_prob,type="h",main="Original vs Fitted")
-mymodel
-summay(mymodel)
-summary(mymodel)
-summary(model)
-summary(mymodel)
-data
-summary(mymodel)
-data
-names(data)
-data = data[-3]
-names(data)
-mymodel = glm(TenYearCHD ~ ., data = data, family = binomial(link = "logit"))
-summary(model)
-summary(mymodel)
-data_modified_1 = data[-3]
-mymodel = glm(TenYearCHD ~ ., data = data_modified_1, family = binomial(link = "logit"))
-rm(list=ls())
-rm(list=ls())#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-mymodel = glm(TenYearCHD ~ ., data = data, family = binomial(link = "logit"))#
-summary(mymodel)#
-#
-data_modified_1 = data[-3]#
-mymodel_1 = glm(TenYearCHD ~ ., data = data_modified_1, family = binomial(link = "logit"))#
-summary(mymodel_1)
-summary(mymodel_1)
-2785.1
-summary(mymodel)
-summary(mymodel_1)
-summary(mymodel)
-mymodel = glm(TenYearCHD ~ ., data = data, family = binomial(link = "logit"))
-summary(mymodel)
-rm(list=ls())#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-data$male = as.factor(data$male)#
-data$education = as.factor(data$education)#
-data$currentSmoker = as.factor(data$currentSmoker)#
-data$prevalentStroke = as.factor(data$prevalentStroke)#
-data$prevalentHyp = as.factor(data$prevalentHyp)#
-data$diabetes = as.factor(data$diabetes)#
-data$TenYearCHD = as.factor(data$TenYearCHD)#
-mymodel = glm(TenYearCHD ~ ., data = data, family = binomial(link = "logit"))#
-summary(mymodel)#
-#
-data_modified_1 = data[-3]#
-mymodel_1 = glm(TenYearCHD ~ ., data = data_modified_1, family = binomial(link = "logit"))#
-summary(mymodel_1)
-summary(mymodel)
-data_modified_1 = data[-3]#
-mymodel_1 = glm(TenYearCHD ~ ., data = data_modified_1, family = binomial(link = "logit"))#
-summary(mymodel_1)
-rm(list=ls())#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-data$male = as.factor(data$male)#
-data$education = as.factor(data$education)#
-data$currentSmoker = as.factor(data$currentSmoker)#
-data$prevalentStroke = as.factor(data$prevalentStroke)#
-data$prevalentHyp = as.factor(data$prevalentHyp)#
-data$diabetes = as.factor(data$diabetes)#
-data$TenYearCHD = as.factor(data$TenYearCHD)#
-mymodel = glm(TenYearCHD ~ ., data = data, family = binomial(link = "logit"))#
-summary(mymodel)#
-#
-data_modified_1 = data[-3]#
-mymodel_1 = glm(TenYearCHD ~ ., data = data_modified_1, family = binomial(link = "logit"))#
-summary(mymodel_1)
-summary(mymodel)
-rm(list=ls())#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-data$male = as.factor(data$male)#
-data$education = as.factor(data$education)#
-data$currentSmoker = as.factor(data$currentSmoker)#
-data$prevalentStroke = as.factor(data$prevalentStroke)#
-data$prevalentHyp = as.factor(data$prevalentHyp)#
-data$diabetes = as.factor(data$diabetes)#
-data$TenYearCHD = as.factor(data$TenYearCHD)#
-mymodel = glm(TenYearCHD ~ ., data = data, family = binomial(link = "logit"))#
-summary(mymodel)
-chisq_logit=sum(((literacy1-pi_hat_logit)^2)/(pi_hat_logit*(1-pi_hat_logit)))
-mean(male)
-names(summary(model))
-names(summary(mymodel))
-summary(mymodel)
-names(summary(mymodel))
-x=summary(model)
-x$deviance
-x=summary(model)
-x=summary(mymodel)
-x$deviance
-names(summary(mymodel))
-summary(mymodel)
-x$estimate
-x$Coefficients
-x=summary(mymodel)
-names(summary(mymodel))
-x$terms
-names(summary(mymodel))
-x$coefficients
-x$coefficients$Estimate
-y=x$coefficients;y$$Estimate
-y=x$coefficients;y$Estimate
-y=x$coefficients
-y$Estimate
-y$estimate
-names(y)
+x = summary(reduced_model_1)
+x
+y = x$coefficients
 y
-y[2]
-y = as.data.frame(y)
-y
-y$Estimates
-y&[1,1]
-y[1,1]
-y[,1]
-estimates = y[,1]
-se = y[,2]
-se
-name(data)
-namea(data)
-names(data)
-data.frame(names(data),estimates,se)
-se = y[,2]
-data.frame(names(data)[-length(data)],estimates,se)
-data.frame(names(data)[-17,-16],estimates,se)
-length(names(data))
-lebgth(se)
-length(se)
-x$deviance
-y=x$coefficients
-y = as.data.frame(y)
-estimates = y[,1]
-summary(mymodel)
-estimates = y[,1][-1,-18]
-estimates = y[,1][-1,-16]
-estimates = y[,1][-1]
-estimates
-estimates = y[,1][-1,-17]
-length(se)
-estimates = y[,1][-1,-18]
-estimates = y[,1][-c(1,18)]
-se = y[,2][-c(1,18)]
-data.frame(names(data)[-17,-16],estimates,se)
-data.frame(names(data)[-c(16,17)],estimates,se)
-#======= Required Packages for the Codes#
-# install.packages("lattice")#
-# rm(list=ls())#
-# data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-# attach(data)#
-# names(data)#
-# data$male = as.factor(data$male)#
-# data$education = as.factor(data$education)#
-# data$currentSmoker = as.factor(data$currentSmoker)#
-# data$prevalentStroke = as.factor(data$prevalentStroke)#
-# data$prevalentHyp = as.factor(data$prevalentHyp)#
-# data$diabetes = as.factor(data$diabetes)#
-# data$TenYearCHD = as.factor(data$TenYearCHD)#
-#
-# mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
-# summary(mymodel)#
-# # install.packages("caret")#
-# fitted_prob=fitted(mymodel)#
-# thresold = seq(0,1,0.001)#
-# accuracy = numeric(length(thresold))#
-# for(i in 1:length(thresold)) {#
-    # Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
-    # x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
-    # y = as.data.frame(x$overall)#
-    # accuracy[i] = y[1,1]#
-# }#
-# accuracy#
-# plot(thresold, accuracy, type="l")#
-# abline(v = thresold[which.max(accuracy)], col = "red", lty = 2)#
-#
-# #thresold = thresold[which.max(accuracy)]#
-# Y_hat = ifelse(fitted_prob <= thresold, 0, 1)#
-# x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
-# detach(data)#
-# # rm(list=ls())#
-# data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-# attach(data)#
-# names(data)#
-# data$male = as.factor(data$male)#
-# data$education = as.factor(data$education)#
-# data$currentSmoker = as.factor(data$currentSmoker)#
-# data$prevalentStroke = as.factor(data$prevalentStroke)#
-# data$prevalentHyp = as.factor(data$prevalentHyp)#
-# data$diabetes = as.factor(data$diabetes)#
-# data$TenYearCHD = as.factor(data$TenYearCHD)#
-#
-# mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
-# summary(mymodel)#
-# fitted_prob=fitted(mymodel)#
-# #=============================================##
-# # Finding thresold by Optimising TPR*(1-FPR)  ##
-# #=============================================##
-# thresold = seq(0,1,0.001)#
-# TPR = numeric(length(thresold))#
-# FPR = numeric(length(thresold))#
-# Index = numeric(length(thresold))#
-# for (i in 1:length(thresold)) {#
-    # Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
-    # conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
-    # confusion_matrix = conf_matrix$table #
-     # TN = confusion_matrix[1, 1]  # True Negatives#
-     # FP = confusion_matrix[1, 2]  # False Positives#
-     # FN = confusion_matrix[2, 1]  # False Negatives#
-     # TP = confusion_matrix[2, 2]  # True Positives#
-    # TPR[i] = TP / (TP + FN)#
-    # FPR[i] = FP / (TN+FP+FN+TP)#
-    # Index[i] = TPR[i] *(1-FPR[i]) #
-# }#
-# optimal_threshold = thresold[which.max(Index)]#
-# plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
-# abline(v = optimal_threshold, col = "red", lty = 2)#
-# Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
-# confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
-# as.factor(data$TenYearCHD))#
-#====#
-# Code for Plotting teh Correlation Heatmaps#
-#====== #
-rm(list=ls())#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-library(ggplot2)#
-library(reshape2)#
-#
-# Calculate correlation matrix#
-correlation_matrix = cor(data)#
-#
-# Melt the correlation matrix for plotting#
-melted_correlation = melt(correlation_matrix)#
-# Plot heatmap with correlation coefficients#
-ggplot(melted_correlation, aes(Var1, Var2, fill = value)) +#
-  geom_tile() + #
-  geom_text(aes(label = sprintf("%.2f", value)), size = 3) +#
-  scale_fill_gradient2(low = "#58390b", high = "#0f423c", midpoint = 0, limit = c(-1,1), name="Correlation", mid = "#FFFFFF") +#
-  theme_minimal() +#
-  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +#
-  coord_fixed() +#
-  labs(x = "Variables", y = "Variables")#
-# = = = = = = #
-# Plottting the VIF Values#
-# = = = = = =#
-# Remove existing objects and load the dataset#
-#
-rm(list = ls())#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-#
-# Load necessary libraries#
-library(car)#
-library(ggplot2)#
-#
-# Fit the model#
-mymodel = glm(TenYearCHD ~ ., data = data, family = binomial(link = "logit"))#
-#
-# Calculate VIF for each predictor in the model#
-vif_values = vif(mymodel)#
-#
-# Transform VIF values into a data frame#
-vif_df = data.frame(Variable = names(vif_values), VIF = unname(vif_values))#
-#
-# Create the bar chart using ggplot#
-ggplot(vif_df, aes(x = Variable, y = VIF, fill = VIF)) +#
-  geom_bar(stat = "identity", color = "steelblue") +#
-  geom_hline(yintercept = 5, linetype = "dashed", color = "red", size = 1) +#
-  theme_minimal() +#
-  labs(title = "Plotting of the VIF Values", y = "VIF Value", x = "") +#
-  coord_cartesian(ylim = c(0, max(vif_df$VIF) + 1)) + # Adjust y-axis limits#
-  theme(axis.text.x = element_text(angle = 45, hjust = 1)) # Angle the x-axis text#
-# = = = = = = = = = = #
-# Final Code#
-# = = = = = = = = = =#
-rm(list=ls())#
-set.seed(123)#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-attach(data)#
-# Define the proportion of data for training (e.g., 80%)#
-train_proportion = 0.8#
-#
-# Number of rows in the data frame#
-num_rows = nrow(data)#
-#
-# Randomly select row indices for the training set#
-train_indices = sample(num_rows, size = round(train_proportion * num_rows), replace = FALSE)#
-training_data = data[train_indices, ]#
-testing_data = data[-train_indices, ]#
-#
-# Fitting of the Logistic Regression Model #
-names(data)#
-data$male = as.factor(data$male)#
-data$education = as.factor(data$education)#
-data$currentSmoker = as.factor(data$currentSmoker)#
-data$prevalentStroke = as.factor(data$prevalentStroke)#
-data$prevalentHyp = as.factor(data$prevalentHyp)#
-data$diabetes = as.factor(data$diabetes)#
-data$TenYearCHD = as.factor(data$TenYearCHD)#
-mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
-summary(mymodel)#
-#
-fitted_prob=fitted(mymodel)#
-plot(fitted_prob,type="h",main="Original vs Fitted")#
-thresold = seq(0,1,0.001)#
-TPR = numeric(length(thresold))#
-FPR = numeric(length(thresold))#
-Index = numeric(length(thresold))#
-for (i in 1:length(thresold)) {#
-    Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
-    conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
-    confusion_matrix = conf_matrix$table #
-     TN = confusion_matrix[1, 1]  # True Negatives#
-     FP = confusion_matrix[1, 2]  # False Positives#
-     FN = confusion_matrix[2, 1]  # False Negatives#
-     TP = confusion_matrix[2, 2]  # True Positives#
-    TPR[i] = TP / (TP + FN)#
-    FPR[i] = FP / (TN+FP+FN+TP)#
-    Index[i] = TPR[i] *(1-FPR[i]) #
-}#
-optimal_threshold = thresold[which.max(Index)]#
-plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
-abline(v = optimal_threshold, col = "red", lty = 2)#
-Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
-confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
-as.factor(data$TenYearCHD))#
-detach(data)#
-#install.packages("tidymodels")#
-library(readr)#
-library(tidymodels)#
-#
-# Read the dataset and convert the target variable to a factor#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-#
-# Plot job occupation against the target variable#
-ggplot(Ten, aes(job, fill = y)) +#
-    geom_bar() +#
-    coord_flip()#
-names(data)#
-#  = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =#
-#   						       	Previous Code#
-# = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = #
-#
-#--- DATA CLEANING ---##
-#=====================##
-#
-rm(list=ls())#
-data=read.csv("literacy_data.csv",header=TRUE)#
-is.data.frame(data)#
-nrow(data)#
-apply(is.na(data),2,which)#
-#
-# CLEANING#
-data1=na.omit(data)#
-apply(is.na(data1),2,which)#
-dim(data1)#
-#
-#Recoding 2 as 0#
-attach(data1)#
-literacy1=replace(literacy,which(literacy==2),0)#
-gender1=replace(gender,which(gender==2),0)#
-data2=data.frame(literacy1,gender1,age)#
-dim(data2)#
-#
-#part (i)#
-tab1=table(literacy1,gender1);tab1#
-#(a)#
-o1=7860/2018;o1#
-#(b)#
-o2=4955/3883;o2#
-#(c)#
-or=3.894945/1.276075;or#
-#
-#part (ii)#
-model_logit=glm(literacy1~age,data2,#
-family=binomial(link="logit"));model_logit#
-fitted(model_logit)#
-#
-#part (iii)#
-model_probit=glm(literacy1~age,data2,#
-family=binomial(link="probit"));model_probit#
-pi_hat_probit=fitted(model_probit)#
-#
-#part (iv)#
-pi_hat_logit=as.vector(fitted(model_logit));pi_hat_logit#
-pi_hat_probit=as.vector(fitted(model_probit));pi_hat_probit#
-#
-chisq_logit=sum(((literacy1-pi_hat_logit)^2)/(pi_hat_logit*(1-pi_hat_logit)))#
-chisq_probit=sum(((literacy1-pi_hat_probit)^2)/(pi_hat_probit*(1-pi_hat_probit)))#
-chisq_logit#
-chisq_probit#
-#part (v)#
-#
-dt=data.frame(age,pi_hat_logit,pi_hat_probit)#
-dtt=dt[order(age),]#
-#
-par(mfrow=c(2,1))#
-plot(y=dtt[,2],x=dtt[,1],type='l')#
-plot(y=dtt[,3],x=dtt[,1],type='l')#
-#
-# part (vi)#
-#
-library(caret)#
-library(InformationValue)#
-??caret#
-confusionMatrix(as.factor(literacy1),pi_hat_logit,threshold=0.5)#
-#
-Y.hat=ifelse(pi_hat_logit>0.5,1,0)#
-caret::confusionMatrix(as.factor(Y.hat),as.factor(literacy1))#
-#
-Y.hat=ifelse(pi_hat_logit>0.5,1,0)  #
-t1=table(Y.hat,literacy1);t1#
-TPR=t1[2,2]/(t1[2,2]+t1[1,2]);TPR#
-FPR=4859/(4859+1042);FPR#
-Sensitivity=TPR;Sensitivity#
-Specificity=1-FPR;Specificity#
-misc=1-TPR+FPR;misc#
-#
-TPR=array()#
-FPR=array()#
-Sensitivity=array()#
-Specificity=array()#
-misc=array()#
-#
-k=1#
-p=seq(0.1,0.8,0.1)#
-for(i in p)#
-{#
-print(paste("Threshold = ",i))#
-Y.hat=ifelse(pi_hat_logit>i,1,0)#
-t=table(Y.hat,literacy1)#
-print(t)#
-TPR[k]=t[2,2]/(t[2,2]+t[1,2])#
-FPR[k]=t[2,1]/(t[2,1]+t[1,1])#
-Sensitivity[k]=TPR[k]#
-Specificity[k]=1-FPR[k]#
-misc[k]=1-TPR[k]+FPR[k]#
-k=k+1#
-}#
-#
-data.frame(p,TPR,FPR,Specificity,Sensitivity,misc,TPR*(1-FPR))#
-TPR=array()#
-FPR=array()#
-Sensitivity=array()#
-Specificity=array()#
-misclassification=array()#
-#
-k=1#
-#p=seq(0.1,0.8,0.1)#
-p=unique(pi_hat_logit)#
-p=sort(p)#
-p=p[-length(p)]#
-p#
-for(i in p)#
-{#
-print(paste("Threshold = ",i))#
-Y.hat=ifelse(pi_hat_logit>i,1,0)#
-t=table(Y.hat,literacy1)#
-print(t)#
-TPR[k]=t[2,2]/(t[2,2]+t[1,2])#
-FPR[k]=t[2,1]/(t[2,1]+t[1,1])#
-Sensitivity[k]=TPR[k]#
-Specificity[k]=1-FPR[k]#
-misclassification[k]=1-TPR[k]+FPR[k]#
-k=k+1#
-}#
-#
-p#
-misc#
-dtt=data.frame(p,TPR,FPR,Specificity,Sensitivity,misclassification,TPR*(1-FPR));dtt#
-xx=TPR*(1-FPR)#
-which(xx==max(xx))#
-dtt[66,]#
-xx#
-par(mfrow=c(1,2))#
-plot(y=TPR,x=1-FPR,type='l',xlim=c(0,1),main="ROC Curve")#
-plot(x=TPR,y=1-FPR,type='l',xlim=c(0,1),main="ROC Curve")#
-rm(list=ls())#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-data$male = as.factor(data$male)#
-data$education = as.factor(data$education)#
-data$currentSmoker = as.factor(data$currentSmoker)#
-data$prevalentStroke = as.factor(data$prevalentStroke)#
-data$prevalentHyp = as.factor(data$prevalentHyp)#
-data$diabetes = as.factor(data$diabetes)#
-data$TenYearCHD = as.factor(data$TenYearCHD)#
-mymodel = glm(TenYearCHD ~ ., data = data, family = binomial(link = "logit"))#
-summary(mymodel)#
-names(summary(mymodel))#
-x=summary(mymodel)#
-x$deviance#
-y=x$coefficients#
-y = as.data.frame(y)#
-estimates = y[,1][-c(1,18)]#
-se = y[,2][-c(1,18)]#
-length(names(data))#
-length(se)#
-data.frame(names(data)[-c(16,17)],estimates,se)
-data.frame(names(data),estimates,se)
-walds_t = estimates/sqrt(se)
-data.frame(names(data),estimates,se,walds)
-data.frame(names(data),estimates,se,walds_t)
-x=summary(mymodel)
-names(summary(mymodel))
-summary(mymodel)
-significance = numeric(lengthwalds_t)
-significance = numeric(length(walds_t))
-if(walds_t>1.96,significance=1,significance=0)
-rm(list=ls())#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-data$male = as.factor(data$male)#
-data$education = as.factor(data$education)#
-data$currentSmoker = as.factor(data$currentSmoker)#
-data$prevalentStroke = as.factor(data$prevalentStroke)#
-data$prevalentHyp = as.factor(data$prevalentHyp)#
-data$diabetes = as.factor(data$diabetes)#
-data$TenYearCHD = as.factor(data$TenYearCHD)#
-mymodel = glm(TenYearCHD ~ ., data = data, family = binomial(link = "logit"))#
-summary(mymodel)#
-x=summary(mymodel)#
-x$deviance#
-y=x$coefficients#
-y = as.data.frame(y)#
-estimates = y[,1][-c(1,18)]#
-se = y[,2][-c(1,18)]#
-walds_t = estimates/sqrt(se)#
-significance = numeric(16)#
-for(i in 1:16){#
-	if(walds_t[i]>1.96){#
-		significance[i]="*"#
-	}#
-}
-rm(list=ls())#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-data$male = as.factor(data$male)#
-data$education = as.factor(data$education)#
-data$currentSmoker = as.factor(data$currentSmoker)#
-data$prevalentStroke = as.factor(data$prevalentStroke)#
-data$prevalentHyp = as.factor(data$prevalentHyp)#
-data$diabetes = as.factor(data$diabetes)#
-data$TenYearCHD = as.factor(data$TenYearCHD)#
-mymodel = glm(TenYearCHD ~ ., data = data, family = binomial(link = "logit"))#
-summary(mymodel)#
-x=summary(mymodel)#
-x$deviance#
-y=x$coefficients#
-y = as.data.frame(y)#
-estimates = y[,1][-c(1,18)]#
-se = y[,2][-c(1,18)]#
-walds_t = estimates/sqrt(se)#
-significance = numeric(16)#
-for(i in 1:16){#
-	if(walds_t[i]>1.96){#
-		significance[i]="*"#
-	}#
-}#
-data.frame(names(data),estimates,se,walds_t)
-data.frame(names(data),estimates,se,walds_t,significance)
-rm(list=ls())#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-data$male = as.factor(data$male)#
-data$education = as.factor(data$education)#
-data$currentSmoker = as.factor(data$currentSmoker)#
-data$prevalentStroke = as.factor(data$prevalentStroke)#
-data$prevalentHyp = as.factor(data$prevalentHyp)#
-data$diabetes = as.factor(data$diabetes)#
-data$TenYearCHD = as.factor(data$TenYearCHD)#
-mymodel = glm(TenYearCHD ~ ., data = data, family = binomial(link = "logit"))#
-summary(mymodel)#
-x=summary(mymodel)#
-x$deviance#
-y=x$coefficients#
-y = as.data.frame(y)#
-estimates = y[,1][-c(1,18)]#
-se = y[,2][-c(1,18)]#
-walds_t = estimates/sqrt(se)#
-significance = numeric(16)#
-for(i in 1:16){#
-	if(walds_t[i]>1.96){#
-		significance[i]="*"#
-	}#
-	i=i+1#
-}#
-data.frame(names(data),estimates,se,walds_t,significance)
-rm(list=ls())#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-data$male = as.factor(data$male)#
-data$education = as.factor(data$education)#
-data$currentSmoker = as.factor(data$currentSmoker)#
-data$prevalentStroke = as.factor(data$prevalentStroke)#
-data$prevalentHyp = as.factor(data$prevalentHyp)#
-data$diabetes = as.factor(data$diabetes)#
-data$TenYearCHD = as.factor(data$TenYearCHD)#
-mymodel = glm(TenYearCHD ~ ., data = data, family = binomial(link = "logit"))#
-summary(mymodel)#
-x=summary(mymodel)#
-x$deviance#
-y=x$coefficients#
-y = as.data.frame(y)#
-estimates = y[,1][-c(1,18)]#
-se = y[,2][-c(1,18)]#
-walds_t = estimates/sqrt(se)#
-significance = numeric(16)#
-for(i in 1:16){#
-	if(walds_t[i]>1.96){#
-		significance[i]= "He"#
-	}#
-	i=i+1#
-}#
-data.frame(names(data),estimates,se,walds_t,significance)
-significance[i]= "He" ;
-for(i in 1:16){
-if(walds_t[i]>1.96){
-significance[i]= "He" ;
-}
-i=i+1
-}
-data.frame(names(data),estimates,se,walds_t,significance)
-i=i+1 ;
-for(i in 1:16){#
-	if(walds_t[i]>1.96){#
-		significance[i]= "He" ;#
-	}#
-	i=i+1 ;#
-}
-data.frame(names(data),estimates,se,walds_t,significance)
-plot(x=TPR,y=1-FPR,type='l',xlim=c(0,1),main="ROC Curve")
-#======= Required Packages for the Codes#
-# install.packages("lattice")#
-# rm(list=ls())#
-# data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-# attach(data)#
-# names(data)#
-# data$male = as.factor(data$male)#
-# data$education = as.factor(data$education)#
-# data$currentSmoker = as.factor(data$currentSmoker)#
-# data$prevalentStroke = as.factor(data$prevalentStroke)#
-# data$prevalentHyp = as.factor(data$prevalentHyp)#
-# data$diabetes = as.factor(data$diabetes)#
-# data$TenYearCHD = as.factor(data$TenYearCHD)#
-#
-# mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
-# summary(mymodel)#
-# # install.packages("caret")#
-# fitted_prob=fitted(mymodel)#
-# thresold = seq(0,1,0.001)#
-# accuracy = numeric(length(thresold))#
-# for(i in 1:length(thresold)) {#
-    # Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
-    # x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
-    # y = as.data.frame(x$overall)#
-    # accuracy[i] = y[1,1]#
-# }#
-# accuracy#
-# plot(thresold, accuracy, type="l")#
-# abline(v = thresold[which.max(accuracy)], col = "red", lty = 2)#
-#
-# #thresold = thresold[which.max(accuracy)]#
-# Y_hat = ifelse(fitted_prob <= thresold, 0, 1)#
-# x = caret::confusionMatrix(as.factor(Y_hat),as.factor(data$TenYearCHD))#
-# detach(data)#
-# # rm(list=ls())#
-# data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-# attach(data)#
-# names(data)#
-# data$male = as.factor(data$male)#
-# data$education = as.factor(data$education)#
-# data$currentSmoker = as.factor(data$currentSmoker)#
-# data$prevalentStroke = as.factor(data$prevalentStroke)#
-# data$prevalentHyp = as.factor(data$prevalentHyp)#
-# data$diabetes = as.factor(data$diabetes)#
-# data$TenYearCHD = as.factor(data$TenYearCHD)#
-#
-# mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
-# summary(mymodel)#
-# fitted_prob=fitted(mymodel)#
-# #=============================================##
-# # Finding thresold by Optimising TPR*(1-FPR)  ##
-# #=============================================##
-# thresold = seq(0,1,0.001)#
-# TPR = numeric(length(thresold))#
-# FPR = numeric(length(thresold))#
-# Index = numeric(length(thresold))#
-# for (i in 1:length(thresold)) {#
-    # Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
-    # conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
-    # confusion_matrix = conf_matrix$table #
-     # TN = confusion_matrix[1, 1]  # True Negatives#
-     # FP = confusion_matrix[1, 2]  # False Positives#
-     # FN = confusion_matrix[2, 1]  # False Negatives#
-     # TP = confusion_matrix[2, 2]  # True Positives#
-    # TPR[i] = TP / (TP + FN)#
-    # FPR[i] = FP / (TN+FP+FN+TP)#
-    # Index[i] = TPR[i] *(1-FPR[i]) #
-# }#
-# optimal_threshold = thresold[which.max(Index)]#
-# plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
-# abline(v = optimal_threshold, col = "red", lty = 2)#
-# Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
-# confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
-# as.factor(data$TenYearCHD))#
-#====#
-# Code for Plotting teh Correlation Heatmaps#
-#====== #
-rm(list=ls())#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-library(ggplot2)#
-library(reshape2)#
-#
-# Calculate correlation matrix#
-correlation_matrix = cor(data)#
-#
-# Melt the correlation matrix for plotting#
-melted_correlation = melt(correlation_matrix)#
-# Plot heatmap with correlation coefficients#
-ggplot(melted_correlation, aes(Var1, Var2, fill = value)) +#
-  geom_tile() + #
-  geom_text(aes(label = sprintf("%.2f", value)), size = 3) +#
-  scale_fill_gradient2(low = "#58390b", high = "#0f423c", midpoint = 0, limit = c(-1,1), name="Correlation", mid = "#FFFFFF") +#
-  theme_minimal() +#
-  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +#
-  coord_fixed() +#
-  labs(x = "Variables", y = "Variables")#
-# = = = = = = #
-# Plottting the VIF Values#
-# = = = = = =#
-# Remove existing objects and load the dataset#
-#
-rm(list = ls())#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-#
-# Load necessary libraries#
-library(car)#
-library(ggplot2)#
-#
-# Fit the model#
-mymodel = glm(TenYearCHD ~ ., data = data, family = binomial(link = "logit"))#
-#
-# Calculate VIF for each predictor in the model#
-vif_values = vif(mymodel)#
-#
-# Transform VIF values into a data frame#
-vif_df = data.frame(Variable = names(vif_values), VIF = unname(vif_values))#
-#
-# Create the bar chart using ggplot#
-ggplot(vif_df, aes(x = Variable, y = VIF, fill = VIF)) +#
-  geom_bar(stat = "identity", color = "steelblue") +#
-  geom_hline(yintercept = 5, linetype = "dashed", color = "red", size = 1) +#
-  theme_minimal() +#
-  labs(title = "Plotting of the VIF Values", y = "VIF Value", x = "") +#
-  coord_cartesian(ylim = c(0, max(vif_df$VIF) + 1)) + # Adjust y-axis limits#
-  theme(axis.text.x = element_text(angle = 45, hjust = 1)) # Angle the x-axis text#
-# = = = = = = = = = = #
-# Final Code#
-# = = = = = = = = = =#
-rm(list=ls())#
-set.seed(123)#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-attach(data)#
-# Define the proportion of data for training (e.g., 80%)#
-train_proportion = 0.8#
-#
-# Number of rows in the data frame#
-num_rows = nrow(data)#
-#
-# Randomly select row indices for the training set#
-train_indices = sample(num_rows, size = round(train_proportion * num_rows), replace = FALSE)#
-training_data = data[train_indices, ]#
-testing_data = data[-train_indices, ]#
-#
-# Fitting of the Logistic Regression Model #
-names(data)#
-data$male = as.factor(data$male)#
-data$education = as.factor(data$education)#
-data$currentSmoker = as.factor(data$currentSmoker)#
-data$prevalentStroke = as.factor(data$prevalentStroke)#
-data$prevalentHyp = as.factor(data$prevalentHyp)#
-data$diabetes = as.factor(data$diabetes)#
-data$TenYearCHD = as.factor(data$TenYearCHD)#
-mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
-summary(mymodel)#
-#
-fitted_prob=fitted(mymodel)#
-plot(fitted_prob,type="h",main="Original vs Fitted")#
-thresold = seq(0,1,0.001)#
-TPR = numeric(length(thresold))#
-FPR = numeric(length(thresold))#
-Index = numeric(length(thresold))#
-for (i in 1:length(thresold)) {#
-    Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
-    conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
-    confusion_matrix = conf_matrix$table #
-     TN = confusion_matrix[1, 1]  # True Negatives#
-     FP = confusion_matrix[1, 2]  # False Positives#
-     FN = confusion_matrix[2, 1]  # False Negatives#
-     TP = confusion_matrix[2, 2]  # True Positives#
-    TPR[i] = TP / (TP + FN)#
-    FPR[i] = FP / (TN+FP+FN+TP)#
-    Index[i] = TPR[i] *(1-FPR[i]) #
-}#
-optimal_threshold = thresold[which.max(Index)]#
-plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
-abline(v = optimal_threshold, col = "red", lty = 2)#
-Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
-confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
-as.factor(data$TenYearCHD))#
-detach(data)#
-#install.packages("tidymodels")#
-library(readr)#
-library(tidymodels)#
-#
-# Read the dataset and convert the target variable to a factor#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-#
-# Plot job occupation against the target variable#
-ggplot(Ten, aes(job, fill = y)) +#
-    geom_bar() +#
-    coord_flip()#
-names(data)#
-#  = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =#
-#   						       	Previous Code#
-# = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = #
-#
-#--- DATA CLEANING ---##
-#=====================##
-#
-rm(list=ls())#
-data=read.csv("literacy_data.csv",header=TRUE)#
-is.data.frame(data)#
-nrow(data)#
-apply(is.na(data),2,which)#
-#
-# CLEANING#
-data1=na.omit(data)#
-apply(is.na(data1),2,which)#
-dim(data1)#
-#
-#Recoding 2 as 0#
-attach(data1)#
-literacy1=replace(literacy,which(literacy==2),0)#
-gender1=replace(gender,which(gender==2),0)#
-data2=data.frame(literacy1,gender1,age)#
-dim(data2)#
-#
-#part (i)#
-tab1=table(literacy1,gender1);tab1#
-#(a)#
-o1=7860/2018;o1#
-#(b)#
-o2=4955/3883;o2#
-#(c)#
-or=3.894945/1.276075;or#
-#
-#part (ii)#
-model_logit=glm(literacy1~age,data2,#
-family=binomial(link="logit"));model_logit#
-fitted(model_logit)#
-#
-#part (iii)#
-model_probit=glm(literacy1~age,data2,#
-family=binomial(link="probit"));model_probit#
-pi_hat_probit=fitted(model_probit)#
-#
-#part (iv)#
-pi_hat_logit=as.vector(fitted(model_logit));pi_hat_logit#
-pi_hat_probit=as.vector(fitted(model_probit));pi_hat_probit#
-#
-chisq_logit=sum(((literacy1-pi_hat_logit)^2)/(pi_hat_logit*(1-pi_hat_logit)))#
-chisq_probit=sum(((literacy1-pi_hat_probit)^2)/(pi_hat_probit*(1-pi_hat_probit)))#
-chisq_logit#
-chisq_probit#
-#part (v)#
-#
-dt=data.frame(age,pi_hat_logit,pi_hat_probit)#
-dtt=dt[order(age),]#
-#
-par(mfrow=c(2,1))#
-plot(y=dtt[,2],x=dtt[,1],type='l')#
-plot(y=dtt[,3],x=dtt[,1],type='l')#
-#
-# part (vi)#
-#
-library(caret)#
-library(InformationValue)#
-??caret#
-confusionMatrix(as.factor(literacy1),pi_hat_logit,threshold=0.5)#
-#
-Y.hat=ifelse(pi_hat_logit>0.5,1,0)#
-caret::confusionMatrix(as.factor(Y.hat),as.factor(literacy1))#
-#
-Y.hat=ifelse(pi_hat_logit>0.5,1,0)  #
-t1=table(Y.hat,literacy1);t1#
-TPR=t1[2,2]/(t1[2,2]+t1[1,2]);TPR#
-FPR=4859/(4859+1042);FPR#
-Sensitivity=TPR;Sensitivity#
-Specificity=1-FPR;Specificity#
-misc=1-TPR+FPR;misc#
-#
-TPR=array()#
-FPR=array()#
-Sensitivity=array()#
-Specificity=array()#
-misc=array()#
-#
-k=1#
-p=seq(0.1,0.8,0.1)#
-for(i in p)#
-{#
-print(paste("Threshold = ",i))#
-Y.hat=ifelse(pi_hat_logit>i,1,0)#
-t=table(Y.hat,literacy1)#
-print(t)#
-TPR[k]=t[2,2]/(t[2,2]+t[1,2])#
-FPR[k]=t[2,1]/(t[2,1]+t[1,1])#
-Sensitivity[k]=TPR[k]#
-Specificity[k]=1-FPR[k]#
-misc[k]=1-TPR[k]+FPR[k]#
-k=k+1#
-}#
-#
-data.frame(p,TPR,FPR,Specificity,Sensitivity,misc,TPR*(1-FPR))#
-TPR=array()#
-FPR=array()#
-Sensitivity=array()#
-Specificity=array()#
-misclassification=array()#
-#
-k=1#
-#p=seq(0.1,0.8,0.1)#
-p=unique(pi_hat_logit)#
-p=sort(p)#
-p=p[-length(p)]#
-p#
-for(i in p)#
-{#
-print(paste("Threshold = ",i))#
-Y.hat=ifelse(pi_hat_logit>i,1,0)#
-t=table(Y.hat,literacy1)#
-print(t)#
-TPR[k]=t[2,2]/(t[2,2]+t[1,2])#
-FPR[k]=t[2,1]/(t[2,1]+t[1,1])#
-Sensitivity[k]=TPR[k]#
-Specificity[k]=1-FPR[k]#
-misclassification[k]=1-TPR[k]+FPR[k]#
-k=k+1#
-}#
-#
-p#
-misc#
-dtt=data.frame(p,TPR,FPR,Specificity,Sensitivity,misclassification,TPR*(1-FPR));dtt#
-xx=TPR*(1-FPR)#
-which(xx==max(xx))#
-dtt[66,]#
-xx#
-par(mfrow=c(1,2))#
-plot(y=TPR,x=1-FPR,type='l',xlim=c(0,1),main="ROC Curve")#
-plot(x=TPR,y=1-FPR,type='l',xlim=c(0,1),main="ROC Curve")#
-rm(list=ls())#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-data$male = as.factor(data$male)#
-data$education = as.factor(data$education)#
-data$currentSmoker = as.factor(data$currentSmoker)#
-data$prevalentStroke = as.factor(data$prevalentStroke)#
-data$prevalentHyp = as.factor(data$prevalentHyp)#
-data$diabetes = as.factor(data$diabetes)#
-data$TenYearCHD = as.factor(data$TenYearCHD)#
-mymodel = glm(TenYearCHD ~ ., data = data, family = binomial(link = "logit"))#
-summary(mymodel)#
-x=summary(mymodel)#
-x$deviance#
-y=x$coefficients#
-y = as.data.frame(y)#
-estimates = y[,1][-c(1,18)]#
-se = y[,2][-c(1,18)]#
-walds_t = estimates/sqrt(se)#
-significance = numeric(16)#
-for(i in 1:16){#
-	if(walds_t[i]>1.96){#
-		significance[i]= "He" ;#
-	}#
-	i=i+1 ;#
-}#
-data.frame(names(data),estimates,se,walds_t,significance)
-# Transform VIF values into a data frame#
-vif_df = data.frame(Variable = names(vif_values), VIF = unname(vif_values))#
-#
-# Create the bar chart using ggplot#
-ggplot(vif_df, aes(x = Variable, y = VIF, fill = VIF)) +#
-  geom_bar(stat = "identity", color = "steelblue") +#
-  geom_hline(yintercept = 5, linetype = "dashed", color = "red", size = 1) +#
-  theme_minimal() +#
-  labs(title = "Plotting of the VIF Values", y = "VIF Value", x = "") +#
-  coord_cartesian(ylim = c(0, max(vif_df$VIF) + 1)) + # Adjust y-axis limits#
-  theme(axis.text.x = element_text(angle = 45, hjust = 1)) # Angle the x-axis text#
-# = = = = = = = = = = #
-# Final Code#
-# = = = = = = = = = =#
-rm(list=ls())#
-set.seed(123)#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-attach(data)#
-# Define the proportion of data for training (e.g., 80%)#
-train_proportion = 0.8#
-#
-# Number of rows in the data frame#
-num_rows = nrow(data)#
-#
-# Randomly select row indices for the training set#
-train_indices = sample(num_rows, size = round(train_proportion * num_rows), replace = FALSE)#
-training_data = data[train_indices, ]#
-testing_data = data[-train_indices, ]#
-#
-# Fitting of the Logistic Regression Model #
-names(data)#
-data$male = as.factor(data$male)#
-data$education = as.factor(data$education)#
-data$currentSmoker = as.factor(data$currentSmoker)#
-data$prevalentStroke = as.factor(data$prevalentStroke)#
-data$prevalentHyp = as.factor(data$prevalentHyp)#
-data$diabetes = as.factor(data$diabetes)#
-data$TenYearCHD = as.factor(data$TenYearCHD)#
-mymodel = glm(TenYearCHD ~ ., data = data, family=binomial(link ="logit"))#
-summary(mymodel)#
-#
-fitted_prob=fitted(mymodel)#
-plot(fitted_prob,type="h",main="Original vs Fitted")#
-thresold = seq(0,1,0.001)#
-TPR = numeric(length(thresold))#
-FPR = numeric(length(thresold))#
-Index = numeric(length(thresold))#
-for (i in 1:length(thresold)) {#
-    Y_hat = ifelse(fitted_prob <= thresold[i], 0, 1)#
-    conf_matrix = caret::confusionMatrix(as.factor(Y_hat),   as.factor(data$TenYearCHD))#
-    confusion_matrix = conf_matrix$table #
-     TN = confusion_matrix[1, 1]  # True Negatives#
-     FP = confusion_matrix[1, 2]  # False Positives#
-     FN = confusion_matrix[2, 1]  # False Negatives#
-     TP = confusion_matrix[2, 2]  # True Positives#
-    TPR[i] = TP / (TP + FN)#
-    FPR[i] = FP / (TN+FP+FN+TP)#
-    Index[i] = TPR[i] *(1-FPR[i]) #
-}#
-optimal_threshold = thresold[which.max(Index)]#
-plot(thresold, Index, type="l", xlab="Threshold", ylab="TPR*(1-FPR)")#
-abline(v = optimal_threshold, col = "red", lty = 2)#
-Y_hat_index = ifelse(fitted_prob <= optimal_threshold, 0, 1)#
-confusion_matrix_index = caret::confusionMatrix(as.factor(Y_hat_index),#
-as.factor(data$TenYearCHD))#
-detach(data)#
-#install.packages("tidymodels")#
-library(readr)#
-library(tidymodels)#
-#
-# Read the dataset and convert the target variable to a factor#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
-#
-# Plot job occupation against the target variable#
-ggplot(Ten, aes(job, fill = y)) +#
-    geom_bar() +#
-    coord_flip()#
-names(data)
+z = as.data.frame(y[,4])
+z = as.data.frame(y[,4]);z
+p = z[,];p
+q = which.max(p) ; q
 # ======================================================== ##
 #                    Final Code                            ##
 # ======================================================== ##
@@ -2015,9 +23,1644 @@ library(reshape2)#
 library(randomForest)#
 library(InformationValue)#
 library(olsrr)#
-set.seed(123)#
-data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+set.seed(1234)#
 #
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+attach(data)#
+split = sample.split(data, SplitRatio = 0.8)#
+training_data = data[split, ]#
+testing_data = data[!split, ]#
+# = = = = = = = = = = = #
+# Correlation Heatmap#
+# = = = = = = = = = = = #
+correlation_matrix = cor(data)#
+melted_correlation = melt(correlation_matrix)#
+ggplot(melted_correlation, aes(Var1, Var2, fill = value)) +#
+  geom_tile() + #
+  geom_text(aes(label = sprintf("%.2f", value)), size = 3) +#
+  scale_fill_gradient2(low = "#58390b", high = "#0f423c", midpoint = 0, limit = c(-1,1), name="Correlation", mid = "#FFFFFF") +#
+  theme_minimal() +#
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +#
+  coord_fixed() +#
+  labs(x = "Variables", y = "Variables")#
+# = = = = = = = = = = = = =#
+# Converting into factors#
+# = = = = = = = = = = = = =#
+data$male = as.factor(data$male)#
+data$education = as.factor(data$education)#
+data$currentSmoker = as.factor(data$currentSmoker)#
+data$prevalentStroke = as.factor(data$prevalentStroke)#
+data$prevalentHyp = as.factor(data$prevalentHyp)#
+data$diabetes = as.factor(data$diabetes)#
+data$TenYearCHD = as.factor(data$TenYearCHD)#
+model = glm(TenYearCHD ~ ., data = training_data, family = binomial(link = "logit"))#
+#
+# = = = = = = = = = = = = = #
+# Plottting the VIF Values#
+# = = = = = = = = = = = = =#
+#
+vif_values = vif(model)#
+vif_df = data.frame(Variable = names(vif_values), VIF = unname(vif_values))#
+#
+# Create the bar chart using ggplot#
+ggplot(vif_df, aes(x = Variable, y = VIF, fill = VIF)) +#
+  geom_bar(stat = "identity", color = "steelblue") +#
+  geom_hline(yintercept = 5, linetype = "dashed", color = "red", size = 1) +#
+  theme_minimal() +#
+  labs(title = "Plotting of the VIF Values", y = "VIF Value", x = "") +#
+  coord_cartesian(ylim = c(0, max(vif_df$VIF) + 1)) + # Adjust y-axis limits#
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) # Angle the x-axis text#
+# = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = #
+#  Code for testing the significance of the predictor variables#
+# = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = #
+#
+x = summary(model)#
+y = x$coefficients#
+estimates = y[,1][-c(1,18)]#
+se = y[,2][-c(1,18)]#
+walds_t = estimates/sqrt(se)#
+significance = numeric(16)#
+for(i in 1:16){#
+	if(abs(walds_t[i])>1.96){#
+		significance[i]= "Not Significant"#
+	}else{#
+		significance[i]="Significant"#
+	}#
+}#
+data.frame(names(training_data),estimates,se,walds_t,significance)#
+#Findig Out the Odds Ratio#
+Odds_Ratio = exp(estimates)#
+p_values = 2*(1- qnorm(estimates)) ; p_values#
+data.frame(names(training_data),exp(Odds_Ratio),p_values)
+detach(data)
+detach(data)
+detach(data)
+detach(data)
+detach(data)
+detach(data)
+detach(data)
+detach(data)
+detach(data)
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")
+attach(data)
+fullmodel = glm(TenYearCHD ~ ., data = training_data, family = binomial(link = "logit"))
+fullmodel = glm(TenYearCHD ~ ., data = training_data, family = binomial(link = "logit"))
+x = summary(fullmodel)
+y = x$coefficients
+z = as.data.frame(y[,4])
+p = z[,]
+q = which.max(p) ; q
+x
+q
+reduced_model_1 =  glm(TenYearCHD ~ ., data = reduced_data_1, family = binomial(link = "logit"))
+reduced_data_1 = training_data[,-q]
+reduced_model_1 =  glm(TenYearCHD ~ ., data = reduced_data_1, family = binomial(link = "logit"))
+summary(reduced_model_1)
+reduced_model_1
+fullmodel
+summary(fullmodel)
+summary(fullmodel)
+x = summary(reduced_model_1)
+x
+y = x$coefficients#
+z = as.data.frame(y[,4])#
+p = z[,]#
+q = which.max(p) ; q#
+reduced_data_1 = training_data[,-q] #
+reduced_model_1 =  glm(TenYearCHD ~ ., data = reduced_data_1, family = binomial(link = "logit"))#
+summary(reduced_model_1)
+x = summary(reduced_model_1)#
+y = x$coefficients#
+z = as.data.frame(y[,4])#
+p = z[,]#
+q = which.max(p) ; q#
+reduced_data_2 = reduced_data_1[,-q]#
+reduced_model_2 = glm(TenYearCHD ~ ., data = reduced_data_2, family = binomial(link = "logit"))#
+summary(reduced_model_2)
+x = summary(fullmodel)
+x
+y = x$coefficients#
+z = as.data.frame(y[,4])#
+p = z[,]#
+q = which.max(p) ; q#
+reduced_data_1 = training_data[,-q] #
+reduced_model_1 =  glm(TenYearCHD ~ ., data = reduced_data_1, family = binomial(link = "logit"))#
+summary(reduced_model_1)
+reduced_data_1 = training_data[-q]
+reduced_model_1 =  glm(TenYearCHD ~ ., data = reduced_data_1, family = binomial(link = "logit"))
+summary(reduced_model_1)
+reduced_data_1 = training_data[,-q]
+reduced_model_1 =  glm(TenYearCHD ~ ., data = reduced_data_1, family = binomial(link = "logit"))
+summary(reduced_model_1)
+# Assuming 'x' contains the summary of 'fullmodel'#
+x = summary(fullmodel)#
+y = x$coefficients#
+#
+# Identify p-values and convert to a data frame#
+z = as.data.frame(y[, 4])#
+#
+# Instead of using the index to remove, identify the variable's name#
+# Note: '+1' in 'coef_names[q + 1]' is not needed because we directly use the names from coefficients excluding the Intercept#
+coef_names = names(y)[-1]  # Exclude intercept from names#
+highest_p_value_name = coef_names[which.max(z[,1])]#
+#
+# Now, remove the column by name, not by index#
+reduced_data_1 = training_data[, !names(training_data) %in% highest_p_value_name] #
+#
+# Create the reduced model without the variable with the highest p-value#
+reduced_model_1 = glm(TenYearCHD ~ ., data = reduced_data_1, family = binomial(link = "logit"))#
+#
+# Display the summary of the reduced model#
+summary(reduced_model_1)
+reduced_data_1 = training_data[!q]
+reduced_model_1 =  glm(TenYearCHD ~ ., data = reduced_data_1, family = binomial(link = "logit"))
+summary(reduced_model_1)
+reduced_data_1 = training_data[q]
+reduced_model_1 =  glm(TenYearCHD ~ ., data = reduced_data_1, family = binomial(link = "logit"))
+reduced_model_1 =  glm(TenYearCHD ~ ., data = reduced_data_1, family = binomial(link = "logit"))
+summary(reduced_model_1)
+reduced_data_1 = training_data[q,2]
+reduced_model_1 =  glm(TenYearCHD ~ ., data = reduced_data_1, family = binomial(link = "logit"))
+reduced_data_1 = training_data[1,q]
+reduced_model_1 =  glm(TenYearCHD ~ ., data = reduced_data_1, family = binomial(link = "logit"))
+reduced_data_1 = training_data[q,q]
+reduced_model_1 =  glm(TenYearCHD ~ ., data = reduced_data_1, family = binomial(link = "logit"))
+reduced_data_1 = training_data[-q,]
+reduced_model_1 =  glm(TenYearCHD ~ ., data = reduced_data_1, family = binomial(link = "logit"))
+reduced_model_1 =  glm(TenYearCHD ~ ., data = reduced_data_1, family = binomial(link = "logit"))
+summary(reduced_model_1)
+reduced_data_1 = training_data[,q]
+reduced_model_1 =  glm(TenYearCHD ~ ., data = reduced_data_1, family = binomial(link = "logit"))
+reduced_data_1 = training_data[-q,]
+reduced_model_1 =  glm(TenYearCHD ~ ., data = reduced_data_1, family = binomial(link = "logit"))
+summary(reduced_model_1)
+reduced_data_1 = training_data[,-q]
+reduced_model_1 =  glm(TenYearCHD ~ ., data = reduced_data_1, family = binomial(link = "logit"))
+summary(reduced_model_1)
+# Fit the full model#
+fullmodel <- glm(TenYearCHD ~ ., data = training_data, family = binomial(link = "logit"))#
+#
+# Get the summary of the full model#
+x <- summary(fullmodel)#
+#
+# Extract p-values#
+p_values <- x$coefficients[, 4]#
+#
+# Find the index of the max p-value excluding the intercept#
+max_p_value_index <- which.max(p_values[-1]) + 1  # +1 to adjust for excluding the intercept#
+#
+# Get the name of the variable to remove#
+variable_to_remove <- names(p_values)[max_p_value_index]#
+#
+# Remove the variable from the dataset#
+reduced_data <- training_data[, !names(training_data) %in% variable_to_remove]#
+#
+# Fit the model again with the reduced dataset#
+reduced_model <- glm(TenYearCHD ~ ., data = reduced_data, family = binomial(link = "logit"))#
+#
+# Display the summary of the reduced model#
+summary(reduced_model)
+x = summary(fullmodel)
+x = summary(fullmodel);x
+rm(list=ls())
+library(car)#
+library(caTools)#
+library(ggplot2)#
+library(pROC)#
+library(reshape2)#
+library(randomForest)#
+library(InformationValue)#
+library(olsrr)#
+set.seed(1234)#
+#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+split = sample.split(data, SplitRatio = 0.8)#
+training_data = data[split, ]#
+testing_data = data[!split, ]
+x = summary(model)
+y = x$coefficients
+estimates = y[,1][-c(1,18)]
+rm(list=ls())
+library(car)#
+library(caTools)#
+library(ggplot2)#
+library(pROC)#
+library(reshape2)#
+library(randomForest)#
+library(InformationValue)#
+library(olsrr)#
+set.seed(1234)#
+#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+split = sample.split(data, SplitRatio = 0.8)#
+training_data = data[split, ]#
+testing_data = data[!split, ]
+fullmodel = glm(TenYearCHD ~ ., data = training_data, family = binomial(link = "logit"))
+x = summary(fullmodel)
+x
+y = x$coefficients
+p_values = x$coefficients[, 4]
+max_p_value_index = which.max(p_values[-1]) + 1  # +1 to adjust for excluding the intercept
+variable_to_remove = names(p_values)[max_p_value_index]
+reduced_data = training_data[, !names(training_data) %in% variable_to_remove]
+reduced_model = glm(TenYearCHD ~ ., data = reduced_data, family = binomial(link = "logit"))
+reduced_model = glm(TenYearCHD ~ ., data = reduced_data, family = binomial(link = "logit"))
+summary(reduced_model)
+x = summary(fullmodel)
+x
+x = summary(reduced_model_1)#
+y = x$coefficients#
+p_values = x$coefficients[, 4]#
+max_p_value_index = which.max(p_values[-1]) + 1  # +1 to adjust for excluding the intercept#
+variable_to_remove = names(p_values)[max_p_value_index]#
+#
+reduced_data_2 = training_data[, !names(reduced_data_1) %in% variable_to_remove]#
+reduced_model_2 = glm(TenYearCHD ~ ., data = reduced_data_2, family = binomial(link = "logit"))#
+summary(reduced_model_2)
+x = summary(fullmodel)#
+y = x$coefficients#
+p_values = x$coefficients[, 4]#
+max_p_value_index = which.max(p_values[-1]) + 1  # +1 to adjust for excluding the intercept#
+variable_to_remove = names(p_values)[max_p_value_index]#
+#
+reduced_data_1 = training_data[, !names(training_data) %in% variable_to_remove]#
+reduced_model_1 = glm(TenYearCHD ~ ., data = reduced_data, family = binomial(link = "logit"))#
+summary(reduced_model_1)
+x = summary(reduced_model_1)#
+y = x$coefficients#
+p_values = x$coefficients[, 4]#
+max_p_value_index = which.max(p_values[-1]) + 1  # +1 to adjust for excluding the intercept#
+variable_to_remove = names(p_values)[max_p_value_index]#
+#
+reduced_data_2 = training_data[, !names(reduced_data_1) %in% variable_to_remove]#
+reduced_model_2 = glm(TenYearCHD ~ ., data = reduced_data_2, family = binomial(link = "logit"))#
+summary(reduced_model_2)
+summary(fullmodel)
+x = summary(fullmodel)#
+y = x$coefficients#
+p_values = x$coefficients[, 4]#
+max_p_value_index = which.max(p_values[-1]) + 1 #
+variable_to_remove = names(p_values)[max_p_value_index]#
+#
+reduced_data_1 = training_data[, !names(training_data) %in% variable_to_remove]#
+reduced_model_1 = glm(TenYearCHD ~ ., data = reduced_data_1, family = binomial(link = "logit"))#
+summary(reduced_model_1)
+x = summary(reduced_model_1)#
+y = x$coefficients#
+p_values = x$coefficients[, 4]#
+max_p_value_index = which.max(p_values[-1]) + 1#
+variable_to_remove = names(p_values)[max_p_value_index]#
+#
+reduced_data_2 = training_data[, !names(reduced_data_1) %in% variable_to_remove]#
+reduced_model_2 = glm(TenYearCHD ~ ., data = reduced_data_2, family = binomial(link = "logit"))#
+summary(reduced_model_2)#
+AIC_Reduced_model_2 = 2138.2
+x = summary(fullmodel)#
+y = x$coefficients#
+p_values = x$coefficients[, 4]#
+max_p_value_index = which.max(p_values[-1]) + 1 #
+variable_to_remove = names(p_values)[max_p_value_index]#
+#
+reduced_data_1 = training_data[, !names(training_data) %in% variable_to_remove]#
+reduced_model_1 = glm(TenYearCHD ~ ., data = reduced_data_1, family = binomial(link = "logit"))#
+summary(reduced_model_1)
+# Fit the full model#
+fullmodel <- glm(TenYearCHD ~ ., data = training_data, family = binomial(link = "logit"))#
+#
+# Get the summary of the full model#
+x <- summary(fullmodel)#
+#
+# Extract p-values#
+p_values <- x$coefficients[, 4]#
+#
+# Find the index of the max p-value excluding the intercept#
+max_p_value_index <- which.max(p_values[-1]) + 1  # +1 to adjust for excluding the intercept#
+#
+# Get the name of the variable to remove#
+variable_to_remove <- names(p_values)[max_p_value_index]#
+#
+# Remove the variable from the dataset#
+reduced_data <- training_data[, !names(training_data) %in% variable_to_remove]#
+#
+# Fit the model again with the reduced dataset#
+reduced_model <- glm(TenYearCHD ~ ., data = reduced_data, family = binomial(link = "logit"))#
+#
+# Display the summary of the reduced model#
+summary(reduced_model)
+summary(fullmodel)
+summary(reduced_model_2)
+summary(reduced_model_1)
+# Fit the full model#
+fullmodel <- glm(TenYearCHD ~ ., data = training_data, family = binomial(link = "logit"))#
+#
+# Get the summary of the full model#
+x <- summary(fullmodel)#
+#
+# Initialize the variable for the best AIC#
+best_AIC <- AIC(fullmodel)#
+#
+# Perform backward elimination#
+for (i in 1:length(x$coefficients)) {#
+  # Get the summary of the current model#
+  x <- summary(fullmodel)#
+  # Extract p-values#
+  p_values <- x$coefficients[, 4]#
+  # Find the index of the max p-value excluding the intercept#
+  max_p_value_index <- which.max(p_values[-1]) + 1#
+  # Get the name of the variable to remove#
+  variable_to_remove <- names(p_values)[max_p_value_index]#
+  # Remove the variable from the dataset#
+  reduced_data <- training_data[, !names(training_data) %in% variable_to_remove]#
+  # Fit the model again with the reduced dataset#
+  reduced_model <- glm(TenYearCHD ~ ., data = reduced_data, family = binomial(link = "logit"))#
+  # Calculate AIC for the reduced model#
+  AIC_reduced <- AIC(reduced_model)#
+  # If AIC for the reduced model is better, update the best AIC and the full model#
+  if (AIC_reduced < best_AIC) {#
+    best_AIC <- AIC_reduced#
+    fullmodel <- reduced_model#
+  } else {#
+    # If AIC for the reduced model is not better, stop the loop#
+    break#
+  }#
+}#
+#
+# Display the summary of the best model#
+summary(fullmodel)
+# Assuming 'fullmodel' is your initial model#
+#
+# Start with all variables in the model#
+predictors <- names(fullmodel)#
+#
+# Perform backward elimination#
+while (length(predictors) > 1) {#
+  # Fit the model#
+  current_model <- lm(formula(fullmodel), data = your_data_frame)#
+  # Get p-values for each predictor#
+  p_values <- summary(current_model)$coefficients[, 4]#
+  # Identify predictor with the highest p-value#
+  max_p_value_index <- which.max(p_values[-1]) # Exclude intercept#
+  # If the highest p-value is greater than your threshold (e.g., 0.05), remove the predictor#
+  if (p_values[max_p_value_index] > 0.05) {#
+    predictors <- predictors[-(max_p_value_index + 1)] # +1 to account for intercept#
+    formula_string <- paste("dependent_variable ~", paste(predictors, collapse = "+"))#
+    fullmodel <- as.formula(formula_string)#
+  } else {#
+    break  # Break the loop if no predictor to remove#
+  }#
+}#
+#
+# Final model after backward elimination#
+final_model <- lm(formula(fullmodel), data = your_data_frame)
+backward_elimination <- function(model, threshold = 0.05) {#
+  while(any(coef(summary(model))[, 4] > threshold)) {#
+    max_p_value_index <- which.max(coef(summary(model))[, 4])#
+    variables <- names(model$coefficients)#
+    variable_to_remove <- variables[max_p_value_index]#
+    model <- update(model, . ~ . - eval(parse(text = variable_to_remove)))#
+  }#
+  return(model)#
+}#
+#
+# Initial model#
+initial_model <- glm(TenYearCHD ~ ., data = training_data, family = binomial(link = "logit"))#
+#
+# Backward elimination#
+final_model <- backward_elimination(initial_model)#
+#
+# Summary of the final model#
+summary(final_model)
+backward_elimination_aic <- function(model) {#
+  initial_aic <- AIC(model)#
+  while(TRUE) {#
+    max_p_value_index <- which.max(coef(summary(model))[, 4])#
+    variables <- names(model$coefficients)#
+    variable_to_remove <- variables[max_p_value_index]#
+    updated_formula <- as.formula(paste(". ~ . - ", variable_to_remove))#
+    updated_model <- update(model, updated_formula)#
+    if (AIC(updated_model) > initial_aic) {#
+      break#
+    }#
+    model <- updated_model#
+  }#
+  return(model)#
+}#
+#
+# Initial model#
+initial_model <- glm(TenYearCHD ~ ., data = training_data, family = binomial(link = "logit"))#
+#
+# Backward elimination based on AIC#
+final_model <- backward_elimination_aic(initial_model)#
+#
+# Summary of the final model#
+summary(final_model)
+backward_elimination_one_by_one <- function(model) {#
+  initial_aic <- AIC(model)#
+  while(TRUE) {#
+    variables <- names(model$coefficients)[-1]  # Exclude intercept#
+    aic_values <- numeric(length(variables))#
+    for (i in seq_along(variables)) {#
+      updated_formula <- as.formula(paste(". ~ . - ", variables[i]))#
+      updated_model <- update(model, updated_formula)#
+      aic_values[i] <- AIC(updated_model)#
+    }#
+    min_aic_index <- which.min(aic_values)#
+    if (aic_values[min_aic_index] >= initial_aic) {#
+      break#
+    }#
+    variable_to_remove <- variables[min_aic_index]#
+    model <- update(model, . ~ . - eval(parse(text = variable_to_remove)))#
+  }#
+  return(model)#
+}#
+#
+# Initial model#
+initial_model <- glm(TenYearCHD ~ ., data = training_data, family = binomial(link = "logit"))#
+#
+# Backward elimination one by one based on AIC#
+final_model <- backward_elimination_one_by_one(initial_model)#
+#
+# Summary of the final model#
+summary(final_model)
+# Initial model#
+initial_model <- glm(TenYearCHD ~ ., data = training_data, family = binomial(link = "logit"))#
+initial_aic <- AIC(initial_model)#
+#
+# Function to calculate AIC for a given model#
+calculate_aic <- function(model) {#
+  return(AIC(model))#
+}#
+#
+# Function to remove one predictor based on AIC criterion#
+backward_elimination_manual <- function(model) {#
+  variables <- names(model$coefficients)[-1]  # Exclude intercept#
+  aic_values <- numeric(length(variables))#
+  for (i in seq_along(variables)) {#
+    updated_formula <- as.formula(paste(". ~ . - ", variables[i]))#
+    updated_model <- update(model, updated_formula)#
+    aic_values[i] <- calculate_aic(updated_model)#
+  }#
+  min_aic_index <- which.min(aic_values)#
+  if (aic_values[min_aic_index] < initial_aic) {#
+    variable_to_remove <- variables[min_aic_index]#
+    model <- update(model, . ~ . - eval(parse(text = variable_to_remove)))#
+    print(paste("Removed predictor:", variable_to_remove))#
+    print(paste("New AIC:", aic_values[min_aic_index]))#
+    print(summary(model))#
+    backward_elimination_manual(model)#
+  } else {#
+    print("No more predictors to remove.")#
+    return(model)#
+  }#
+}#
+#
+# Perform backward elimination manually#
+final_model_manual <- backward_elimination_manual(initial_model)
+# Initial model#
+initial_model <- glm(TenYearCHD ~ ., data = training_data, family = binomial(link = "logit"))#
+initial_aic <- AIC(initial_model)#
+#
+# Function to calculate AIC for a given model#
+calculate_aic <- function(model) {#
+  return(AIC(model))#
+}#
+#
+# Function to remove one predictor based on AIC criterion#
+backward_elimination_manual <- function(model) {#
+  variables <- names(model$coefficients)[-1]  # Exclude intercept#
+  aic_values <- numeric(length(variables))#
+  for (i in seq_along(variables)) {#
+    updated_formula <- as.formula(paste(". ~ . - ", variables[i]))#
+    updated_model <- update(model, updated_formula)#
+    aic_values[i] <- calculate_aic(updated_model)#
+  }#
+  min_aic_index <- which.min(aic_values)#
+  if (aic_values[min_aic_index] < initial_aic) {#
+    variable_to_remove <- variables[min_aic_index]#
+    model <- update(model, . ~ . - eval(parse(text = variable_to_remove)))#
+    print(paste("Removed predictor:", variable_to_remove))#
+    print(paste("New AIC:", aic_values[min_aic_index]))#
+    print(summary(model))#
+    backward_elimination_manual(model)#
+  } else {#
+    print("No more predictors to remove.")#
+    return(model)#
+  }#
+}#
+#
+# Perform backward elimination manually#
+final_model_manual <- backward_elimination_manual(initial_model)
+x = summary(fullmodel)
+x
+x = summary(model)
+x = summary(fullmodel)
+x = summary(fullmodel)
+names(x)
+x$P-value
+x$coefficients
+y =	x$coefficients
+z = y[,4]
+z = y[,4];z
+z = as.vector(y[,4])
+z = as.vector(y[,4]);z
+z = which.max(as.vector(y[,4]))
+z = which.max(as.vector(y[,4]));z
+x
+x
+reduced_data = training_data[-z+1]
+names(reduced_data
+)
+reduced_data_1 = training_data[-z+1]
+x = summary(fullmodel)#
+y =	x$coefficients#
+z = which.max(as.vector(y[,4]))#
+reduced_data_1 = training_data[-z+1]#
+reduced_model_1 = glm(TenYearCHD ~ ., data = reduced_data_1, family = binomial(link = "logit"))#
+summary(reduced_model_1)
+# =====================#
+# Reduced Model -> 2#
+# =====================#
+x = summary(reduced_model_1)#
+y =	x$coefficients#
+z = which.max(as.vector(y[,4]))#
+reduced_data_2 = reduced_data_1[-z+1]#
+reduced_model_2 = glm(TenYearCHD ~ ., data = reduced_data_2, family = binomial(link = "logit"))#
+summary(reduced_model_2)
+summary(reduced_model_1)
+# =====================#
+# Reduced Model -> 3#
+# =====================#
+x = summary(reduced_model_2)#
+y =	x$coefficients#
+z = which.max(as.vector(y[,4]))#
+reduced_data_3 = reduced_data_2[-z+1]#
+reduced_model_3 = glm(TenYearCHD ~ ., data = reduced_data_3, family = binomial(link = "logit"))#
+summary(reduced_model_3)
+# =====================#
+# Reduced Model -> 4#
+# =====================#
+x = summary(reduced_model_3)#
+y =	x$coefficients#
+z = which.max(as.vector(y[,4]))#
+reduced_data_4 = reduced_data_3[-z+1]#
+reduced_model_4 = glm(TenYearCHD ~ ., data = reduced_data_4, family = binomial(link = "logit"))#
+summary(reduced_model_4)
+x = summary(reduced_model_4)#
+y =	x$coefficients#
+z = which.max(as.vector(y[,4]))#
+reduced_data_5 = reduced_data_4[-z+1]#
+reduced_model_5 = glm(TenYearCHD ~ ., data = reduced_data_5, family = binomial(link = "logit"))#
+summary(reduced_model_5)
+x = summary(reduced_model_5)#
+y =	x$coefficients#
+z = which.max(as.vector(y[,4]))#
+reduced_data_6 = reduced_data_5[-z+1]#
+reduced_model_5 = glm(TenYearCHD ~ ., data = reduced_data_6, family = binomial(link = "logit"))#
+summary(reduced_model_6)
+x = summary(reduced_model_4)#
+y =	x$coefficients#
+z = which.max(as.vector(y[,4]))#
+reduced_data_5 = reduced_data_4[-z+1]#
+reduced_model_5 = glm(TenYearCHD ~ ., data = reduced_data_5, family = binomial(link = "logit"))#
+summary(reduced_model_5)#
+AIC_Reduced_Model_5 = 2131.6
+x = summary(reduced_model_5)#
+y =	x$coefficients#
+z = which.max(as.vector(y[,4]))#
+reduced_data_6 = reduced_data_5[-z+1]#
+reduced_model_6 = glm(TenYearCHD ~ ., data = reduced_data_6, family = binomial(link = "logit"))#
+summary(reduced_model_6)
+# =====================#
+# Reduced Model -> 7#
+# =====================#
+x = summary(reduced_model_6)#
+y =	x$coefficients#
+z = which.max(as.vector(y[,4]))#
+reduced_data_7 = reduced_data_5[-z+1]#
+reduced_model_7 = glm(TenYearCHD ~ ., data = reduced_data_7, family = binomial(link = "logit"))#
+summary(reduced_model_7)
+# =====================#
+# Reduced Model -> 8#
+# =====================#
+x = summary(reduced_model_6)#
+y =	x$coefficients#
+z = which.max(as.vector(y[,4]))#
+reduced_data_8 = reduced_data_7[-z+1]#
+reduced_model_8 = glm(TenYearCHD ~ ., data = reduced_data_8, family = binomial(link = "logit"))#
+summary(reduced_model_8)
+# Selected_Model = reduced_model_6
+Selected_Model = reduced_model_6
+fitted_prob = fitted(Selected_Model)
+TPR=array()#
+FPR=array()#
+Index = array()#
+k=1#
+p=seq(0.1,1,0.0001)#
+for(i in p)#
+{#
+print(paste("Threshold = ",i))#
+Y.hat=ifelse(fitted_prob>i,1,0)#
+confusion_matrix = table(Y.hat,TenYearCHD)#
+print(confusion_matrix)#
+  TN = confusion_matrix[1, 1]  # True Negatives#
+  FP = confusion_matrix[1, 2]  # False Positives#
+  FN = confusion_matrix[2, 1]  # False Negatives#
+  TP = confusion_matrix[2, 2]  # True Positives#
+  TPR[k] = TP / (TP + FN)#
+  FPR[k] = FP / (TN + FP + FN + TP)#
+  Index[k] = TPR[k] * (1 - FPR[k]) #
+  plot(FPR,TPR,type="l",main="Finding Optimum Model . . . ")#
+  k=k+1#
+}#
+optimum_thresold = p[which.max(Index)]
+fitted_prob
+TenYearCHD
+fitted_prob
+TenYearCHD
+length(TemYearCHD)
+length(TenYearCHD)
+length(Y.hat)
+length(fitted_prob)
+TPR=array()#
+FPR=array()#
+Index = array()#
+k=1#
+p=seq(0.1,1,0.0001)#
+for(i in p)#
+{#
+print(paste("Threshold = ",i))#
+Y.hat=ifelse(fitted_prob>i,1,0)#
+confusion_matrix = table(Y.hat,training_data$TenYearCHD)#
+print(confusion_matrix)#
+  TN = confusion_matrix[1, 1]  # True Negatives#
+  FP = confusion_matrix[1, 2]  # False Positives#
+  FN = confusion_matrix[2, 1]  # False Negatives#
+  TP = confusion_matrix[2, 2]  # True Positives#
+  TPR[k] = TP / (TP + FN)#
+  FPR[k] = FP / (TN + FP + FN + TP)#
+  Index[k] = TPR[k] * (1 - FPR[k]) #
+  plot(FPR,TPR,type="l",main="Finding Optimum Model . . . ")#
+  k=k+1#
+}#
+optimum_thresold = p[which.max(Index)]
+TPR=array()#
+FPR=array()#
+Index = array()#
+k=1#
+p=seq(0.1,1,0.001)#
+for(i in p)#
+{#
+print(paste("Threshold = ",i))#
+Y.hat=ifelse(fitted_prob>i,1,0)#
+confusion_matrix = table(Y.hat,training_data$TenYearCHD)#
+print(confusion_matrix)#
+  TN = confusion_matrix[1, 1]  # True Negatives#
+  FP = confusion_matrix[1, 2]  # False Positives#
+  FN = confusion_matrix[2, 1]  # False Negatives#
+  TP = confusion_matrix[2, 2]  # True Positives#
+  TPR[k] = TP / (TP + FN)#
+  FPR[k] = FP / (TN + FP + FN + TP)#
+  Index[k] = TPR[k] * (1 - FPR[k]) #
+  plot(FPR,TPR,type="l",main="Finding Optimum Model . . . ")#
+  k=k+1#
+}#
+optimum_thresold = p[which.max(Index)]
+# Full Model#
+fullmodel = glm(TenYearCHD ~ ., data = data, family = binomial(link = "logit"))#
+AIC_full_model = 2139.9#
+# =====================#
+# Reduced Model -> 1#
+# =====================#
+x = summary(fullmodel)#
+y =	x$coefficients#
+z = which.max(as.vector(y[,4]))#
+reduced_data_1 = training_data[-z+1]#
+reduced_model_1 = glm(TenYearCHD ~ ., data = reduced_data_1, family = binomial(link = "logit"))#
+summary(reduced_model_1)#
+AIC_Reduced_Model_1 = 2138.2#
+# =====================#
+# Reduced Model -> 2#
+# =====================#
+x = summary(reduced_model_1)#
+y =	x$coefficients#
+z = which.max(as.vector(y[,4]))#
+reduced_data_2 = reduced_data_1[-z+1]#
+reduced_model_2 = glm(TenYearCHD ~ ., data = reduced_data_2, family = binomial(link = "logit"))#
+summary(reduced_model_2)#
+AIC_Reduced_Model_2 = 2136.3#
+# =====================#
+# Reduced Model -> 3#
+# =====================#
+x = summary(reduced_model_2)#
+y =	x$coefficients#
+z = which.max(as.vector(y[,4]))#
+reduced_data_3 = reduced_data_2[-z+1]#
+reduced_model_3 = glm(TenYearCHD ~ ., data = reduced_data_3, family = binomial(link = "logit"))#
+summary(reduced_model_3)#
+AIC_Reduced_Model_3 = 2134.7#
+# =====================#
+# Reduced Model -> 4#
+# =====================#
+x = summary(reduced_model_3)#
+y =	x$coefficients#
+z = which.max(as.vector(y[,4]))#
+reduced_data_4 = reduced_data_3[-z+1]#
+reduced_model_4 = glm(TenYearCHD ~ ., data = reduced_data_4, family = binomial(link = "logit"))#
+summary(reduced_model_4)#
+AIC_Reduced_Model_4 = 2133.2#
+# =====================#
+# Reduced Model -> 5#
+# =====================#
+x = summary(reduced_model_4)#
+y =	x$coefficients#
+z = which.max(as.vector(y[,4]))#
+reduced_data_5 = reduced_data_4[-z+1]#
+reduced_model_5 = glm(TenYearCHD ~ ., data = reduced_data_5, family = binomial(link = "logit"))#
+summary(reduced_model_5)#
+AIC_Reduced_Model_5 = 2131.6#
+# =====================#
+# Reduced Model -> 6#
+# =====================#
+x = summary(reduced_model_5)#
+y =	x$coefficients#
+z = which.max(as.vector(y[,4]))#
+reduced_data_6 = reduced_data_5[-z+1]#
+reduced_model_6 = glm(TenYearCHD ~ ., data = reduced_data_6, family = binomial(link = "logit"))#
+summary(reduced_model_6)#
+AIC_Reduced_Model_6 = 2130.1#
+# =====================#
+# Reduced Model -> 7#
+# =====================#
+x = summary(reduced_model_6)#
+y =	x$coefficients#
+z = which.max(as.vector(y[,4]))#
+reduced_data_7 = reduced_data_5[-z+1]#
+reduced_model_7 = glm(TenYearCHD ~ ., data = reduced_data_7, family = binomial(link = "logit"))#
+summary(reduced_model_7)#
+AIC_Reduced_Model_7 = 2130.4#
+#
+Selected_Model = reduced_model_6#
+fitted_prob = fitted(Selected_Model)#
+#=============================================##
+# Finding thresold by Optimising TPR*(1-FPR)  ##
+#=============================================##
+TPR=array()#
+FPR=array()#
+Index = array()#
+k=1#
+p=seq(0.1,1,0.0001)#
+for(i in p)#
+{#
+print(paste("Threshold = ",i))#
+Y.hat=ifelse(fitted_prob>i,1,0)#
+confusion_matrix = table(Y.hat,TenYearCHD)#
+print(confusion_matrix)#
+  TN = confusion_matrix[1, 1]  # True Negatives#
+  FP = confusion_matrix[1, 2]  # False Positives#
+  FN = confusion_matrix[2, 1]  # False Negatives#
+  TP = confusion_matrix[2, 2]  # True Positives#
+  TPR[k] = TP / (TP + FN)#
+  FPR[k] = FP / (TN + FP + FN + TP)#
+  Index[k] = TPR[k] * (1 - FPR[k]) #
+  plot(FPR,TPR,type="l",main="Finding Optimum Model . . . ")#
+  k=k+1#
+}#
+optimum_thresold = p[which.max(Index)]
+fitted_prob
+fitted_prob = fitted(Selected_Model)
+TPR=array()#
+FPR=array()#
+Index = array()#
+k=1#
+p=seq(0.1,1,0.0001)#
+for(i in p)#
+{#
+print(paste("Threshold = ",i))#
+Y.hat=ifelse(fitted_prob>i,1,0)#
+confusion_matrix = table(Y.hat,TenYearCHD)#
+print(confusion_matrix)#
+  TN = confusion_matrix[1, 1]  # True Negatives#
+  FP = confusion_matrix[1, 2]  # False Positives#
+  FN = confusion_matrix[2, 1]  # False Negatives#
+  TP = confusion_matrix[2, 2]  # True Positives#
+  TPR[k] = TP / (TP + FN)#
+  FPR[k] = FP / (TN + FP + FN + TP)#
+  Index[k] = TPR[k] * (1 - FPR[k]) #
+  plot(FPR,TPR,type="l",main="Finding Optimum Model . . . ")#
+  k=k+1#
+}#
+optimum_thresold = p[which.max(Index)]
+length(Y.Hat)
+length(Y.hat)
+length(TenYearCHD)
+length(fitted_prob)
+fitted_prob = fitted(full_model)
+fitted_prob = fitted(fullmodel)
+TPR=array()#
+FPR=array()#
+Index = array()#
+k=1#
+p=seq(0.1,1,0.0001)#
+for(i in p)#
+{#
+print(paste("Threshold = ",i))#
+Y.hat=ifelse(fitted_prob>i,1,0)#
+confusion_matrix = table(Y.hat,TenYearCHD)#
+print(confusion_matrix)#
+  TN = confusion_matrix[1, 1]  # True Negatives#
+  FP = confusion_matrix[1, 2]  # False Positives#
+  FN = confusion_matrix[2, 1]  # False Negatives#
+  TP = confusion_matrix[2, 2]  # True Positives#
+  TPR[k] = TP / (TP + FN)#
+  FPR[k] = FP / (TN + FP + FN + TP)#
+  Index[k] = TPR[k] * (1 - FPR[k]) #
+  plot(FPR,TPR,type="l",main="Finding Optimum Model . . . ")#
+  k=k+1#
+}#
+optimum_thresold = p[which.max(Index)]
+TPR=array()#
+FPR=array()#
+Index = array()#
+k=1#
+p=seq(0.1,1,0.01)#
+for(i in p)#
+{#
+print(paste("Threshold = ",i))#
+Y.hat=ifelse(fitted_prob>i,1,0)#
+confusion_matrix = table(Y.hat,TenYearCHD)#
+print(confusion_matrix)#
+  TN = confusion_matrix[1, 1]  # True Negatives#
+  FP = confusion_matrix[1, 2]  # False Positives#
+  FN = confusion_matrix[2, 1]  # False Negatives#
+  TP = confusion_matrix[2, 2]  # True Positives#
+  TPR[k] = TP / (TP + FN)#
+  FPR[k] = FP / (TN + FP + FN + TP)#
+  Index[k] = TPR[k] * (1 - FPR[k]) #
+  plot(FPR,TPR,type="l",main="Finding Optimum Model . . . ")#
+  k=k+1#
+}#
+optimum_thresold = p[which.max(Index)]
+Selected_Model = fullmodel
+fitted_prob = fitted(Selected_Model)
+TPR=array()#
+FPR=array()#
+Index = array()#
+k=1#
+p=seq(0.1,1,0.0001)#
+for(i in p)#
+{#
+print(paste("Threshold = ",i))#
+Y.hat=ifelse(fitted_prob>i,1,0)#
+confusion_matrix = table(Y.hat,TenYearCHD)#
+print(confusion_matrix)#
+  TN = confusion_matrix[1, 1]  # True Negatives#
+  FP = confusion_matrix[1, 2]  # False Positives#
+  FN = confusion_matrix[2, 1]  # False Negatives#
+  TP = confusion_matrix[2, 2]  # True Positives#
+  TPR[k] = TP / (TP + FN)#
+  FPR[k] = FP / (TN + FP + FN + TP)#
+  Index[k] = TPR[k] * (1 - FPR[k]) #
+  plot(FPR,TPR,type="l",main="Finding Optimum Model . . . ")#
+  k=k+1#
+}#
+optimum_thresold = p[which.max(Index)]
+#=============================================##
+# Finding thresold by Optimising TPR*(1-FPR)  ##
+#=============================================##
+TPR=array()#
+FPR=array()#
+Index = array()#
+k=1#
+p=seq(0.1,0.8,0.0001)#
+for(i in p)#
+{#
+print(paste("Threshold = ",i))#
+Y.hat=ifelse(fitted_prob>i,1,0)#
+confusion_matrix = table(Y.hat,TenYearCHD)#
+print(confusion_matrix)#
+  TN = confusion_matrix[1, 1]  # True Negatives#
+  FP = confusion_matrix[1, 2]  # False Positives#
+  FN = confusion_matrix[2, 1]  # False Negatives#
+  TP = confusion_matrix[2, 2]  # True Positives#
+  TPR[k] = TP / (TP + FN)#
+  FPR[k] = FP / (TN + FP + FN + TP)#
+  Index[k] = TPR[k] * (1 - FPR[k]) #
+  plot(FPR,TPR,type="l",main="Finding Optimum Model . . . ")#
+  k=k+1#
+}#
+optimum_thresold = p[which.max(Index)]
+#=============================================##
+# Finding thresold by Optimising TPR*(1-FPR)  ##
+#=============================================##
+TPR=array()#
+FPR=array()#
+Index = array()#
+k=1#
+p=seq(0.1,0.8,0.001)#
+for(i in p)#
+{#
+print(paste("Threshold = ",i))#
+Y.hat=ifelse(fitted_prob>i,1,0)#
+confusion_matrix = table(Y.hat,TenYearCHD)#
+print(confusion_matrix)#
+  TN = confusion_matrix[1, 1]  # True Negatives#
+  FP = confusion_matrix[1, 2]  # False Positives#
+  FN = confusion_matrix[2, 1]  # False Negatives#
+  TP = confusion_matrix[2, 2]  # True Positives#
+  TPR[k] = TP / (TP + FN)#
+  FPR[k] = FP / (TN + FP + FN + TP)#
+  Index[k] = TPR[k] * (1 - FPR[k]) #
+  plot(FPR,TPR,type="l",main="Finding Optimum Model . . . ")#
+  k=k+1#
+}#
+optimum_thresold = p[which.max(Index)]
+optimum_Thresold
+optimum_thresold
+TPR=array()#
+FPR=array()#
+Index = array()#
+k=1#
+p=seq(0.1,0.9,0.001)#
+for(i in p)#
+{#
+print(paste("Threshold = ",i))#
+Y.hat=ifelse(fitted_prob>i,1,0)#
+confusion_matrix = table(Y.hat,TenYearCHD)#
+print(confusion_matrix)#
+  TN = confusion_matrix[1, 1]  # True Negatives#
+  FP = confusion_matrix[1, 2]  # False Positives#
+  FN = confusion_matrix[2, 1]  # False Negatives#
+  TP = confusion_matrix[2, 2]  # True Positives#
+  TPR[k] = TP / (TP + FN)#
+  FPR[k] = FP / (TN + FP + FN + TP)#
+  Index[k] = TPR[k] * (1 - FPR[k]) #
+  plot(FPR,TPR,type="l",main="Finding Optimum Model . . . ")#
+  k=k+1#
+}#
+optimum_thresold = p[which.max(Index)]
+optimum_thresold
+#=============================================##
+# Finding thresold by Optimising TPR*(1-FPR)  ##
+#=============================================##
+TPR=array()#
+FPR=array()#
+Index = array()#
+k=1#
+p=seq(0.1,0.999,0.001)#
+for(i in p)#
+{#
+print(paste("Threshold = ",i))#
+Y.hat=ifelse(fitted_prob>i,1,0)#
+confusion_matrix = table(Y.hat,TenYearCHD)#
+print(confusion_matrix)#
+  TN = confusion_matrix[1, 1]  # True Negatives#
+  FP = confusion_matrix[1, 2]  # False Positives#
+  FN = confusion_matrix[2, 1]  # False Negatives#
+  TP = confusion_matrix[2, 2]  # True Positives#
+  TPR[k] = TP / (TP + FN)#
+  FPR[k] = FP / (TN + FP + FN + TP)#
+  Index[k] = TPR[k] * (1 - FPR[k]) #
+  plot(FPR,TPR,type="l",main="Finding Optimum Model . . . ")#
+  k=k+1#
+}#
+optimum_thresold = p[which.max(Index)]
+#=============================================##
+# Finding thresold by Optimising TPR*(1-FPR)  ##
+#=============================================##
+TPR=array()#
+FPR=array()#
+Index = array()#
+k=1#
+p=seq(0.1,0.95,0.001)#
+for(i in p)#
+{#
+print(paste("Threshold = ",i))#
+Y.hat=ifelse(fitted_prob>i,1,0)#
+confusion_matrix = table(Y.hat,TenYearCHD)#
+print(confusion_matrix)#
+  TN = confusion_matrix[1, 1]  # True Negatives#
+  FP = confusion_matrix[1, 2]  # False Positives#
+  FN = confusion_matrix[2, 1]  # False Negatives#
+  TP = confusion_matrix[2, 2]  # True Positives#
+  TPR[k] = TP / (TP + FN)#
+  FPR[k] = FP / (TN + FP + FN + TP)#
+  Index[k] = TPR[k] * (1 - FPR[k]) #
+  plot(FPR,TPR,type="l",main="Finding Optimum Model . . . ")#
+  k=k+1#
+}#
+optimum_thresold = p[which.max(Index)]
+optimum_thresold
+#=============================================##
+# Finding thresold by Optimising TPR*(1-FPR)  ##
+#=============================================##
+TPR=array()#
+FPR=array()#
+Index = array()#
+k=1#
+p=seq(0.1,0.9,0.001)#
+for(i in p)#
+{#
+print(paste("Threshold = ",i))#
+Y.hat=ifelse(fitted_prob>i,1,0)#
+confusion_matrix = table(Y.hat,TenYearCHD)#
+print(confusion_matrix)#
+  TN = confusion_matrix[1, 1]  # True Negatives#
+  FP = confusion_matrix[1, 2]  # False Positives#
+  FN = confusion_matrix[2, 1]  # False Negatives#
+  TP = confusion_matrix[2, 2]  # True Positives#
+  TPR[k] = TP / (TP + FN)#
+  FPR[k] = FP / (TN + FP + FN + TP)#
+  Index[k] = TPR[k] * (1 - FPR[k]) #
+  plot(FPR,TPR,type="l",main="Finding Optimum Model . . . ")#
+  k=k+1#
+}#
+optimum_thresold = p[which.max(Index)]
+optimum_thresold
+Selected_Model = reduced_model_6
+Selected_Model = reduced_model_6
+fitted_prob = fitted(Selected_Model)
+#=============================================##
+# Finding thresold by Optimising TPR*(1-FPR)  ##
+#=============================================##
+TPR=array()#
+FPR=array()#
+Index = array()#
+k=1#
+p=seq(0.1,0.9,0.001)#
+for(i in p)#
+{#
+print(paste("Threshold = ",i))#
+Y.hat=ifelse(fitted_prob>i,1,0)#
+confusion_matrix = table(Y.hat,TenYearCHD)#
+print(confusion_matrix)#
+  TN = confusion_matrix[1, 1]  # True Negatives#
+  FP = confusion_matrix[1, 2]  # False Positives#
+  FN = confusion_matrix[2, 1]  # False Negatives#
+  TP = confusion_matrix[2, 2]  # True Positives#
+  TPR[k] = TP / (TP + FN)#
+  FPR[k] = FP / (TN + FP + FN + TP)#
+  Index[k] = TPR[k] * (1 - FPR[k]) #
+  plot(FPR,TPR,type="l",main="Finding Optimum Model . . . ")#
+  k=k+1#
+}#
+optimum_thresold = p[which.max(Index)]
+length(reduced_data_1)
+length(reduced_data_2)
+length(reduced_data_3)
+nrows(reduced_data_1
+)
+nrow(reduced_data_1)
+nrow(reduced_data_2)
+nrow(reduced_data_3)
+nrow(reduced_data_4)
+nrow(reduced_data_5)
+nrow(training_data)
+Selected_Model = reduced_model_6#
+fitted_prob = fitted(Selected_Model)#
+#=============================================##
+# Finding thresold by Optimising TPR*(1-FPR)  ##
+#=============================================##
+TPR=array()#
+FPR=array()#
+Index = array()#
+k=1#
+p=seq(0.1,0.9,0.001)#
+for(i in p)#
+{#
+print(paste("Threshold = ",i))#
+Y.hat=ifelse(fitted_prob>i,1,0)#
+confusion_matrix = table(Y.hat,training_data$TenYearCHD)#
+print(confusion_matrix)#
+  TN = confusion_matrix[1, 1]  # True Negatives#
+  FP = confusion_matrix[1, 2]  # False Positives#
+  FN = confusion_matrix[2, 1]  # False Negatives#
+  TP = confusion_matrix[2, 2]  # True Positives#
+  TPR[k] = TP / (TP + FN)#
+  FPR[k] = FP / (TN + FP + FN + TP)#
+  Index[k] = TPR[k] * (1 - FPR[k]) #
+  plot(FPR,TPR,type="l",main="Finding Optimum Model . . . ")#
+  k=k+1#
+}#
+optimum_thresold = p[which.max(Index)]
+optimum_thresold
+fitted_prob = fitted(Selected_Model)#
+#=============================================##
+# Finding thresold by Optimising TPR*(1-FPR)  ##
+#=============================================##
+TPR=array()#
+FPR=array()#
+Index = array()#
+k=1#
+p=seq(0.1,0.9,0.001)#
+for(i in p)#
+{#
+print(paste("Threshold = ",i))#
+Y.hat=ifelse(fitted_prob>i,1,0)#
+confusion_matrix = table(Y.hat,training_data$TenYearCHD)#
+print(confusion_matrix)#
+ TN = confusion_matrix[1, 1]  # True Negatives#
+FP = confusion_matrix[1, 2]  # False Positives#
+FN = confusion_matrix[2, 1]  # False Negatives#
+TP = confusion_matrix[2, 2]  # True Positives#
+#
+TPR[k] = TP / (TP + FN)#
+FPR[k] = FP / (TN + FP)#
+#
+  Index[k] = TPR[k] * (1 - FPR[k]) #
+  plot(FPR,TPR,type="l",main="Finding Optimum Model . . . ")#
+  k=k+1#
+}#
+optimum_thresold = p[which.max(Index)]
+optimum_thresold
+TPR <- numeric()#
+FPR <- numeric()#
+Index <- numeric()#
+k <- 1#
+p <- seq(0.1, 0.9, 0.001)#
+for (i in p) {#
+  print(paste("Threshold = ", i))#
+  Y.hat <- ifelse(fitted_prob > i, 1, 0)#
+  confusion_matrix <- table(Y.hat, training_data$TenYearCHD)#
+  print(confusion_matrix)#
+  TN <- confusion_matrix[1, 1]  # True Negatives#
+  FP <- confusion_matrix[1, 2]  # False Positives#
+  FN <- confusion_matrix[2, 1]  # False Negatives#
+  TP <- confusion_matrix[2, 2]  # True Positives#
+  TPR[k] <- TP / (TP + FN)#
+  FPR[k] <- FP / (TN + FP)#
+  Index[k] <- TPR[k] * (1 - FPR[k])#
+  plot(FPR, TPR, type = "l", main = "Finding Optimum Model . . . ")#
+  k <- k + 1#
+}#
+optimum_threshold <- p[which.max(Index)]
+library(caret)#
+#
+TPR <- numeric()#
+FPR <- numeric()#
+Index <- numeric()#
+k <- 1#
+p <- seq(0.1, 0.9, 0.001)#
+#
+for (i in p) {#
+  print(paste("Threshold = ", i))#
+  Y.hat <- ifelse(fitted_prob > i, 1, 0)#
+  confusion_matrix <- confusionMatrix(factor(Y.hat), factor(training_data$TenYearCHD))#
+  print(confusion_matrix$table)#
+  TN <- confusion_matrix$table[1, 1]  # True Negatives#
+  FP <- confusion_matrix$table[1, 2]  # False Positives#
+  FN <- confusion_matrix$table[2, 1]  # False Negatives#
+  TP <- confusion_matrix$table[2, 2]  # True Positives#
+  TPR[k] <- TP / (TP + FN)#
+  FPR[k] <- FP / (TN + FP)#
+  Index[k] <- TPR[k] * (1 - FPR[k]) #
+  plot(FPR, TPR, type = "l", main = "Finding Optimum Model . . . ")#
+  k <- k + 1#
+}#
+#
+optimum_threshold <- p[which.max(Index)]
+#=============================================##
+# Finding threshold by Optimising TPR*(1-FPR) ##
+#=============================================##
+TPR <- array()#
+FPR <- array()#
+Index <- array()#
+k <- 1#
+p <- seq(0.1, 0.9, 0.001)#
+#
+for (i in p) {#
+  print(paste("Threshold = ", i))#
+  Y.hat <- ifelse(fitted_prob > i, 1, 0)#
+  confusion_matrix <- table(Y.hat, training_data$TenYearCHD)#
+  print(confusion_matrix)#
+  TN <- confusion_matrix[1, 1]  # True Negatives#
+  FP <- confusion_matrix[1, 2]  # False Positives#
+  FN <- confusion_matrix[2, 1]  # False Negatives#
+  TP <- confusion_matrix[2, 2]  # True Positives#
+  TPR[k] <- TP / (TP + FN)#
+  FPR[k] <- FP / (TN + FP)#
+  Index[k] <- TPR[k] * (1 - FPR[k]) #
+  plot(FPR, TPR, type = "l", main = "Finding Optimum Model . . . ")#
+  k <- k + 1#
+}#
+optimum_threshold <- p[which.max(Index)]
+Y.hat
+Y.hat=ifelse(fitted_prob>0.8,1,0)
+Y.hat
+fitted_prob = fitted(Selected_Model)#
+#
+#=============================================##
+# Finding threshold by Optimizing TPR*(1-FPR)  ##
+#=============================================##
+#
+roc_data = data.frame(fitted_prob, training_data$TenYearCHD)#
+colnames(roc_data) = c('prob', 'chd')#
+roc_data = roc_data[order(-roc_data$prob),]#
+#
+fpr <- numeric(length = length(roc_data$prob))#
+tpr <- numeric(length = length(roc_data$prob))#
+#
+for(i in 1:length(roc_data$prob)){#
+  fpr[i] <- sum(roc_data$chd[i:length(roc_data$prob)] == 0) / sum(roc_data$chd == 0)#
+  tpr[i] <- sum(roc_data$chd[i:length(roc_data$prob)] == 1) / sum(roc_data$chd == 1)#
+}#
+#
+roc_df = data.frame(fpr, tpr)#
+#
+roc_df$optimum <- roc_df$tpr * (1 - roc_df$fpr)#
+optimal_threshold = roc_data$prob[which.max(roc_df$optimum)]#
+#
+# Plotting ROC curve#
+ggplot(roc_df, aes(x = fpr, y = tpr)) +#
+  geom_line() +#
+  geom_abline(slope = 1, intercept = 0, linetype = "dashed") +#
+  ggtitle("Receiver Operating Characteristic (ROC) Curve") +#
+  xlab("False Positive Rate (FPR)") +#
+  ylab("True Positive Rate (TPR)") +#
+  geom_point(data = roc_df[which.max(roc_df$optimum), ], aes(x = fpr, y = tpr), color = "red", size = 3) +#
+  annotate("text", x = roc_df[which.max(roc_df$optimum), ]$fpr, y = roc_df[which.max(roc_df$optimum), ]$tpr, label = paste("Threshold:", round(optimal_threshold, 2)), vjust = -1, hjust = 1, color = "red")
+optimum
+roc_df$optimum
+# Load pROC package#
+library(pROC)#
+#
+# Calculate ROC curve#
+roc_curve <- roc(roc_data$chd, roc_data$prob)#
+#
+# Find optimal threshold#
+optimal_threshold <- coords(roc_curve, "best", ret = "threshold")#
+#
+# Plot ROC curve#
+plot(roc_curve, print.thres = "best", print.thres.best.method = "closest.topleft", main = "ROC Curve")#
+#
+# Add optimal threshold to the plot#
+abline(v = optimal_threshold, col = "red", lty = 2)#
+text(optimal_threshold, 0.5, labels = paste("Threshold:", round(optimal_threshold, 2)), pos = 2, col = "red")
+fitted_prob = fitted(Selected_Model)#
+#
+#=============================================##
+# Finding threshold by Optimizing TPR*(1-FPR)  ##
+#=============================================##
+#
+roc_data = data.frame(fitted_prob, training_data$TenYearCHD)#
+colnames(roc_data) = c('prob', 'chd')#
+roc_data = roc_data[order(-roc_data$prob),]#
+#
+fpr <- numeric(length = length(roc_data$prob))#
+tpr <- numeric(length = length(roc_data$prob))#
+#
+for(i in 1:length(roc_data$prob)){#
+  fpr[i] <- sum(roc_data$chd[i:length(roc_data$prob)] == 0) / sum(roc_data$chd == 0)#
+  tpr[i] <- sum(roc_data$chd[i:length(roc_data$prob)] == 1) / sum(roc_data$chd == 1)#
+}#
+#
+roc_df = data.frame(fpr, tpr)#
+#
+roc_df$optimum <- roc_df$tpr * (1 - roc_df$fpr)#
+optimal_threshold = roc_data$prob[which.max(roc_df$optimum)]#
+#
+# Plotting ROC curve#
+ggplot(roc_df, aes(x = fpr, y = tpr)) +#
+  geom_line() +#
+  geom_abline(slope = 1, intercept = 0, linetype = "dashed") +#
+  ggtitle("Receiver Operating Characteristic (ROC) Curve") +#
+  xlab("False Positive Rate (FPR)") +#
+  ylab("True Positive Rate (TPR)") +#
+  geom_point(data = roc_df[which.max(roc_df$optimum), ], aes(x = fpr, y = tpr), color = "red", size = 3) +#
+  annotate("text", x = roc_df[which.max(roc_df$optimum), ]$fpr, y = roc_df[which.max(roc_df$optimum), ]$tpr, label = paste("Threshold:", round(optimal_threshold, 2)), vjust = -1, hjust = 1, color = "red")
+fitted_prob = fitted(Selected_Model)#
+#
+#=============================================##
+# Finding threshold by Optimizing TPR*(1-FPR)  ##
+#=============================================##
+#
+roc_data = data.frame(fitted_prob, training_data$TenYearCHD)#
+colnames(roc_data) = c('prob', 'chd')#
+roc_data = roc_data[order(-roc_data$prob),]#
+#
+fpr <- numeric(length = length(roc_data$prob))#
+tpr <- numeric(length = length(roc_data$prob))#
+#
+for(i in 1:length(roc_data$prob)){#
+  fpr[i] <- sum(roc_data$chd[i:length(roc_data$prob)] == 0) / sum(roc_data$chd == 0)#
+  tpr[i] <- sum(roc_data$chd[i:length(roc_data$prob)] == 1) / sum(roc_data$chd == 1)#
+}#
+#
+roc_df = data.frame(fpr, tpr)#
+#
+roc_df$optimum <- roc_df$tpr * (1 - roc_df$fpr)#
+optimal_threshold = roc_data$prob[which.max(roc_df$optimum)]#
+#
+# Plotting ROC curve#
+ggplot(roc_df, aes(x = fpr, y = tpr)) +#
+  geom_line() +#
+  geom_abline(slope = 1, intercept = 0, linetype = "dashed") +#
+  ggtitle("Receiver Operating Characteristic (ROC) Curve") +#
+  xlab("False Positive Rate (FPR)") +#
+  ylab("True Positive Rate (TPR)") +#
+  geom_point(data = roc_df[which.max(roc_df$optimum), ], aes(x = fpr, y = tpr), color = "red", size = 3) +#
+  annotate("text", x = roc_df[which.max(roc_df$optimum), ]$fpr, y = roc_df[which.max(roc_df$optimum), ]$tpr, label = paste("Threshold:", round(optimal_threshold, 2)), vjust = -1, hjust = 1, color = "red")
+# Load pROC package#
+library(pROC)#
+#
+# Calculate ROC curve#
+roc_curve <- roc(roc_data$chd, roc_data$prob)#
+#
+# Find optimal threshold#
+optimal_threshold <- coords(roc_curve, "best", ret = "threshold")#
+#
+# Plot ROC curve#
+plot(roc_curve, print.thres = "best", print.thres.best.method = "closest.topleft", main = "ROC Curve")#
+#
+# Add optimal threshold to the plot#
+abline(v = optimal_threshold, col = "red", lty = 2)#
+text(optimal_threshold, 0.5, labels = paste("Threshold:", round(optimal_threshold, 2)), pos = 2, col = "red")
+# Load pROC package#
+library(pROC)#
+#
+# Calculate ROC curve#
+roc_curve <- roc(roc_data$chd, roc_data$prob)#
+#
+# Find optimal threshold#
+optimal_threshold <- coords(roc_curve, "best", ret = "threshold")#
+#
+# Plot ROC curve#
+plot(roc_curve, print.thres = "best", print.thres.best.method = "closest.topleft", main = "ROC Curve")#
+#
+# Add optimal threshold to the plot#
+abline(v = optimal_threshold, col = "red", lty = 2)#
+text(optimal_threshold, 0.5, labels = paste("Threshold:", round(optimal_threshold, 2)), pos = 2, col = "red")
+# Load pROC package#
+library(pROC)#
+#
+# Calculate ROC curve#
+roc_curve <- roc(roc_data$chd, roc_data$prob)#
+#
+# Find optimal threshold#
+optimal_threshold <- coords(roc_curve, "best", ret = "threshold")#
+#
+# Plot ROC curve with customizations#
+plot(roc_curve, #
+     print.thres = "best", #
+     print.thres.best.method = "closest.topleft", #
+     main = "ROC Curve", #
+     xlab = "False Positive Rate (FPR)", #
+     ylab = "True Positive Rate (TPR)", #
+     col = "blue", #
+     lwd = 2)#
+#
+# Add optimal threshold to the plot#
+abline(v = optimal_threshold, col = "red", lty = 2)#
+text(optimal_threshold, 0.5, labels = paste("Optimal Threshold:", round(optimal_threshold, 2)), pos = 2, col = "red", cex = 0.8)#
+#
+# Add legend#
+legend("bottomright", #
+       legend = c("ROC Curve", "Optimal Threshold"), #
+       col = c("blue", "red"), #
+       lwd = c(2, 1), #
+       cex = 0.8, #
+       bg = "white")
+# Load pROC package#
+library(pROC)#
+#
+# Calculate ROC curve#
+roc_curve <- roc(roc_data$chd, roc_data$prob)#
+#
+# Find optimal threshold#
+optimal_threshold <- coords(roc_curve, "best", ret = "threshold")#
+#
+# Plot ROC curve#
+plot(roc_curve, print.thres = "best", print.thres.best.method = "closest.topleft", main = "ROC Curve")#
+#
+# Add optimal threshold to the plot#
+abline(v = optimal_threshold, col = "red", lty = 2)#
+text(optimal_threshold, 0.5, labels = paste("Threshold:", round(optimal_threshold, 2)), pos = 2, col = "red")
+# Load pROC package#
+library(pROC)#
+#
+# Calculate ROC curve#
+roc_curve <- roc(roc_data$chd, roc_data$prob)#
+#
+# Find optimal threshold#
+optimal_threshold <- coords(roc_curve, "best", ret = "threshold")#
+#
+# Plot ROC curve with customizations#
+plot(roc_curve, #
+     print.thres = "best", #
+     print.thres.best.method = "closest.topleft", #
+     main = "ROC Curve", #
+     xlab = "False Positive Rate (FPR)", #
+     ylab = "True Positive Rate (TPR)", #
+     col = "blue", #
+     lwd = 2)#
+#
+# Add optimal threshold to the plot#
+abline(v = optimal_threshold, col = "red", lty = 2)#
+text(optimal_threshold, 0.5, labels = paste("Optimal Threshold:", round(optimal_threshold, 2)), pos = 2, col = "red", cex = 0.8)#
+#
+# Add legend#
+legend("bottomright", #
+       legend = c("ROC Curve", "Optimal Threshold"), #
+       col = c("blue", "red"), #
+       lwd = c(2, 1), #
+       cex = 0.8, #
+       bg = "white")
+# Load pROC package#
+library(pROC)#
+#
+# Calculate ROC curve#
+roc_curve <- roc(roc_data$chd, roc_data$prob)#
+#
+# Find optimal threshold#
+optimal_threshold <- coords(roc_curve, "best", ret = "threshold")#
+#
+# Plot ROC curve with customizations#
+plot(roc_curve, #
+     print.thres = "best", #
+     print.thres.best.method = "closest.topleft", #
+     main = "ROC Curve", #
+     xlab = "False Positive Rate (FPR)", #
+     ylab = "True Positive Rate (TPR)", #
+     col = "blue", #
+     lwd = 2)#
+#
+# Add optimal threshold to the plot#
+abline(v = optimal_threshold, col = "red", lty = 2)#
+text(optimal_threshold, 0.5, labels = paste("Optimal Threshold:", round(optimal_threshold, 2)), pos = 2, col = "red", cex = 0.8)#
+#
+# Add legend#
+legend("bottomright", #
+       legend = c("ROC Curve", "Optimal Threshold"), #
+       col = c("blue", "red"), #
+       lwd = c(2, 1), #
+       cex = 0.8, #
+       bg = "white")
+# Load pROC package#
+library(pROC)#
+#
+# Calculate ROC curve#
+roc_curve <- roc(roc_data$chd, roc_data$prob)#
+#
+# Find optimal threshold#
+optimal_threshold <- coords(roc_curve, "best", ret = "threshold")#
+#
+# Plot ROC curve with customizations#
+plot(roc_curve, #
+     print.thres = "best", #
+     print.thres.best.method = "closest.topleft", #
+     main = "ROC Curve", #
+     xlab = "False Positive Rate (FPR)", #
+     ylab = "True Positive Rate (TPR)", #
+     col = "blue", #
+     lwd = 2)#
+#
+# Add optimal threshold to the plot#
+abline(v = optimal_threshold, col = "red", lty = 2)#
+text(optimal_threshold, 0.5, labels = paste("Optimal Threshold:", round(optimal_threshold, 2)), pos = 2, col = "red", cex = 0.8)#
+#
+# Add legend#
+legend("bottomright", #
+       legend = c("ROC Curve", "Optimal Threshold"), #
+       col = c("blue", "red"), #
+       lwd = c(2, 1), #
+       cex = 0.8, #
+       bg = "white")
+# Load pROC package#
+library(pROC)#
+#
+# Calculate ROC curve#
+roc_curve <- roc(roc_data$chd, roc_data$prob)#
+#
+# Find optimal threshold#
+optimal_threshold <- coords(roc_curve, "best", ret = "threshold")#
+#
+# Plot ROC curve with customizations#
+plot(roc_curve, #
+     print.thres = "best", #
+     print.thres.best.method = "closest.topleft", #
+     main = "ROC Curve", #
+     xlab = "False Positive Rate (FPR)", #
+     ylab = "True Positive Rate (TPR)", #
+     col = "blue", #
+     lwd = 2)#
+#
+# Add optimal threshold to the plot#
+abline(v = optimal_threshold, col = "red", lty = 2)#
+text(optimal_threshold, 0.5, labels = paste("Optimal Threshold:", round(optimal_threshold, 2)), pos = 2, col = "red", cex = 0.8)#
+#
+# Add legend#
+legend("bottomright", #
+       legend = c("ROC Curve", "Optimal Threshold"), #
+       col = c("blue", "red"), #
+       lwd = c(2, 1), #
+       cex = 0.8, #
+       bg = "white")
+# Load pROC package#
+library(pROC)#
+#
+# Calculate ROC curve#
+roc_curve <- roc(roc_data$chd, roc_data$prob)#
+#
+# Find optimal threshold#
+optimal_threshold <- coords(roc_curve, "best", ret = "threshold")#
+#
+# Plot ROC curve with customizations#
+plot(roc_curve, #
+     print.thres = "best", #
+     print.thres.best.method = "closest.topleft", #
+     main = "ROC Curve", #
+     xlab = "False Positive Rate (FPR)", #
+     ylab = "True Positive Rate (TPR)", #
+     col = "blue", #
+     lwd = 2)#
+#
+# Add optimal threshold to the plot#
+abline(v = optimal_threshold, col = "red", lty = 2)#
+text(optimal_threshold, 0.5, labels = paste("Optimal Threshold:", round(optimal_threshold, 2)), pos = 2, col = "red", cex = 0.8)#
+#
+# Add legend#
+legend("bottomright", #
+       legend = c("ROC Curve", "Optimal Threshold"), #
+       col = c("blue", "red"), #
+       lwd = c(2, 1), #
+       cex = 0.8, #
+       bg = "white")
+FPR
+# Load pROC package#
+library(pROC)#
+#
+# Calculate ROC curve#
+roc_curve <- roc(roc_data$chd, roc_data$prob)#
+#
+# Find optimal threshold#
+optimal_threshold <- coords(roc_curve, "best", ret = "threshold")#
+#
+# Plot ROC curve with customizations#
+plot(roc_curve, #
+     print.thres = "best", #
+     print.thres.best.method = "closest.topleft", #
+     main = "ROC Curve", #
+     xlab = "False Positive Rate (FPR)", #
+     ylab = "True Positive Rate (TPR)", #
+     col = "blue", #
+     lwd = 2,#
+     rev = "tpr")  # Ensure FPR values are in increasing order#
+#
+# Add optimal threshold to the plot#
+abline(v = optimal_threshold, col = "red", lty = 2)#
+text(optimal_threshold, 0.5, labels = paste("Optimal Threshold:", round(optimal_threshold, 2)), pos = 2, col = "red", cex = 0.8)#
+#
+# Add legend#
+legend("bottomright", #
+       legend = c("ROC Curve", "Optimal Threshold"), #
+       col = c("blue", "red"), #
+       lwd = c(2, 1), #
+       cex = 0.8, #
+       bg = "white")
+FPR=sort(FPR)
+plot(FPR,TPR,type="l")
+plot(roc_curve)
+library(pROC)#
+#
+# Fit the logistic regression model#
+model <- glm(TenYearCHD ~ ., data = training_data, family = binomial(link = "logit"))#
+#
+# Predict probabilities on the test set#
+predicted_probs <- predict(model, newdata = testing_data, type = "response")#
+#
+# Calculate ROC curve#
+roc_curve <- roc(testing_data$TenYearCHD, predicted_probs)#
+#
+# Plot ROC curve#
+plot(roc_curve, main = "ROC Curve", percent = TRUE, xlab = "False Positive Rate", ylab = "True Positive Rate", col = "#377eb8", lwd = 2)#
+#
+# Add optimal threshold to the plot#
+coords <- coords(roc_curve, "best", ret = c("threshold", "specificity", "sensitivity"))#
+abline(v = coords$threshold, col = "red", lty = 2)#
+text(coords$threshold, coords$sensitivity, labels = paste("Optimal Threshold:", round(coords$threshold, 2)), pos = 2, col = "red", cex = 0.8)#
+#
+# Print AUC#
+print(roc_curve, print.auc = TRUE)
+# ======================================================== ##
+#                    Final Code                            ##
+# ======================================================== ##
+rm(list=ls())#
+#install.packages("lattice")#
+# install.packages("caret")#
+#install.packages("pROC")#
+#install.packages("randomForest")#
+#install.packages("olsrr")#
+library(car)#
+library(caTools)#
+library(ggplot2)#
+library(pROC)#
+library(reshape2)#
+library(randomForest)#
+library(InformationValue)#
+library(olsrr)#
+set.seed(1234)#
+#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+attach(data)#
 split = sample.split(data, SplitRatio = 0.8)#
 training_data = data[split, ]#
 testing_data = data[!split, ]#
@@ -2134,7 +1777,762 @@ TPR=array()#
 FPR=array()#
 Index = array()#
 k=1#
-p=seq(0.1,1,0.001)#
+p=seq(0.1,1,0.0001)#
+for(i in p)#
+{#
+print(paste("Threshold = ",i))#
+Y.hat=ifelse(fitted_prob>i,1,0)#
+confusion_matrix = table(Y.hat,TenYearCHD)#
+print(confusion_matrix)#
+  TN = confusion_matrix[1, 1]  # True Negatives#
+  FP = confusion_matrix[1, 2]  # False Positives#
+  FN = confusion_matrix[2, 1]  # False Negatives#
+  TP = confusion_matrix[2, 2]  # True Positives#
+  TPR[k] = TP / (TP + FN)#
+  FPR[k] = FP / (TN + FP + FN + TP)#
+  Index[k] = TPR[k] * (1 - FPR[k]) #
+  plot(FPR,TPR,type="l",main="Finding Optimum Model . . . ")#
+  k=k+1#
+}#
+optimum_thresold = p[which.max(Index)]#
+#===================================##
+#Checking the Model Accuracy        ##
+#===================================##
+#
+binary_predictions = ifelse(fitted_prob > optimum_thresold, 1, 0)#
+#
+# Calculate confusion matrix#
+confusion_matrix = table(binary_predictions, TenYearCHD)#
+#
+# Print confusion matrix#
+print("Confusion Matrix:")#
+print(confusion_matrix)#
+#
+# Calculate accuracy#
+accuracy = sum(diag(confusion_matrix)) / sum(confusion_matrix)#
+print(paste("Accuracy:", round(accuracy, 3)))#
+#
+# Calculate precision#
+precision = confusion_matrix[2, 2] / sum(confusion_matrix[, 2])#
+print(paste("Precision:", round(precision, 3)))#
+#
+# Calculate recall (True Positive Rate)#
+recall = confusion_matrix[2, 2] / sum(confusion_matrix[2, ])#
+print(paste("Recall (True Positive Rate):", round(recall, 3)))#
+#
+# Calculate F1-score#
+F1_score = 2 * (precision * recall) / (precision + recall)#
+print(paste("F1-score:", round(F1_score, 3)))
+# ======================================================== ##
+#                    Final Code                            ##
+# ======================================================== ##
+rm(list=ls())#
+#install.packages("lattice")#
+# install.packages("caret")#
+#install.packages("pROC")#
+#install.packages("randomForest")#
+#install.packages("olsrr")#
+library(car)#
+library(caTools)#
+library(ggplot2)#
+library(pROC)#
+library(reshape2)#
+library(randomForest)#
+library(InformationValue)#
+library(olsrr)#
+set.seed(1234)#
+#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+attach(data)#
+split = sample.split(data, SplitRatio = 0.8)#
+training_data = data[split, ]#
+testing_data = data[!split, ]#
+fullmodel = glm(TenYearCHD ~ ., data = training_data, family = binomial(link = "logit"))#
+# = = = = = = = = = = = #
+# Correlation Heatmap#
+# = = = = = = = = = = = #
+correlation_matrix = cor(data)#
+melted_correlation = melt(correlation_matrix)#
+ggplot(melted_correlation, aes(Var1, Var2, fill = value)) +#
+  geom_tile() + #
+  geom_text(aes(label = sprintf("%.2f", value)), size = 3) +#
+  scale_fill_gradient2(low = "#58390b", high = "#0f423c", midpoint = 0, limit = c(-1,1), name="Correlation", mid = "#FFFFFF") +#
+  theme_minimal() +#
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +#
+  coord_fixed() +#
+  labs(x = "Variables", y = "Variables")#
+# = = = = = = = = = = = = =#
+# Converting into factors#
+# = = = = = = = = = = = = =#
+data$male = as.factor(data$male)#
+data$education = as.factor(data$education)#
+data$currentSmoker = as.factor(data$currentSmoker)#
+data$prevalentStroke = as.factor(data$prevalentStroke)#
+data$prevalentHyp = as.factor(data$prevalentHyp)#
+data$diabetes = as.factor(data$diabetes)#
+data$TenYearCHD = as.factor(data$TenYearCHD)#
+# = = = = = = = = = = = = = #
+# Plottting the VIF Values#
+# = = = = = = = = = = = = =#
+#
+vif_values = vif(fullmodel)#
+vif_df = data.frame(Variable = names(vif_values), VIF = unname(vif_values))#
+#
+# Create the bar chart using ggplot#
+ggplot(vif_df, aes(x = Variable, y = VIF, fill = VIF)) +#
+  geom_bar(stat = "identity", color = "steelblue") +#
+  geom_hline(yintercept = 5, linetype = "dashed", color = "red", size = 1) +#
+  theme_minimal() +#
+  labs(title = "Plotting of the VIF Values", y = "VIF Value", x = "") +#
+  coord_cartesian(ylim = c(0, max(vif_df$VIF) + 1)) + # Adjust y-axis limits#
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) # Angle the x-axis text#
+# = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = #
+#  Code for testing the significance of the predictor variables#
+# = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = #
+x = summary(fullmodel)#
+y = x$coefficients#
+estimates = y[,1][-c(1,18)]#
+se = y[,2][-c(1,18)]#
+walds_t = estimates/sqrt(se)#
+significance = numeric(16)#
+for(i in 1:16){#
+	if(abs(walds_t[i])>1.96){#
+		significance[i]= "Not Significant"#
+	}else{#
+		significance[i]="Significant"#
+	}#
+}#
+data.frame(names(training_data),estimates,se,walds_t,significance)#
+#Findig Out the Odds Ratio#
+Odds_Ratio = exp(estimates)#
+p_values = 2*(1- qnorm(estimates)) ; p_values#
+data.frame(names(training_data),exp(Odds_Ratio),p_values)#
+# = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = #
+# Selection of the Best Model#
+# = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = #
+#
+# Full Model#
+AIC_full_model = 2095.7#
+x = summary(fullmodel)#
+y = x$coefficients#
+z = as.data.frame(y[,4])#
+p = z[,]#
+q = which.max(p) ; q#
+reduced_data_1 = data[,-q] #
+reduced_model_1 =  glm(TenYearCHD ~ ., data = reduced_data_1, family = binomial(link = "logit"))#
+summary(reduced_model_1)#
+AIC_1 = 2784.8#
+# Reduced Model - 01#
+x = summary(reduced_model_1)#
+y = x$coefficients#
+z = as.data.frame(y[,4])#
+p = z[,]#
+q = which.max(p) ; q#
+reduced_data_2 = reduced_data_1[,-q]#
+reduced_model_2 = glm(TenYearCHD ~ ., data = reduced_data_2, family = binomial(link = "logit"))#
+summary(reduced_model_2)#
+AIC_2 = 2786.8#
+# Reduced Model - 02#
+x = summary(reduced_model_2)#
+y = x$coefficients#
+z = as.data.frame(y[,4])#
+p = z[,]#
+q = which.max(p) ; q#
+reduced_data_3 = reduced_data_2[,-q]#
+reduced_model_3 = glm(TenYearCHD ~ ., data = reduced_data_3, family = binomial(link = "logit"))#
+summary(reduced_model_3)#
+AIC_3 = 2782.9#
+# Reduced Model - 03#
+x = summary(reduced_model_3)#
+y = x$coefficients#
+z = as.data.frame(y[,4])#
+p = z[,]#
+q = which.max(p) ; q#
+reduced_data_4 = reduced_data_3[,-q]#
+reduced_model_4 = glm(TenYearCHD ~ ., data = reduced_data_4, family = binomial(link = "logit"))#
+summary(reduced_model_4)#
+AIC_4 = 2791.6#
+fitted_prob = fitted(reduced_model_3)#
+#=============================================##
+# Finding thresold by Optimising TPR*(1-FPR)  ##
+#=============================================##
+TPR=array()#
+FPR=array()#
+Index = array()#
+k=1#
+p=seq(0.1,1,0.01)#
+for(i in p)#
+{#
+print(paste("Threshold = ",i))#
+Y.hat=ifelse(fitted_prob>i,1,0)#
+confusion_matrix = table(Y.hat,TenYearCHD)#
+print(confusion_matrix)#
+  TN = confusion_matrix[1, 1]  # True Negatives#
+  FP = confusion_matrix[1, 2]  # False Positives#
+  FN = confusion_matrix[2, 1]  # False Negatives#
+  TP = confusion_matrix[2, 2]  # True Positives#
+  TPR[k] = TP / (TP + FN)#
+  FPR[k] = FP / (TN + FP + FN + TP)#
+  Index[k] = TPR[k] * (1 - FPR[k]) #
+  plot(FPR,TPR,type="l",main="Finding Optimum Model . . . ")#
+  k=k+1#
+}#
+optimum_thresold = p[which.max(Index)]#
+#===================================##
+#Checking the Model Accuracy        ##
+#===================================##
+#
+binary_predictions = ifelse(fitted_prob > optimum_thresold, 1, 0)#
+#
+# Calculate confusion matrix#
+confusion_matrix = table(binary_predictions, TenYearCHD)#
+#
+# Print confusion matrix#
+print("Confusion Matrix:")#
+print(confusion_matrix)#
+#
+# Calculate accuracy#
+accuracy = sum(diag(confusion_matrix)) / sum(confusion_matrix)#
+print(paste("Accuracy:", round(accuracy, 3)))#
+#
+# Calculate precision#
+precision = confusion_matrix[2, 2] / sum(confusion_matrix[, 2])#
+print(paste("Precision:", round(precision, 3)))#
+#
+# Calculate recall (True Positive Rate)#
+recall = confusion_matrix[2, 2] / sum(confusion_matrix[2, ])#
+print(paste("Recall (True Positive Rate):", round(recall, 3)))#
+#
+# Calculate F1-score#
+F1_score = 2 * (precision * recall) / (precision + recall)#
+print(paste("F1-score:", round(F1_score, 3)))
+# ======================================================== ##
+#                    Final Code                            ##
+# ======================================================== ##
+rm(list=ls())#
+#install.packages("lattice")#
+# install.packages("caret")#
+#install.packages("pROC")#
+#install.packages("randomForest")#
+#install.packages("olsrr")#
+library(car)#
+library(caTools)#
+library(ggplot2)#
+library(pROC)#
+library(reshape2)#
+library(randomForest)#
+library(InformationValue)#
+library(olsrr)#
+set.seed(1234)#
+#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+attach(data)#
+split = sample.split(data, SplitRatio = 0.8)#
+training_data = data[split, ]#
+testing_data = data[!split, ]#
+fullmodel = glm(TenYearCHD ~ ., data = training_data, family = binomial(link = "logit"))#
+# = = = = = = = = = = = #
+# Correlation Heatmap#
+# = = = = = = = = = = = #
+correlation_matrix = cor(data)#
+melted_correlation = melt(correlation_matrix)#
+ggplot(melted_correlation, aes(Var1, Var2, fill = value)) +#
+  geom_tile() + #
+  geom_text(aes(label = sprintf("%.2f", value)), size = 3) +#
+  scale_fill_gradient2(low = "#58390b", high = "#0f423c", midpoint = 0, limit = c(-1,1), name="Correlation", mid = "#FFFFFF") +#
+  theme_minimal() +#
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +#
+  coord_fixed() +#
+  labs(x = "Variables", y = "Variables")#
+# = = = = = = = = = = = = =#
+# Converting into factors#
+# = = = = = = = = = = = = =#
+data$male = as.factor(data$male)#
+data$education = as.factor(data$education)#
+data$currentSmoker = as.factor(data$currentSmoker)#
+data$prevalentStroke = as.factor(data$prevalentStroke)#
+data$prevalentHyp = as.factor(data$prevalentHyp)#
+data$diabetes = as.factor(data$diabetes)#
+data$TenYearCHD = as.factor(data$TenYearCHD)#
+# = = = = = = = = = = = = = #
+# Plottting the VIF Values#
+# = = = = = = = = = = = = =#
+#
+vif_values = vif(fullmodel)#
+vif_df = data.frame(Variable = names(vif_values), VIF = unname(vif_values))#
+#
+# Create the bar chart using ggplot#
+ggplot(vif_df, aes(x = Variable, y = VIF, fill = VIF)) +#
+  geom_bar(stat = "identity", color = "steelblue") +#
+  geom_hline(yintercept = 5, linetype = "dashed", color = "red", size = 1) +#
+  theme_minimal() +#
+  labs(title = "Plotting of the VIF Values", y = "VIF Value", x = "") +#
+  coord_cartesian(ylim = c(0, max(vif_df$VIF) + 1)) + # Adjust y-axis limits#
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) # Angle the x-axis text#
+# = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = #
+#  Code for testing the significance of the predictor variables#
+# = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = #
+x = summary(fullmodel)#
+y = x$coefficients#
+estimates = y[,1][-c(1,18)]#
+se = y[,2][-c(1,18)]#
+walds_t = estimates/sqrt(se)#
+significance = numeric(16)#
+for(i in 1:16){#
+	if(abs(walds_t[i])>1.96){#
+		significance[i]= "Not Significant"#
+	}else{#
+		significance[i]="Significant"#
+	}#
+}#
+data.frame(names(training_data),estimates,se,walds_t,significance)#
+#Findig Out the Odds Ratio#
+Odds_Ratio = exp(estimates)#
+p_values = 2*(1- qnorm(estimates)) ; p_values#
+data.frame(names(training_data),exp(Odds_Ratio),p_values)#
+# = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = #
+# Selection of the Best Model#
+# = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = #
+#
+# Full Model#
+AIC_full_model = 2095.7#
+x = summary(fullmodel)#
+y = x$coefficients#
+z = as.data.frame(y[,4])#
+p = z[,]#
+q = which.max(p) ; q#
+reduced_data_1 = data[,-q] #
+reduced_model_1 =  glm(TenYearCHD ~ ., data = reduced_data_1, family = binomial(link = "logit"))#
+summary(reduced_model_1)#
+AIC_1 = 2784.8#
+# Reduced Model - 01#
+x = summary(reduced_model_1)#
+y = x$coefficients#
+z = as.data.frame(y[,4])#
+p = z[,]#
+q = which.max(p) ; q#
+reduced_data_2 = reduced_data_1[,-q]#
+reduced_model_2 = glm(TenYearCHD ~ ., data = reduced_data_2, family = binomial(link = "logit"))#
+summary(reduced_model_2)#
+AIC_2 = 2786.8#
+# Reduced Model - 02#
+x = summary(reduced_model_2)#
+y = x$coefficients#
+z = as.data.frame(y[,4])#
+p = z[,]#
+q = which.max(p) ; q#
+reduced_data_3 = reduced_data_2[,-q]#
+reduced_model_3 = glm(TenYearCHD ~ ., data = reduced_data_3, family = binomial(link = "logit"))#
+summary(reduced_model_3)#
+AIC_3 = 2782.9#
+# Reduced Model - 03#
+x = summary(reduced_model_3)#
+y = x$coefficients#
+z = as.data.frame(y[,4])#
+p = z[,]#
+q = which.max(p) ; q#
+reduced_data_4 = reduced_data_3[,-q]#
+reduced_model_4 = glm(TenYearCHD ~ ., data = reduced_data_4, family = binomial(link = "logit"))#
+summary(reduced_model_4)#
+AIC_4 = 2791.6#
+fitted_prob = fitted(reduced_model_3)#
+#=============================================##
+# Finding thresold by Optimising TPR*(1-FPR)  ##
+#=============================================##
+TPR=array()#
+FPR=array()#
+Index = array()#
+k=1#
+p=seq(0.1,0.9,0.01)#
+for(i in p)#
+{#
+print(paste("Threshold = ",i))#
+Y.hat=ifelse(fitted_prob>i,1,0)#
+confusion_matrix = table(Y.hat,TenYearCHD)#
+print(confusion_matrix)#
+  TN = confusion_matrix[1, 1]  # True Negatives#
+  FP = confusion_matrix[1, 2]  # False Positives#
+  FN = confusion_matrix[2, 1]  # False Negatives#
+  TP = confusion_matrix[2, 2]  # True Positives#
+  TPR[k] = TP / (TP + FN)#
+  FPR[k] = FP / (TN + FP + FN + TP)#
+  Index[k] = TPR[k] * (1 - FPR[k]) #
+  plot(FPR,TPR,type="l",main="Finding Optimum Model . . . ")#
+  k=k+1#
+}#
+optimum_thresold = p[which.max(Index)]#
+#===================================##
+#Checking the Model Accuracy        ##
+#===================================##
+#
+binary_predictions = ifelse(fitted_prob > optimum_thresold, 1, 0)#
+#
+# Calculate confusion matrix#
+confusion_matrix = table(binary_predictions, TenYearCHD)#
+#
+# Print confusion matrix#
+print("Confusion Matrix:")#
+print(confusion_matrix)#
+#
+# Calculate accuracy#
+accuracy = sum(diag(confusion_matrix)) / sum(confusion_matrix)#
+print(paste("Accuracy:", round(accuracy, 3)))#
+#
+# Calculate precision#
+precision = confusion_matrix[2, 2] / sum(confusion_matrix[, 2])#
+print(paste("Precision:", round(precision, 3)))#
+#
+# Calculate recall (True Positive Rate)#
+recall = confusion_matrix[2, 2] / sum(confusion_matrix[2, ])#
+print(paste("Recall (True Positive Rate):", round(recall, 3)))#
+#
+# Calculate F1-score#
+F1_score = 2 * (precision * recall) / (precision + recall)#
+print(paste("F1-score:", round(F1_score, 3)))
+optimum_thresold
+binary_predictions = ifelse(fitted_prob > optimum_thresold, 1, 0)#
+#
+# Calculate confusion matrix#
+confusion_matrix = table(binary_predictions, TenYearCHD)#
+#
+# Print confusion matrix#
+print("Confusion Matrix:")#
+print(confusion_matrix)#
+#
+# Calculate accuracy#
+accuracy = sum(diag(confusion_matrix)) / sum(confusion_matrix)#
+print(paste("Accuracy:", round(accuracy, 3)))#
+#
+# Calculate precision#
+precision = confusion_matrix[2, 2] / sum(confusion_matrix[, 2])#
+print(paste("Precision:", round(precision, 3)))#
+#
+# Calculate recall (True Positive Rate)#
+recall = confusion_matrix[2, 2] / sum(confusion_matrix[2, ])#
+print(paste("Recall (True Positive Rate):", round(recall, 3)))#
+#
+# Calculate F1-score#
+F1_score = 2 * (precision * recall) / (precision + recall)#
+print(paste("F1-score:", round(F1_score, 3)))
+binary_predictions = ifelse(fitted_prob > 0.15, 1, 0)#
+#
+# Calculate confusion matrix#
+confusion_matrix = table(binary_predictions, TenYearCHD)#
+#
+# Print confusion matrix#
+print("Confusion Matrix:")#
+print(confusion_matrix)#
+#
+# Calculate accuracy#
+accuracy = sum(diag(confusion_matrix)) / sum(confusion_matrix)#
+print(paste("Accuracy:", round(accuracy, 3)))#
+#
+# Calculate precision#
+precision = confusion_matrix[2, 2] / sum(confusion_matrix[, 2])#
+print(paste("Precision:", round(precision, 3)))#
+#
+# Calculate recall (True Positive Rate)#
+recall = confusion_matrix[2, 2] / sum(confusion_matrix[2, ])#
+print(paste("Recall (True Positive Rate):", round(recall, 3)))#
+#
+# Calculate F1-score#
+F1_score = 2 * (precision * recall) / (precision + recall)#
+print(paste("F1-score:", round(F1_score, 3)))
+binary_predictions = ifelse(fitted_prob > 0.14, 1, 0)#
+#
+# Calculate confusion matrix#
+confusion_matrix = table(binary_predictions, TenYearCHD)#
+#
+# Print confusion matrix#
+print("Confusion Matrix:")#
+print(confusion_matrix)#
+#
+# Calculate accuracy#
+accuracy = sum(diag(confusion_matrix)) / sum(confusion_matrix)#
+print(paste("Accuracy:", round(accuracy, 3)))#
+#
+# Calculate precision#
+precision = confusion_matrix[2, 2] / sum(confusion_matrix[, 2])#
+print(paste("Precision:", round(precision, 3)))#
+#
+# Calculate recall (True Positive Rate)#
+recall = confusion_matrix[2, 2] / sum(confusion_matrix[2, ])#
+print(paste("Recall (True Positive Rate):", round(recall, 3)))#
+#
+# Calculate F1-score#
+F1_score = 2 * (precision * recall) / (precision + recall)#
+print(paste("F1-score:", round(F1_score, 3)))
+confusion_matrix = table(binary_predictions, training_data$TenYearCHD)
+Selected_Model = fullmodel
+fitted_prob = fitted(Selected_Model)
+binary_predictions = ifelse(fitted_prob > 0.14, 1, 0)#
+#
+# Calculate confusion matrix#
+confusion_matrix = table(binary_predictions, TenYearCHD)#
+#
+# Print confusion matrix#
+print("Confusion Matrix:")#
+print(confusion_matrix)#
+#
+# Calculate accuracy#
+accuracy = sum(diag(confusion_matrix)) / sum(confusion_matrix)#
+print(paste("Accuracy:", round(accuracy, 3)))#
+#
+# Calculate precision#
+precision = confusion_matrix[2, 2] / sum(confusion_matrix[, 2])#
+print(paste("Precision:", round(precision, 3)))#
+#
+# Calculate recall (True Positive Rate)#
+recall = confusion_matrix[2, 2] / sum(confusion_matrix[2, ])#
+print(paste("Recall (True Positive Rate):", round(recall, 3)))#
+#
+# Calculate F1-score#
+F1_score = 2 * (precision * recall) / (precision + recall)#
+print(paste("F1-score:", round(F1_score, 3)))
+binary_predictions = ifelse(fitted_prob > 0.17, 1, 0)#
+#
+# Calculate confusion matrix#
+confusion_matrix = table(binary_predictions, TenYearCHD)#
+#
+# Print confusion matrix#
+print("Confusion Matrix:")#
+print(confusion_matrix)#
+#
+# Calculate accuracy#
+accuracy = sum(diag(confusion_matrix)) / sum(confusion_matrix)#
+print(paste("Accuracy:", round(accuracy, 3)))#
+#
+# Calculate precision#
+precision = confusion_matrix[2, 2] / sum(confusion_matrix[, 2])#
+print(paste("Precision:", round(precision, 3)))#
+#
+# Calculate recall (True Positive Rate)#
+recall = confusion_matrix[2, 2] / sum(confusion_matrix[2, ])#
+print(paste("Recall (True Positive Rate):", round(recall, 3)))#
+#
+# Calculate F1-score#
+F1_score = 2 * (precision * recall) / (precision + recall)#
+print(paste("F1-score:", round(F1_score, 3)))
+binary_predictions = ifelse(fitted_prob > 0.6, 1, 0)#
+#
+# Calculate confusion matrix#
+confusion_matrix = table(binary_predictions, TenYearCHD)#
+#
+# Print confusion matrix#
+print("Confusion Matrix:")#
+print(confusion_matrix)#
+#
+# Calculate accuracy#
+accuracy = sum(diag(confusion_matrix)) / sum(confusion_matrix)#
+print(paste("Accuracy:", round(accuracy, 3)))#
+#
+# Calculate precision#
+precision = confusion_matrix[2, 2] / sum(confusion_matrix[, 2])#
+print(paste("Precision:", round(precision, 3)))#
+#
+# Calculate recall (True Positive Rate)#
+recall = confusion_matrix[2, 2] / sum(confusion_matrix[2, ])#
+print(paste("Recall (True Positive Rate):", round(recall, 3)))#
+#
+# Calculate F1-score#
+F1_score = 2 * (precision * recall) / (precision + recall)#
+print(paste("F1-score:", round(F1_score, 3)))
+binary_predictions = ifelse(fitted_prob > 1, 1, 0)#
+#
+# Calculate confusion matrix#
+confusion_matrix = table(binary_predictions, TenYearCHD)#
+#
+# Print confusion matrix#
+print("Confusion Matrix:")#
+print(confusion_matrix)#
+#
+# Calculate accuracy#
+accuracy = sum(diag(confusion_matrix)) / sum(confusion_matrix)#
+print(paste("Accuracy:", round(accuracy, 3)))#
+#
+# Calculate precision#
+precision = confusion_matrix[2, 2] / sum(confusion_matrix[, 2])#
+print(paste("Precision:", round(precision, 3)))#
+#
+# Calculate recall (True Positive Rate)#
+recall = confusion_matrix[2, 2] / sum(confusion_matrix[2, ])#
+print(paste("Recall (True Positive Rate):", round(recall, 3)))#
+#
+# Calculate F1-score#
+F1_score = 2 * (precision * recall) / (precision + recall)#
+print(paste("F1-score:", round(F1_score, 3)))
+# ======================================================== ##
+#                    Final Code                            ##
+# ======================================================== ##
+rm(list=ls())#
+#install.packages("lattice")#
+# install.packages("caret")#
+#install.packages("pROC")#
+#install.packages("randomForest")#
+#install.packages("olsrr")#
+library(car)#
+library(caTools)#
+library(ggplot2)#
+library(pROC)#
+library(reshape2)#
+library(randomForest)#
+library(InformationValue)#
+library(olsrr)#
+set.seed(1234)#
+#
+data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")#
+split = sample.split(data, SplitRatio = 0.8)#
+training_data = data[split, ]#
+testing_data = data[!split, ]#
+# = = = = = = = = = = = #
+# Correlation Heatmap#
+# = = = = = = = = = = = #
+correlation_matrix = cor(data)#
+melted_correlation = melt(correlation_matrix)#
+ggplot(melted_correlation, aes(Var1, Var2, fill = value)) +#
+  geom_tile() + #
+  geom_text(aes(label = sprintf("%.2f", value)), size = 3) +#
+  scale_fill_gradient2(low = "#58390b", high = "#0f423c", midpoint = 0, limit = c(-1,1), name="Correlation", mid = "#FFFFFF") +#
+  theme_minimal() +#
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +#
+  coord_fixed() +#
+  labs(x = "Variables", y = "Variables")#
+# = = = = = = = = = = = = =#
+# Converting into factors#
+# = = = = = = = = = = = = =#
+data$male = as.factor(data$male)#
+data$education = as.factor(data$education)#
+data$currentSmoker = as.factor(data$currentSmoker)#
+data$prevalentStroke = as.factor(data$prevalentStroke)#
+data$prevalentHyp = as.factor(data$prevalentHyp)#
+data$diabetes = as.factor(data$diabetes)#
+data$TenYearCHD = as.factor(data$TenYearCHD)#
+model = glm(TenYearCHD ~ ., data = training_data, family = binomial(link = "logit"))#
+#
+# = = = = = = = = = = = = = #
+# Plottting the VIF Values#
+# = = = = = = = = = = = = =#
+#
+vif_values = vif(model)#
+vif_df = data.frame(Variable = names(vif_values), VIF = unname(vif_values))#
+#
+# Create the bar chart using ggplot#
+ggplot(vif_df, aes(x = Variable, y = VIF, fill = VIF)) +#
+  geom_bar(stat = "identity", color = "steelblue") +#
+  geom_hline(yintercept = 5, linetype = "dashed", color = "red", size = 1) +#
+  theme_minimal() +#
+  labs(title = "Plotting of the VIF Values", y = "VIF Value", x = "") +#
+  coord_cartesian(ylim = c(0, max(vif_df$VIF) + 1)) + # Adjust y-axis limits#
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) # Angle the x-axis text#
+# = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = #
+#  Code for testing the significance of the predictor variables#
+# = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = #
+#
+x = summary(model)#
+y = x$coefficients#
+estimates = y[,1][-c(1,18)]#
+se = y[,2][-c(1,18)]#
+walds_t = estimates/sqrt(se)#
+significance = numeric(16)#
+for(i in 1:16){#
+	if(abs(walds_t[i])>1.96){#
+		significance[i]= "Not Significant"#
+	}else{#
+		significance[i]="Significant"#
+	}#
+}#
+data.frame(names(training_data),estimates,se,walds_t,significance)#
+#Findig Out the Odds Ratio#
+Odds_Ratio = exp(estimates)#
+p_values = 2*(1- qnorm(estimates)) ; p_values#
+data.frame(names(training_data),exp(Odds_Ratio),p_values)#
+# = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = #
+# Selection of the Best Model#
+# = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = #
+# Full Model#
+fullmodel = glm(TenYearCHD ~ ., data = training_data, family = binomial(link = "logit"))#
+AIC_full_model = 2139.9#
+# =====================data#
+# Reduced Model -> 1#
+# =====================#
+x = summary(fullmodel)#
+y =	x$coefficients#
+z = which.max(as.vector(y[,4]))#
+reduced_data_1 = training_data[-z+1]#
+reduced_model_1 = glm(TenYearCHD ~ ., data = reduced_data_1, family = binomial(link = "logit"))#
+summary(reduced_model_1)#
+AIC_Reduced_Model_1 = 2138.2#
+# =====================#
+# Reduced Model -> 2#
+# =====================#
+x = summary(reduced_model_1)#
+y =	x$coefficients#
+z = which.max(as.vector(y[,4]))#
+reduced_data_2 = reduced_data_1[-z+1]#
+reduced_model_2 = glm(TenYearCHD ~ ., data = reduced_data_2, family = binomial(link = "logit"))#
+summary(reduced_model_2)#
+AIC_Reduced_Model_2 = 2136.3#
+# =====================#
+# Reduced Model -> 3#
+# =====================#
+x = summary(reduced_model_2)#
+y =	x$coefficients#
+z = which.max(as.vector(y[,4]))#
+reduced_data_3 = reduced_data_2[-z+1]#
+reduced_model_3 = glm(TenYearCHD ~ ., data = reduced_data_3, family = binomial(link = "logit"))#
+summary(reduced_model_3)#
+AIC_Reduced_Model_3 = 2134.7#
+# =====================#
+# Reduced Model -> 4#
+# =====================#
+x = summary(reduced_model_3)#
+y =	x$coefficients#
+z = which.max(as.vector(y[,4]))#
+reduced_data_4 = reduced_data_3[-z+1]#
+reduced_model_4 = glm(TenYearCHD ~ ., data = reduced_data_4, family = binomial(link = "logit"))#
+summary(reduced_model_4)#
+AIC_Reduced_Model_4 = 2133.2#
+# =====================#
+# Reduced Model -> 5#
+# =====================#
+x = summary(reduced_model_4)#
+y =	x$coefficients#
+z = which.max(as.vector(y[,4]))#
+reduced_data_5 = reduced_data_4[-z+1]#
+reduced_model_5 = glm(TenYearCHD ~ ., data = reduced_data_5, family = binomial(link = "logit"))#
+summary(reduced_model_5)#
+AIC_Reduced_Model_5 = 2131.6#
+# =====================#
+# Reduced Model -> 6#
+# =====================#
+x = summary(reduced_model_5)#
+y =	x$coefficients#
+z = which.max(as.vector(y[,4]))#
+reduced_data_6 = reduced_data_5[-z+1]#
+reduced_model_6 = glm(TenYearCHD ~ ., data = reduced_data_6, family = binomial(link = "logit"))#
+summary(reduced_model_6)#
+AIC_Reduced_Model_6 = 2130.1#
+# =====================#
+# Reduced Model -> 7#
+# =====================#
+x = summary(reduced_model_6)#
+y =	x$coefficients#
+z = which.max(as.vector(y[,4]))#
+reduced_data_7 = reduced_data_5[-z+1]#
+reduced_model_7 = glm(TenYearCHD ~ ., data = reduced_data_7, family = binomial(link = "logit"))#
+summary(reduced_model_7)#
+AIC_Reduced_Model_7 = 2130.4#
+#
+Selected_Model = fullmodel#
+fitted_prob = fitted(Selected_Model)#
+#=============================================##
+# Finding thresold by Optimising TPR*(1-FPR)  ##
+#=============================================##
+TPR=array()#
+FPR=array()#
+Index = array()#
+k=1#
+p=seq(0.1,0.9,0.001)#
 for(i in p)#
 {#
 print(paste("Threshold = ",i))#

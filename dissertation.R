@@ -18,11 +18,9 @@ library(olsrr)
 set.seed(1234)
 
 data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")
-attach(data)
 split = sample.split(data, SplitRatio = 0.8)
 training_data = data[split, ]
 testing_data = data[!split, ]
-fullmodel = glm(TenYearCHD ~ ., data = training_data, family = binomial(link = "logit"))
 
 
 
@@ -54,11 +52,13 @@ data$diabetes = as.factor(data$diabetes)
 data$TenYearCHD = as.factor(data$TenYearCHD)
 
 
+model = glm(TenYearCHD ~ ., data = training_data, family = binomial(link = "logit"))
+
 # = = = = = = = = = = = = = 
 # Plottting the VIF Values
 # = = = = = = = = = = = = =
 
-vif_values = vif(fullmodel)
+vif_values = vif(model)
 vif_df = data.frame(Variable = names(vif_values), VIF = unname(vif_values))
 
 # Create the bar chart using ggplot
@@ -78,7 +78,8 @@ ggplot(vif_df, aes(x = Variable, y = VIF, fill = VIF)) +
 # = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
 #  Code for testing the significance of the predictor variables
 # = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
-x = summary(fullmodel)
+
+x = summary(model)
 y = x$coefficients
 estimates = y[,1][-c(1,18)]
 se = y[,2][-c(1,18)]
@@ -103,57 +104,104 @@ data.frame(names(training_data),exp(Odds_Ratio),p_values)
 # Selection of the Best Model
 # = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
 
+
 # Full Model
-AIC_full_model = 2095.7
+fullmodel = glm(TenYearCHD ~ ., data = training_data, family = binomial(link = "logit"))
+AIC_full_model = 2139.9
+
+
+# =====================data
+# Reduced Model -> 1
+# =====================
 x = summary(fullmodel)
-y = x$coefficients
-z = as.data.frame(y[,4])
-p = z[,]
-q = which.max(p) ; q
-reduced_data_1 = data[,-q] 
-reduced_model_1 =  glm(TenYearCHD ~ ., data = reduced_data_1, family = binomial(link = "logit"))
+y =	x$coefficients
+z = which.max(as.vector(y[,4]))
+reduced_data_1 = training_data[-z+1]
+reduced_model_1 = glm(TenYearCHD ~ ., data = reduced_data_1, family = binomial(link = "logit"))
 summary(reduced_model_1)
-AIC_1 = 2784.8
+AIC_Reduced_Model_1 = 2138.2
 
 
-# Reduced Model - 01
+# =====================
+# Reduced Model -> 2
+# =====================
 x = summary(reduced_model_1)
-y = x$coefficients
-z = as.data.frame(y[,4])
-p = z[,]
-q = which.max(p) ; q
-reduced_data_2 = reduced_data_1[,-q]
+y =	x$coefficients
+z = which.max(as.vector(y[,4]))
+reduced_data_2 = reduced_data_1[-z+1]
 reduced_model_2 = glm(TenYearCHD ~ ., data = reduced_data_2, family = binomial(link = "logit"))
 summary(reduced_model_2)
-AIC_2 = 2786.8
+AIC_Reduced_Model_2 = 2136.3
 
 
 
-# Reduced Model - 02
+# =====================
+# Reduced Model -> 3
+# =====================
 x = summary(reduced_model_2)
-y = x$coefficients
-z = as.data.frame(y[,4])
-p = z[,]
-q = which.max(p) ; q
-reduced_data_3 = reduced_data_2[,-q]
+y =	x$coefficients
+z = which.max(as.vector(y[,4]))
+reduced_data_3 = reduced_data_2[-z+1]
 reduced_model_3 = glm(TenYearCHD ~ ., data = reduced_data_3, family = binomial(link = "logit"))
 summary(reduced_model_3)
-AIC_3 = 2782.9
+AIC_Reduced_Model_3 = 2134.7
 
 
-# Reduced Model - 03
+# =====================
+# Reduced Model -> 4
+# =====================
 x = summary(reduced_model_3)
-y = x$coefficients
-z = as.data.frame(y[,4])
-p = z[,]
-q = which.max(p) ; q
-reduced_data_4 = reduced_data_3[,-q]
+y =	x$coefficients
+z = which.max(as.vector(y[,4]))
+reduced_data_4 = reduced_data_3[-z+1]
 reduced_model_4 = glm(TenYearCHD ~ ., data = reduced_data_4, family = binomial(link = "logit"))
 summary(reduced_model_4)
-AIC_4 = 2791.6
+AIC_Reduced_Model_4 = 2133.2
 
 
-fitted_prob = fitted(reduced_model_3)
+
+# =====================
+# Reduced Model -> 5
+# =====================
+x = summary(reduced_model_4)
+y =	x$coefficients
+z = which.max(as.vector(y[,4]))
+reduced_data_5 = reduced_data_4[-z+1]
+reduced_model_5 = glm(TenYearCHD ~ ., data = reduced_data_5, family = binomial(link = "logit"))
+summary(reduced_model_5)
+AIC_Reduced_Model_5 = 2131.6
+
+
+
+
+# =====================
+# Reduced Model -> 6
+# =====================
+x = summary(reduced_model_5)
+y =	x$coefficients
+z = which.max(as.vector(y[,4]))
+reduced_data_6 = reduced_data_5[-z+1]
+reduced_model_6 = glm(TenYearCHD ~ ., data = reduced_data_6, family = binomial(link = "logit"))
+summary(reduced_model_6)
+AIC_Reduced_Model_6 = 2130.1
+
+
+# =====================
+# Reduced Model -> 7
+# =====================
+x = summary(reduced_model_6)
+y =	x$coefficients
+z = which.max(as.vector(y[,4]))
+reduced_data_7 = reduced_data_5[-z+1]
+reduced_model_7 = glm(TenYearCHD ~ ., data = reduced_data_7, family = binomial(link = "logit"))
+summary(reduced_model_7)
+AIC_Reduced_Model_7 = 2130.4
+
+Selected_Model = fullmodel
+
+
+
+fitted_prob = fitted(Selected_Model)
  
 #=============================================#
 # Finding thresold by Optimising TPR*(1-FPR)  #
@@ -162,7 +210,7 @@ TPR=array()
 FPR=array()
 Index = array()
 k=1
-p=seq(0.1,1,0.0001)
+p=seq(0.1,0.9,0.001)
 for(i in p)
 {
 print(paste("Threshold = ",i))
