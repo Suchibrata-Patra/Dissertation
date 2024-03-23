@@ -25,9 +25,9 @@ testing_data = data[!split, ]
 
 
 
-# = = = = = = = = = = = 
-# Correlation Heatmap
-# = = = = = = = = = = = 
+# = = = = = = = = = = = #
+#  Correlation Heatmap  #
+# = = = = = = = = = = = #
 correlation_matrix = cor(data)
 melted_correlation = melt(correlation_matrix)
 ggplot(melted_correlation, aes(Var1, Var2, fill = value)) +
@@ -40,9 +40,9 @@ ggplot(melted_correlation, aes(Var1, Var2, fill = value)) +
   labs(x = "Variables", y = "Variables")
 
 
-# = = = = = = = = = = = = =
-# Converting into factors
-# = = = = = = = = = = = = =
+# = = = = = = = = = = = = = #
+#  Converting into factors  #
+# = = = = = = = = = = = = = #
 data$male = as.factor(data$male)
 data$education = as.factor(data$education)
 data$currentSmoker = as.factor(data$currentSmoker)
@@ -54,14 +54,13 @@ data$TenYearCHD = as.factor(data$TenYearCHD)
 
 model = glm(TenYearCHD ~ ., data = training_data, family = binomial(link = "logit"))
 
-# = = = = = = = = = = = = = 
-# Plottting the VIF Values
-# = = = = = = = = = = = = =
+#===============================#
+#   Plottting the VIF Values    #
+#===============================#
 
 vif_values = vif(model)
 vif_df = data.frame(Variable = names(vif_values), VIF = unname(vif_values))
 
-# Create the bar chart using ggplot
 ggplot(vif_df, aes(x = Variable, y = VIF, fill = VIF)) +
   geom_bar(stat = "identity", color = "steelblue") +
   geom_hline(yintercept = 5, linetype = "dashed", color = "red", size = 1) +
@@ -75,51 +74,48 @@ ggplot(vif_df, aes(x = Variable, y = VIF, fill = VIF)) +
 
 
 
-# = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
-#  Code for testing the significance of the predictor variables
-# = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
-
-x = summary(model)
+#=========================================#
+# Significance of the predictor variables #
+#=========================================#
+x = summary(fullmodel)
 y = x$coefficients
-estimates = y[,1][-c(1,18)]
-se = y[,2][-c(1,18)]
-walds_t = estimates/sqrt(se)
-significance = numeric(16)
-for(i in 1:16){
-	if(abs(walds_t[i])>1.96){
-		significance[i]= "Not Significant"
-	}else{
-		significance[i]="Significant"
-	}
+estimates = y[,1][-1]
+se = y[,2][-1]
+walds_t = as.numeric(estimates/sqrt(se))
+significance = numeric(15)
+for(i in 1:15){
+    if(abs(walds_t[i])>1.96){
+        significance[i]= "Not Significant"
+    }else{
+        significance[i]="Significant"
+    }
 }
-data.frame(names(training_data),estimates,se,walds_t,significance)
-#Findig Out the Odds Ratio
+data.frame(names(training_data)[-16],walds_t,significance)
 Odds_Ratio = exp(estimates)
-p_values = 2*(1- qnorm(estimates)) ; p_values
-data.frame(names(training_data),exp(Odds_Ratio),p_values)
 
 
 
-# = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
-# Selection of the Best Model
-# = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
+#======================================#
+# Selection of the Best Model          #
+#======================================#
 
-
+# ============
 # Full Model
+# ============
 fullmodel = glm(TenYearCHD ~ ., data = training_data, family = binomial(link = "logit"))
 AIC_full_model = 2139.9
+summary(fullmodel)
 
-
-# =====================data
+# =====================
 # Reduced Model -> 1
 # =====================
-x = summary(fullmodel)
+x = summary(fullmodel);x
 y =	x$coefficients
 z = which.max(as.vector(y[,4]))
 reduced_data_1 = training_data[-z+1]
 reduced_model_1 = glm(TenYearCHD ~ ., data = reduced_data_1, family = binomial(link = "logit"))
 summary(reduced_model_1)
-AIC_Reduced_Model_1 = 2138.2
+AIC_Reduced_Model_1 = 2138
 
 
 # =====================
@@ -192,74 +188,163 @@ AIC_Reduced_Model_6 = 2130.1
 x = summary(reduced_model_6)
 y =	x$coefficients
 z = which.max(as.vector(y[,4]))
-reduced_data_7 = reduced_data_5[-z+1]
+reduced_data_7 = reduced_data_6[-z+1]
 reduced_model_7 = glm(TenYearCHD ~ ., data = reduced_data_7, family = binomial(link = "logit"))
 summary(reduced_model_7)
-AIC_Reduced_Model_7 = 2130.4
-
-Selected_Model = fullmodel
+AIC_Reduced_Model_7 = 2128.8
 
 
 
+# =====================
+# Reduced Model -> 8
+# =====================
+x = summary(reduced_model_7)
+y =	x$coefficients
+z = which.max(as.vector(y[,4]))
+reduced_data_8 = reduced_data_7[-z+1]
+reduced_model_8 = glm(TenYearCHD ~ ., data = reduced_data_8, family = binomial(link = "logit"))
+summary(reduced_model_8)
+AIC_Reduced_Model_7 = 2128
+
+
+
+# =====================
+# Reduced Model -> 9
+# =====================
+x = summary(reduced_model_8)
+y =	x$coefficients
+z = which.max(as.vector(y[,4]))
+reduced_data_9 = reduced_data_8[-z+1]
+reduced_model_9 = glm(TenYearCHD ~ ., data = reduced_data_9, family = binomial(link = "logit"))
+summary(reduced_model_9)
+
+
+
+Selected_Model = reduced_model_6
 fitted_prob = fitted(Selected_Model)
- 
+
+
+
+
+
+
+
+
+#==============================================#
+#Finding Out Odds ratio
+#==============================================#
+x = summary(reduced_model_8)
+y = x$coefficients
+estimates = y[,1][-1]
+se = y[,2][-1]
+Odds_Ratio = as.data.frame(exp(estimates))
+Odds_Ratio
+
+
+names(summary(fullmodel))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+fitted_prob = predict(reduced_model_8)
+
 #=============================================#
-# Finding thresold by Optimising TPR*(1-FPR)  #
+#Finding Goosness of Fit for the reduced Model#
 #=============================================#
-TPR=array()
-FPR=array()
-Index = array()
-k=1
-p=seq(0.1,0.9,0.001)
-for(i in p)
-{
-print(paste("Threshold = ",i))
-Y.hat=ifelse(fitted_prob>i,1,0)
-confusion_matrix = table(Y.hat,TenYearCHD)
-print(confusion_matrix)
-  TN = confusion_matrix[1, 1]  # True Negatives
-  FP = confusion_matrix[1, 2]  # False Positives
-  FN = confusion_matrix[2, 1]  # False Negatives
-  TP = confusion_matrix[2, 2]  # True Positives
-  TPR[k] = TP / (TP + FN)
-  FPR[k] = FP / (TN + FP + FN + TP)
-  Index[k] = TPR[k] * (1 - FPR[k]) 
-  plot(FPR,TPR,type="l",main="Finding Optimum Model . . . ")
-  k=k+1
- 
+# Assuming fitted_prob contains the predicted probabilities and reduced_data_8$TenYearCHD contains the actual labels
+
+thresholds = sort(fitted_prob)
+
+# Initialize arrays to store TPR and FPR values
+tpr_values = numeric(length(thresholds))
+fpr_values = numeric(length(thresholds))
+
+# Calculate TPR and FPR for each threshold
+for (i in 1:length(thresholds)) {
+  predicted_labels = ifelse(fitted_prob > thresholds[i], 1, 0)
+  tp = sum(predicted_labels == 1 & reduced_data_8$TenYearCHD == 1)
+  fp = sum(predicted_labels == 1 & reduced_data_8$TenYearCHD == 0)
+  fn = sum(predicted_labels == 0 & reduced_data_8$TenYearCHD == 1)
+  tn = sum(predicted_labels == 0 & reduced_data_8$TenYearCHD == 0)
+  tpr_values[i] = tp / (tp + fn)
+  fpr_values[i] = fp / (fp + tn)
 }
-optimum_thresold = p[which.max(Index)]
 
+# Now, let's plot the ROC curve using base R plotting functions
+plot(fpr_values, tpr_values, type = "l", main = "ROC Curve", col = "GREY", lwd = 2, xlab = "FPR", ylab = "TPR")
 
-#===================================#
-#Checking the Model Accuracy        #
-#===================================#
+# Add legend
+legend("bottomright", legend = "ROC Curve", col = "blue", lty = 1, lwd = 2, bty = "n")
 
-binary_predictions = ifelse(fitted_prob > optimum_thresold, 1, 0)
-
-# Calculate confusion matrix
-confusion_matrix = table(binary_predictions, TenYearCHD)
-
-# Print confusion matrix
-print("Confusion Matrix:")
-print(confusion_matrix)
+# Determine predicted labels based on the optimal threshold
+predicted_labels = ifelse(fitted_prob > optimal_threshold, 1, 0)
 
 # Calculate accuracy
-accuracy = sum(diag(confusion_matrix)) / sum(confusion_matrix)
-print(paste("Accuracy:", round(accuracy, 3)))
+accuracy = sum(predicted_labels == reduced_data_8$TenYearCHD) / length(reduced_data_8$TenYearCHD)
 
-# Calculate precision
-precision = confusion_matrix[2, 2] / sum(confusion_matrix[, 2])
-print(paste("Precision:", round(precision, 3)))
-
-# Calculate recall (True Positive Rate)
-recall = confusion_matrix[2, 2] / sum(confusion_matrix[2, ])
-print(paste("Recall (True Positive Rate):", round(recall, 3)))
-
-# Calculate F1-score
-F1_score = 2 * (precision * recall) / (precision + recall)
-print(paste("F1-score:", round(F1_score, 3)))
+# Print accuracy
+print(paste("Accuracy of the model at the optimal threshold:", round(accuracy, 3)))
 
 
 
-  
+#Finding out the AUC Value
+roc_curve = roc(reduced_data_8$TenYearCHD, fitted_prob)
+auc(roc_curve)
+lines(fpr_values,fpr_values,lty=2)

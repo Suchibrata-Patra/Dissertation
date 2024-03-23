@@ -93,17 +93,8 @@ Odds_Ratio = exp(estimates)#
 p_values = 2*(1- qnorm(estimates)) ; p_values#
 data.frame(names(training_data),exp(Odds_Ratio),p_values)
 detach(data)
-detach(data)
-detach(data)
-detach(data)
-detach(data)
-detach(data)
-detach(data)
-detach(data)
-detach(data)
 data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")
 attach(data)
-fullmodel = glm(TenYearCHD ~ ., data = training_data, family = binomial(link = "logit"))
 fullmodel = glm(TenYearCHD ~ ., data = training_data, family = binomial(link = "logit"))
 x = summary(fullmodel)
 y = x$coefficients
@@ -118,7 +109,6 @@ reduced_model_1 =  glm(TenYearCHD ~ ., data = reduced_data_1, family = binomial(
 summary(reduced_model_1)
 reduced_model_1
 fullmodel
-summary(fullmodel)
 summary(fullmodel)
 x = summary(reduced_model_1)
 x
@@ -177,7 +167,6 @@ reduced_model_1 =  glm(TenYearCHD ~ ., data = reduced_data_1, family = binomial(
 summary(reduced_model_1)
 reduced_data_1 = training_data[q]
 reduced_model_1 =  glm(TenYearCHD ~ ., data = reduced_data_1, family = binomial(link = "logit"))
-reduced_model_1 =  glm(TenYearCHD ~ ., data = reduced_data_1, family = binomial(link = "logit"))
 summary(reduced_model_1)
 reduced_data_1 = training_data[q,2]
 reduced_model_1 =  glm(TenYearCHD ~ ., data = reduced_data_1, family = binomial(link = "logit"))
@@ -186,7 +175,6 @@ reduced_model_1 =  glm(TenYearCHD ~ ., data = reduced_data_1, family = binomial(
 reduced_data_1 = training_data[q,q]
 reduced_model_1 =  glm(TenYearCHD ~ ., data = reduced_data_1, family = binomial(link = "logit"))
 reduced_data_1 = training_data[-q,]
-reduced_model_1 =  glm(TenYearCHD ~ ., data = reduced_data_1, family = binomial(link = "logit"))
 reduced_model_1 =  glm(TenYearCHD ~ ., data = reduced_data_1, family = binomial(link = "logit"))
 summary(reduced_model_1)
 reduced_data_1 = training_data[,q]
@@ -263,7 +251,6 @@ p_values = x$coefficients[, 4]
 max_p_value_index = which.max(p_values[-1]) + 1  # +1 to adjust for excluding the intercept
 variable_to_remove = names(p_values)[max_p_value_index]
 reduced_data = training_data[, !names(training_data) %in% variable_to_remove]
-reduced_model = glm(TenYearCHD ~ ., data = reduced_data, family = binomial(link = "logit"))
 reduced_model = glm(TenYearCHD ~ ., data = reduced_data, family = binomial(link = "logit"))
 summary(reduced_model)
 x = summary(fullmodel)
@@ -516,44 +503,9 @@ backward_elimination_manual <- function(model) {#
 #
 # Perform backward elimination manually#
 final_model_manual <- backward_elimination_manual(initial_model)
-# Initial model#
-initial_model <- glm(TenYearCHD ~ ., data = training_data, family = binomial(link = "logit"))#
-initial_aic <- AIC(initial_model)#
-#
-# Function to calculate AIC for a given model#
-calculate_aic <- function(model) {#
-  return(AIC(model))#
-}#
-#
-# Function to remove one predictor based on AIC criterion#
-backward_elimination_manual <- function(model) {#
-  variables <- names(model$coefficients)[-1]  # Exclude intercept#
-  aic_values <- numeric(length(variables))#
-  for (i in seq_along(variables)) {#
-    updated_formula <- as.formula(paste(". ~ . - ", variables[i]))#
-    updated_model <- update(model, updated_formula)#
-    aic_values[i] <- calculate_aic(updated_model)#
-  }#
-  min_aic_index <- which.min(aic_values)#
-  if (aic_values[min_aic_index] < initial_aic) {#
-    variable_to_remove <- variables[min_aic_index]#
-    model <- update(model, . ~ . - eval(parse(text = variable_to_remove)))#
-    print(paste("Removed predictor:", variable_to_remove))#
-    print(paste("New AIC:", aic_values[min_aic_index]))#
-    print(summary(model))#
-    backward_elimination_manual(model)#
-  } else {#
-    print("No more predictors to remove.")#
-    return(model)#
-  }#
-}#
-#
-# Perform backward elimination manually#
-final_model_manual <- backward_elimination_manual(initial_model)
 x = summary(fullmodel)
 x
 x = summary(model)
-x = summary(fullmodel)
 x = summary(fullmodel)
 names(x)
 x$P-value
@@ -565,7 +517,6 @@ z = as.vector(y[,4])
 z = as.vector(y[,4]);z
 z = which.max(as.vector(y[,4]))
 z = which.max(as.vector(y[,4]));z
-x
 x
 reduced_data = training_data[-z+1]
 names(reduced_data
@@ -1077,7 +1028,6 @@ print(confusion_matrix)#
 optimum_thresold = p[which.max(Index)]
 optimum_thresold
 Selected_Model = reduced_model_6
-Selected_Model = reduced_model_6
 fitted_prob = fitted(Selected_Model)
 #=============================================##
 # Finding thresold by Optimising TPR*(1-FPR)  ##
@@ -1327,53 +1277,6 @@ ggplot(roc_df, aes(x = fpr, y = tpr)) +#
   ylab("True Positive Rate (TPR)") +#
   geom_point(data = roc_df[which.max(roc_df$optimum), ], aes(x = fpr, y = tpr), color = "red", size = 3) +#
   annotate("text", x = roc_df[which.max(roc_df$optimum), ]$fpr, y = roc_df[which.max(roc_df$optimum), ]$tpr, label = paste("Threshold:", round(optimal_threshold, 2)), vjust = -1, hjust = 1, color = "red")
-fitted_prob = fitted(Selected_Model)#
-#
-#=============================================##
-# Finding threshold by Optimizing TPR*(1-FPR)  ##
-#=============================================##
-#
-roc_data = data.frame(fitted_prob, training_data$TenYearCHD)#
-colnames(roc_data) = c('prob', 'chd')#
-roc_data = roc_data[order(-roc_data$prob),]#
-#
-fpr <- numeric(length = length(roc_data$prob))#
-tpr <- numeric(length = length(roc_data$prob))#
-#
-for(i in 1:length(roc_data$prob)){#
-  fpr[i] <- sum(roc_data$chd[i:length(roc_data$prob)] == 0) / sum(roc_data$chd == 0)#
-  tpr[i] <- sum(roc_data$chd[i:length(roc_data$prob)] == 1) / sum(roc_data$chd == 1)#
-}#
-#
-roc_df = data.frame(fpr, tpr)#
-#
-roc_df$optimum <- roc_df$tpr * (1 - roc_df$fpr)#
-optimal_threshold = roc_data$prob[which.max(roc_df$optimum)]#
-#
-# Plotting ROC curve#
-ggplot(roc_df, aes(x = fpr, y = tpr)) +#
-  geom_line() +#
-  geom_abline(slope = 1, intercept = 0, linetype = "dashed") +#
-  ggtitle("Receiver Operating Characteristic (ROC) Curve") +#
-  xlab("False Positive Rate (FPR)") +#
-  ylab("True Positive Rate (TPR)") +#
-  geom_point(data = roc_df[which.max(roc_df$optimum), ], aes(x = fpr, y = tpr), color = "red", size = 3) +#
-  annotate("text", x = roc_df[which.max(roc_df$optimum), ]$fpr, y = roc_df[which.max(roc_df$optimum), ]$tpr, label = paste("Threshold:", round(optimal_threshold, 2)), vjust = -1, hjust = 1, color = "red")
-# Load pROC package#
-library(pROC)#
-#
-# Calculate ROC curve#
-roc_curve <- roc(roc_data$chd, roc_data$prob)#
-#
-# Find optimal threshold#
-optimal_threshold <- coords(roc_curve, "best", ret = "threshold")#
-#
-# Plot ROC curve#
-plot(roc_curve, print.thres = "best", print.thres.best.method = "closest.topleft", main = "ROC Curve")#
-#
-# Add optimal threshold to the plot#
-abline(v = optimal_threshold, col = "red", lty = 2)#
-text(optimal_threshold, 0.5, labels = paste("Threshold:", round(optimal_threshold, 2)), pos = 2, col = "red")
 # Load pROC package#
 library(pROC)#
 #
@@ -1434,126 +1337,6 @@ plot(roc_curve, print.thres = "best", print.thres.best.method = "closest.topleft
 # Add optimal threshold to the plot#
 abline(v = optimal_threshold, col = "red", lty = 2)#
 text(optimal_threshold, 0.5, labels = paste("Threshold:", round(optimal_threshold, 2)), pos = 2, col = "red")
-# Load pROC package#
-library(pROC)#
-#
-# Calculate ROC curve#
-roc_curve <- roc(roc_data$chd, roc_data$prob)#
-#
-# Find optimal threshold#
-optimal_threshold <- coords(roc_curve, "best", ret = "threshold")#
-#
-# Plot ROC curve with customizations#
-plot(roc_curve, #
-     print.thres = "best", #
-     print.thres.best.method = "closest.topleft", #
-     main = "ROC Curve", #
-     xlab = "False Positive Rate (FPR)", #
-     ylab = "True Positive Rate (TPR)", #
-     col = "blue", #
-     lwd = 2)#
-#
-# Add optimal threshold to the plot#
-abline(v = optimal_threshold, col = "red", lty = 2)#
-text(optimal_threshold, 0.5, labels = paste("Optimal Threshold:", round(optimal_threshold, 2)), pos = 2, col = "red", cex = 0.8)#
-#
-# Add legend#
-legend("bottomright", #
-       legend = c("ROC Curve", "Optimal Threshold"), #
-       col = c("blue", "red"), #
-       lwd = c(2, 1), #
-       cex = 0.8, #
-       bg = "white")
-# Load pROC package#
-library(pROC)#
-#
-# Calculate ROC curve#
-roc_curve <- roc(roc_data$chd, roc_data$prob)#
-#
-# Find optimal threshold#
-optimal_threshold <- coords(roc_curve, "best", ret = "threshold")#
-#
-# Plot ROC curve with customizations#
-plot(roc_curve, #
-     print.thres = "best", #
-     print.thres.best.method = "closest.topleft", #
-     main = "ROC Curve", #
-     xlab = "False Positive Rate (FPR)", #
-     ylab = "True Positive Rate (TPR)", #
-     col = "blue", #
-     lwd = 2)#
-#
-# Add optimal threshold to the plot#
-abline(v = optimal_threshold, col = "red", lty = 2)#
-text(optimal_threshold, 0.5, labels = paste("Optimal Threshold:", round(optimal_threshold, 2)), pos = 2, col = "red", cex = 0.8)#
-#
-# Add legend#
-legend("bottomright", #
-       legend = c("ROC Curve", "Optimal Threshold"), #
-       col = c("blue", "red"), #
-       lwd = c(2, 1), #
-       cex = 0.8, #
-       bg = "white")
-# Load pROC package#
-library(pROC)#
-#
-# Calculate ROC curve#
-roc_curve <- roc(roc_data$chd, roc_data$prob)#
-#
-# Find optimal threshold#
-optimal_threshold <- coords(roc_curve, "best", ret = "threshold")#
-#
-# Plot ROC curve with customizations#
-plot(roc_curve, #
-     print.thres = "best", #
-     print.thres.best.method = "closest.topleft", #
-     main = "ROC Curve", #
-     xlab = "False Positive Rate (FPR)", #
-     ylab = "True Positive Rate (TPR)", #
-     col = "blue", #
-     lwd = 2)#
-#
-# Add optimal threshold to the plot#
-abline(v = optimal_threshold, col = "red", lty = 2)#
-text(optimal_threshold, 0.5, labels = paste("Optimal Threshold:", round(optimal_threshold, 2)), pos = 2, col = "red", cex = 0.8)#
-#
-# Add legend#
-legend("bottomright", #
-       legend = c("ROC Curve", "Optimal Threshold"), #
-       col = c("blue", "red"), #
-       lwd = c(2, 1), #
-       cex = 0.8, #
-       bg = "white")
-# Load pROC package#
-library(pROC)#
-#
-# Calculate ROC curve#
-roc_curve <- roc(roc_data$chd, roc_data$prob)#
-#
-# Find optimal threshold#
-optimal_threshold <- coords(roc_curve, "best", ret = "threshold")#
-#
-# Plot ROC curve with customizations#
-plot(roc_curve, #
-     print.thres = "best", #
-     print.thres.best.method = "closest.topleft", #
-     main = "ROC Curve", #
-     xlab = "False Positive Rate (FPR)", #
-     ylab = "True Positive Rate (TPR)", #
-     col = "blue", #
-     lwd = 2)#
-#
-# Add optimal threshold to the plot#
-abline(v = optimal_threshold, col = "red", lty = 2)#
-text(optimal_threshold, 0.5, labels = paste("Optimal Threshold:", round(optimal_threshold, 2)), pos = 2, col = "red", cex = 0.8)#
-#
-# Add legend#
-legend("bottomright", #
-       legend = c("ROC Curve", "Optimal Threshold"), #
-       col = c("blue", "red"), #
-       lwd = c(2, 1), #
-       cex = 0.8, #
-       bg = "white")
 # Load pROC package#
 library(pROC)#
 #
