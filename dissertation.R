@@ -219,21 +219,16 @@ reduced_model_9 = glm(TenYearCHD ~ ., data = reduced_data_9, family = binomial(l
 summary(reduced_model_9)
 
 
-
-Selected_Model = reduced_model_6
+Selected_Data = reduced_data_8
+Selected_Model = reduced_model_8
 fitted_prob = fitted(Selected_Model)
-
-
-
-
-
 
 
 
 #==============================================#
 #Finding Out Odds ratio
 #==============================================#
-x = summary(reduced_model_8)
+x = summary(Selected_Model)
 y = x$coefficients
 estimates = y[,1][-1]
 se = y[,2][-1]
@@ -241,110 +236,89 @@ Odds_Ratio = as.data.frame(exp(estimates))
 Odds_Ratio
 
 
-names(summary(fullmodel))
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-fitted_prob = predict(reduced_model_8)
-
-#=============================================#
-#Finding Goosness of Fit for the reduced Model#
-#=============================================#
-# Assuming fitted_prob contains the predicted probabilities and reduced_data_8$TenYearCHD contains the actual labels
-
-thresholds = sort(fitted_prob)
-
-# Initialize arrays to store TPR and FPR values
-tpr_values = numeric(length(thresholds))
-fpr_values = numeric(length(thresholds))
-
-# Calculate TPR and FPR for each threshold
-for (i in 1:length(thresholds)) {
-  predicted_labels = ifelse(fitted_prob > thresholds[i], 1, 0)
-  tp = sum(predicted_labels == 1 & reduced_data_8$TenYearCHD == 1)
-  fp = sum(predicted_labels == 1 & reduced_data_8$TenYearCHD == 0)
-  fn = sum(predicted_labels == 0 & reduced_data_8$TenYearCHD == 1)
-  tn = sum(predicted_labels == 0 & reduced_data_8$TenYearCHD == 0)
-  tpr_values[i] = tp / (tp + fn)
-  fpr_values[i] = fp / (fp + tn)
+#=================================================#
+# ROC, AUC for reduced Model
+#=================================================#
+fitted_prob = predict(Selected_Model)
+TPR=array()
+FPR=array()
+Sensitivity=array()
+Specificity=array()
+misclassification=array()
+k=1
+p=unique(fitted_prob)
+p=sort(p)
+p=p[-length(p)]
+for(i in p)
+{
+print(paste("Threshold = ",i))
+Y.hat=ifelse(fitted_prob>i,1,0)
+t=table(Y.hat,Selected_Data$TenYearCHD)
+print(t)
+TPR[k]=t[2,2]/(t[2,2]+t[1,2])
+FPR[k]=t[2,1]/(t[2,1]+t[1,1])
+Sensitivity[k]=TPR[k]
+Specificity[k]=1-FPR[k]
+misclassification[k]=1-TPR[k]+FPR[k]
+k=k+1
 }
-
-# Now, let's plot the ROC curve using base R plotting functions
-plot(fpr_values, tpr_values, type = "l", main = "ROC Curve", col = "GREY", lwd = 2, xlab = "FPR", ylab = "TPR")
-
-# Add legend
-legend("bottomright", legend = "ROC Curve", col = "blue", lty = 1, lwd = 2, bty = "n")
-
-# Determine predicted labels based on the optimal threshold
-predicted_labels = ifelse(fitted_prob > optimal_threshold, 1, 0)
-
-# Calculate accuracy
-accuracy = sum(predicted_labels == reduced_data_8$TenYearCHD) / length(reduced_data_8$TenYearCHD)
-
-# Print accuracy
-print(paste("Accuracy of the model at the optimal threshold:", round(accuracy, 3)))
+plot(FPR,TPR,type="l",main="ROC Curve")
+lines(FPR,FPR,lty=2,col="GREY")
 
 
-
-#Finding out the AUC Value
-roc_curve = roc(reduced_data_8$TenYearCHD, fitted_prob)
+optimal_thresold = FPR[which.max(TPR*(1-FPR))]
+roc_curve = roc(Selected_Data$TenYearCHD, fitted_prob)
 auc(roc_curve)
-lines(fpr_values,fpr_values,lty=2)
+
+Y.hat = ifelse(fitted_prob>optimal_thresold,1,0)
+confusion_matrix=table(Y.hat,Selected_Data$TenYearCHD)
+confusion_matrix
+accuracy_1 = sum(diag(confusion_matrix)) / sum(confusion_matrix)
+accuracy_1
+
+
+
+#=================================================#
+# ROC, AUC for Full Model
+#=================================================#
+fitted_prob = predict(fullmodel)
+TPR=array()
+FPR=array()
+Sensitivity=array()
+Specificity=array()
+misclassification=array()
+k=1
+p=unique(fitted_prob)
+p=sort(p)
+p=p[-length(p)]
+for(i in p)
+{
+print(paste("Threshold = ",i))
+Y.hat=ifelse(fitted_prob>i,1,0)
+t=table(Y.hat,training_data$TenYearCHD)
+print(t)
+TPR[k]=t[2,2]/(t[2,2]+t[1,2])
+FPR[k]=t[2,1]/(t[2,1]+t[1,1])
+Sensitivity[k]=TPR[k]
+Specificity[k]=1-FPR[k]
+misclassification[k]=1-TPR[k]+FPR[k]
+k=k+1
+}
+plot(FPR,TPR,type="l",main="ROC Curve")
+lines(FPR,FPR,lty=2,col="GREY")
+
+
+optimal_thresold = FPR[which.max(TPR*(1-FPR))]
+roc_curve = roc(training_data$TenYearCHD, fitted_prob)
+auc(roc_curve)
+
+Y.hat = ifelse(fitted_prob>optimal_thresold,1,0)
+confusion_matrix=table(Y.hat,training_data$TenYearCHD)
+confusion_matrix
+accuracy_2 = sum(diag(confusion_matrix)) / sum(confusion_matrix)
+
+accuracy_1
+accuracy_2
