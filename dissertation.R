@@ -17,6 +17,7 @@ library(InformationValue)
 library(olsrr)
 set.seed(1234)
 
+library(caTools)
 data = read.csv("/Users/suchibratapatra/Desktop/Dissertation/maindata.csv")
 split = sample.split(data, SplitRatio = 0.8)
 training_data = data[split, ]
@@ -52,13 +53,15 @@ data$diabetes = as.factor(data$diabetes)
 data$TenYearCHD = as.factor(data$TenYearCHD)
 
 
-model = glm(TenYearCHD ~ ., data = training_data, family = binomial(link = "logit"))
+
+fullmodel = glm(TenYearCHD ~ ., data = training_data, family = binomial(link = "logit"))
+
 
 #===============================#
 #   Plottting the VIF Values    #
 #===============================#
 
-vif_values = vif(model)
+vif_values = vif(fullmodel)
 vif_df = data.frame(Variable = names(vif_values), VIF = unname(vif_values))
 
 ggplot(vif_df, aes(x = Variable, y = VIF, fill = VIF)) +
@@ -90,7 +93,8 @@ for(i in 1:15){
         significance[i]="Significant"
     }
 }
-data.frame(names(training_data)[-16],walds_t,significance)
+name = names(training_data)[-16]
+data.frame(name,walds_t,significance)
 Odds_Ratio = exp(estimates)
 
 
@@ -265,9 +269,10 @@ Specificity[k]=1-FPR[k]
 misclassification[k]=1-TPR[k]+FPR[k]
 k=k+1
 }
-plot(FPR,TPR,type="l",main="ROC Curve")
-lines(FPR,FPR,lty=2,col="GREY")
 
+plot(FPR,TPR,type="l",main="ROC Curve")
+lines(FPR,FPR,lty=3,col="GREY")
+abline(v=optimal_thresold,lty=3)
 
 optimal_thresold = FPR[which.max(TPR*(1-FPR))]
 roc_curve = roc(Selected_Data$TenYearCHD, fitted_prob)
@@ -276,9 +281,8 @@ auc(roc_curve)
 Y.hat = ifelse(fitted_prob>optimal_thresold,1,0)
 confusion_matrix=table(Y.hat,Selected_Data$TenYearCHD)
 confusion_matrix
-accuracy_1 = sum(diag(confusion_matrix)) / sum(confusion_matrix)
-accuracy_1
-
+accuracy_reduced_model = sum(diag(confusion_matrix)) / sum(confusion_matrix)
+optimal_thresold_for_test_data = optimal_thresold
 
 
 #=================================================#
@@ -318,7 +322,29 @@ auc(roc_curve)
 Y.hat = ifelse(fitted_prob>optimal_thresold,1,0)
 confusion_matrix=table(Y.hat,training_data$TenYearCHD)
 confusion_matrix
-accuracy_2 = sum(diag(confusion_matrix)) / sum(confusion_matrix)
+accuracy_full_model = sum(diag(confusion_matrix)) / sum(confusion_matrix)
 
-accuracy_1
-accuracy_2
+
+
+
+round(accuracy_reduced_model,4)
+round(accuracy_full_model,4)
+
+
+
+
+#=====================================#
+#Testing using the Rest 20% Test Data
+#=====================================#
+fitted_prob_test = predict(Selected_Model, newdata = testing_data, type = "response")
+
+Y.hat_test = ifelse(fitted_prob_test > optimal_thresold_for_test_data, 1, 0)
+confusion_matrix_test_data = table(Y.hat_test, testing_data$TenYearCHD) 
+confusion_matrix_test_data
+accuracy_test = sum(diag(confusion_matrix_test_data)) / sum(confusion_matrix_test_data)
+round(accuracy_test, 4)
+
+roc_curve = roc(testing_data$TenYearCHD, fitted_prob_test)
+auc(roc_curve)
+
+
