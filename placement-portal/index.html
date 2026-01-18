@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Placement Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Student Placement Portal</h1>
+        <p>Batch of 2025 | Department of Computer Science</p>
+    </header>
+
+    <main class="container">
+        <aside class="filters">
+            <h3>Filters</h3>
+            
+            <label>Domain</label>
+            <select id="domainFilter">
+                <option value="all">All Domains</option>
+                <option value="Web Development">Web Development</option>
+                <option value="Data Science">Data Science</option>
+            </select>
+
+            <label>Min CGPA</label>
+            <input type="number" id="cgpaFilter" step="0.1" placeholder="e.g. 8.0">
+
+            <label>Search Skill / Tool</label>
+            <input type="text" id="skillSearch" placeholder="e.g. Python, Git">
+        </aside>
+
+        <section id="studentGrid" class="grid"></section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
